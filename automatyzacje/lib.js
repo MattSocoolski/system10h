@@ -64,6 +64,78 @@ export async function mlFetch(endpoint) {
   return res.json();
 }
 
+// --- Notion API (CRM) ---
+const NOTION_API = 'https://api.notion.com/v1';
+const NOTION_VERSION = '2025-09-03';
+const CRM_DATA_SOURCE_ID = '26f862e1-4a0c-808f-a249-000b2cee31df';
+
+export async function notionFetch(endpoint, options = {}) {
+  const key = process.env.NOTION_API_KEY;
+  if (!key) throw new Error('NOTION_API_KEY not set');
+  const res = await fetch(`${NOTION_API}${endpoint}`, {
+    method: options.method || 'GET',
+    headers: {
+      'Authorization': `Bearer ${key}`,
+      'Notion-Version': NOTION_VERSION,
+      'Content-Type': 'application/json'
+    },
+    ...(options.body ? { body: JSON.stringify(options.body) } : {})
+  });
+  if (!res.ok) throw new Error(`Notion ${res.status}: ${await res.text()}`);
+  return res.json();
+}
+
+export async function queryCRM(filter, sorts = []) {
+  const body = { page_size: 100 };
+  if (filter && Object.keys(filter).length) body.filter = filter;
+  if (sorts.length) body.sorts = sorts;
+
+  let results = [];
+  let cursor;
+  do {
+    if (cursor) body.start_cursor = cursor;
+    const data = await notionFetch(`/data_sources/${CRM_DATA_SOURCE_ID}/query`, {
+      method: 'POST', body
+    });
+    results = results.concat(data.results);
+    cursor = data.has_more ? data.next_cursor : undefined;
+  } while (cursor);
+  return results;
+}
+
+export function parseNotionLead(page) {
+  const p = page.properties;
+  const getText = (prop) => {
+    if (!prop) return '';
+    if (prop.type === 'title') return (prop.title || []).map(t => t.plain_text).join('');
+    if (prop.type === 'rich_text') return (prop.rich_text || []).map(t => t.plain_text).join('');
+    return '';
+  };
+  const getSelect = (prop) => prop?.select?.name || prop?.status?.name || '';
+  const getDate = (prop) => prop?.date?.start ? new Date(prop.date.start + 'T00:00:00') : null;
+  const getNumber = (prop) => prop?.number ?? null;
+
+  return {
+    id: page.id,
+    name: getText(p['Task name']),
+    company: getText(p['nazwa klienta']),
+    contact: getText(p['osoba kontaktowa']),
+    email: p['Email']?.email || '',
+    phone: p['Phone']?.phone_number || '',
+    status: getSelect(p['Status']),
+    priority: getSelect(p['PRIORYTET']),
+    segment: getSelect(p['segment rynku']),
+    country: getSelect(p['kraj']),
+    icp: getSelect(p['ICP']),
+    source: getSelect(p['źródło leada']),
+    value: getNumber(p['wartość szansy']),
+    due: getDate(p['Due']),
+    lastContact: getDate(p['ostatni kontakt']),
+    notes: getText(p['notatki']),
+    summary: getText(p['Summary'])
+  };
+}
+
 // --- State persistence ---
 export function loadState(name) {
   const path = join(__dirname, 'state', `${name}.json`);

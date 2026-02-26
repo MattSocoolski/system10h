@@ -1,12 +1,19 @@
 #!/usr/bin/env node
-// #2 PORANNY PIPELINE BRIEF
-// Czyta plan.md obu biznesów → formatuje brief → Telegram push
-// Uruchomienie: node pipeline-brief.js
-// Cron: 30 9 * * 1-5 cd /Users/mateuszsokolski/asystent && node automatyzacje/pipeline-brief.js
+// UNIFIED MORNING DIGEST (Opcja 1+3)
+// Źródło: Notion CRM (API 2025-09-03) + plan.md (System 10H fallback)
+// Wysyła jeden skonsolidowany brief na Telegram o 9:30
+// Cron: 30 9 * * 1-5
 
-import { loadEnv, sendTelegram, readPlan, parseDueDates, today, formatDate, daysDiff } from './lib.js';
+import { loadEnv, sendTelegram, queryCRM, parseNotionLead, readPlan, parseDueDates, today, formatDate, daysDiff } from './lib.js';
 
 loadEnv();
+
+const ACTIVE_STATUSES = [
+  'Pierwszy kontakt',
+  'Kwalifikacja potrzeby',
+  'Wysłana próbka',
+  'Dogrywanie'
+];
 
 async function run() {
   const now = today();
@@ -14,122 +21,118 @@ async function run() {
   const dayNames = ['niedz.', 'pon.', 'wt.', 'śr.', 'czw.', 'pt.', 'sob.'];
   const dayName = dayNames[now.getDay()];
 
-  // --- ARTNAPI ---
-  const artPlan = readPlan('artnapi');
-  const artLeads = parseDueDates(artPlan);
-  const artActive = artLeads.filter(l => !l.isPaused);
+  // --- NOTION CRM (ARTNAPI) ---
+  const pages = await queryCRM();
+  const allLeads = pages.map(parseNotionLead);
 
-  const artOverdue = artActive.filter(l => daysDiff(now, l.dueDate) > 0);
-  const artToday = artActive.filter(l => {
-    const diff = daysDiff(now, l.dueDate);
-    return diff === 0;
-  });
-  const artTomorrow = artActive.filter(l => {
-    const diff = daysDiff(l.dueDate, now);
-    return diff === 1;
-  });
+  const active = allLeads.filter(l => ACTIVE_STATUSES.includes(l.status));
+  const am = allLeads.filter(l => l.status === 'Klient / Rozwój (Account Management)');
+  const won = allLeads.filter(l => l.status === 'Zamknięta - Wygrana');
 
-  // Pipeline value from plan text
-  const artPipelineMatch = artPlan.match(/pipeline:\s*~?([\d\s]+)\s*PLN/i);
-  const artPipeline = artPipelineMatch ? artPipelineMatch[1].replace(/\s/g, '') : '?';
-
-  // Prowizje from plan text
-  const prowizjeMatch = artPlan.match(/prowizj[iy][^:]*:\s*([\d\s]+)\s*PLN/i);
-  const prowizje = prowizjeMatch ? prowizjeMatch[1].replace(/\s/g, '') : '?';
-
-  // --- SYSTEM 10H ---
-  const s10Plan = readPlan('system10h');
-  const s10Leads = parseDueDates(s10Plan);
-  const s10Active = s10Leads.filter(l => !l.isPaused);
-
-  const s10Overdue = s10Active.filter(l => daysDiff(now, l.dueDate) > 0);
-  const s10Today = s10Active.filter(l => daysDiff(now, l.dueDate) === 0);
+  // Due date categories (active pipeline only)
+  const withDue = active.filter(l => l.due);
+  const overdue = withDue
+    .filter(l => daysDiff(now, l.due) > 0)
+    .sort((a, b) => a.due - b.due);
+  const dueToday = withDue.filter(l => daysDiff(now, l.due) === 0);
+  const dueTomorrow = withDue.filter(l => daysDiff(l.due, now) === 1);
+  const noDue = active.filter(l => !l.due);
 
   // Pipeline value
-  const s10PipelineMatch = s10Plan.match(/Pipeline value[^:]*:\s*([\d\s]+)\s*PLN/i);
-  const s10Pipeline = s10PipelineMatch ? s10PipelineMatch[1].replace(/\s/g, '') : '?';
+  const totalValue = active.reduce((sum, l) => sum + (l.value || 0), 0);
 
-  // --- FORMAT MESSAGE ---
-  const sections = [];
-  sections.push(`📋 <b>PIPELINE BRIEF — ${todayStr} (${dayName})</b>`);
-  sections.push('');
+  // Country breakdown
+  const countries = {};
+  for (const l of active) {
+    const c = l.country || '?';
+    countries[c] = (countries[c] || 0) + 1;
+  }
+
+  // --- SYSTEM 10H (plan.md fallback — brak Notion CRM) ---
+  const s10Plan = readPlan('system10h');
+  const s10Leads = parseDueDates(s10Plan).filter(l => !l.isPaused);
+  const s10Overdue = s10Leads.filter(l => daysDiff(now, l.dueDate) > 0);
+  const s10Today = s10Leads.filter(l => daysDiff(now, l.dueDate) === 0);
+
+  // --- FORMAT ---
+  const s = [];
+  s.push(`<b>BRIEF ${todayStr} (${dayName})</b>`);
 
   // OVERDUE
-  const allOverdue = [
-    ...artOverdue.map(l => ({ ...l, biz: 'ART' })),
-    ...s10Overdue.map(l => ({ ...l, biz: '10H' }))
-  ].sort((a, b) => a.dueDate - b.dueDate);
-
-  if (allOverdue.length > 0) {
-    sections.push('🔴 <b>OVERDUE:</b>');
-    for (const l of allOverdue.slice(0, 8)) {
-      const days = daysDiff(now, l.dueDate);
-      const val = l.value ? ` (${l.value} PLN)` : '';
-      sections.push(`• [${l.biz}] ${l.name} — ${days}d overdue${val}`);
+  if (overdue.length > 0 || s10Overdue.length > 0) {
+    s.push('');
+    s.push('<b>ZALEGFE:</b>');
+    for (const l of overdue.slice(0, 8)) {
+      const days = daysDiff(now, l.due);
+      const val = l.value ? ` — ${l.value} PLN` : '';
+      s.push(`  ${l.name || l.company}, ${days} dni${val}`);
     }
-    if (allOverdue.length > 8) sections.push(`  ...i ${allOverdue.length - 8} więcej`);
-    sections.push('');
+    if (overdue.length > 8) s.push(`  ...i ${overdue.length - 8} wiecej`);
+    for (const l of s10Overdue.slice(0, 3)) {
+      const days = daysDiff(now, l.dueDate);
+      s.push(`  [10H] ${l.name}, ${days} dni`);
+    }
   }
 
   // TODAY
-  const allToday = [
-    ...artToday.map(l => ({ ...l, biz: 'ART' })),
-    ...s10Today.map(l => ({ ...l, biz: '10H' }))
-  ];
-
-  if (allToday.length > 0) {
-    sections.push('📌 <b>DZIŚ:</b>');
-    for (const l of allToday.slice(0, 8)) {
-      const val = l.value ? ` (${l.value} PLN)` : '';
-      sections.push(`• [${l.biz}] ${l.name}${val}`);
+  if (dueToday.length > 0 || s10Today.length > 0) {
+    s.push('');
+    s.push('<b>NA DZIS:</b>');
+    for (const l of dueToday) {
+      const val = l.value ? ` — ${l.value} PLN` : '';
+      s.push(`  ${l.name || l.company}${val}`);
     }
-    sections.push('');
+    for (const l of s10Today) {
+      s.push(`  [10H] ${l.name}`);
+    }
   }
 
   // TOMORROW
-  const allTomorrow = [
-    ...artTomorrow.map(l => ({ ...l, biz: 'ART' })),
-    ...s10Active.filter(l => daysDiff(l.dueDate, now) === 1).map(l => ({ ...l, biz: '10H' }))
-  ];
-
-  if (allTomorrow.length > 0) {
-    sections.push('📅 <b>JUTRO:</b>');
-    for (const l of allTomorrow.slice(0, 5)) {
-      sections.push(`• [${l.biz}] ${l.name}`);
+  if (dueTomorrow.length > 0) {
+    s.push('');
+    s.push('<b>JUTRO:</b>');
+    for (const l of dueTomorrow.slice(0, 5)) {
+      const val = l.value ? ` — ${l.value} PLN` : '';
+      s.push(`  ${l.name || l.company}${val}`);
     }
-    sections.push('');
+  }
+
+  // HOT LEADS
+  const hot = active.filter(l => l.priority?.includes('Gorący'));
+  if (hot.length > 0) {
+    s.push('');
+    s.push('<b>GORACE LEADY:</b>');
+    for (const l of hot.slice(0, 5)) {
+      const val = l.value ? ` — ${l.value} PLN` : '';
+      const lastC = l.lastContact ? `, ost. kontakt ${formatDate(l.lastContact)}` : '';
+      s.push(`  ${l.name || l.company}${val}${lastC}`);
+    }
   }
 
   // PIPELINE SNAPSHOT
-  sections.push('📊 <b>PIPELINE:</b>');
-  sections.push(`• ARTNAPI: ~${artPipeline} PLN | ${artActive.length} aktywnych`);
-  sections.push(`• SYSTEM 10H: ~${s10Pipeline} PLN | ${s10Active.length} aktywnych`);
-  if (prowizje !== '?') {
-    sections.push(`• 💰 Prowizja luty: ${prowizje} PLN`);
-  }
+  s.push('');
+  s.push(`<b>PIPELINE:</b> ${active.length} aktywnych, ~${totalValue.toLocaleString('pl-PL')} PLN`);
+  s.push(`Klienci AM: ${am.length} | Wygrane: ${won.length}`);
+  const countryLine = Object.entries(countries)
+    .sort((a, b) => b[1] - a[1])
+    .map(([c, n]) => `${c}:${n}`)
+    .join(' ');
+  if (countryLine) s.push(countryLine);
+  if (s10Leads.length > 0) s.push(`10H: ${s10Leads.length} aktywnych`);
 
   // WARNINGS
-  if (allOverdue.length > 5) {
-    sections.push('');
-    sections.push(`⚠️ ${allOverdue.length} leadów overdue — rozważ czystkę pipeline`);
-  }
+  if (noDue.length > 0) s.push(`\n${noDue.length} leadow bez due date`);
+  if (overdue.length > 5) s.push(`${overdue.length} zalegych — rozwaz czystke`);
 
-  // DAY-SPECIFIC TIPS
-  if (now.getDay() === 1) { // Monday
-    sections.push('');
-    sections.push('🔄 Poniedziałek → rozważ @coo CRM Sync');
-  }
-  if (now.getDay() === 5) { // Friday
-    sections.push('');
-    sections.push('📊 Piątek → rozważ Pipeline Pulse + aktualizacja metryki.md');
-  }
+  // DAY TIPS
+  if (now.getDay() === 1) s.push('\nPoniedzialek — CRM Sync + plan tygodnia');
+  if (now.getDay() === 5) s.push('\nPiatek — Pipeline Pulse + metryki');
 
-  const message = sections.join('\n');
-  await sendTelegram(message);
-  console.log(`[BRIEF] Sent pipeline brief — ${allOverdue.length} overdue, ${allToday.length} today, ${allTomorrow.length} tomorrow`);
+  await sendTelegram(s.join('\n'));
+  console.log(`[DIGEST] Sent — ${overdue.length} overdue, ${dueToday.length} today, ${dueTomorrow.length} tomorrow, ${active.length} active`);
 }
 
 run().catch(err => {
-  console.error('[BRIEF] ERROR:', err.message);
+  console.error('[DIGEST] ERROR:', err.message);
   process.exit(1);
 });
