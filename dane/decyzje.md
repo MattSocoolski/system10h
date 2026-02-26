@@ -3,6 +3,8 @@
 ## ZASADY
 - NAJNOWSZE NA GÓRZE
 - CO TYDZIEŃ PRZEJRZYJ
+- TAGUJ KAŻDY WPIS: [ARTNAPI] / [SYSTEM10H] / [SHARED]
+- LIMIT: ≤100 aktywnych wpisów. Wpisy >30 dni → backup/decyzje_archiwum_YYYY-MM.md
 
 ---
 
@@ -35,7 +37,7 @@
 
 ## AKTYWNE DECYZJE
 
-### 26.02.2026 | STRATEGIA + OPERACJE | CEO: PODSUMOWANIE DNIA — INFRASTRUKTURA + WIZJA 6 MSC + GIT
+### [SYSTEM10H] 26.02.2026 | STRATEGIA + OPERACJE | CEO: PODSUMOWANIE DNIA — INFRASTRUKTURA + WIZJA 6 MSC + GIT
 
 **KONTEKST:** Druga sesja 26.02. Po łańcuchu sprzedażowym (sesja 1) — pełny @cto warsztat: Tech Audit BEFORE/AFTER, audit bezpieczeństwa trybu autonomicznego, wizja systemu na 6 miesięcy (marzec→sierpień), git init.
 
@@ -53,7 +55,7 @@
 
 ---
 
-### 26.02.2026 | SPRZEDAŻ + MARKETING | CEO: ŁAŃCUCH SPRZEDAŻOWY + CONTENT PACK TYDZIEŃ 03-14.03
+### [SYSTEM10H] 26.02.2026 | SPRZEDAŻ + MARKETING | CEO: ŁAŃCUCH SPRZEDAŻOWY + CONTENT PACK TYDZIEŃ 03-14.03
 
 **KONTEKST:** Pełny łańcuch: CEO→CSO→Ghost→CTO→CEO. Jednocześnie Content Machine + Ghost wygenerowały pakiet contentu na 2 tygodnie (5 postów LI + 3 infografiki + 1 newsletter + kalendarz publikacji).
 
@@ -71,7 +73,7 @@
 
 ---
 
-### 26.02.2026 | STRATEGIA | CEO + CTO: TELEGRAM BOT (ULTRON) — MAPA AUTOMATYZACJI SYSTEMU
+### [SYSTEM10H] 26.02.2026 | STRATEGIA | CEO + CTO: TELEGRAM BOT (ULTRON) — MAPA AUTOMATYZACJI SYSTEMU
 
 **KONTEKST:** @cto podłączył Telegram Bot (Ultron, @MattJarvis_Bot) do systemu. Token w .env, chat_id: 1304598782, test wysyłki OK. Telegram to brakujący element — kanał PUSH w real-time. Do tej pory system działał na PULL (user musiał sam sprawdzać). Teraz system może SZUKAĆ usera. CEO + CTO zmapowali 7 automatyzacji z istniejących 15 narzędzi.
 
@@ -110,7 +112,7 @@
 
 ---
 
-### 26.02.2026 | STRATEGIA | CEO: INFOGRAPHIC GENERATOR — POTENCJAŁ DLA @CSO + @CMO
+### [SYSTEM10H] 26.02.2026 | STRATEGIA | CEO: INFOGRAPHIC GENERATOR — POTENCJAŁ DLA @CSO + @CMO
 
 **KONTEKST:** @cto zbudował agenta „Infographic Generator" — skrypt Python, jedno kliknięcie (URUCHOM.command), 10 infografik co minutę przez Nano Banana Pro (Gemini). Koszt ~$0.40-1.00 za paczkę. Pierwsza paczka wygenerowana — 10 grafik z wartością dla handlowca B2B (checklisty, statystyki, frameworki, porównania). Teraz: jak to wprzęgnąć w sprzedaż i marketing?
 
@@ -147,7 +149,7 @@
 
 ---
 
-### 26.02.2026 | OPERACJE | CTO: GEMINI DEEP RESEARCH — PEŁNA INTEGRACJA Z ZESPOŁEM ASYSTENTÓW
+### [SYSTEM10H] 26.02.2026 | OPERACJE | CTO: GEMINI DEEP RESEARCH — PEŁNA INTEGRACJA Z ZESPOŁEM ASYSTENTÓW
 
 **KONTEKST:** Sesja @cto — analiza integracji Gemini Deep Research MCP z asystentami. User wybrał Opcję B (pełna integracja, 4 asystentów). Gemini DR to async multi-step research z cytowaniem źródeł, dostępny przez MCP (gemini-deep-research, gemini-check-research, gemini-research-followup).
 
@@ -166,7 +168,7 @@
 
 ---
 
-### 26.02.2026 | OPERACJE | CTO: NOTION CRM SYSTEM 10H+ (PIPELINE W NOTION)
+### [SYSTEM10H] 26.02.2026 | OPERACJE | CTO: NOTION CRM SYSTEM 10H+ (PIPELINE W NOTION)
 
 **KONTEKST:** Sesja @cto "Łącz Kropki" — scan 10 okazji integracyjnych. Pipeline prowadzony w plan.md (plik tekstowy, 250+ linii, ręczna edycja) = podatny na błędy, brak widoku Kanban, brak filtrów. Notion MCP już podłączony ale niewykorzystany. Zbudowano CRM jako bazę danych Notion z importem całego pipeline'u.
 
@@ -184,7 +186,7 @@
 
 ---
 
-### 26.02.2026 | OPERACJE | CTO: GOOGLE AI STUDIO — UPGRADE NA PŁATNY PLAN + LIMIT $10/MSC
+### [SYSTEM10H] 26.02.2026 | OPERACJE | CTO: GOOGLE AI STUDIO — UPGRADE NA PŁATNY PLAN + LIMIT $10/MSC
 
 **KONTEKST:** Gemini MCP (Nano Banan / Nano Banan Pro) nie działał na darmowym tierze (quota exceeded). User zmienił pricing na płatny plan w Google AI Studio. Test po upgrade: generowanie obrazu — działa poprawnie.
 
@@ -200,7 +202,7 @@
 
 ---
 
-### 26.02.2026 | OPERACJE | CTO: AUDIT BEZPIECZEŃSTWA + GEMINI MCP (NANO BANAN PRO + DEEP RESEARCH)
+### [SYSTEM10H] 26.02.2026 | OPERACJE | CTO: AUDIT BEZPIECZEŃSTWA + GEMINI MCP (NANO BANAN PRO + DEEP RESEARCH)
 
 **KONTEKST:** Sesja @cto — pełny audit bezpieczeństwa systemu (klucze, uprawnienia, pliki) + uzupełnienie api-inventory.md + podłączenie Google AI Studio (Gemini) jako MCP do generowania obrazów i deep researchu.
 
@@ -224,7 +226,7 @@
 
 ---
 
-### 26.02.2026 | OPERACJE | CTO: MAILERLITE MCP + EXCALIDRAW SKILL + DIAGRAM SYSTEMU
+### [SYSTEM10H] 26.02.2026 | OPERACJE | CTO: MAILERLITE MCP + EXCALIDRAW SKILL + DIAGRAM SYSTEMU
 
 **KONTEKST:** Sesja @cto — weryfikacja integracji MailerLite, audit i instalacja nowego skilla do diagramów, wygenerowanie mapy systemu asystentów.
 
@@ -239,7 +241,7 @@
 
 ---
 
-### 26.02.2026 | OPERACJE | SEJF API — INWENTARZ NARZĘDZI + RESEND MCP + KLUCZE
+### [SYSTEM10H] 26.02.2026 | OPERACJE | SEJF API — INWENTARZ NARZĘDZI + RESEND MCP + KLUCZE
 
 **KONTEKST:** Sesja @cto opcja 4 (Sejf API). Nie istniał plik api-inventory.md — klucze rozproszone, brak inwentarza. User podał listę narzędzi: Claude API, Cyber Folks, Resend + już znane: MailerLite, Gmail, Notion, AIBL, LinkedIn. Research 7 narzędzi (API, MCP, docs, koszt).
 
@@ -256,7 +258,7 @@
 
 ---
 
-### 25.02.2026 | PRODUKT | SYSTEM 10H+ v6.1 — STAN.MD + RADAR SZANS + DEEP RESEARCH UPGRADE
+### [SYSTEM10H] 25.02.2026 | PRODUKT | SYSTEM 10H+ v6.1 — STAN.MD + RADAR SZANS + DEEP RESEARCH UPGRADE
 
 **KONTEKST:** Wdrożenie u klientów (Andrzej, Stalton) ujawniło 2 krytyczne luki: (1) AI traci pamięć między sesjami, (2) brak proaktywnego skanowania szans. Zaprojektowano stan.md (pamięć operacyjna) + WF16 Radar Szans. Feedback od Andrzeja (8 punktów) wymusił redesign v2.0 Radaru. 3 deep research (Gemini) dostarczyły: formułę ORI, benchmarki PLN/h, wzorce time sink.
 
@@ -272,7 +274,7 @@
 
 ---
 
-### 24.02.2026 | MARKETING | PILOT DEADLINE CAMPAIGN ŚR-PT 26-28.02
+### [SYSTEM10H] 24.02.2026 | MARKETING | PILOT DEADLINE CAMPAIGN ŚR-PT 26-28.02
 
 **KONTEKST:** 4 dni do końca pilota (1 990 PLN, deadline 28.02). 8 aktywnych leadów, 0 demo. CEO ustalił 3 taski na tydzień: Zbigniew demo, pilot deadline messaging, follow-upy D+3. CMO przygotował brief → @content wygenerował 3 deliverables → @ghost wypolerował.
 
@@ -288,7 +290,7 @@
 
 ---
 
-### 24.02.2026 | OPERACJE | NOWY ASYSTENT @PIPELINE + BACKLOG @DELIVERY I @BIZDEV
+### [SYSTEM10H] 24.02.2026 | OPERACJE | NOWY ASYSTENT @PIPELINE + BACKLOG @DELIVERY I @BIZDEV
 
 **KONTEKST:** Analiza CEO wykazała lukę w zespole asystentów — nikt nie pilnuje nurturingu leadów między generowaniem (@cmo) a zamykaniem (@cso). Wąskie gardło SD→Demo = 0% (0/15). Rozważano 3 opcje: @pipeline, @delivery, @bizdev.
 
@@ -303,7 +305,7 @@
 
 ---
 
-### 24.02.2026 | ANALIZA FINANSOWA CEO — KOREKTA PROJEKCJI
+### [SYSTEM10H] 24.02.2026 | ANALIZA FINANSOWA CEO — KOREKTA PROJEKCJI
 
 **KONTEKST:** CEO analiza budżetu (budget_2025.xlsx). Dług 18 500 PLN (stan 24.02).
 
@@ -318,7 +320,7 @@
 
 ---
 
-### 20.02.2026 | ZBIGNIEW KOWALSKI (COMMI) — STRATEGIC PARTNER DEAL 990 PLN
+### [SYSTEM10H] 20.02.2026 | ZBIGNIEW KOWALSKI (COMMI) — STRATEGIC PARTNER DEAL 990 PLN
 
 **KONTEKST:**
 Rozmowa osobista z Zbigniewem Kowalskim. Ekspert komunikacji medycznej, absolwent Stanford Medicine X (Patient Engagement Design), TEDx speaker, 14 książek, 180 000+ przeszkolonych ludzi, VP Stowarzyszenia Profesjonalnych Mówców PL. Założyciel SaaS COMMI (commi.pro — video messaging lekarz→pacjent). Leży ze sprzedażą COMMI — brak lejka, brak lead magnetów, brak systemu follow-upów. Pytał czy Bliźniak może pomóc w rozwinięciu sprzedaży COMMI.
@@ -344,6 +346,98 @@ Rozmowa osobista z Zbigniewem Kowalskim. Ekspert komunikacji medycznej, absolwen
 **NASTĘPNY KROK:** PN 23.02 — sprawdzić SD + ustalić termin spotkania + przygotować demo COMMI na terminalu.
 
 ---
+
+---
+
+## === DECYZJE ARTNAPI ===
+
+### [ARTNAPI] 26.02 | OPERACJE | DAILY BRIEF NA TELEGRAM — AUTOMATYCZNY PORANNY RAPORT
+
+**Decyzja:** Zbudować skrypt "Daily Brief" uruchamiany cronem (6:00 lub 9:00) który: (1) sprawdza plan.md → leady z Due = dziś, (2) sprawdza Gmail → nowe odpowiedzi od leadów, (3) wysyła podsumowanie na Telegram Bot. Oszczędność: ~20 min/dzień.
+
+**Dlaczego:** Codzienne FU to #1 driver sprzedaży. Ręczne sprawdzanie plan.md + Gmail = ryzyko zapomnianych follow-upów.
+
+**Status:** DO ZBUDOWANIA — gdy user da zielone światło.
+
+---
+
+### [ARTNAPI] 25.02 | STRATEGIA | RETAIL EXPANSION — 3 KANAŁY (Kaufland online + PBS + Poczta Polska)
+
+**Decyzja:** Uruchomić równolegle 3 ścieżki retail: (1) Kaufland marketplace, (2) PBS Polska jako partner dystrybucyjny, (3) Poczta Polska. Wszystkie zablokowane przez CE marking.
+
+**Dlaczego:** Nadrzędny cel Artnapi = retail. PBS Connect Polska = wspólny dystrybutor Brushme i Ideyki w Kaufland.
+
+**Blokada:** CE marking (Dyrektywa 2009/48/WE) — status NIEZNANY. Zapytanie do Piotra 25.02.
+
+---
+
+### [ARTNAPI] 25.02 | STRATEGIA | KAUFLAND — WEJŚCIE DO RETAIL (nadrzędny cel)
+
+**Decyzja:** Uruchomić ścieżkę wejścia do Kaufland PL z PBN + podobraziami. Brushme i Ideyka już na półkach — kategoria zwalidowana.
+
+**Dlaczego:** Konkurenci już w Kaufland = okno się zamyka. Artnapi ma unikalne atuty: polska marka, 24h restock, podobrazia.
+
+---
+
+### [ARTNAPI] 24.02 | STRATEGIA | SHEIN EUROPE — WARUNKOWE GO
+
+**Decyzja:** SHEIN drop-shipping — GO na test. TYLKO segment WCF/LOW PBN na ramie. COGS 29 PLN brutto. Realizacja: marzec 2026.
+
+**Warunki Piotra:** 5/5 muszą być spełnione przed wystawieniem. Test na 1 ID przed wystawieniem całości.
+
+---
+
+### [ARTNAPI] 24.02 | STRATEGIA | NOWY ASYSTENT @RECON + PARKING KOLEJNYCH
+
+**Decyzja:** Zbudowano @recon (Research & Intelligence). Zaparkowane: @am (Account Manager, Q2 2026), @supply (Supply Chain, gdy >15k szt/mies).
+
+---
+
+### [ARTNAPI] 24.02 | ANALIZA FINANSOWA CFO — LUTY 2026
+
+**Zamówienia luty:** 54 273 PLN (16 zamówień). Prowizja: 4 930 PLN (211% celu). Wynagrodzenie: 11 596 PLN netto. Dług: 18 500 PLN. Nadwyżka: ~7 984 PLN.
+
+---
+
+### [ARTNAPI] 25.02 | CZYSTKA PIPELINE + PODZIAŁ ZADAŃ NA ZESPÓŁ
+
+**Usunięte:** Sztukarnia, Varsztatovnia, CARAMEL, Alkotásutca (ghosting). **Korekty:** HobbySet PAUZA pogodowa, FessNeki próbki wysłane. **Lekcja:** Gmail check PRZED aktualizacją statusów.
+
+---
+
+### [ARTNAPI] 25.02 | POLBAR — KOREKTA CENNIKA RAM A4
+
+**Decyzja:** Poprawiony cennik (50-100: 19,50, 100-299: 18,99, 300+: 18,50). Push białe ramy.
+
+---
+
+### [ARTNAPI] 24.02 | 5 KAMPANII WZROSTU — STRATEGIA + EGZEKUCJA
+
+**Kampanie:** Dzień Kobiet (5-15k), WTZ FU (1-3k), Agencje batch 2 (2-5k), DK batch 1 (1-4k), Phoenix Down (3-10k). Potencjał łączny: 12-37k PLN.
+
+---
+
+### [ARTNAPI] 23.02 | STRATEGIA HOTEL + WINE&PAINT — DEEP RESEARCH
+
+18 firm wine&paint: 4 nasze, 5 pipeline, 9 nowych targetów. Batch 1 wysłany 23.02 (8 firm). Toolkit: materialy-artnapi/outreach_hotele_toolkit.md.
+
+---
+
+### [ARTNAPI] 23.02 | MONITORING PHOENIX — WEEKLY (od 03.03)
+
+Każdy poniedziałek: sprawdź phoenix-arts.pl dostępność 40×50 i 30×40.
+
+---
+
+### [ARTNAPI] 23.02 | MESSAGING — "ZAWSZE MAMY TOWAR"
+
+Każdy outreach/FU MUSI zawierać: "[X] szt na stanie, wysyłka 24h z polskiego magazynu."
+
+---
+
+### [ARTNAPI] 23.02 | RETENCJA D14 — STANDARD DLA NOWYCH KLIENTÓW
+
+Po 1. zamówieniu → FU D14 "jak się sprawdziło?" Cel: retencja, nie sprzedaż.
 
 ---
 

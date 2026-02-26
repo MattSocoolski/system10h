@@ -27,6 +27,7 @@
 | Google AI Studio (Gemini) | TAK | TAK (community, podłączony) | AKTYWNE | [x] GOOGLE_AI_STUDIO_API_KEY |
 | AIBL Network | — | — | AKTYWNE | [x] AIBL_NETWORK_TOKEN |
 | Telegram Bot (Ultron) | TAK | NIE | AKTYWNE | [x] TELEGRAM_BOT_TOKEN |
+| Google Sheets (Prowizje Artnapi) | NIE (publiczny CSV) | NIE — WebFetch | AKTYWNE | — (publiczny URL) |
 
 ---
 
@@ -343,6 +344,22 @@ TELEGRAM_BOT_TOKEN=xxxxx              # [JEST] ✅
 
 ---
 
+## Google Sheets — Prowizje Artnapi (WebFetch, CSV)
+
+- **Do czego:** Arkusz prowizji per miesiąc (tryb ARTNAPI). Ściągaj przez WebFetch jako CSV.
+- **API:** NIE (publiczny URL)
+- **MCP:** NIE — WebFetch bezpośredni
+- **Kontekst:** Tylko tryb ARTNAPI
+- **Base URL:** `https://docs.google.com/spreadsheets/d/e/2PACX-1vR-SUkz1MISFvx0tQGwO02bZenANU-90GYQT1OqxQDia4blrhg0_R7egEm4sqhMdi47HhcuipNo0z3i/pub?output=csv`
+- **Zakładki (dodaj &gid=X do URL):**
+  - `gid=0` → 10/25 | `gid=1421765063` → 11/25 | `gid=1654399783` → 12/25
+  - `gid=1964597183` → 1/26 | `gid=2096709391` → 2/26
+- **UWAGA:** URL robi redirect 307 — trzeba zrobić drugi WebFetch na redirect URL
+- **Status:** AKTYWNE
+- **Koszt:** Free (publiczny arkusz)
+
+---
+
 ## DO ZROBIENIA
 
 - [x] Dodać RESEND_API_KEY do .env → podłączyć MCP Resend ✅ 26.02
@@ -356,5 +373,5 @@ TELEGRAM_BOT_TOKEN=xxxxx              # [JEST] ✅
 
 ---
 
-*Ostatnia aktualizacja: 26.02.2026 (+Telegram Bot Ultron, 15 narzędzi łącznie)*
-*Źródło: @cto sesja — audit bezpieczeństwa + uzupełnienie inwentarza + Telegram Bot*
+*Ostatnia aktualizacja: 26.02.2026 (+Google Sheets Prowizje Artnapi, 16 narzędzi łącznie)*
+*Źródło: @cto sesja — konsolidacja systemów, merge z ARTNAPI_OS api-inventory*
