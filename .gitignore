@@ -24,3 +24,7 @@ node_modules/
 
 # Pliki binarne
 *.xlsx
+
+# Automatyzacje — state i logi
+automatyzacje/state/
+automatyzacje/logs/
