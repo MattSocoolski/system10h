@@ -35,6 +35,24 @@
 
 ## AKTYWNE DECYZJE
 
+### 26.02.2026 | STRATEGIA + OPERACJE | CEO: PODSUMOWANIE DNIA — INFRASTRUKTURA + WIZJA 6 MSC + GIT
+
+**KONTEKST:** Druga sesja 26.02. Po łańcuchu sprzedażowym (sesja 1) — pełny @cto warsztat: Tech Audit BEFORE/AFTER, audit bezpieczeństwa trybu autonomicznego, wizja systemu na 6 miesięcy (marzec→sierpień), git init.
+
+**DECYZJE:**
+
+1. **TECH AUDIT:** System urósł z 3 MCP → 6 MCP, 0 → 15 narzędzi zinwentaryzowanych, 0 → Notion CRM (15 leadów), 0 → Telegram Bot, 0 → Content Pack (8 plików), 0 → Infographic Generator, 0 → 7 automatyzacji zmapowanych. Wszystko w 1 dzień.
+2. **BEZPIECZEŃSTWO TRYBU AUTONOMICZNEGO:** 3 zasady: nie włączaj gdy AI może WYSŁAĆ / USUNĄĆ / WYDAĆ PIENIĄDZE. Rekomendacje: przywrócić skipDangerousModePermissionPrompt, limity API, backup przed sesją, git.
+3. **WIZJA 6 MSC (marzec→sierpień):** Od ręcznego (12h/tyg) → autonomicznego (1-2h/tyg). Miesiąc po miesiącu: MAR = system mówi (4 automatyzacje Telegram), KWI = system pisze (Ghost→Resend), MAJ = system sprzedaje (self-service Architekt), CZE = system myśli (Pipeline Intelligence), LIP = system skaluje (partnerzy, recurring), SIE = autonomiczny lejek.
+4. **WIEDZA DO ZDOBYCIA:** Poziom 1 (marzec): webhook, cron, git. Poziom 2 (kwiecień-maj): API request, Workers, JSON. Poziom 3 (czerwiec+): scoring, A/B, Stripe. Nauka PRZY budowaniu, nie teoria.
+5. **GIT INIT:** Pierwszy punkt kontrolny — 157 plików, 34 658 linii. .env chroniony. Od teraz: commit na koniec każdej sesji.
+
+**DLACZEGO:** Infrastruktura zbudowana w 1 dzień potrzebuje: dokumentacji (tech audit), zabezpieczeń (audit autonomiczny), kierunku (wizja 6 msc), ochrony (git). Bez tego — budujemy na piasku.
+
+**NASTĘPNY KROK:** CZ 27.02 — WYŚLIJ DM do Zbigniewa (KRYTYCZNY) + przygotuj demo COMMI + post "Pilot Bliźniaka". MARZEC TYD 1 — @cto buduje Speed-to-Lead Alert (#1) + Poranny Pipeline Brief (#2).
+
+---
+
 ### 26.02.2026 | SPRZEDAŻ + MARKETING | CEO: ŁAŃCUCH SPRZEDAŻOWY + CONTENT PACK TYDZIEŃ 03-14.03
 
 **KONTEKST:** Pełny łańcuch: CEO→CSO→Ghost→CTO→CEO. Jednocześnie Content Machine + Ghost wygenerowały pakiet contentu na 2 tygodnie (5 postów LI + 3 infografiki + 1 newsletter + kalendarz publikacji).
