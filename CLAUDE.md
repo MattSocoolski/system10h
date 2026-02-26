@@ -47,6 +47,8 @@ Mam dostęp do plików w folderze `dane/`:
 - dane/[tryb]/metryki.md - metryki sprzedaży
 - dane/[tryb]/projekty-status.md - status projektów
 - dane/[tryb]/dane_marketingowe.md - audyt marketingowy
+- dane/artnapi/crm_sync_protocol.md - protokół CRM sync (tylko ARTNAPI)
+- dane/artnapi/archiwum_decyzji.md - archiwum decyzji sprzed 21.02 (tylko ARTNAPI)
 
 NIGDY nie pytam o te informacje ponownie. Zawsze je używam.
 
@@ -72,6 +74,7 @@ Gdy prompt asystenta odwołuje się do ścieżki — mapuj na odpowiedni podfold
 | dane/metryki.md | dane/artnapi/metryki.md | dane/system10h/metryki.md |
 | dane/projekty-status.md | dane/artnapi/projekty-status.md | dane/system10h/projekty-status.md |
 | dane/dane_marketingowe.md | dane/artnapi/dane_marketingowe.md | dane/system10h/dane_marketingowe.md |
+| dane/crm_sync_protocol.md | dane/artnapi/crm_sync_protocol.md | — (brak) |
 
 **Pliki SHARED (zawsze czytane):** dane/profil.md, dane/decyzje.md, dane/lekcje.md, dane/api-inventory.md, dane/ghost_styl.md
 
