@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | System 10h+ - Automatyzacja sprzedaży B2B</title>
+    <meta name="description" content="Praktyczne porady o automatyzacji sprzedaży, AI dla handlowców i zwiększaniu marży. Bez bełkotu, same konkrety.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%233b82f6%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2270%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: { 500: '#3b82f6', 600: '#2563eb' },
+                        solo: { 500: '#a855f7', 600: '#9333ea' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0f172a; color: #f8fafc; }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="font-sans">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-xl font-bold text-white hover:text-brand-500 transition">
+                <i class="fa-solid fa-arrow-left mr-2"></i> System 10h+
+            </a>
+            <a href="../index.html" class="text-sm bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-lg transition font-bold">
+                Sprawdź ofertę
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <p class="text-brand-500 font-bold uppercase tracking-wider mb-4">Blog</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                Sprzedaż B2B bez bełkotu
+            </h1>
+            <p class="text-xl text-slate-400">
+                Praktyczne porady o automatyzacji, AI i zwiększaniu marży.
+                Od praktyka, nie teoretyka.
+            </p>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="py-12 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Article 1 -->
+                <a href="follow-upy.html" class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1553484771-371a605b060b?w=600&h=340&fit=crop" alt="Follow-upy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs text-brand-500 font-bold uppercase tracking-wider mb-2">Sprzedaż B2B</p>
+                        <h2 class="text-xl font-bold text-white mb-3 group-hover:text-brand-400 transition">
+                            Jak przestać tracić leady przez brak follow-upów
+                        </h2>
+                        <p class="text-slate-400 text-sm">
+                            80% sprzedaży wymaga 5+ kontaktów. Ile pieniędzy zostawiasz na stole?
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Article 2 -->
+                <a href="rabaty-marza.html" class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&h=340&fit=crop" alt="Marża i rabaty" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs text-red-500 font-bold uppercase tracking-wider mb-2">Marża</p>
+                        <h2 class="text-xl font-bold text-white mb-3 group-hover:text-brand-400 transition">
+                            Dlaczego Twoi handlowcy rozdają rabaty
+                        </h2>
+                        <p class="text-slate-400 text-sm">
+                            Strategia "Złego Policjanta", która ochroni Twoje zyski.
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Article 3 -->
+                <a href="ai-dla-handlowca.html" class="glass-card rounded-2xl overflow-hidden group">
+                    <div class="aspect-video overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&h=340&fit=crop" alt="AI dla handlowca" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs text-purple-500 font-bold uppercase tracking-wider mb-2">Produktywność</p>
+                        <h2 class="text-xl font-bold text-white mb-3 group-hover:text-brand-400 transition">
+                            AI dla handlowca: Odzyskaj 10 godzin tygodniowo
+                        </h2>
+                        <p class="text-slate-400 text-sm">
+                            Nie musisz być techniczny. Potrzebujesz systemu, który działa.
+                        </p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-card rounded-2xl p-12 text-center border border-brand-500/30">
+                <h2 class="text-3xl font-bold text-white mb-4">Gotowy na automatyzację?</h2>
+                <p class="text-slate-400 mb-8 max-w-xl mx-auto">
+                    Przestań czytać o rozwiązaniach. Zacznij je wdrażać.
+                    System 10h+ to gotowy system, nie kolejny kurs.
+                </p>
+                <a href="../index.html" class="inline-block bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 px-10 rounded-xl transition text-lg">
+                    Sprawdź System 10h+
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center border-t border-slate-800/50 text-slate-500 text-xs">
+        <div class="mb-4">
+            <p class="font-bold text-slate-400">Mateusz Sokólski Account Management</p>
+            <p>NIP: 8952117558</p>
+        </div>
+        <div class="flex justify-center gap-6 flex-wrap">
+            <span>&copy; 2026 System 10h+</span>
+            <a href="../polityka-prywatnosci.html" class="hover:text-white transition-colors">Polityka Prywatności</a>
+        </div>
+    </footer>
+</body>
+</html>

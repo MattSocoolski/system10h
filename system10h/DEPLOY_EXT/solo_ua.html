@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System 10h+ | AI-асистент, який ЗНАЄ твій бізнес</title>
+    <meta name="description" content="Налаштований AI-асистент, який пам'ятає хто ти, що продаєш і кому. Кінець пояснень контексту заново. Система, яка ЗНАЄ.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        .light-section {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .light-section .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+        .light-section h2, .light-section h3 {
+            color: #0f172a;
+        }
+        .light-section p, .light-section li {
+            color: #475569;
+        }
+
+        .mockup-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #1e293b;
+        }
+
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Background Elements -->
+    <div class="glow-bg top-[-200px] left-[-200px]"></div>
+    <div class="glow-bg bottom-0 right-0 bg-[radial-gradient(circle,rgba(234,179,8,0.1)_0%,rgba(0,0,0,0)_70%)]"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <a href="#" class="flex items-center gap-2 hover:opacity-80 transition">
+                        <div class="bg-brand-600 text-white font-bold p-2 rounded-lg">10h+</div>
+                        <span class="font-bold text-xl tracking-tight hidden sm:block">System 10h+</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#problem" class="text-slate-300 hover:text-white transition">Проблема</a>
+                    <a href="#rozwiazanie" class="text-slate-300 hover:text-white transition">Рішення</a>
+                    <a href="#jak-dziala" class="text-slate-300 hover:text-white transition">Як це працює</a>
+                    <a href="#cena" class="text-slate-300 hover:text-white transition">Ціна</a>
+                    <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
+                    <div class="flex gap-2 ml-4 border-l border-slate-700 pl-4 text-xs font-bold">
+                        <a href="index.html" class="text-slate-500 hover:text-white transition">PL</a>
+                        <span class="text-white">UA</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="#cena" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg shadow-brand-500/20">
+                        Хочу Систему
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 relative">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+            <div class="text-left fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-brand-400 text-sm font-semibold mb-6">
+                    Для продавців та підприємців solo
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                    AI-асистент, який <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400">ЗНАЄ твій бізнес.</span>
+                </h1>
+                <p class="text-xl text-slate-400 mb-8 max-w-xl leading-relaxed">
+                    Не черговий чатбот. <strong>Налаштований "мозок"</strong>, який пам'ятає хто ти, що продаєш і кому. Працює згідно ТВОЇХ знань, а не генеричних відповідей.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                    <a href="#cena" class="bg-brand-600 hover:bg-brand-500 text-white text-lg px-8 py-4 rounded-xl font-bold transition transform hover:-translate-y-1 shadow-xl shadow-brand-600/20 text-center">
+                        Хочу такого асистента
+                    </a>
+                    <a href="#rozwiazanie" class="bg-slate-800 hover:bg-slate-700 text-white text-lg px-8 py-4 rounded-xl font-bold transition border border-slate-700 text-center">
+                        Як це працює?
+                    </a>
+                </div>
+
+                <div class="border-t border-slate-800 pt-6 flex items-center gap-6 text-sm text-slate-500">
+                    <span><i class="fa-solid fa-check text-green-500 mr-2"></i> Одноразова оплата</span>
+                    <span><i class="fa-solid fa-check text-green-500 mr-2"></i> Без абонементів</span>
+                    <span><i class="fa-solid fa-check text-green-500 mr-2"></i> 14 днів гарантії</span>
+                </div>
+            </div>
+
+            <!-- Right: Hero Visual -->
+            <div class="relative fade-in-up animate-float" style="animation-delay: 0.5s;">
+                <div class="mockup-container aspect-[4/3] bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center border border-brand-500/20 shadow-2xl shadow-brand-500/10">
+                    <div class="text-center p-8">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-500/20 rounded-full mb-6 text-brand-400 text-4xl">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Система, яка ЗНАЄ</h3>
+                        <p class="text-slate-400 mb-6">"Кажеш: напиши пропозицію для клієнта X.<br>Отримуєш те, що звучить як ТИ."</p>
+
+                        <div class="flex flex-wrap justify-center gap-2 text-xs">
+                            <span class="px-3 py-1 bg-slate-700/50 rounded-full text-slate-300">Твій профіль</span>
+                            <span class="px-3 py-1 bg-slate-700/50 rounded-full text-slate-300">Твоя персона</span>
+                            <span class="px-3 py-1 bg-slate-700/50 rounded-full text-slate-300">Твоя пропозиція</span>
+                            <span class="px-3 py-1 bg-slate-700/50 rounded-full text-slate-300">Твої правила</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section id="problem" class="py-20 bg-slate-950 border-y border-slate-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">ChatGPT тебе не знає. І це видно.</h2>
+                <p class="text-slate-400 text-lg">Скільки разів ти пояснював AI заново...</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Problem Side -->
+                <div class="p-8 rounded-2xl bg-red-500/5 border border-red-500/20 fade-in-up">
+                    <h3 class="text-red-400 font-bold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-xmark"></i> Кожна розмова з нуля
+                    </h3>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>"Хто ти? Що продаєш? Кому?"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Генеричні відповіді без контексту</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Втрата часу на "промптінг"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>AI звучить як робот, а не як ти</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solution Side -->
+                <div class="p-8 rounded-2xl bg-brand-500/5 border border-brand-500/20 fade-in-up" style="transition-delay: 100ms;">
+                    <h3 class="text-brand-400 font-bold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> Система, яка пам'ятає
+                    </h3>
+                    <ul class="space-y-4 text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>ЗНАЄ хто ти і чим займаєшся</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>ЗНАЄ твого клієнта і його болі</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>РОЗУМІЄ твої правила і стиль</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>ДІАЄ згідно твоїх знань</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-center text-xl text-brand-300 font-bold fade-in-up">
+                А якби AI ЗНАЛО все це ще до того, як почнеш писати?
+            </p>
+        </div>
+    </section>
+
+    <!-- ROZWIĄZANIE SECTION -->
+    <section id="rozwiazanie" class="py-24 bg-slate-900">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-4">РІШЕННЯ</span>
+                <h2 class="text-4xl font-bold mb-6">Що ти отримуєш?</h2>
+                <p class="text-xl text-slate-400">Налаштований "мозок" AI з твоїм ДНК</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                <!-- Card 1 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up">
+                    <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Твій Профіль</h3>
+                    <p class="text-slate-400 text-sm">Хто ти, чим займаєшся, які маєш цілі. AI знає твій контекст.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Твоя Персона</h3>
+                    <p class="text-slate-400 text-sm">Хто твій клієнт, що його болить, чого шукає. Комунікація влучає в ціль.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Твоя Пропозиція</h3>
+                    <p class="text-slate-400 text-sm">Що продаєш, за скільки, чому. Пропозиції готові за секунди.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Skill Pack</h3>
+                    <p class="text-slate-400 text-sm">4 сценарії: пропозиції, follow-up, переговори, research клієнта.</p>
+                </div>
+            </div>
+
+            <!-- Demo Terminal -->
+            <div class="bg-slate-950 rounded-xl shadow-2xl overflow-hidden border border-slate-700 max-w-4xl mx-auto fade-in-up">
+                <div class="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+                    <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    <span class="ml-4 text-xs text-slate-400 font-mono">System_10h+ --demo</span>
+                </div>
+                <div class="p-6 font-mono text-sm space-y-6">
+
+                    <!-- User Input -->
+                    <div class="flex gap-4">
+                        <div class="text-brand-500 font-bold shrink-0">ТИ:</div>
+                        <div class="text-white">
+                            Напиши follow-up клієнту, який не відповів на пропозицію 5 днів тому. Був зацікавлений, але "мав подумати".
+                        </div>
+                    </div>
+
+                    <!-- AI Output -->
+                    <div class="flex gap-4">
+                        <div class="text-brand-500 font-bold shrink-0">AI:</div>
+                        <div class="text-green-300 bg-slate-800/50 p-4 rounded-lg border border-slate-700 w-full">
+                            <p class="text-slate-500 text-xs mb-2">// Знаю, що продаєш System 10h+, твій клієнт - продавець B2B, любиш конкретний але не нав'язливий стиль...</p>
+                            <br>
+                            Тема: Марку, рішення прийнято?<br><br>
+                            Привіт Марку,<br><br>
+                            Минув тиждень від нашої розмови. Знаю, що "подумати" іноді означає "не зараз", а іноді "потрібен привід повернутися".<br><br>
+                            Якщо друге – ось привід: наступного тижня роблю лише 2 впровадження. Одне місце твоє, якщо хочеш.<br><br>
+                            Якщо перше – теж OK, відстану. Тільки дай знати одним словом, щоб не турбувати.<br><br>
+                            Бувай,<br>
+                            Матеуш
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-slate-500 text-sm mt-6 fade-in-up">
+                AI знає ХТО ти, ЩО продаєш і КОМУ. Тому відповідь звучить як ТИ, а не як робот.
+            </p>
+        </div>
+    </section>
+
+    <!-- JAK TO DZIAŁA -->
+    <section id="jak-dziala" class="py-24 light-section">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Як це працює?</h2>
+                <p class="text-xl text-slate-600">Два шляхи, одна ціль: асистент, який тебе ЗНАЄ.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+
+                <!-- Ścieżka EXPRESS -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-brand-500 fade-in-up">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Шлях EXPRESS</h3>
+                            <p class="text-slate-500 text-sm">Для свідомих</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 mb-6">
+                        <strong>Знаєш хто ти, що пропонуєш, кому продаєш.</strong><br>
+                        Маєш визначену пропозицію і клієнтів.
+                    </p>
+
+                    <ol class="space-y-4 text-slate-700">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                            <span><strong>Анкета</strong> (15 хв) - відповідаєш на ключові питання</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                            <span><strong>Побудова мозку</strong> - налаштовую систему під тебе</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                            <span><strong>Інсталяція</strong> - впроваджуєш і починаєш користуватися</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Ścieżka DISCOVERY -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 fade-in-up" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Шлях DISCOVERY</h3>
+                            <p class="text-slate-500 text-sm">Для тих, хто шукає</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 mb-6">
+                        <strong>Ще не маєш повної ясності.</strong><br>
+                        Потрібно спочатку впорядкувати хто ти в бізнесі.
+                    </p>
+
+                    <ol class="space-y-4 text-slate-700">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                            <span><strong>Self-Discovery</strong> - AI тебе опитує, будуєш профіль</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                            <span><strong>Побудова мозку</strong> - налаштовую систему під результати</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                            <span><strong>Інсталяція</strong> - впроваджуєш і починаєш користуватися</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <p class="text-center text-slate-600 fade-in-up">
+                <strong>Не знаєш який шлях?</strong> Без стресу - визначимо на початку.
+            </p>
+        </div>
+    </section>
+
+    <!-- DLA KOGO / NIE DLA KOGO -->
+    <section class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl font-bold mb-4">Для кого це?</h2>
+                <p class="text-slate-400">І для кого НІ - щоб не витрачати час.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- DLA -->
+                <div class="fade-in-up">
+                    <h3 class="text-green-400 font-bold mb-6 flex items-center gap-2 text-xl">
+                        <i class="fa-solid fa-circle-check"></i> ТАК, якщо:
+                    </h3>
+                    <ul class="space-y-4 text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Ти <strong>продавець або підприємець solo</strong></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Щодня пишеш пропозиції, листи, follow-up'и</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Хочеш AI, яке <strong>РОЗУМІЄ</strong> твій бізнес</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Не маєш часу вчити "prompt engineering"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Цінуєш свій час і хочеш його повернути</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- NIE DLA -->
+                <div class="fade-in-up" style="transition-delay: 100ms;">
+                    <h3 class="text-red-400 font-bold mb-6 flex items-center gap-2 text-xl">
+                        <i class="fa-solid fa-circle-xmark"></i> НІ, якщо:
+                    </h3>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Шукаєш "чарівну кнопку" без власного вкладу</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Хочеш "подивитися чи AI працює" (це не демо)</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Очікуєш що AI зробить ВСЕ за тебе</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Потрібні складні IT-інтеграції</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Не маєш 15 хвилин на заповнення анкети</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="cena" class="py-24 relative overflow-hidden">
+        <div class="glow-bg left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] opacity-30"></div>
+        <div class="max-w-3xl mx-auto px-4 text-center">
+
+            <div class="glass-card p-10 rounded-3xl border border-brand-500/50 shadow-2xl relative fade-in-up">
+
+                <h2 class="text-4xl font-bold text-white mb-4">Одна ціна. Без сюрпризів.</h2>
+                <p class="text-slate-400 mb-8">Платиш раз. Користуєшся завжди. Без абонементів.</p>
+
+                <div class="text-6xl font-extrabold text-white mb-4">2 500 <span class="text-2xl text-slate-500 font-normal">PLN нетто</span></div>
+                <p class="text-sm text-slate-500 mb-8">Фактура VAT 23%</p>
+
+                <div class="bg-slate-800/50 rounded-xl p-6 mb-8 text-left">
+                    <h4 class="font-bold text-white mb-4">Що отримуєш:</h4>
+                    <ul class="space-y-2 text-slate-300 text-sm">
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i> Налаштований "мозок" AI з твоїм ДНК</li>
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i> Skill Pack (пропозиції, follow-up, переговори, research)</li>
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i> CRM Notion (опціонально)</li>
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i> Допомога при інсталяції (Loom + email)</li>
+                        <li><i class="fa-solid fa-check text-brand-400 mr-2"></i> Гарантія 14 днів</li>
+                    </ul>
+                </div>
+
+                <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="block w-full bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
+                    Хочу System 10h+
+                </a>
+
+                <div class="mt-8 pt-8 border-t border-slate-700/50">
+                    <p class="text-sm font-bold text-white mb-2"><i class="fa-solid fa-shield-halved text-green-500 mr-2"></i> Гарантія задоволення</p>
+                    <p class="text-xs text-slate-400">Якщо протягом 14 днів система не виправдає твоїх очікувань – повертаю 100% грошей. Без питань.</p>
+                </div>
+
+                <div class="mt-6 p-4 bg-slate-800/30 rounded-lg">
+                    <p class="text-sm text-slate-400">
+                        <strong class="text-white">ROI:</strong> Окупається після 1 врятованої угоди або 10 год збереженого часу.<br>
+                        Це менше ніж місяць стажера. А працює роками.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl font-bold mb-4">Питання, які отримую</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up">
+                    <h3 class="font-bold text-white mb-2">Чим це відрізняється від звичайного ChatGPT?</h3>
+                    <p class="text-slate-400 text-sm">ChatGPT не знає хто ти. При кожній розмові починаєш з нуля. System 10h+ - це налаштований "мозок", який ЗНАЄ твій бізнес - профіль, персону, пропозицію, правила. Кажеш "напиши пропозицію" - отримуєш те, що звучить як ТИ.</p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 50ms;">
+                    <h3 class="font-bold text-white mb-2">Чи потрібно вміти програмувати?</h3>
+                    <p class="text-slate-400 text-sm">Ні. Якщо вмієш копіювати-вставляти (Ctrl+C / Ctrl+V) - впораєшся. Це простіше ніж Excel.</p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 100ms;">
+                    <h3 class="font-bold text-white mb-2">Чи це безпечно для моїх даних?</h3>
+                    <p class="text-slate-400 text-sm">Так. Система працює на твоєму акаунті Claude/ChatGPT. Твої дані не проходять через мої сервери. Маєш повний контроль.</p>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 150ms;">
+                    <h3 class="font-bold text-white mb-2">Чому одноразова оплата, а не абонемент?</h3>
+                    <p class="text-slate-400 text-sm">Бо ненавиджу модель "платиш вічно за те саме". Платиш за setup і налаштування. Потім несеш лише витрати AI (близько 20-50 zł/міс, платиш OpenAI/Anthropic).</p>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 200ms;">
+                    <h3 class="font-bold text-white mb-2">А якщо не спрацює?</h3>
+                    <p class="text-slate-400 text-sm">14 днів гарантії. Якщо система не виправдає твоїх очікувань - повертаю 100% грошей. Без питань, без пояснень.</p>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 250ms;">
+                    <h3 class="font-bold text-white mb-2">Скільки часу займає впровадження?</h3>
+                    <p class="text-slate-400 text-sm">Шлях Express: 2-3 дні. Шлях Discovery: 4-5 днів. З твого боку потрібно близько 15-30 хвилин на заповнення анкети/проходження Discovery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="py-20 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8 fade-in-up">
+            <div class="w-32 h-32 rounded-full overflow-hidden shrink-0 border-2 border-slate-700">
+                <img src="assets/mateusz-photo.jpg" alt="Mateusz Sokólski" class="w-full h-full object-cover grayscale">
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-2">Хто за цим стоїть?</h3>
+                <p class="text-slate-400 leading-relaxed">
+                    Мене звати <strong>Матеуш Сокульський</strong>. Я не "гуру AI" і не інфлюенсер. Я продавець, який роками писав сотні листів, пропозицій і follow-up'ів. Створив цю систему для себе - щоб AI нарешті РОЗУМІЛО мій бізнес. Спрацювало. Тепер впроваджую в інших.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto px-4 text-center fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Готовий до асистента, який тебе ЗНАЄ?
+            </h2>
+            <p class="text-slate-400 mb-8 text-lg">
+                Напиши "Хочу Систему" - визначимо шлях і починаємо.
+            </p>
+            <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="inline-block bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 px-12 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
+                Хочу System 10h+
+            </a>
+            <p class="text-slate-600 text-sm mt-8">
+                <strong>PS.</strong> Кожна розмова з генеричним AI - це втрачений час. Зміни це сьогодні.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800 text-center text-slate-600 text-sm">
+        <div class="mb-4">
+            <p class="font-bold text-slate-400">Mateusz Sokólski Account Management</p>
+            <p>NIP: 8952117558</p>
+        </div>
+        <div class="space-x-4">
+            <span>&copy; 2026 System 10h+</span>
+            <a href="polityka-prywatnosci-ua.html" class="hover:text-slate-400">Політика конфіденційності</a>
+            <a href="mailto:hello@system10h.com" class="hover:text-slate-400">Контакт</a>
+        </div>
+    </footer>
+
+    <!-- EXIT INTENT POPUP -->
+    <div id="exit-popup" class="fixed inset-0 z-[10001] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" id="exit-overlay"></div>
+        <div class="relative bg-slate-800 border border-slate-600 rounded-2xl p-8 max-w-lg w-full shadow-2xl">
+            <button id="close-exit" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-times text-xl"></i></button>
+            <div class="text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-brand-500/10 rounded-full mb-6 text-brand-500 text-3xl">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Маєш питання?</h3>
+                <p class="text-slate-400 mb-6">Не впевнений чи це для тебе? Запиши <strong>15-хвилинну розмову</strong> - поясню все без зобов'язань.</p>
+                <a href="https://calendly.com/mt-sokolski/30min" target="_blank" onclick="document.getElementById('exit-popup').classList.add('hidden')" class="block w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition shadow-lg mb-4">
+                    Записатися на розмову
+                </a>
+                <p class="text-xs text-slate-500 cursor-pointer hover:text-slate-300" id="close-exit-text">Ні, дякую. Розберуся сам.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Exit Intent
+            const exitPopup = document.getElementById('exit-popup');
+            const closeBtn = document.getElementById('close-exit');
+            const closeText = document.getElementById('close-exit-text');
+            const overlay = document.getElementById('exit-overlay');
+
+            if (!localStorage.getItem('exitPopupShown10hUA')) {
+                document.addEventListener('mouseleave', (e) => { if (e.clientY < 0 && !localStorage.getItem('exitPopupShown10hUA')) showPopup(); });
+                setTimeout(() => { if (!localStorage.getItem('exitPopupShown10hUA')) showPopup(); }, 25000);
+            }
+
+            function showPopup() { exitPopup.classList.remove('hidden'); localStorage.setItem('exitPopupShown10hUA', 'true'); }
+            function hidePopup() { exitPopup.classList.add('hidden'); }
+
+            if(closeBtn) closeBtn.addEventListener('click', hidePopup);
+            if(closeText) closeText.addEventListener('click', hidePopup);
+            if(overlay) overlay.addEventListener('click', hidePopup);
+        });
+    </script>
+</body>
+</html>

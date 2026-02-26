@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System 10h+ | Asystent AI który ZNA Twój biznes</title>
+    <meta name="description" content="Skonfigurowany asystent AI który pamięta kim jesteś, co sprzedajesz i komu. Koniec z tłumaczeniem kontekstu od nowa. System który WIE.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            transform: translateY(-4px);
+            transition: all 0.3s ease;
+        }
+
+        .light-section {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+        .light-section .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+        }
+        .light-section h2, .light-section h3 {
+            color: #0f172a;
+        }
+        .light-section p, .light-section li {
+            color: #475569;
+        }
+
+        .mockup-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            background: #1e293b;
+        }
+
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Background Elements -->
+    <div class="glow-bg top-[-200px] left-[-200px]"></div>
+    <div class="glow-bg bottom-0 right-0 bg-[radial-gradient(circle,rgba(234,179,8,0.1)_0%,rgba(0,0,0,0)_70%)]"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <a href="#" class="flex items-center gap-2 hover:opacity-80 transition">
+                        <div class="bg-brand-600 text-white font-bold p-2 rounded-lg">10h+</div>
+                        <span class="font-bold text-xl tracking-tight hidden sm:block">System 10h+</span>
+                    </a>
+                </div>
+
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#problem" class="text-slate-300 hover:text-white transition">Problem</a>
+                    <a href="#rozwiazanie" class="text-slate-300 hover:text-white transition">Rozwiązanie</a>
+                    <a href="preview/" class="text-brand-400 hover:text-brand-300 transition font-semibold">Demo</a>
+                    <a href="#jak-dziala" class="text-slate-300 hover:text-white transition">Jak to działa</a>
+                    <a href="#cena" class="text-slate-300 hover:text-white transition">Cennik</a>
+                    <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
+                    <a href="blog/" class="text-slate-300 hover:text-white transition">Blog</a>
+                    <div class="flex gap-2 ml-4 border-l border-slate-700 pl-4 text-xs font-bold">
+                        <span class="text-white">PL</span>
+                        <a href="solo_ua.html" class="text-slate-500 hover:text-white transition">UA</a>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <!-- Hamburger menu mobile -->
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white transition text-xl" aria-label="Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <a href="#cena" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg shadow-brand-500/20">
+                        Chcę System
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
+        <div class="absolute inset-0 bg-slate-900/95 backdrop-blur-md" id="mobile-menu-overlay"></div>
+        <div class="relative pt-24 px-6 flex flex-col gap-4 text-lg">
+            <a href="#problem" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Problem</a>
+            <a href="#rozwiazanie" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Rozwiązanie</a>
+            <a href="preview/" class="text-brand-400 hover:text-brand-300 py-2 border-b border-slate-800 font-semibold mobile-menu-link">Demo</a>
+            <a href="#jak-dziala" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Jak to działa</a>
+            <a href="#cena" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Cennik</a>
+            <a href="#faq" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">FAQ</a>
+            <a href="blog/" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Blog</a>
+            <div class="flex gap-4 pt-4 text-sm font-bold">
+                <span class="text-white">PL</span>
+                <a href="solo_ua.html" class="text-slate-500 hover:text-white transition mobile-menu-link">UA</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HERO SECTION -->
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 relative">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+            <div class="text-left fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-brand-400 text-sm font-semibold mb-6">
+                    Dla handlowców i przedsiębiorców solo
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 leading-tight">
+                    Asystent AI który <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400">ZNA Twój biznes.</span>
+                </h1>
+                <p class="text-xl text-slate-400 mb-8 max-w-xl leading-relaxed">
+                    Nie kolejny chatbot. <strong>Skonfigurowany "mózg"</strong> który pamięta kim jesteś, co sprzedajesz i komu. Działa według TWOJEJ wiedzy, nie generycznych odpowiedzi.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                    <a href="#cena" class="bg-brand-600 hover:bg-brand-500 text-white text-lg px-8 py-4 rounded-xl font-bold transition transform hover:-translate-y-1 shadow-xl shadow-brand-600/20 text-center">
+                        Chcę takiego asystenta
+                    </a>
+                    <a href="preview/" class="bg-slate-800 hover:bg-slate-700 text-white text-lg px-8 py-4 rounded-xl font-bold transition border border-slate-700 text-center group">
+                        Zobacz demo na żywo <i class="fa-solid fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform inline-block"></i>
+                    </a>
+                </div>
+
+                <div class="border-t border-slate-800 pt-6 flex items-center gap-6 text-sm text-slate-500">
+                    <span><i class="fa-solid fa-check text-green-500 mr-2"></i> Jednorazowa opłata</span>
+                    <span><i class="fa-solid fa-check text-green-500 mr-2"></i> Zero abonamentu</span>
+                    <span><i class="fa-solid fa-check text-green-500 mr-2"></i> 30 dni gwarancji</span>
+                </div>
+            </div>
+
+            <!-- Right: Hero Visual — Animated Mesh -->
+            <div class="relative fade-in-up animate-float" style="animation-delay: 0.5s;">
+                <div class="mockup-container aspect-[4/3] bg-gradient-to-br from-slate-800 to-slate-900 border border-brand-500/20 shadow-2xl shadow-brand-500/10 relative overflow-hidden">
+                    <canvas id="mesh-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                    <div class="relative z-10 flex items-center justify-center h-full text-center p-8">
+                        <div>
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-500/20 rounded-full mb-6 text-brand-400 text-4xl backdrop-blur-sm">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">System który WIE</h3>
+                            <p class="text-slate-400 mb-6">"Mówisz: napisz ofertę dla klienta X.<br>Dostajesz coś, co brzmi jak TY."</p>
+                            <div class="flex flex-wrap justify-center gap-2 text-xs">
+                                <span class="px-3 py-1 bg-slate-700/80 backdrop-blur-sm rounded-full text-slate-300 border border-slate-600/50">Twój profil</span>
+                                <span class="px-3 py-1 bg-slate-700/80 backdrop-blur-sm rounded-full text-slate-300 border border-slate-600/50">Twoja persona</span>
+                                <span class="px-3 py-1 bg-slate-700/80 backdrop-blur-sm rounded-full text-slate-300 border border-slate-600/50">Twoja oferta</span>
+                                <span class="px-3 py-1 bg-slate-700/80 backdrop-blur-sm rounded-full text-slate-300 border border-slate-600/50">Twoje zasady</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PROBLEM SECTION -->
+    <section id="problem" class="py-20 bg-slate-950 border-y border-slate-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">ChatGPT Cię nie zna. I to widać.</h2>
+                <p class="text-slate-400 text-lg">Ile razy tłumaczyłeś AI od nowa...</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Problem Side -->
+                <div class="p-8 rounded-2xl bg-red-500/5 border border-red-500/20 fade-in-up">
+                    <h3 class="text-red-400 font-bold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-xmark"></i> Każda rozmowa od zera
+                    </h3>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>"Kim jesteś? Co sprzedajesz? Komu?"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Generyczne odpowiedzi bez kontekstu</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Strata czasu na "promptowanie"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>AI brzmi jak robot, nie jak Ty</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Solution Side -->
+                <div class="p-8 rounded-2xl bg-brand-500/5 border border-brand-500/20 fade-in-up" style="transition-delay: 100ms;">
+                    <h3 class="text-brand-400 font-bold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check"></i> System który pamięta
+                    </h3>
+                    <ul class="space-y-4 text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>WIE kim jesteś i co robisz</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>ZNA Twojego klienta i jego bóle</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>ROZUMIE Twoje zasady i styl</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-brand-400 mt-1"></i>
+                            <span>DZIAŁA według Twojej wiedzy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="text-center text-xl text-brand-300 font-bold fade-in-up">
+                A gdyby AI WIEDZIAŁO to wszystko zanim zaczniesz pisać?
+            </p>
+        </div>
+    </section>
+
+    <!-- BEFORE / AFTER — "Dzień z życia" -->
+    <section class="py-24 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-brand-400 text-sm font-semibold mb-4">TRANSFORMACJA</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Twój dzień. Z systemem i bez.</h2>
+                <p class="text-xl text-slate-400">Rano 20 maili. Wieczorem poczucie, że znów nie zdążyłem.</p>
+            </div>
+
+            <!-- 8:30 — Skrzynka -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8 fade-in-up">
+                <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
+                    <p class="text-red-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-clock mr-1"></i> 8:30 — Skrzynka mailowa</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">24 wiadomości. 6 wymaga dłuższej odpowiedzi. Kopiujesz szablon, poprawiasz, kopiujesz następny. Po godzinie masz 10 odpisanych. Oferty czekają. <strong class="text-red-400">Energia spada.</strong></p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-500/5 border border-brand-500/20">
+                    <p class="text-brand-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> 8:30 — Z Systemem 10h+</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">24 wiadomości. System czyta skrzynkę, podsumowuje i przygotowuje odpowiedzi w Twoim stylu. Ty tylko zatwierdzasz i wysyłasz. <strong class="text-brand-400">24 maile w 20 minut.</strong> Zostało 70% porannej energii.</p>
+                </div>
+            </div>
+
+            <!-- 10:00 — Ofertowanie -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8 fade-in-up">
+                <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
+                    <p class="text-red-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-clock mr-1"></i> 10:00 — Ofertowanie</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Klient chce ofertę na jutro. Otwierasz Worda, szukasz starego szablonu, poprawiasz. <strong class="text-red-400">40 minut później:</strong> ogólnikowa oferta jak każda inna.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-500/5 border border-brand-500/20">
+                    <p class="text-brand-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> 10:00 — Z Systemem 10h+</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">"Zrób ofertę. Firma XYZ, szukają automatyzacji." System generuje ofertę z Twoją ceną, warunkami, spersonalizowaną pod branżę. <strong class="text-brand-400">30 sekund.</strong></p>
+                </div>
+            </div>
+
+            <!-- 14:00 — Negocjacje -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8 fade-in-up">
+                <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
+                    <p class="text-red-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-clock mr-1"></i> 14:00 — Negocjacje</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Klient dzwoni: "Za drogo." Nie masz argumentów. Mówisz "ok, dam 10% rabatu". <strong class="text-red-400">Marża ucieka.</strong> Poczucie porażki.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-500/5 border border-brand-500/20">
+                    <p class="text-brand-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> 14:00 — Z Systemem 10h+</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">Klient mówi "za drogo". Masz 6 battle cards z gotowymi argumentami. System broni Twojej marży <strong class="text-brand-400">nawet gdy Ty chcesz się ugiąć.</strong></p>
+                </div>
+            </div>
+
+            <!-- 16:00 — Outreach -->
+            <div class="grid md:grid-cols-2 gap-6 mb-8 fade-in-up">
+                <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
+                    <p class="text-red-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-clock mr-1"></i> 16:00 — Outreach</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">Powinieneś wysłać 5 cold maili. Research, LinkedIn, notatki. Godzinę później: <strong class="text-red-400">2 maile wysłane.</strong> Reszta na jutro. Jutro też nie wyślesz.</p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-500/5 border border-brand-500/20">
+                    <p class="text-brand-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> 16:00 — Z Systemem 10h+</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">"Przygotuj outreach do 5 firm." System robi research, pisze spersonalizowane wiadomości z hookiem pod każdego. <strong class="text-brand-400">15 minut. Wysłane.</strong></p>
+                </div>
+            </div>
+
+            <!-- 18:00 — Zamknięcie dnia -->
+            <div class="grid md:grid-cols-2 gap-6 mb-12 fade-in-up">
+                <div class="p-6 rounded-2xl bg-red-500/5 border border-red-500/20">
+                    <p class="text-red-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-clock mr-1"></i> 18:00 — Koniec dnia</p>
+                    <p class="text-slate-400 text-sm leading-relaxed">W głowie: "Komu zapomniałem oddzwonić?". Tomek czeka tydzień. Ewa nie odpisała. <strong class="text-red-400">Otwierasz telefon o 21:00.</strong></p>
+                </div>
+                <div class="p-6 rounded-2xl bg-brand-500/5 border border-brand-500/20">
+                    <p class="text-brand-400 text-xs font-bold mb-3 uppercase tracking-wider"><i class="fa-solid fa-bolt mr-1"></i> 18:00 — Z Systemem 10h+</p>
+                    <p class="text-slate-300 text-sm leading-relaxed">"Co mam jeszcze dziś?" — "Tomek czeka 5 dni, Ewa nie odpisała po demo." <strong class="text-brand-400">Pipeline pilnowany. Zamykasz laptop.</strong></p>
+                </div>
+            </div>
+
+            <!-- Tabela podsumowująca -->
+            <div class="glass-card p-8 rounded-2xl fade-in-up">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="py-3 text-left text-slate-400 font-normal"></th>
+                                <th class="py-3 text-center text-red-400 font-bold">Bez systemu</th>
+                                <th class="py-3 text-center text-brand-400 font-bold">Z Systemem 10h+</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr>
+                                <td class="py-3 text-slate-300 font-semibold">Maile</td>
+                                <td class="py-3 text-center text-slate-400">2h, szablonowe</td>
+                                <td class="py-3 text-center text-slate-300">20 min, w Twoim stylu</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 text-slate-300 font-semibold">Ofertowanie</td>
+                                <td class="py-3 text-center text-slate-400">40 min, generyczne</td>
+                                <td class="py-3 text-center text-slate-300">30 sek, pod klienta</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 text-slate-300 font-semibold">Negocjacje</td>
+                                <td class="py-3 text-center text-slate-400">rabat 10%, marża ucieka</td>
+                                <td class="py-3 text-center text-slate-300">6 battle cards, marża cała</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 text-slate-300 font-semibold">Outreach</td>
+                                <td class="py-3 text-center text-slate-400">2 maile/dzień, 1h</td>
+                                <td class="py-3 text-center text-slate-300">5 maili w 15 min</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 text-slate-300 font-semibold">Follow-upy</td>
+                                <td class="py-3 text-center text-slate-400">zapomniane, deal umarł</td>
+                                <td class="py-3 text-center text-slate-300">system pilnuje, zero uciekinierów</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 text-slate-300 font-semibold">Wieczór</td>
+                                <td class="py-3 text-center text-slate-400">telefon o 21:00</td>
+                                <td class="py-3 text-center text-slate-300">laptop zamknięty o 17:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-center text-brand-300 font-bold mt-6 text-lg">Ten sam handlowiec. Ten sam dzień. Inny wynik.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ROZWIĄZANIE SECTION -->
+    <section id="rozwiazanie" class="py-24 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-4">ROZWIĄZANIE</span>
+                <h2 class="text-4xl font-bold mb-6">Co dostajesz?</h2>
+                <p class="text-xl text-slate-400">Skonfigurowany "mózg" AI z Twoim DNA</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6 mb-16">
+                <!-- Card 1 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up">
+                    <div class="w-12 h-12 bg-brand-500/20 text-brand-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Twój Profil</h3>
+                    <p class="text-slate-400 text-sm">Kim jesteś, co robisz, jakie masz cele. AI zna Twój kontekst.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up" style="transition-delay: 100ms;">
+                    <div class="w-12 h-12 bg-blue-500/20 text-blue-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Twoja Persona</h3>
+                    <p class="text-slate-400 text-sm">Kto jest Twoim klientem, co go boli, czego szuka. Komunikacja trafia w punkt.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up" style="transition-delay: 200ms;">
+                    <div class="w-12 h-12 bg-green-500/20 text-green-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Twoja Oferta</h3>
+                    <p class="text-slate-400 text-sm">Co sprzedajesz, za ile, dlaczego. Oferty gotowe w sekundy.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up" style="transition-delay: 300ms;">
+                    <div class="w-12 h-12 bg-amber-500/20 text-amber-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Twój Styl</h3>
+                    <p class="text-slate-400 text-sm">Analiza stylu pisania z Twoich prawdziwych maili. AI pisze jak TY, nie jak robot.</p>
+                </div>
+
+                <!-- Card 5 — Inteligentny Routing -->
+                <div class="glass-card p-6 rounded-2xl fade-in-up border border-brand-500/30" style="transition-delay: 400ms;">
+                    <div class="w-12 h-12 bg-cyan-500/20 text-cyan-400 rounded-xl flex items-center justify-center text-2xl mb-4">
+                        <i class="fa-solid fa-route"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-white">Inteligentny Routing</h3>
+                    <p class="text-slate-400 text-sm">Nie musisz mówić AI co chcesz. System sam rozpoznaje czy piszesz ofertę, follow-up czy obronę ceny.</p>
+                </div>
+            </div>
+
+            <!-- 15 WORKFLOWS -->
+            <div class="mt-12 fade-in-up">
+                <h3 class="text-center text-2xl font-bold mb-2 text-white">16 gotowych scenariuszy</h3>
+                <p class="text-center text-slate-400 mb-8">Mówisz co chcesz. System robi resztę.</p>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-envelope text-brand-400"></i><span class="text-slate-300">Odpowiedź na maila</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-file-invoice-dollar text-green-400"></i><span class="text-slate-300">Ofertowanie</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-shield-halved text-red-400"></i><span class="text-slate-300">Obrona marży</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-bell text-amber-400"></i><span class="text-slate-300">Follow-up</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-scale-balanced text-orange-400"></i><span class="text-slate-300">Windykacja</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-paper-plane text-blue-400"></i><span class="text-slate-300">Cold/Warm Outreach</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-magnifying-glass text-purple-400"></i><span class="text-slate-300">Research prospekta</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-handshake text-cyan-400"></i><span class="text-slate-300">Prep na spotkanie</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-pen-nib text-pink-400"></i><span class="text-slate-300">Content</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-chart-line text-emerald-400"></i><span class="text-slate-300">Briefing pipeline</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-file-contract text-indigo-400"></i><span class="text-slate-300">Propozycja handlowa</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-headset text-teal-400"></i><span class="text-slate-300">Obsługa reklamacji</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-globe text-sky-400"></i><span class="text-slate-300">Deep Research</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-broom text-lime-400"></i><span class="text-slate-300">Higiena folderu</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-chart-pie text-rose-400"></i><span class="text-slate-300">Rozwój biznesu</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2 border border-brand-500/30"><i class="fa-solid fa-radar text-yellow-400"></i><span class="text-slate-300">Radar szans</span></div>
+                </div>
+            </div>
+
+            <!-- Live Preview CTA -->
+            <div class="max-w-4xl mx-auto mt-12 fade-in-up">
+                <div class="relative rounded-2xl overflow-hidden border border-brand-500/30 shadow-2xl shadow-brand-500/10">
+                    <!-- Background glow -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-brand-600/10 via-slate-900 to-amber-500/5"></div>
+
+                    <div class="relative p-8 md:p-12 flex flex-col md:flex-row items-center gap-8">
+                        <!-- Left: mockup preview -->
+                        <div class="flex-1 w-full">
+                            <div class="bg-slate-950 rounded-xl border border-slate-700 overflow-hidden shadow-lg">
+                                <div class="bg-slate-800 px-4 py-2 flex items-center gap-2 border-b border-slate-700">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                                    <span class="ml-3 text-xs text-slate-500 font-mono">Live Preview</span>
+                                </div>
+                                <div class="p-5 font-mono text-xs space-y-3">
+                                    <div class="flex gap-3">
+                                        <span class="text-slate-500 shrink-0">Branża:</span>
+                                        <span class="text-brand-400">CNC / Obróbka metali</span>
+                                    </div>
+                                    <div class="flex gap-3">
+                                        <span class="text-slate-500 shrink-0">Produkt:</span>
+                                        <span class="text-brand-400">Frezowanie precyzyjne</span>
+                                    </div>
+                                    <div class="border-t border-slate-800 pt-3">
+                                        <div class="flex gap-2 mb-3">
+                                            <span class="px-2 py-0.5 bg-brand-600/30 text-brand-300 rounded text-[10px] font-semibold">Email</span>
+                                            <span class="px-2 py-0.5 bg-slate-800 text-slate-500 rounded text-[10px]">Obrona ceny</span>
+                                            <span class="px-2 py-0.5 bg-slate-800 text-slate-500 rounded text-[10px]">Follow-up</span>
+                                        </div>
+                                        <p class="text-green-400/80 leading-relaxed">Dzień dobry Panie Marku,<br><br>Widzę że produkujecie elementy ze stali nierdzewnej dla automotive. Frezowanie 5-osiowe to Wasza specjalność — ale ile czasu Wasz handlowiec spędza na pisaniu ofert zamiast...</p>
+                                        <span class="inline-block w-2 h-4 bg-brand-500 animate-pulse ml-0.5"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: CTA -->
+                        <div class="flex-1 text-center md:text-left">
+                            <span class="inline-block py-1 px-3 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-300 text-xs font-semibold mb-4">DARMOWE DEMO</span>
+                            <h3 class="text-2xl md:text-3xl font-bold text-white mb-3">Zobacz co AI napisze dla <span class="text-brand-400">TWOJEJ</span> branży</h3>
+                            <p class="text-slate-400 mb-6">Wpisz branżę i produkt. W 30 sekund dostajesz email sprzedażowy, obronę ceny i follow-up — spersonalizowane pod Twój biznes.</p>
+                            <a href="preview/" class="inline-block bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 px-8 rounded-xl transition transform hover:-translate-y-1 shadow-xl shadow-brand-600/20">
+                                Wypróbuj za darmo <i class="fa-solid fa-arrow-right ml-2"></i>
+                            </a>
+                            <p class="text-slate-600 text-xs mt-4">Zero rejestracji. Zero zobowiązań. 30 sekund.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center text-slate-500 text-sm mt-6 fade-in-up">
+                AI wie KIM jesteś, CO sprzedajesz i KOMU. Wypróbuj na żywo — wpisz swoją branżę i zobacz.
+            </p>
+        </div>
+    </section>
+
+    <!-- JAK TO DZIAŁA -->
+    <section id="jak-dziala" class="py-24 light-section">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-6">Jak to działa?</h2>
+                <p class="text-xl text-slate-600">Dwie ścieżki, jeden cel: asystent który Cię ZNA.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+
+                <!-- Ścieżka EXPRESS -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border-2 border-brand-500 fade-in-up">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Ścieżka EXPRESS</h3>
+                            <p class="text-slate-500 text-sm">Dla świadomych</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 mb-6">
+                        <strong>Wiesz kim jesteś, co oferujesz, komu sprzedajesz.</strong><br>
+                        Masz zdefiniowaną ofertę i klientów. Idziemy od razu.
+                    </p>
+
+                    <ol class="space-y-4 text-slate-700">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                            <span><strong>Wywiad z Architektem AI</strong> (~45 min) — 35 pytań o Twoim biznesie + analiza stylu pisania z Twoich maili</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                            <span><strong>Budowa Twojego DNA</strong> — konfiguruję system: 8 sekcji wiedzy o Twoim biznesie + 16 scenariuszy</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-brand-100 text-brand-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                            <span><strong>Instalacja + szkolenie</strong> — wdrażasz z moją asystą, dostajesz nagranie (15-20 min) z 3 demo na żywo</span>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Ścieżka DISCOVERY -->
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-200 fade-in-up" style="transition-delay: 100ms;">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-12 h-12 bg-amber-100 text-amber-600 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Ścieżka DISCOVERY</h3>
+                            <p class="text-slate-500 text-sm">Dla szukających</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-600 mb-6">
+                        <strong>Jeszcze nie masz pełnej jasności.</strong><br>
+                        Najpierw odkrywasz kim jesteś biznesowo, potem budujemy system.
+                    </p>
+
+                    <ol class="space-y-4 text-slate-700">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">1</span>
+                            <span><strong>Self-Discovery</strong> (~30 min) — AI przepytuje Cię: 12 pytań. Budujesz profil + personę klienta</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">2</span>
+                            <span><strong>Wywiad z Architektem AI</strong> (~30 min) — dane z Self-Discovery importują się automatycznie, uzupełniasz resztę</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center text-sm font-bold shrink-0">3</span>
+                            <span><strong>Instalacja + szkolenie</strong> — wdrażasz z moją asystą, dostajesz nagranie z demo</span>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+
+            <p class="text-center text-slate-600 fade-in-up">
+                <strong>Nie wiesz która ścieżka?</strong> Bez stresu - ustalimy to na początku.
+            </p>
+        </div>
+    </section>
+
+    <!-- DLA KOGO / NIE DLA KOGO -->
+    <section class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl font-bold mb-4">Dla kogo to jest?</h2>
+                <p class="text-slate-400">I dla kogo NIE jest - żebyśmy nie tracili czasu.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- DLA -->
+                <div class="fade-in-up">
+                    <h3 class="text-green-400 font-bold mb-6 flex items-center gap-2 text-xl">
+                        <i class="fa-solid fa-circle-check"></i> TAK, jeśli:
+                    </h3>
+                    <ul class="space-y-4 text-slate-300">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Jesteś <strong>handlowcem lub przedsiębiorcą solo</strong></span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Codziennie piszesz oferty, maile, follow-upy</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Chcesz AI które <strong>ROZUMIE</strong> Twój biznes</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Nie masz czasu na naukę "prompt engineeringu"</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                            <span>Cenisz swój czas i chcesz go odzyskać</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- NIE DLA -->
+                <div class="fade-in-up" style="transition-delay: 100ms;">
+                    <h3 class="text-red-400 font-bold mb-6 flex items-center gap-2 text-xl">
+                        <i class="fa-solid fa-circle-xmark"></i> NIE, jeśli:
+                    </h3>
+                    <ul class="space-y-4 text-slate-400">
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Szukasz "magicznego przycisku" bez wkładu własnego</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                    <span>Oczekujesz cudów bez wkładu — 15 min wywiadu to minimum</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Oczekujesz że AI zrobi za Ciebie WSZYSTKO</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Potrzebujesz skomplikowanych integracji IT</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fa-solid fa-xmark text-red-500 mt-1"></i>
+                            <span>Nie masz 15 minut na wypełnienie formularza</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DARMOWE NARZĘDZIA BANNER -->
+    <section class="py-12 bg-gradient-to-r from-brand-600/10 to-amber-500/10 border-y border-brand-500/20">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-8">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-300 text-xs font-semibold mb-3">DARMOWE NARZĘDZIA</span>
+                <h3 class="text-2xl font-bold text-white">Wypróbuj za darmo — zanim zdecydujesz</h3>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Live Preview -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-brand-500/20 hover:border-brand-500/40 transition">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-brand-500/20 text-brand-400 rounded-lg flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Live Preview</h4>
+                            <p class="text-slate-500 text-xs">Wiesz co sprzedajesz</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">Wpisz branżę i produkt → AI generuje email, obronę ceny i follow-up DLA CIEBIE w 30 sekund.</p>
+                    <a href="preview/" class="inline-flex items-center gap-2 text-brand-400 hover:text-brand-300 font-semibold text-sm transition">
+                        Wypróbuj demo <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+                <!-- Self-Discovery -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-6 border border-slate-700 hover:border-amber-500/30 transition">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 bg-amber-500/20 text-amber-400 rounded-lg flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-compass"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white">Self-Discovery</h4>
+                            <p class="text-slate-500 text-xs">Nie wiesz jeszcze co sprzedajesz</p>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm mb-4">12 pytań, 30 minut. AI pomoże Ci zdefiniować kim jesteś w biznesie i kto jest Twoim idealnym klientem.</p>
+                    <a href="self-discovery.html" class="inline-flex items-center gap-2 text-amber-400 hover:text-amber-300 font-semibold text-sm transition">
+                        Zacznij Self-Discovery <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="cena" class="py-24 relative overflow-hidden">
+        <div class="glow-bg left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] opacity-30"></div>
+        <div class="max-w-3xl mx-auto px-4 text-center">
+
+            <div class="glass-card p-10 rounded-3xl border border-brand-500/50 shadow-2xl relative fade-in-up">
+
+                <h2 class="text-4xl font-bold text-white mb-4">Jedna cena. Bez niespodzianek.</h2>
+                <p class="text-slate-400 mb-8">Płacisz raz. Korzystasz zawsze. Zero abonamentu.</p>
+
+                <div class="text-6xl font-extrabold text-white mb-2">2 500 <span class="text-2xl text-slate-500 font-normal">PLN netto</span></div>
+                <p class="text-sm text-slate-500 mb-1">Faktura VAT 23%</p>
+                <p class="text-sm text-slate-400 mb-8">Raty: 2&times; 1 250 PLN</p>
+
+                <div class="bg-slate-800/50 rounded-xl p-6 mb-8 text-left">
+                    <h4 class="font-bold text-white mb-4">Co dostajesz:</h4>
+                    <table class="w-full text-sm">
+                        <tbody class="divide-y divide-slate-700/50">
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> System 10h+ v6.1 — AI z 16 scenariuszami + Radar Szans + Deep Research</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">2 800 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Inteligentny routing — AI sam wie czego potrzebujesz</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">800 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Biznesowe DNA v2.0 — 8 sekcji, ~240 pól wiedzy</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">1 200 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Pamięć operacyjna — system pamięta między sesjami</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">400 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Szkolenie Loom + biblioteka 16 scenariuszy</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">1 100 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Quick Start + instrukcja instalacji</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">200 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> 30 dni wsparcia mailowego</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">900 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Gwarancja 30 dni — nie działa = zwrot kasy</td>
+                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">—</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="border-t border-slate-600">
+                                <td class="pt-3 font-bold text-white">Łączna wartość</td>
+                                <td class="pt-3 text-right font-bold text-white whitespace-nowrap">7 400 PLN</td>
+                            </tr>
+                            <tr>
+                                <td class="pt-1 font-bold text-brand-400">Twoja inwestycja</td>
+                                <td class="pt-1 text-right font-bold text-brand-400 whitespace-nowrap">2 500 PLN</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="block w-full bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
+                    Chcę System 10h+
+                </a>
+
+                <div class="mt-8 pt-8 border-t border-slate-700/50">
+                    <p class="text-sm font-bold text-white mb-2"><i class="fa-solid fa-shield-halved text-green-500 mr-2"></i> Gwarancja satysfakcji</p>
+                    <p class="text-xs text-slate-400">Jeśli w ciągu 30 dni system nie spełni Twoich oczekiwań – zwracam 100% pieniędzy. Bez pytań.</p>
+                </div>
+
+                <div class="mt-6 p-4 bg-slate-800/30 rounded-lg">
+                    <p class="text-sm text-slate-400">
+                        <strong class="text-white">ROI:</strong> Zwraca się po 1 uratowanym dealu lub 10h zaoszczędzonego czasu.<br>
+                        To mniej niż miesiąc stażu studenta. A działa latami.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PILOT DEAL BANNER -->
+            <div class="mt-8 glass-card p-8 rounded-2xl border-2 border-amber-500/50 shadow-xl shadow-amber-500/10 fade-in-up">
+                <div class="flex flex-col md:flex-row items-center gap-6">
+                    <div class="flex-1 text-center md:text-left">
+                        <span class="inline-block py-1 px-3 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-bold mb-3">PILOT — LIMITOWANE</span>
+                        <h3 class="text-2xl font-bold text-white mb-2">1 990 PLN <span class="text-lg text-slate-400 font-normal line-through">2 500 PLN</span></h3>
+                        <p class="text-slate-400 text-sm mb-2">Wszystko co w pełnej wersji + <strong class="text-white">osobisty monitoring 30 dni</strong> (sprawdzam czy system działa na Twoich realnych scenariuszach).</p>
+                        <p class="text-amber-400 text-sm font-semibold"><i class="fa-solid fa-clock mr-1"></i> Do 28 lutego. Limit: 2 miejsca.</p>
+                    </div>
+                    <div class="shrink-0">
+                        <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="inline-block bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold py-4 px-8 rounded-xl transition transform hover:-translate-y-1 shadow-xl shadow-amber-500/20">
+                            Chcę Pilota <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PORÓWNANIE Z ABONAMENTAMI -->
+            <div class="mt-8 glass-card p-8 rounded-2xl fade-in-up">
+                <h3 class="text-xl font-bold text-white mb-2 text-center">Dlaczego nie abonament?</h3>
+                <p class="text-slate-400 text-sm text-center mb-6">Większość narzędzi AI to abonamenty. System 10h+ płacisz raz.</p>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b border-slate-700">
+                                <th class="py-3 text-left text-slate-400 font-normal">Narzędzie</th>
+                                <th class="py-3 text-right text-slate-400 font-normal">Miesięcznie</th>
+                                <th class="py-3 text-right text-slate-400 font-normal">Rocznie</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-800">
+                            <tr>
+                                <td class="py-2 text-slate-300">Lavender</td>
+                                <td class="py-2 text-right text-slate-400">$29–49</td>
+                                <td class="py-2 text-right text-slate-400">$348–588</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300">Instantly</td>
+                                <td class="py-2 text-right text-slate-400">$37–97</td>
+                                <td class="py-2 text-right text-slate-400">$444–1 164</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300">Jasper</td>
+                                <td class="py-2 text-right text-slate-400">$39–69</td>
+                                <td class="py-2 text-right text-slate-400">$468–828</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 text-slate-300">Copy.ai</td>
+                                <td class="py-2 text-right text-slate-400">$29</td>
+                                <td class="py-2 text-right text-slate-400">$348</td>
+                            </tr>
+                            <tr class="border-t-2 border-brand-500/50">
+                                <td class="py-3 text-brand-400 font-bold">System 10h+</td>
+                                <td class="py-3 text-right text-brand-400 font-bold" colspan="2">2 500 PLN. Raz. Koniec.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-20 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16 fade-in-up">
+                <h2 class="text-3xl font-bold mb-4">Pytania które dostaję</h2>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up">
+                    <h3 class="font-bold text-white mb-2">Czym to się różni od zwykłego ChatGPT?</h3>
+                    <p class="text-slate-400 text-sm">ChatGPT nie wie kim jesteś. Przy każdej rozmowie zaczynasz od zera. System 10h+ to skonfigurowany "mózg" który ZNA Twój biznes — profil, personę, ofertę, zasady, styl pisania, obiekcje klientów. 8 sekcji kontekstu, 16 gotowych scenariuszy, pamięć między sesjami. Mówisz "napisz ofertę" — dostajesz coś, co brzmi jak TY.</p>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 50ms;">
+                    <h3 class="font-bold text-white mb-2">Czy muszę umieć programować?</h3>
+                    <p class="text-slate-400 text-sm">Nie. Jeśli umiesz kopiuj-wklej (Ctrl+C / Ctrl+V) - dasz radę. To prostsze niż Excel.</p>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 100ms;">
+                    <h3 class="font-bold text-white mb-2">Czy to jest bezpieczne dla moich danych?</h3>
+                    <p class="text-slate-400 text-sm">Tak. System działa na Twoim koncie Claude/ChatGPT. Twoje dane nie przechodzą przez moje serwery. Masz pełną kontrolę.</p>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 150ms;">
+                    <h3 class="font-bold text-white mb-2">Dlaczego jednorazowa opłata, a nie abonament?</h3>
+                    <p class="text-slate-400 text-sm">Bo nienawidzę modelu "płacisz wiecznie za to samo". Płacisz za setup i konfigurację. Potem ponosisz tylko koszty AI (ok. 20-50 zł/msc, płatne do OpenAI/Anthropic).</p>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 200ms;">
+                    <h3 class="font-bold text-white mb-2">A jeśli nie zadziała?</h3>
+                    <p class="text-slate-400 text-sm">30 dni gwarancji. Jeśli system nie spełni Twoich oczekiwań - zwracam 100% pieniędzy. Bez pytań, bez tłumaczeń.</p>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="glass-card rounded-xl p-6 fade-in-up" style="transition-delay: 250ms;">
+                    <h3 class="font-bold text-white mb-2">Ile czasu zajmuje wdrożenie?</h3>
+                    <p class="text-slate-400 text-sm">Ścieżka Express: 2-3 dni (z Twojej strony ~45 min na wywiad z Architektem). Ścieżka Discovery: 4-5 dni (~30 min Self-Discovery + ~30 min Architekt). Resztę robię ja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="py-20 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8 fade-in-up">
+            <div class="w-32 h-32 rounded-full overflow-hidden shrink-0 border-2 border-slate-700">
+                <img src="assets/mateusz-photo.jpg" alt="Mateusz Sokólski" class="w-full h-full object-cover grayscale">
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-2">Kto za tym stoi?</h3>
+                <p class="text-slate-400 leading-relaxed">
+                    Nazywam się <strong>Mateusz Sokólski</strong>. Nie jestem "guru AI" ani influencerem. Jestem handlowcem który przez lata pisał setki maili, ofert i follow-upów. Zbudowałem ten system dla siebie - żeby AI wreszcie ROZUMIAŁO mój biznes. Zadziałał. Teraz wdrażam go u innych.
+                </p>
+                <p class="text-slate-500 text-sm mt-4 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-check text-green-500"></i>
+                    <span>Pierwszy klient wdrożony: <strong class="text-slate-300">Stalton</strong> — firma CNC z Wrocławia</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-20 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto px-4 text-center fade-in-up">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                Gotowy na asystenta który Cię ZNA?
+            </h2>
+            <p class="text-slate-400 mb-8 text-lg">
+                Napisz "Chcę System" - ustalimy ścieżkę i zaczynamy.
+            </p>
+            <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="inline-block bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 px-12 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
+                Chcę System 10h+
+            </a>
+            <p class="text-slate-500 text-sm mt-8 max-w-xl mx-auto">
+                <strong class="text-slate-400">P.S.</strong> Każdy tydzień bez systemu to kolejne 3-4 godziny adminów zamiast sprzedaży — i kolejny deal który przepadł przez ciszę. Jeden zamknięty deal z&nbsp;Systemem zwraca całą inwestycję.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800 text-center text-slate-600 text-sm">
+        <div class="mb-4">
+            <p class="font-bold text-slate-400">Mateusz Sokólski Account Management</p>
+            <p>NIP: 8952117558</p>
+        </div>
+        <div class="space-x-4">
+            <span>&copy; 2026 System 10h+</span>
+            <a href="polityka-prywatnosci.html" class="hover:text-slate-400">Polityka prywatności</a>
+            <a href="mailto:hello@system10h.com" class="hover:text-slate-400">Kontakt</a>
+        </div>
+    </footer>
+
+    <!-- EXIT INTENT POPUP — Smart: Pilot do 28.02, Dickens Pattern po -->
+    <div id="exit-popup" class="fixed inset-0 z-[10001] hidden flex items-center justify-center p-4">
+        <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" id="exit-overlay"></div>
+        <div class="relative bg-slate-800 border border-slate-600 rounded-2xl p-8 max-w-lg w-full shadow-2xl">
+            <button id="close-exit" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-times text-xl"></i></button>
+            <div class="text-center" id="exit-popup-content"></div>
+        </div>
+    </div>
+
+    <!-- Mesh Canvas Animation -->
+    <script>
+    (function() {
+        const canvas = document.getElementById('mesh-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const container = canvas.parentElement;
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.innerWidth < 768;
+        const NODE_COUNT = isMobile ? 25 : 50;
+        const MAX_DIST = isMobile ? 100 : 130;
+        const FPS = 30;
+        let nodes = [], w, h, lastFrame = 0;
+
+        function resize() {
+            const rect = container.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            w = rect.width; h = rect.height;
+            canvas.width = w * dpr; canvas.height = h * dpr;
+            ctx.scale(dpr, dpr);
+        }
+
+        function createNodes() {
+            nodes = [];
+            for (let i = 0; i < NODE_COUNT; i++) {
+                nodes.push({
+                    x: Math.random() * w, y: Math.random() * h,
+                    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+                    r: Math.random() * 1.5 + 1, opacity: Math.random() * 0.4 + 0.2
+                });
+            }
+        }
+
+        function update() {
+            for (const n of nodes) {
+                n.x += n.vx; n.y += n.vy;
+                if (n.x < 0 || n.x > w) n.vx *= -1;
+                if (n.y < 0 || n.y > h) n.vy *= -1;
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, w, h);
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < MAX_DIST) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = 'rgba(168,85,247,' + ((1 - dist / MAX_DIST) * 0.15) + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            for (const n of nodes) {
+                ctx.beginPath();
+                ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(168,85,247,' + n.opacity + ')';
+                ctx.fill();
+            }
+        }
+
+        function loop(ts) {
+            if (ts - lastFrame >= 1000 / FPS) { lastFrame = ts; update(); draw(); }
+            requestAnimationFrame(loop);
+        }
+
+        resize(); createNodes();
+        if (prefersReducedMotion) { draw(); } else { requestAnimationFrame(loop); }
+
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() { resize(); createNodes(); }, 250);
+        });
+    })();
+    </script>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); } }); }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-in-up').forEach((el) => observer.observe(el));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileOverlay = document.getElementById('mobile-menu-overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-menu-link');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                });
+                if (mobileOverlay) mobileOverlay.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                });
+                mobileLinks.forEach(link => link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                }));
+            }
+
+            // Exit Intent — Smart popup (Pilot do deadline, Dickens po)
+            const exitPopup = document.getElementById('exit-popup');
+            const popupContent = document.getElementById('exit-popup-content');
+            const closeBtn = document.getElementById('close-exit');
+            const overlay = document.getElementById('exit-overlay');
+
+            // Pilot deadline — zmień datę gdy nowa oferta
+            const PILOT_DEADLINE = new Date('2026-03-01T00:00:00');
+            const isPilotActive = new Date() < PILOT_DEADLINE;
+
+            if (popupContent) {
+                if (isPilotActive) {
+                    // WARIANT A — Pilot Deal (scarcity + anchoring)
+                    popupContent.innerHTML = `
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-amber-500/10 rounded-full mb-6 text-amber-400 text-3xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Zostały 2 miejsca w Pilocie.</h3>
+                        <p class="text-slate-400 mb-6">Do 28.02 wchodzisz za <strong class="text-white">1 990 PLN</strong> zamiast 2 500 PLN — i dostajesz osobisty monitoring przez 30 dni. To nie rabat. To pilotaż dla osób, które chcą działać, nie czekać.</p>
+                        <a href="https://calendly.com/mt-sokolski/30min" target="_blank" onclick="document.getElementById('exit-popup').classList.add('hidden')" class="block w-full bg-amber-500 hover:bg-amber-400 text-slate-900 font-bold py-3 rounded-xl transition shadow-lg mb-4">
+                            Chcę wejść za 1 990 PLN
+                        </a>
+                        <p class="text-xs text-slate-500 cursor-pointer hover:text-slate-300" id="close-exit-text">Nie, wolę zapłacić 510 PLN więcej za miesiąc.</p>
+                    `;
+                } else {
+                    // WARIANT B — Dickens Pattern (evergreen)
+                    popupContent.innerHTML = `
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-brand-500/10 rounded-full mb-6 text-brand-500 text-3xl">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">Co tracisz każdego tygodnia bez systemu?</h3>
+                        <p class="text-slate-400 mb-6">Paraliż białej kartki, follow-upy których nie wysłałeś, deal który przepadł przez ciszę. Jeden system. <strong class="text-white">2 500 PLN jednorazowo.</strong> Gwarancja 30 dni — nie działa = zwrot.</p>
+                        <a href="https://calendly.com/mt-sokolski/30min" target="_blank" onclick="document.getElementById('exit-popup').classList.add('hidden')" class="block w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition shadow-lg mb-4">
+                            Umów 15-min rozmowę
+                        </a>
+                        <p class="text-xs text-slate-500 cursor-pointer hover:text-slate-300" id="close-exit-text">Nie, dam sobie radę z bieżączką sam.</p>
+                    `;
+                }
+            }
+
+            if (!localStorage.getItem('exitPopupShown10h')) {
+                document.addEventListener('mouseleave', (e) => { if (e.clientY < 0 && !localStorage.getItem('exitPopupShown10h')) showPopup(); });
+                setTimeout(() => { if (!localStorage.getItem('exitPopupShown10h')) showPopup(); }, 25000);
+            }
+
+            function showPopup() { exitPopup.classList.remove('hidden'); localStorage.setItem('exitPopupShown10h', 'true'); }
+            function hidePopup() { exitPopup.classList.add('hidden'); }
+
+            if(closeBtn) closeBtn.addEventListener('click', hidePopup);
+            // Bind close-exit-text after content is injected
+            const closeText = document.getElementById('close-exit-text');
+            if(closeText) closeText.addEventListener('click', hidePopup);
+            if(overlay) overlay.addEventListener('click', hidePopup);
+        });
+    </script>
+</body>
+</html>

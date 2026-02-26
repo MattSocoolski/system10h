@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Preview | Zobacz co AI napisze dla TWOJEJ branży</title>
+    <meta name="description" content="Wpisz branżę i produkt. Otrzymaj email sprzedażowy, obronę ceny i follow-up wygenerowane przez AI w 30 sekund. Za darmo.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#faf5ff', 100: '#f3e8ff', 400: '#c084fc', 500: '#a855f7', 600: '#9333ea', 900: '#0f172a' },
+                        accent: { 400: '#facc15', 500: '#eab308' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased overflow-x-hidden bg-[#0f172a] text-slate-100">
+
+    <!-- NAVBAR (minimal) -->
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+            <div class="flex justify-between items-center h-16">
+                <a href="../" class="flex items-center gap-2 hover:opacity-80 transition">
+                    <div class="bg-brand-600 text-white font-bold p-1.5 rounded-lg text-sm">10h+</div>
+                    <span class="font-bold text-lg tracking-tight">System 10h+</span>
+                </a>
+                <a href="https://calendly.com/mt-sokolski/30min" target="_blank"
+                   class="text-sm text-slate-400 hover:text-white transition hidden sm:inline">
+                    Umów rozmowę <i class="fa-solid fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO + FORM -->
+    <section class="pt-24 pb-8 sm:pt-28 px-4">
+        <div class="max-w-2xl mx-auto text-center mb-8">
+            <span class="inline-block py-1 px-3 rounded-full bg-slate-800 border border-slate-700 text-brand-400 text-xs font-semibold mb-4">
+                AI Asystent Sprzedaży
+            </span>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
+                Zobacz co AI napisze dla <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-500 to-accent-400">TWOJEJ branży</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-400 max-w-xl mx-auto">
+                Wpisz branżę i produkt. Otrzymaj email sprzedażowy, obronę ceny i follow-up
+                <strong class="text-slate-300">spersonalizowane pod Twój biznes</strong> w 30 sekund.
+            </p>
+        </div>
+
+        <!-- FORM CARD -->
+        <div class="max-w-xl mx-auto">
+            <form id="preview-form" class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-700/50">
+                <div class="space-y-4">
+                    <!-- 1. Industry (dropdown) -->
+                    <div>
+                        <label for="industry" class="block text-sm font-semibold text-slate-300 mb-1.5">Twoja branża</label>
+                        <select id="industry" name="industry" required
+                                class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition">
+                            <option value="" disabled selected>Wybierz branżę...</option>
+                            <option value="Handel B2B / Dystrybucja">Handel B2B / Dystrybucja</option>
+                            <option value="Usługi profesjonalne / Konsulting">Usługi profesjonalne / Konsulting</option>
+                            <option value="IT / Software">IT / Software</option>
+                            <option value="Produkcja / Przemysł">Produkcja / Przemysł</option>
+                            <option value="E-commerce">E-commerce</option>
+                            <option value="Finanse / Ubezpieczenia">Finanse / Ubezpieczenia</option>
+                            <option value="Nieruchomości">Nieruchomości</option>
+                            <option value="Szkolenia / Edukacja">Szkolenia / Edukacja</option>
+                            <option value="Marketing / Agencja">Marketing / Agencja</option>
+                            <option value="Inna">Inna (wpisz w polu produktu)</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Product (text) -->
+                    <div>
+                        <label for="product" class="block text-sm font-semibold text-slate-300 mb-1.5">Twój produkt lub usługa</label>
+                        <input type="text" id="product" name="product" required maxlength="200"
+                               placeholder="np. Wdrożenia ERP dla firm produkcyjnych"
+                               class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition">
+                        <p class="text-xs text-slate-500 mt-1"><span id="product-count">0</span>/200</p>
+                    </div>
+
+                    <!-- 3. Pain (text) -->
+                    <div>
+                        <label for="pain" class="block text-sm font-semibold text-slate-300 mb-1.5">Jaki problem rozwiązujesz dla klientów?</label>
+                        <textarea id="pain" name="pain" required maxlength="500" rows="3"
+                                  placeholder="np. Moi klienci tracą leady bo nie nadążają z follow-upami i piszą każdą ofertę od zera"
+                                  class="w-full bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition resize-none"></textarea>
+                        <p class="text-xs text-slate-500 mt-1"><span id="pain-count">0</span>/500</p>
+                    </div>
+
+                    <!-- Honeypot (hidden) -->
+                    <div class="hp-field" aria-hidden="true" tabindex="-1">
+                        <input type="text" name="website" id="website" autocomplete="off" tabindex="-1">
+                    </div>
+
+                    <!-- Turnstile -->
+                    <div class="cf-turnstile" data-sitekey="0x4AAAAAACd6iHnL7olgQbf1" data-theme="dark"></div>
+
+                    <!-- Submit -->
+                    <button type="submit" id="submit-btn"
+                            class="w-full bg-brand-600 hover:bg-brand-500 text-white text-lg font-bold py-4 rounded-xl transition shadow-lg shadow-brand-600/20 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span id="submit-text">Generuj moje skrypty — za darmo</span>
+                    </button>
+                </div>
+
+                <p class="text-[11px] text-slate-500 mt-3 text-center">
+                    Bez rejestracji &bull; Wyniki w 30 sekund &bull; 100% spersonalizowane
+                </p>
+            </form>
+
+            <!-- Social proof (before generation) -->
+            <div class="mt-4 flex items-center justify-center gap-3 bg-slate-800/30 rounded-xl px-4 py-3 border border-slate-700/30">
+                <img src="../assets/mateusz-photo.jpg" alt="Mateusz" class="w-8 h-8 rounded-full grayscale">
+                <p class="text-xs text-slate-400">
+                    <span class="text-slate-300 font-semibold">Mateusz Sokólski</span> &bull;
+                    5 lat B2B sales &bull; UGEARS, Auchan, Empik
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUTPUT SECTION (hidden until generated) -->
+    <section id="output-section" class="hidden py-8 px-4">
+        <div class="max-w-2xl mx-auto">
+
+            <!-- Status message -->
+            <div id="status-bar" class="text-center mb-6">
+                <div class="inline-flex items-center gap-2 text-sm text-brand-400">
+                    <div class="loading-dots"><span></span><span></span><span></span></div>
+                    <span id="status-text">Analizuję Twój kontekst sprzedażowy...</span>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex border-b border-slate-700 mb-0" id="output-tabs" role="tablist">
+                <button class="tab-btn active" data-tab="email" role="tab" aria-selected="true">
+                    <i class="fa-solid fa-envelope mr-1.5"></i>Email
+                </button>
+                <button class="tab-btn" data-tab="price" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-shield-halved mr-1.5"></i>Obrona ceny
+                </button>
+                <button class="tab-btn" data-tab="followup" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-bell mr-1.5"></i>Follow-up
+                </button>
+                <button class="tab-btn" data-tab="markets" role="tab" aria-selected="false">
+                    <i class="fa-solid fa-magnifying-glass-chart mr-1.5"></i><span class="hidden sm:inline">Nowe </span>Rynki
+                </button>
+            </div>
+
+            <!-- Tab panels -->
+            <div class="glass-card rounded-b-2xl rounded-tr-2xl border border-slate-700/50 border-t-0">
+                <div id="panel-email" class="tab-panel active p-5 sm:p-6" role="tabpanel">
+                    <div class="output-content skeleton-active">
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block w-3/4"></div>
+                        <div class="skeleton-block w-5/6"></div>
+                        <div class="skeleton-block w-2/3"></div>
+                    </div>
+                    <div class="output-text whitespace-pre-wrap text-slate-200 leading-relaxed hidden"></div>
+                </div>
+                <div id="panel-price" class="tab-panel p-5 sm:p-6 hidden" role="tabpanel">
+                    <div class="output-content skeleton-active">
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block w-3/4"></div>
+                        <div class="skeleton-block w-5/6"></div>
+                    </div>
+                    <div class="output-text whitespace-pre-wrap text-slate-200 leading-relaxed hidden"></div>
+                </div>
+                <div id="panel-followup" class="tab-panel p-5 sm:p-6 hidden" role="tabpanel">
+                    <div class="output-content skeleton-active">
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block w-3/4"></div>
+                        <div class="skeleton-block w-5/6"></div>
+                    </div>
+                    <div class="output-text whitespace-pre-wrap text-slate-200 leading-relaxed hidden"></div>
+                </div>
+
+                <div id="panel-markets" class="tab-panel p-5 sm:p-6 hidden" role="tabpanel">
+                    <div class="output-content skeleton-active">
+                        <div class="skeleton-block"></div>
+                        <div class="skeleton-block w-4/5"></div>
+                        <div class="skeleton-block w-3/4"></div>
+                        <div class="skeleton-block w-5/6"></div>
+                        <div class="skeleton-block w-2/3"></div>
+                    </div>
+                    <div class="output-text whitespace-pre-wrap text-slate-200 leading-relaxed hidden"></div>
+                    <div class="markets-footer hidden mt-4 pt-3 border-t border-slate-700/50">
+                        <p class="text-xs text-brand-400">
+                            <i class="fa-solid fa-lightbulb mr-1"></i>
+                            To fragment workflow'u #15: Rozwój Biznesu — nowe segmenty, upsell, plan 90 dni.
+                            Pełny System 10h+ ma 15 takich scenariuszy.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Action buttons (shown after generation) -->
+                <div id="output-actions" class="hidden p-4 border-t border-slate-700/50 flex flex-wrap gap-2">
+                    <button id="copy-current-btn" class="action-btn">
+                        <i class="fa-regular fa-copy mr-1"></i> Kopiuj
+                    </button>
+                    <button id="copy-all-btn" class="action-btn">
+                        <i class="fa-solid fa-copy mr-1"></i> Kopiuj wszystko
+                    </button>
+                    <button id="regenerate-btn" class="action-btn">
+                        <i class="fa-solid fa-rotate mr-1"></i> Generuj ponownie
+                    </button>
+                    <button id="edit-input-btn" class="action-btn">
+                        <i class="fa-solid fa-pen mr-1"></i> Zmień dane
+                    </button>
+                </div>
+            </div>
+
+            <!-- Toast -->
+            <div id="toast" class="fixed bottom-20 left-1/2 -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-lg transition-all duration-300 opacity-0 pointer-events-none z-50">
+                <i class="fa-solid fa-check mr-1"></i> Skopiowano
+            </div>
+
+            <!-- CTA ZONE (shown after generation) -->
+            <div id="cta-zone" class="hidden mt-8 space-y-4">
+
+                <!-- Email Capture -->
+                <div id="email-capture" class="glass-card rounded-2xl p-6 border border-green-500/30">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-envelope text-green-400"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-white">Wyślij wyniki na email</h3>
+                            <p class="text-slate-400 text-sm">Zachowaj skrypty + dostaniesz wskazówki AI w sprzedaży</p>
+                        </div>
+                    </div>
+                    <form id="subscribe-form" class="space-y-3">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="text" id="sub-name" name="name" placeholder="Imię" required maxlength="100"
+                                   class="flex-1 bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition text-sm">
+                            <input type="email" id="sub-email" name="email" placeholder="Twój email" required
+                                   class="flex-1 bg-slate-800 border border-slate-600 rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:border-green-500 focus:ring-1 focus:ring-green-500 outline-none transition text-sm">
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <input type="checkbox" id="sub-consent" required
+                                   class="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-800 text-green-600 focus:ring-green-500 shrink-0">
+                            <label for="sub-consent" class="text-slate-500 text-[11px] leading-relaxed">
+                                Chcę otrzymywać newsletter &mdash; wskazówki AI w sprzedaży i informacje o System 10h+.
+                                Mogę się wypisać w dowolnym momencie.
+                                <a href="../polityka-prywatnosci.html" class="text-brand-400 underline hover:text-brand-300" target="_blank">Polityka Prywatności</a>
+                            </label>
+                        </div>
+                        <button type="submit" id="subscribe-btn"
+                                class="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-3 rounded-xl transition text-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span id="subscribe-text">Wyślij na email</span>
+                        </button>
+                    </form>
+                    <p class="text-[10px] text-slate-600 mt-2 text-center">
+                        Admin: Mateusz Sokólski Account Management, NIP: 8952117558. Dane przetwarzam w celu wysyłki newslettera (RODO).
+                    </p>
+                </div>
+
+                <!-- Email Success (hidden until subscribed) -->
+                <div id="email-success" class="hidden glass-card rounded-2xl p-6 border border-green-500/30 text-center">
+                    <div class="w-12 h-12 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-3">
+                        <i class="fa-solid fa-check text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1">Gotowe! Sprawdź skrzynkę</h3>
+                    <p class="text-slate-400 text-sm">Twoje skrypty wysłaliśmy na <span id="sent-email" class="text-green-400 font-semibold"></span></p>
+                    <p class="text-slate-500 text-xs mt-1">Nie widzisz? Sprawdź folder spam.</p>
+                </div>
+
+                <!-- Primary CTA -->
+                <div class="glass-card rounded-2xl p-6 border border-brand-500/30 text-center">
+                    <h3 class="text-xl font-bold text-white mb-2">Chcesz taki system na co dzień?</h3>
+                    <p class="text-slate-400 text-sm mb-4">
+                        To dopiero początek. Pełny System 10h+ ma 15 scenariuszy, zna Twoje zasady, styl pisania i klientów.
+                    </p>
+                    <a href="https://calendly.com/mt-sokolski/30min" target="_blank"
+                       class="inline-block bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 px-8 rounded-xl transition shadow-lg shadow-brand-600/20">
+                        <i class="fa-regular fa-calendar mr-2"></i>Umów 15-min rozmowę
+                    </a>
+                    <p class="text-xs text-slate-500 mt-2">Bez zobowiązań. Wyjaśnię wszystko.</p>
+                </div>
+
+                <!-- Social proof -->
+                <div class="text-center pt-4">
+                    <div class="inline-flex items-center gap-3 bg-slate-800/50 rounded-full px-5 py-2.5 border border-slate-700/50">
+                        <img src="../assets/mateusz-photo.jpg" alt="Mateusz" class="w-8 h-8 rounded-full grayscale">
+                        <p class="text-xs text-slate-400 text-left">
+                            <span class="text-slate-300 font-semibold">Mateusz Sokólski</span><br>
+                            5 lat B2B sales &bull; UGEARS, Auchan, Empik &bull; 70 punktów dystrybucji
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODO notice -->
+    <section class="py-6 px-4">
+        <div class="max-w-xl mx-auto">
+            <p class="text-[10px] text-slate-600 text-center leading-relaxed">
+                To demo wykorzystuje AI (Claude by Anthropic) do generowania próbek sprzedażowych.
+                Twój input jest przetwarzany przez API Anthropic jako procesora danych w ramach RODO
+                z zabezpieczeniem EU SCCs. Dane nie są wykorzystywane do trenowania AI.
+                Wygenerowane treści są tworzone przez sztuczną inteligencję.
+                <a href="../polityka-prywatnosci.html" class="underline hover:text-slate-400">Polityka prywatności</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer (minimal) -->
+    <footer class="py-6 border-t border-slate-800 text-center text-slate-600 text-xs">
+        <p>&copy; 2026 System 10h+ &bull; Mateusz Sokólski Account Management &bull; NIP: 8952117558</p>
+        <p class="mt-1">
+            <a href="../" class="hover:text-slate-400">Strona główna</a> &bull;
+            <a href="../polityka-prywatnosci.html" class="hover:text-slate-400">Polityka prywatności</a> &bull;
+            <a href="mailto:hello@system10h.com" class="hover:text-slate-400">Kontakt</a>
+        </p>
+    </footer>
+
+    <!-- Sticky CTA mobile -->
+    <div id="sticky-cta" class="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-t border-slate-700 p-3 z-40 hidden sm:hidden">
+        <a href="https://calendly.com/mt-sokolski/30min" target="_blank"
+           class="block w-full bg-brand-600 text-white text-center font-bold py-3 rounded-xl text-sm">
+            <i class="fa-regular fa-calendar mr-1"></i> Umów 15-min rozmowę
+        </a>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
