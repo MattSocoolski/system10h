@@ -25,6 +25,9 @@ node_modules/
 # Pliki binarne
 *.xlsx
 
+# Generowane grafiki (carousel-generator.js)
+materialy/carousel_*/
+
 # Automatyzacje — state i logi
 automatyzacje/state/
 automatyzacje/logs/

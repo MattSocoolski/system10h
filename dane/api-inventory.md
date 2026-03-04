@@ -287,11 +287,13 @@
 - **Uwierzytelnianie:** parametr `?key=` w URL lub nagłówek `x-goog-api-key`
 - **Status:** AKTYWNE
 - **Modele obrazów:**
-  - **Nano Banan** (`gemini-2.5-flash-image`) — szybki, ~$0.039/obraz
-  - **Nano Banan Pro** (`gemini-3-pro-image-preview`) — jakość studio, 4K, preview
+  - **Nano Banana 2** (`gemini-3.1-flash-image-preview`) — PRO jakość, Flash cena, ~$0.039/obraz. Aspect ratios: 1:1, 4:5, 16:9, 9:16 itd. Rozdzielczości: 512px, 1K, 2K, 4K. Ref images: do 14.
+  - **Nano Banana Pro** (`gemini-3-pro-image-preview`) — jakość studio, 4K, ~$0.08/obraz
+  - **Nano Banana 1** (`gemini-2.5-flash-image`) — legacy, szybki
 - **Deep Research:** Agent `deep-research-pro-preview-12-2025` — autonomiczny research z Interactions API
-- **Koszt:** Free tier: 15 req/min (Flash), 2 req/min (Pro). Obrazy: ~$0.039/obraz (Flash). Deep Research: preview (ograniczone). Grounding: $14-35/1k zapytań. Ustaw limit w Google Cloud Console!
-- **Użycie w biznesie:** Deep research (rynek, konkurencja, benchmarki), Nano Banan Pro (grafiki, social media, wizualizacje), Radar Szans (WF16)
+- **Koszt:** Free tier: 15 req/min (Flash), 2 req/min (Pro). Obrazy: ~$0.039/obraz (NB2). Deep Research: preview (ograniczone). Grounding: $14-35/1k zapytań. Ustaw limit w Google Cloud Console!
+- **Użycie w biznesie:** Deep research (rynek, konkurencja, benchmarki), Nano Banana 2 (grafiki, karuzele LinkedIn, wizualizacje), Radar Szans (WF16)
+- **Automatyzacja:** `automatyzacje/carousel-generator.js` — czyta markdown z treścią slajdów → generuje PNG per slajd (Nano Banana 2, 4:5, 2K). Koszt: ~$0.04/slajd. Użycie: `node automatyzacje/carousel-generator.js materialy/PLIK.md [--pro] [--dry-run]`
 
 ---
 
