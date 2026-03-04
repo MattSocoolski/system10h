@@ -227,3 +227,154 @@ export function formatDate(d) {
 export function daysDiff(d1, d2) {
   return Math.floor((d1 - d2) / (1000 * 60 * 60 * 24));
 }
+
+// --- Gmail API (OAuth 2.0) ---
+
+export async function gmailGetAccessToken() {
+  const clientId = process.env.GMAIL_CLIENT_ID;
+  const clientSecret = process.env.GMAIL_CLIENT_SECRET;
+  const refreshToken = process.env.GMAIL_REFRESH_TOKEN;
+
+  if (!clientId || !clientSecret || !refreshToken) {
+    throw new Error('Gmail OAuth not configured — run: node automatyzacje/gmail-auth.js');
+  }
+
+  const res = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams({
+      client_id: clientId,
+      client_secret: clientSecret,
+      refresh_token: refreshToken,
+      grant_type: 'refresh_token'
+    }).toString()
+  });
+
+  const data = await res.json();
+  if (data.error) throw new Error(`Gmail token refresh failed: ${data.error} — ${data.error_description || ''}`);
+  return data.access_token;
+}
+
+export async function gmailFetch(accessToken, endpoint, params = {}) {
+  const qs = new URLSearchParams(params).toString();
+  const url = `https://www.googleapis.com/gmail/v1/users/me/${endpoint}${qs ? '?' + qs : ''}`;
+
+  const res = await fetch(url, {
+    headers: { 'Authorization': `Bearer ${accessToken}` }
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Gmail API ${res.status}: ${text}`);
+  }
+  return res.json();
+}
+
+export async function gmailSearchMessages(accessToken, query, maxResults = 10) {
+  const data = await gmailFetch(accessToken, 'messages', { q: query, maxResults: String(maxResults) });
+  return data.messages || [];
+}
+
+export async function gmailGetMessage(accessToken, messageId, format = 'metadata') {
+  // Gmail API requires repeated metadataHeaders params (one per header)
+  const qs = new URLSearchParams();
+  qs.append('format', format);
+  qs.append('metadataHeaders', 'From');
+  qs.append('metadataHeaders', 'To');
+  qs.append('metadataHeaders', 'Subject');
+  qs.append('metadataHeaders', 'Date');
+  const url = `https://www.googleapis.com/gmail/v1/users/me/messages/${messageId}?${qs.toString()}`;
+
+  const res = await fetch(url, {
+    headers: { 'Authorization': `Bearer ${accessToken}` }
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Gmail API ${res.status}: ${text}`);
+  }
+  const data = await res.json();
+
+  const headers = {};
+  for (const h of (data.payload?.headers || [])) {
+    headers[h.name.toLowerCase()] = h.value;
+  }
+
+  return {
+    id: data.id,
+    threadId: data.threadId,
+    from: headers.from || '',
+    to: headers.to || '',
+    subject: headers.subject || '',
+    date: headers.date || '',
+    snippet: data.snippet || '',
+    labels: data.labelIds || []
+  };
+}
+
+export async function gmailListDrafts(accessToken, maxResults = 10) {
+  const data = await gmailFetch(accessToken, 'drafts', { maxResults: String(maxResults) });
+  const drafts = [];
+
+  for (const d of (data.drafts || [])) {
+    const msg = d.message;
+    if (!msg?.id) continue;
+    // Fetch draft message details
+    const detail = await gmailGetMessage(accessToken, msg.id);
+    drafts.push({
+      id: d.id,
+      subject: detail.subject,
+      to: detail.to,
+      snippet: detail.snippet
+    });
+  }
+
+  return drafts;
+}
+
+export function escapeHtml(text) {
+  return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+export async function gmailCreateDraft(accessToken, to, subject, body, replyToMessageId = null) {
+  // Build RFC 2822 MIME message
+  const lines = [
+    `To: ${to}`,
+    `Subject: =?UTF-8?B?${Buffer.from(subject).toString('base64')}?=`,
+    'Content-Type: text/plain; charset="UTF-8"',
+    'Content-Transfer-Encoding: base64',
+    'MIME-Version: 1.0',
+    '',
+    Buffer.from(body).toString('base64')
+  ];
+  const raw = Buffer.from(lines.join('\r\n'))
+    .toString('base64')
+    .replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+
+  const draftBody = { message: { raw } };
+  if (replyToMessageId) draftBody.message.threadId = replyToMessageId;
+
+  const res = await fetch('https://www.googleapis.com/gmail/v1/users/me/drafts', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(draftBody)
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Gmail draft create ${res.status}: ${text}`);
+  }
+  return res.json();
+}
+
+export function extractEmail(headerValue) {
+  const match = headerValue.match(/<([^>]+)>/);
+  return match ? match[1].toLowerCase() : headerValue.toLowerCase().trim();
+}
+
+export function extractName(headerValue) {
+  const match = headerValue.match(/^"?([^"<]+)"?\s*</);
+  return match ? match[1].trim() : headerValue.split('@')[0];
+}

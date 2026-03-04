@@ -37,6 +37,144 @@
 
 ## AKTYWNE DECYZJE
 
+### [SYSTEM10H] 04.03.2026 | STRATEGIA | KRYSTIAN SZCZYPEK — AGENCI AI DLA URZĘDÓW (KPO)
+
+**KONTEKST:** Krystian Szczypek prowadzi szkolenia KPO w urzędach Pomorskiego. Urzędnicy widzą potencjał AI (dokumenty, analiza wniosków). Krystian proponuje: on sprzedaje i analizuje, Mateusz buduje agentów. Budżety KPO muszą być wydane, EU AI Act (sierpień 2026) daje urgency. CEO analiza: Bliźniak 830 PLN/h vs 175-470 PLN/h na urzędach — ale recurring + skala to kompensuje.
+
+**DECYZJA:** TAK, warunkowo:
+1. **Max 5h/tyg** — nie może zjadać pipeline'u handlowców B2B (System 10H = priorytet)
+2. **Demo sam** — Mateusz przygotowuje demo na sztucznych danych (2-3h), NIE angażuj Kamila na tym etapie
+3. **Kamil dopiero Faza 3** — techniczne wdrożenie cloud/Vertex AI, nie wcześniej
+4. **Revenue split do ustalenia** z Krystianem (propozycja: 60/40 lub 70/30 na korzyść tech)
+5. **Gate:** Krystian MUSI dostarczyć konkretny pipeline (ile urzędów, budżety, timeline) ZANIM Mateusz zainwestuje więcej niż demo
+
+**DLACZEGO:** KPO budżety muszą być wydane = popyt realny. Krystian robi sprzedaż = Mateusz nie traci czasu na prospecting. Recurring (abonament 2-5k/msc). Ryzyko niskie przy 5h/tyg cap.
+
+**NASTĘPNY KROK:** Wysłać Krystianowi listę pytań do ustalenia przed następnym spotkaniem → @mateusz, ten tydzień.
+
+---
+
+### [SYSTEM10H] 04.03.2026 | SPRZEDAŻ + FINANSE | KAMIL ANDRUSZ / IAI — PROWIZJA 15% ZA NAPI SP. Z O.O.
+
+**KONTEKST:** Piotr (prywatnie) wspomniał o potrzebie Napi sp. z o.o. na automatyzację CS. Mateusz skontaktował Kamila Andruszu (CQRE) z Napi. Kamil złożył ofertę: Chatwoot + n8n + AI, 75-100k PLN. Mateusz = finder/introducer. Oferta ważna ~30 dni od 25.02 (deadline ~27.03).
+
+**DECYZJA:** TAK, natychmiast:
+1. **Prowizja:** 15% netto od wartości kontraktu Kamila z Napi
+2. **Zakres:** Finder's fee za wprowadzenie + facilitację kontaktu
+3. **Formalizacja:** Proste ustalenie na piśmie (mail/wiadomość) — wysłać Kamilowi DZIŚ
+4. **Szacunek:** 15% × 75-100k = **11 250-15 000 PLN** (pasywny przychód, zero pracy technicznej)
+
+**DLACZEGO:** Najlepszy ROI w portfolio (0h pracy technicznej → 11-15k PLN). Buduje relację z Kamilem na przyszłe deale. Deadline oferty ~27.03 — trzeba sformalizować TERAZ.
+
+**NASTĘPNY KROK:** Wysłać Kamilowi ustalenie prowizyjne na piśmie (15% netto) → @mateusz, DZIŚ.
+
+---
+
+### [SYSTEM10H] 04.03.2026 | PRODUKT + SPRZEDAŻ | BLIŹNIAK RAPORTOWY — MICHAŁ GAWLIK (1 000 PLN)
+
+**KONTEKST:** Michał Gawlik (copywriter, agencja) chce generować wizualne raporty PDF (SEO, blog, social) dla swoich klientów. Pivot z pełnego backendu → "Bliźniak Raportowy" w Claude Code (Michał ma subskrypcję). WhatsApp wysłany 04.03.
+
+**DECYZJA:**
+1. **Model:** Bliźniak Raportowy (Claude Code Project) — dna-raporty.md + szablony HTML + SKILL.md + pdf.sh. Zero backendu, zero serwera.
+2. **Cena:** 1 000 PLN netto (decyzja usera). Scope: dna + 2 szablony raportów + skill + szkolenie. Pracy na 2-3h.
+3. **Recurring:** Każdy dodatkowy szablon = osobna wycena.
+4. **Status:** WhatsApp WYSŁANY. Czekamy na odpowiedź Michała.
+
+**DLACZEGO:** Minimalny nakład pracy (2-3h), buduje case study dla linii "Bliźniak [branża]", potencjał na recurring z kolejnych szablonów.
+
+**NASTĘPNY KROK:** Czekać na odpowiedź Michała → call 15 min → zebrać dane (branding, typy raportów, przykłady) → zbudować.
+
+---
+
+### [SHARED] 03.03.2026 | OPERACJE | FIX: ASYSTENT.COMMAND + GEMINI MCP RECONNECT
+
+**KONTEKST:** Asystent.command nie odpalał się z Desktopu. Gemini MCP pokazywał "Failed to reconnect".
+
+**DECYZJA:** (1) Naprawiony Asystent.command — miał windowsowe CRLF line endings (`\r\n`), zamienione na unix (`\n`). (2) Gemini MCP (`@rlabs-inc/gemini-mcp`) brakowało w konfiguracji — dodany ponownie przez `claude mcp add` z kluczem z .env.
+
+**DLACZEGO:** Oba narzędzia są krytyczne do codziennej pracy. Asystent.command to główne wejście, Gemini MCP to deep research.
+
+**NASTĘPNY KROK:** Po restarcie sesji sprawdzić `/mcp` → gemini: connected. Done.
+
+---
+
+### [SHARED] 03.03.2026 | OPERACJE | ŻELAZNA ZASADA: @GHOST JAKO GATEKEEPER KOMUNIKACJI
+
+**KONTEKST:** User stwierdzil, że żadna komunikacja wychodząca do klientów nie może pomijać @ghost. Dotyczy wszystkich asystentów i automatyzacji.
+
+**DECYZJA:** @ghost (ghost_styl.md) jest obowiązkowym gatekeeperem KAŻDEJ komunikacji wychodzącej. @cso/@pipeline/@cmo generują strategię — finalny tekst ZAWSZE przez @ghost. Automatyzacje (email-radar.js) MUSZĄ używać ghost_styl.md jako system prompt.
+
+**DLACZEGO:** Spójność głosu marki. Każdy mail/DM musi brzmieć jak Mateusz, nie jak AI.
+
+**NASTĘPNY KROK:** Zasada wpisana do CLAUDE.md, ghost.md, cto.md. Obowiązuje od 03.03.2026.
+
+---
+
+### [ARTNAPI] 03.03.2026 | OPERACJE + TECHNOLOGIA | EMAIL RADAR — AUTO-DRAFT W REAL-TIME
+
+**KONTEKST:** Morning scan daje strategiczny raport rano, ale maile od leadów CRM przychodzą cały dzień. Speed-to-lead wymaga szybszej reakcji.
+
+**DECYZJA:** Zbudowany email-radar.js — co 30 min (8:00-18:00 pn-pt) skanuje Gmail, cross-ref z CRM, Claude Haiku generuje draft w stylu @ghost, draft trafia do Gmail. Telegram alert. User sprawdza i wysyła ręcznie.
+
+**DLACZEGO:** @ceo 9/10, @cso 10/10. Speed-to-lead to pieniądze. ROI w 30 dni.
+
+**NASTĘPNY KROK:** Monitoring logów (automatyzacje/logs/email-radar.log). Review jakości draftów po 1 tyg.
+
+---
+
+### [ARTNAPI] 02.03.2026 | OPERACJE + TECHNOLOGIA | CTO: MORNING FEED — AUTOMATYCZNY WSAD DLA ZESPOŁU
+
+**KONTEKST:** Zbudowano morning-scan.js (Gmail OAuth + Notion CRM API) — skrypt generuje o 8:00 pn-pt plik dane/artnapi/morning-feed.md ze skonsolidowanym raportem: inbox, sent, drafty, mismatche Gmail↔CRM, overdue leady (z emailami/wartościami), pipeline snapshot, rekomendacje.
+
+**DECYZJA:**
+1. Morning feed zastępuje Telegram push jako primary output (Telegram opcjonalny: TELEGRAM_MORNING=true)
+2. @ceo czyta feed na starcie sesji (Protocol Zero punkt 3) → priorytetyzuje → deleguje @ghost pisanie maili (Opus)
+3. Workflow: Feed → @ceo plan → @ghost follow-upy/break-upy → User wysyła z Gmail
+4. Naprawiony bug Gmail API (metadataHeaders) — headery teraz działają poprawnie
+5. Zaktualizowani agenci: @ceo, @coo, @cso, @ghost, @pipeline, @cto — wszyscy znają morning-feed.md
+6. Cloudflare Workers: NIE TERAZ — lokalny cron wystarczy (feed = plik lokalny, laptop jest włączony o 8:00)
+
+**DLACZEGO:** User nie chce Telegramu — woli żeby AI (Opus) dostał structured feed i sam pisał maile zamiast push notyfikacji.
+
+**NASTĘPNY KROK:** @ceo jutro rano przeczyta morning-feed.md → TOP 3 akcje → @ghost pisze follow-upy do overdue leadów (21 leadów, 47.5k PLN)
+
+---
+
+### [SYSTEM10H] 02.03.2026 | SPRZEDAŻ + PRODUKT | CEO: SESJA PONIEDZIAŁKOWA — ZBIGNIEW REFRAME + DEMO OPCJA B + LINKEDIN HIT + REFERENCJE
+
+**KONTEKST:** Pełna sesja poniedziałkowa: COO briefing + CSO soft punch Zbigniew + CEO demo strategy + CMO analiza LinkedIn. Luty zamknięty: 1 220 PLN / 5 000 = 24%. Pipeline 20 000 PLN (korekta Zbigniew). LinkedIn post z kursu AI zażarł (2 537 views, 28 komentarzy). Spotkanie z Krystianem Szczypkiem (projekt AI urzędy).
+
+**DECYZJE:**
+
+1. **ZBIGNIEW — CENA 990→2 500 PLN (FULL).** Koniec strategic partner deal. Następna rozmowa = pełna cena. Uzasadnienie: 990 dewaluuje produkt, Zbigniew ma budżet, social proof od TEDx speakera wart jest full price bez rabatu.
+
+2. **ZBIGNIEW — DEMO REFRAME:** Z "3 statyczne maile" → **"Dzień z Bliźniakiem"** (Pipeline Briefing WF10 + Speed×Scale + Radar Szans WF16). Zbigniew zna AI i potrafi pisać maile — WOW to SYSTEM który myśli za niego, nie kolejny generator tekstu.
+
+3. **DEMO OPCJA B — ZBUDOWANA:** Mock pipeline COMMI (6 leadów + 5 referencji), mock stan.md, Radar Szans z 4 insightami (85k lekarzy, 125 pharma firm, 0 poleceń, content z danymi). Scenariusz 15-20 min. Pliki w projekty/zbigniew/.
+
+4. **PYTANIA REFERENCYJNE — GOTOWE:** 7 pytań do zbierania testimoniali od klientów (projekty/stalton/pytania_referencje.md). Pierwsze użycie: Natan/Stalton ok. 03-10.03. Format na stronę + zgoda na cytat.
+
+5. **GHOST POSTY MARZEC — 12 POSTÓW GOTOWYCH:** Kalendarz PN/ŚR/PT, 5 filarów (Tożsamość, Czas, ROI, Social Proof, Edukacja). 11 do copy-paste + 1 szablon (review). Plik: materialy/2026-03-02_system10h_ghost_posty_marzec.md.
+
+6. **LINKEDIN POST — FORMUŁA KTÓRA DZIAŁA:** Vulnerability hook + bridge statement + done-for-you + jednosłowne CTA ("PROFIL") = 2 537 views, 28 komentarzy (3-12x norma). Replikować w marcu.
+
+7. **PROJEKT AI URZĘDY (KRYSTIAN SZCZYPEK) — DOKUMENTACJA:** Współpraca: Krystian sprzedaż/relacje, Mateusz tech/AI, Kamil Andrusz cloud. 4 fazy: Analiza→Przygotowanie→Budowa→Wdrożenie. Tech: Google Vertex AI + Claude (Frankfurt, RODO). Cennik: warsztat 3-5k, pilot 15-25k, full 40-80k. Plik: materialy/PROJEKT_AI_URZEDY_KRYSTIAN.md. Shiny Object Test: NIE jest shiny JEŚLI Krystian robi sprzedaż.
+
+**PLIKI UTWORZONE:**
+- projekty/zbigniew/demo_commi_dna_mini.md (mock DNA)
+- projekty/zbigniew/demo_commi_3_outputy.md (3 demo outputy)
+- projekty/zbigniew/demo_commi_mock_pipeline.md (mock pipeline)
+- projekty/zbigniew/demo_commi_mock_stan.md (mock pamięć operacyjna)
+- projekty/zbigniew/demo_commi_radar_szans.md (output Radar Szans)
+- projekty/zbigniew/demo_commi_scenariusz.md (scenariusz demo 15-20 min)
+- projekty/stalton/pytania_referencje.md (7 pytań referencyjnych)
+- materialy/2026-03-02_system10h_ghost_posty_marzec.md (12 postów LI)
+- materialy/PROJEKT_AI_URZEDY_KRYSTIAN.md (projekt z Krystianem)
+
+**NASTĘPNY KROK:** (1) Wysłać DM do Zbigniewa, (2) DM do Karoliny Durmaj (overdue), (3) Follow-up Michał Glinka jutro 03.03, (4) Przetestować demo w Claude Projects przed rozmową ze Zbigniewem.
+
+---
+
 ### [SYSTEM10H] 26.02.2026 | STRATEGIA + OPERACJE | CEO: PODSUMOWANIE DNIA — INFRASTRUKTURA + WIZJA 6 MSC + GIT
 
 **KONTEKST:** Druga sesja 26.02. Po łańcuchu sprzedażowym (sesja 1) — pełny @cto warsztat: Tech Audit BEFORE/AFTER, audit bezpieczeństwa trybu autonomicznego, wizja systemu na 6 miesięcy (marzec→sierpień), git init.

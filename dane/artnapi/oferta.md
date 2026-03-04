@@ -199,6 +199,47 @@ Gdy klient porównuje z Phoenix:
 
 ---
 
+## 🌍 CENNIK CEE / EXPORT (EUR netto)
+
+**Kalkulator online:** https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
+**Kurs:** 1 PLN = 0.2287 EUR (4.38 PLN/EUR)
+
+### PODOBRAZIA 40x50 (EUR/szt, BEZ transportu)
+
+| Próg | Ilość | Cena EUR netto |
+|------|-------|---------------|
+| KARTONY | 1-359 | **€9.77** |
+| 1 PALETA | 360-719 | **€8.46** |
+| 2 PALETY | 720-1079 | **€7.61** |
+| 3+ PALETY | 1080+ | **€7.30** |
+
+### PODOBRAZIA 30x40 (EUR/szt, BEZ transportu)
+
+| Próg | Ilość | Cena EUR netto |
+|------|-------|---------------|
+| KARTONY | 1-479 | **€7.05** |
+| 1 PALETA | 480-959 | **€6.34** |
+| 2 PALETY | 960-1439 | **€5.70** |
+| 3+ PALETY | 1440+ | **€4.56** |
+
+### TRANSPORT (EUR netto, per przesyłka)
+
+| Miasto | Paleta | Karton |
+|--------|--------|--------|
+| Vilnius (LT) | €103 | €46.78 |
+| Kowno (LT) | €116 | — |
+| Ryga (LV) | €120 | €47.84 |
+| Tallin (EE) | €141 | €51.90 |
+| Praga (CZ) | €100 | €49.88 |
+| Bratysława (SK) | €151 | €53.63 |
+| Budapeszt (HU) | €131 | €54.00 |
+| Bukareszt (RO) | €187 | €100.15 |
+
+**Zasada CSO:** NIE podawaj cen EUR w mailu — kieruj na kalkulator. Ceny mogą się zmienić.
+**Wzorzec w mailu:** "Check exact pricing for your city: [link do kalkulatora]"
+
+---
+
 ## INSTRUKCJE DLA AI (Asystenta Sprzedaży)
 * **O Podobraziach (Adré Artó):** "To nasz bezpieczny import. Bierzemy ryzyko jakości na siebie. Ty dostajesz sprawdzony towar z polską fakturą."
 * **O PBN (Artnapi):** "To gotowiec na półkę. 21 zł netto. Kupujesz karton, sprzedajesz z marżą 100%. Żadnych zwrotów, bo farby są świeże."

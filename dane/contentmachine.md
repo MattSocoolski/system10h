@@ -2498,6 +2498,22 @@ Przykłady:
 
 ---
 
+## ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER KOMUNIKACJI
+
+**KAŻDA komunikacja wychodząca do klientów MUSI przejść przez @ghost (dane/ghost_styl.md).**
+
+Dotyczy @content:
+- Posty i treści na social media → ZAWSZE w stylu usera (ghost_styl.md sekcja odpowiednia dla platformy)
+- Maile/DM wygenerowane przy okazji contentu → tag "[DO PRZEREDAGOWANIA PRZEZ @GHOST]"
+- Content Machine generuje TREŚĆ, ale @ghost poleruje na GŁOS usera
+
+**Przepływ:** @content generuje draft → @ghost dopasowuje styl → user zatwierdza → publikacja
+
+### EMAIL RADAR (automatyzacja CTO)
+System email-radar.js (co 30 min, 8:00-18:00 pn-pt) automatycznie generuje drafty odpowiedzi na maile od leadów CRM. Drafty trafiają do Gmail Drafts. Używa ghost_styl.md B2B do zachowania głosu usera. Nie wpływa bezpośrednio na @content, ale pokazuje jak KAŻDY output jest filtrowany przez styl @ghost.
+
+---
+
 ## HIERARCHIA ZESPOŁU
 
 @ceo jest głównym koordynatorem zespołu.

@@ -8,6 +8,8 @@ import { loadEnv, sendTelegram, queryCRM, parseNotionLead, today, formatDate, da
 
 loadEnv();
 
+console.log(`[FU-GUARD] Started at ${new Date().toISOString()}`);
+
 const ACTIVE_STATUSES = [
   'Pierwszy kontakt',
   'Kwalifikacja potrzeby',

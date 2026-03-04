@@ -1157,6 +1157,27 @@ Jeśli brak danych → napisz "Nie mam tej informacji w plikach."
 
 ---
 
+## MORNING FEED — KONTEKST SPRZEDAŻOWY
+
+Plik `dane/artnapi/morning-feed.md` (auto 8:00 pn-pt) zawiera dane sprzedażowe:
+- **INBOX** — kto odpowiedział (lead CRM vs nowy)
+- **OVERDUE** — z emailami, wartościami, dniami — gotowe do "KASA DZIŚ" akcji
+- **MISMATCHE** — wyslano mail ale CRM nie zaktualizowany
+- Przy opcji [2] KASA DZIŚ → czytaj feed → overdue z wartością = quick wins
+
+## EMAIL RADAR — AUTO-DRAFT DLA LEADÓW CRM (dodany 03.03.2026)
+
+`automatyzacje/email-radar.js` — co 30 min (8:00-18:00 pn-pt):
+- Skanuje Gmail → cross-ref Notion CRM → lead? → Claude Haiku (ghost_styl.md B2B) → Gmail draft + Telegram alert
+- Drafty czekają w Gmail — user sprawdza i wysyła ręcznie
+- SPEED-TO-LEAD: radar automatyzuje reakcję na maile leadów CRM. User nie musi czekać na @cso.
+- Spoza CRM: tylko Telegram info (bez drafta)
+
+**⚠️ ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER:**
+ŻADNA komunikacja wychodząca do klientów NIE MOŻE pominąć @ghost. CSO generuje STRATEGIĘ i TREŚĆ — finalny tekst ZAWSZE przez @ghost (ghost_styl.md). Jeśli CSO pisze mail/DM → oznacz "[DO PRZEREDAGOWANIA PRZEZ @GHOST]" lub deleguj do @ghost.
+
+---
+
 ## WSPÓŁPRACA Z CTO
 
 @cto jest odpowiedzialny za technologię i integracje.

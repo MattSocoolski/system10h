@@ -90,22 +90,22 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 | Tomek Szacoń | LinkedIn reaktywacja | NURTURE | — | 23.02 (follow-up, brak odpowiedzi) | Znajomy, komentarz dla zasięgu. Nie katować. Wrócić tylko jeśli sam się odezwie. |
 | Lena | Sieć | Beta-test | — (nie liczy) | 16.02 (odpisała) | CZ 19.02 odsyła wywiad Architekta |
 | Credipass | Sieć (ciepły) | PAUZA | 2 500 PLN | 09.02 (follow-up) | Wstrzymany — wrócić później |
-| Karolina Durmaj | Cold outreach | MARZEC | 2 500 PLN | 11.02 (zmiana firmy, start marzec) | Napisać 1 marca — spotkanie wirtualne |
+| Karolina Durmaj | Cold outreach | **MARZEC — DM READY** | 2 500 PLN | 11.02 (zmiana firmy, start marzec) | Nowa firma: prawdop. Jawi Sp. z o.o. (logistyka/dystrybucja). DM gotowy 02.03 — WYSŁAĆ. |
 | Julia Sienkiewicz | Growth King | NURTURE | — | 29.01 ("jak firma urośnie") | Nie pisać. Trigger: case study / ona się odezwie |
 | **Natan Bącławek / Stalton** (CNC) | Sieć (przyjaciel) | **INSTALLED** ✅ | 1 220 PLN netto (3x405) | 17.02 (zainstalowany) | Feedback za 2-3 tyg → case study |
 | Bagrat | Sieć | ZAMROŻONY | 2 500 PLN | 02.2026 (wielokrotny kontakt, brak odpowiedzi) | Odpuszczamy. Wrócić tylko jeśli sam się odezwie. |
 | **Arkadiusz Piotrowicz** | LinkedIn inbound | **LINK WYSŁANY** (brak SD) | 2 500 PLN | 23.02 (follow-up DM) | Nie zapisał się na SD (zweryfikowane MailerLite 26.02). Nudge z bezpośrednią ofertą demo. |
 | **Michał Glinka** | LinkedIn inbound | **SD ZROBIONY** ✅ | 2 500 PLN | 23.02 (odpowiedział: "ten tydzień zajęty") | SD zrobiony 23.02 (MailerLite: 2 emaile otwarte, 100% open rate). Zajęty ten tydzień. Follow-up 03.03. |
 | **Michał Wielgosz** | LinkedIn inbound | **LINK WYSŁANY** (brak SD) | 2 500 PLN | 23.02 (follow-up DM) | Nie zapisał się na SD (zweryfikowane MailerLite 26.02). Nudge z bezpośrednią ofertą demo. |
-| **Zbigniew Kowalski** (COMMI) | Networking (rozmowa osobista) | **DM WYSŁANY** | 990 PLN (Strategic Partner) | 23.02 (DM, rozmowa aktywna, SD jeszcze nie zrobił) | Nie zapisał się na SD. Nudge dziś wieczór. Demo realnie CZ 27 lub PT 28. Deal: 990 PLN + case study video + testimonial + 3 ciepłe intro z sieci. |
+| **Zbigniew Kowalski** (COMMI) | Networking (rozmowa osobista) | **SOFT PUNCH READY** | **2 500 PLN (FULL)** | 23.02 (DM, 7 dni cisza, SD nie zrobił) | Cena zmieniona 990→2500 (decyzja 02.03). Demo reframe: "Dzień z Bliźniakiem" (WF10+Speed+Radar). Mock pipeline+stan+Radar GOTOWE (projekty/zbigniew/). Wysłać soft punch DM → umówić demo. |
 | **Julia Safandowska-Pawlak** | LinkedIn inbound (komentarz) | **LINK WYSŁANY** (brak SD) | 2 500 PLN | 23.02 (SD link → "jutro przetestuję") | Powiedziała "jutro przetestuję" 23.02 — nie zrobiła (zweryfikowane MailerLite 26.02). Nudge DZIŚ. |
 | **Rafał Knap** | AIBL network | **SD ZROBIONY** ✅ | 2 500 PLN | 23.02 (pozytywna odpowiedź) | SD zrobiony 20.02 (MailerLite: 3 emaile otwarte, 100% open rate). Ciepły lead. Follow-up z próbką/demo. |
 | **Krystian Szczypek** | LinkedIn inbound (komentarz) | **LINK WYSŁANY** (brak SD) | 2 500 PLN | 23.02 (follow-up DM) | Nie zapisał się na SD (zweryfikowane MailerLite 26.02). Nudge z bezpośrednią ofertą demo. |
 | **Daniel/Darek** (DANTAR) | Networking (AI Brainstorm) | ZAMROŻONY | — | 11.02 | Temat nie wypalił. Bez akcji. |
 
-**Pipeline value Bliźniak:** 18 490 PLN (Arkadiusz 2.5k + Michał G. 2.5k + Michał W. 2.5k + Karolina 2.5k marzec + Zbigniew 990 + Julia 2.5k + Rafał 2.5k + Krystian 2.5k) | **Pipeline integrator:** ~20 000 PLN (Piotr/Artnapi) | **Zamknięte:** 1 220 PLN netto (Stalton) | **Tracking:** dane/metryki.md
+**Pipeline value Bliźniak:** **20 000 PLN** (Arkadiusz 2.5k + Michał G. 2.5k + Michał W. 2.5k + Karolina 2.5k marzec + **Zbigniew 2.5k** + Julia 2.5k + Rafał 2.5k + Krystian 2.5k) | **Pipeline integrator:** ~20 000 PLN (Piotr/Artnapi) | **Zamknięte:** 1 220 PLN netto (Stalton) | **Tracking:** dane/metryki.md
 **Weryfikacja MailerLite (26.02):** SD ZROBIONY: Michał Glinka, Rafał Knap (+ Andrzej/tata). BRAK SD: Arkadiusz, Michał W., Julia S-P, Krystian, Zbigniew. Wąskie gardło: LINK→SD (5/8 leadów nie zapisało się).
-**PILOT DEAL (luty):** 1 990 PLN (zamiast 2 500) + osobisty monitoring 30 dni. W zamian: feedback + 15-min testimonial. Raty: 2 × 995 PLN. Limit: 2 miejsca do 28.02.
+**PILOT DEAL (luty):** WYGASŁ 28.02. Cena standardowa od marca: 2 500 PLN. Zbigniew: zmiana z 990→2500 (decyzja CEO 02.03).
 **Notatka:** Artnapi — integrator znaleziony: **Kamil Andrusz** (AIBL network). Kompetencje e-commerce (Napi, Unizoo, spółki). Spotkanie umówione. Rozliczenie: do ustalenia (rekomendacja: hybrid flat+%).
 
 ---
@@ -124,10 +124,10 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 | # | Deal | Wartość | Cel | Status |
 |---|------|---------|-----|--------|
 | ✅ | Stalton | 1 220 PLN | 11.02 | ZAMKNIĘTY |
-| 2 | Zbigniew K. | 990 PLN | luty | [ ] |
+| 2 | Zbigniew K. | **2 500 PLN** | marzec | [ ] |
 | 3 | Deal standard | 2 500 PLN | marzec | [ ] |
 | 4 | Deal standard | 2 500 PLN | kwiecień | [ ] |
-| | **TOTAL** | **7 210 PLN** | | **17% (1 220/7 000)** |
+| | **TOTAL** | **8 720 PLN** | | **17% (1 220/7 000)** |
 
 ### PLAN MIESIĘCZNY
 

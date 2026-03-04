@@ -732,6 +732,35 @@ CO TO JEST:
 Plik z instrukcjami który Twój komputer wykonuje o określonej porze.
 Jak budzik - ustawiasz godzinę, a komputer robi resztę.
 
+AKTYWNE AUTOMATYZACJE (stan 03.2026):
+┌──────────────────────────────────────────────────────────────────┐
+│ morning-scan.js     │ 8:00 pn-pt │ Gmail+CRM → morning-feed.md  │
+│ email-radar.js      │ co 30 min  │ Gmail+CRM+Claude → auto-draft│
+│ pipeline-brief.js   │ 8:15 pn-pt │ CRM → Telegram pipeline      │
+│ speed-to-lead.js    │ co 4h      │ CRM → Telegram nowe leady    │
+│ followup-guardian.js │ 17:00 pn-pt│ CRM → Telegram zaleglosci    │
+└──────────────────────────────────────────────────────────────────┘
+
+MORNING FEED (strategiczny raport poranny):
+- Skrypt: automatyzacje/morning-scan.js
+- Output: dane/artnapi/morning-feed.md (structured MD)
+- Źródła: Gmail OAuth + Notion CRM API
+- Zawiera: inbox, sent, drafty, mismatche Gmail↔CRM, overdue, pipeline
+- Czyta go: @ceo (Protocol Zero) → deleguje do @ghost
+- LaunchAgent: com.asystent.morning-scan.plist
+- Telegram: opcjonalny (TELEGRAM_MORNING=true w .env)
+
+EMAIL RADAR (taktyczny auto-draft w real-time):
+- Skrypt: automatyzacje/email-radar.js
+- Co robi: co 30 min (8:00-18:00 pn-pt) skanuje Gmail → CRM match → Claude Haiku generuje draft → Gmail draft + Telegram alert
+- Flow: Gmail inbox (last 1h) → cross-ref Notion CRM → lead? → Claude API (ghost_styl.md B2B + oferta.md) → Gmail draft as reply → Telegram alert
+- Spoza CRM: tylko Telegram info (bez drafta)
+- ZASADA @GHOST: System prompt zawiera pełny profil ghost_styl.md (sekcja B2B SPRZEDAŻ) + oferta.md + dane leada z CRM. Każdy draft pisze "głosem Mateusza".
+- LaunchAgent: com.asystent.email-radar.plist (co 1800s)
+- State: automatyzacje/state/email-radar.json (processedIds, dedup)
+- Koszt: ~$0.001/mail (Haiku ~$1/mln input tokens)
+- UWAGA: Draft = DRAFT. User sprawdza i wysyła ręcznie.
+
 PRZYKŁADY:
 - Co rano: "Sprawdź mój plan i wyślij mi 3 zadania na Telegram"
 - Co godzinę: "Sprawdź maile i oznacz pilne"

@@ -16,8 +16,8 @@
 | Claude API (Anthropic) | TAK | N/A | AKTYWNE | [x] ANTHROPIC_API_KEY |
 | MailerLite | TAK | TAK (podłączony) | AKTYWNE | [x] MAILERLITE_API_KEY |
 | Resend | TAK | TAK (podłączony) | AKTYWNE | [x] RESEND_API_KEY |
-| Gmail | TAK | TAK (podłączony) | AKTYWNE | zarządzane przez Claude |
-| Notion | TAK | TAK (podłączony) | AKTYWNE | zarządzane przez Claude |
+| Gmail | TAK | TAK (podłączony) | AKTYWNE | [x] GMAIL_CLIENT_ID, GMAIL_CLIENT_SECRET, GMAIL_REFRESH_TOKEN |
+| Notion | TAK | TAK (podłączony) | AKTYWNE | [x] NOTION_API_KEY |
 | Cloudflare Workers | TAK | NIE | AKTYWNE | sekrety w Cloudflare Dashboard |
 | Cloudflare Turnstile | TAK | NIE | AKTYWNE | sekret w `wrangler secret` |
 | Cyber Folks | TAK (DirectAdmin API) | NIE | AKTYWNE | dane logowania panelu |
@@ -47,6 +47,7 @@
 - **Status:** AKTYWNE
 - **Koszt:** Pay-as-you-go (prepaid credits). Opus ~$15/mln input, Sonnet ~$3/mln input, Haiku ~$1/mln input. Ustaw limit wydatków w console.anthropic.com!
 - **Limit wydatków:** https://console.anthropic.com → Settings → Spend Limits
+- **Użycie w automatyzacjach:** Email Radar (automatyzacje/email-radar.js) — Claude Haiku do generowania draftów odpowiedzi na maile leadów CRM. ~$0.001/mail. Dodane 03.03.2026.
 
 ---
 
@@ -99,19 +100,30 @@
 
 ## Gmail / Google Workspace
 
-- **Do czego:** Poczta firmowa — hello@system10h.com, komunikacja z klientami
-- **API:** TAK (OAuth 2.0, nie prosty klucz API)
+- **Do czego:** Poczta firmowa — mateusz.sokolski@artnapi.pl + hello@system10h.com
+- **API:** TAK (OAuth 2.0 Installed App — Desktop Application)
 - **MCP:** TAK — podłączony jako zarządzane połączenie Claude (claude_ai_Gmail)
 - **Dokumentacja API:** https://developers.google.com/workspace/gmail/api/reference/rest
-- **Gdzie znaleźć credentials (jeśli potrzebne do innych integracji):**
+- **Gdzie znaleźć credentials:**
   1. Wejdź na https://console.cloud.google.com/
   2. Wybierz lub stwórz projekt
   3. **APIs & Services → Library** → szukaj "Gmail API" → Enable
   4. **APIs & Services → Credentials** → **"+ CREATE CREDENTIALS"** → **"OAuth 2.0 Client ID"**
-  5. Skonfiguruj OAuth Consent Screen
-- **Klucz:** Zarządzane przez Claude (OAuth) — nie wymaga ręcznej konfiguracji
+  5. Typ aplikacji: **Desktop Application**
+  6. Skopiuj Client ID + Client Secret
+  7. Wpisz do .env jako GMAIL_CLIENT_ID i GMAIL_CLIENT_SECRET
+  8. Odpal `node automatyzacje/gmail-auth.js` → zaloguj się → GMAIL_REFRESH_TOKEN zapisany auto
+- **Klucze w .env:**
+  - `GMAIL_CLIENT_ID` — OAuth Client ID (Desktop App)
+  - `GMAIL_CLIENT_SECRET` — OAuth Client Secret
+  - `GMAIL_REFRESH_TOKEN` — auto-generowany przez gmail-auth.js (jednorazowo)
+- **MCP (sesja Claude):** Zarządzane połączenie (claude_ai_Gmail) — osobne od OAuth
+- **Automatyzacje (skrypty):** OAuth 2.0 z refresh_token → `automatyzacje/lib.js` (gmailGetAccessToken)
 - **Status:** AKTYWNE
 - **Koszt:** Gmail API jest darmowe. Limity: 250 units/user/sec, 15 000 units/user/dzień.
+- **Użycie:**
+  - Morning Intelligence Scan (automatyzacje/morning-scan.js) — codziennie 8:00 pn-pt
+  - Email Radar (automatyzacje/email-radar.js) — co 30 min 8:00-18:00 pn-pt (read inbox + create drafts)
 
 ---
 
@@ -129,7 +141,9 @@
   2. Kliknij **"+ New integration"** → nadaj nazwę, wybierz workspace
   3. W zakładce **"Secrets"** skopiuj **Internal Integration Secret** (zaczyna się od `secret_`)
   4. W Notion otwórz stronę → **"..." → "Connections"** → dodaj swoją integrację
-- **Klucz:** Zarządzane przez Claude (OAuth) — nie wymaga ręcznej konfiguracji
+- **Klucze:**
+  - MCP (sesja Claude): zarządzane połączenie (claude_ai_Notion)
+  - Automatyzacje (skrypty): `NOTION_API_KEY` w .env (Internal Integration Secret)
 - **Status:** AKTYWNE
 - **Koszt:** API darmowe. Rate limit: 3 req/sek. Notion workspace: Free / Plus $12/user/msc.
 
@@ -373,5 +387,5 @@ TELEGRAM_BOT_TOKEN=xxxxx              # [JEST] ✅
 
 ---
 
-*Ostatnia aktualizacja: 26.02.2026 (+Google Sheets Prowizje Artnapi, 16 narzędzi łącznie)*
+*Ostatnia aktualizacja: 03.03.2026 (+Email Radar: Claude Haiku auto-draft + Gmail polling)*
 *Źródło: @cto sesja — konsolidacja systemów, merge z ARTNAPI_OS api-inventory*

@@ -52,13 +52,22 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 
 ---
 
-## 📆 AKTUALNY MIESIĄC: LUTY 2026
-**Cel:** Zamknąć 2-3 nowych klientów + domknąć gorące leady + REAKTYWACJA śpiących.
-**Luty dotychczas (25.02):** 56 903 PLN wartość zamówień (18 pozycji, 8 164 szt) | 4 155 PLN prowizji opłaconych (178% celu) + 409 PLN zamówione (malowisko) = 4 564 PLN (196% celu) ✅ TARGET PRZEKROCZONY
+## 📆 LUTY 2026 — ZAMKNIĘTY (REKORD)
+**WYNIK FINALNY:** 52 423 PLN zamówień | 15 deali | 4 878 PLN prowizji (209% celu) ✅
+**Highlights:** WINO-GRONO 15 768 PLN (przyszli SAMI), BATS 5 904 PLN, Kolorab 6 790 PLN, recurring 50%.
+**Nowy model prowizji = 3.8x lepszy avg/deal.** Pełne rozbicie → metryki.md.
+
+## 📆 AKTUALNY MIESIĄC: MARZEC 2026 — 🔥 PUSH MONTH
+**Cel:** 30-45k PLN zamówień | 3 000-4 500 PLN prowizji
+**Nowe zamówienia (02.03):** Malowanie przy winie 1 648 PLN (160 szt, proforma wysłana) | ART Cafe Beskidy ~309 PLN | Kamilla Wielocha 977 PLN (opłacone, odbiór)
+**7 draftów @ghost GOTOWE** → materialy/2026-03-02_email_*.md
+**Plan egzekucji W1** → materialy/2026-03-02_cso_plan_egzekucji_marzec_w1.md
 **Do zrobienia:**
 - [ ] Codzienny blok 30 min prospecting
-- [ ] Uzupełnij dane kontaktowe w CRM: BATS/Mroczyk, malowisko/Ewelina (mail/telefon)
+- [ ] Wrzucić 7 draftów do Gmail i wysłać (pon 8:00)
+- [ ] ZADZWONIĆ RestArt/Edukido 601 722 230 (pon 9:00)
 - [ ] Dodać 36 nowych WTZ do Notion CRM
+- [ ] DK Research 50 z BIP (śr-pt)
 
 ---
 
@@ -337,4 +346,4 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 • Piątek: Sync arkusz prowizji ↔ CRM (nowe zamówienia → baza klientów).
 
 ## 🔧 MAINTENANCE
-• **Co tydzień (poniedziałek rano):** Re-auth Gmail MCP token: `npx -y @gongrzhe/server-gmail-autoauth-mcp auth` (30 sek, przeglądarka). Token wygasa co 7 dni (tryb testowy). Konto: hajlajf.art@gmail.com. Setup → decyzje.md (13.02.2026).
+• **Gmail:** Managed connection (Anthropic) + własny OAuth (lib.js) → zero maintenance. Local MCP usunięty 03.03.2026.

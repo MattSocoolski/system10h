@@ -16,7 +16,7 @@
 - Zamknięcie: pytanie do czytelnika / CTA
 - Struktura: hook → historia → konkrety → wniosek → pytanie
 - Dużo enterów, krótkie akapity (1-2 zdania)
-- Hashtagi: hasztag#kategoria
+- Hashtagi: ZERO — ani jednego (usunięte nawet gdy draft miał 2)
 - Kompresja punch-line'ów: przecinki zamiast kropek ("Jedno zdanie, konkret." nie "Jedno zdanie. Konkret. Zero mgły.")
 - Dystans narracyjny: trzecia osoba w opisie problemów ("kim są, do kogo mówią" nie "kim jestem, do kogo mówię")
 - Pytanie jako ramka dla danych: "Potrzebny czas? 20 minut. Koszt: 0 zł." zamiast gołych liczb
@@ -24,6 +24,17 @@
 - Bullets: • zamiast -
 - Dodaje intrygę do opisów: "którego możesz nie widzieć" (ciekawość > informacja)
 - Temporal connectors dla flow: "Wtedy jeszcze nie istniało" zamiast suchego "Nie istniało"
+- Mnożnik "x" nie "razy": "3,7x częściej" nie "3,7 razy częściej"
+- Separator "||" (programistyczny OR): "deklaracja || wdrożenie" — oddziela kontrasty
+- Przecinki i "bo"/"a" > myślniki em: łączy myśli naturalnie, nie literacko
+- Polski > angielski gdy brzmi naturalnie: "nawyk" nie "workflow", "środowisko" nie "environment"
+- "Właśnie dlatego" jako wzmocniony connector (silniejszy niż "Dlatego")
+- "czyli" jako inline wyjaśnienie w nawiasie mentalnym
+- Formy opisowe > nominalizacje: "jak Ty sobie radzisz z obiekcjami" nie "Twoje obiekcje"
+- Jedno złożone zdanie zamykające: "To nie X, nie Y a Z" — nie trzy osobne zdania
+- Brak kropki po dramatycznym stwierdzeniu: "Giełda? +24% tego samego dnia" (bez kropki = zawieszone napięcie)
+- Zero self-promo wyjaśnień: nie dodaje "Twarde dane, nie opinia" — tekst mówi sam za siebie
+- Konkretna obietnica w CTA: "do pracy w Twoim środowisku" — nie abstrakcyjne "AI-asystent"
 
 ## LINKEDIN DM (outreach)
 - Ton: formalny na starcie → coraz luźniejszy w trakcie → miękki close
@@ -157,6 +168,32 @@ telefon: +48 534 852 707
 ### LinkedIn #5 (AI/Matrix)
 "Osoby, które pamiętają oryginalną rozmowę Morfeusza z Neo (...) Dobry copywriter dzięki korzystaniu z AI stanie się jeszcze lepszy."
 
+### LinkedIn #6 (Przepaść AI — dane + storytelling, 04.03.2026)
+"81% firm mówi, że wdrożyło AI.
+Ale tylko 19% handlowców faktycznie z niego korzysta.
+
+Ci co korzystają? 3,7x częściej realizują plan sprzedażowy.
+
+To nie jest przepaść technologiczna.
+To jest przepaść między deklaracją || wdrożeniem.
+
+Deloitte zbadał 1 060 firm, i wyszło jasne:
+firmy po właściwej stronie tej przepaści rosną ponad dwukrotnie szybciej. Szef Deloitte Digital mówi wprost: „To naprawdę sedno."
+
+63% Polaków korzysta z AI prywatnie.
+Ale 5,6% polskich firm to wdrożyło.
+
+A Jack Dorsey wyciągnął najbrutalniejszy wniosek, bo zwolnił 40% Block z powodu AI. Giełda? +24% tego samego dnia
+
+Ale to nie chodzi o więcej narzędzi.
+To chodzi o JEDNO, które naprawdę weszło Ci w nawyk.
+
+Właśnie dlatego buduję Bliźniaka, czyli AI-asystenta, który od pierwszego dnia pisze jak Ty sobie radzisz z obiekcjami, jak Ty pilnujesz pipeline i jak Ty zamykasz.
+
+To nie kolejne narzędzie, nie poradnik a gotowy system do pracy w Twoim środowisku.
+
+Napisz 'DANE' w DM — przyślę Ci pełny raport Deloitte + Salesforce po polsku"
+
 ### Email #1 (follow-up UGEARS)
 "Dzień dobry, panie Macieju! (...) Będę wdzięczny za kontakt. Możemy się spotkać w Warszawie. Pozdrawiam serdecznie,"
 
@@ -186,6 +223,7 @@ https://system10h.com/preview/
 Warto sprawdzić — zajmuje 2 min. Jestem ciekawy czy to coś wartego uwagi :)"
 
 ## HISTORIA AKTUALIZACJI
+- 04.03.2026: Doszkolenie — LinkedIn post "Przepaść AI" (dane + storytelling). Nowe wzorce: ZERO hashtagów, mnożnik "x" (3,7x), separator "||" (deklaracja||wdrożenie), przecinki/"bo"/"a" > em-dash, polski > angielski ("nawyk" nie "workflow"), "Właśnie dlatego" + "czyli", formy opisowe > nominalizacje, jedno złożone zdanie zamykające ("To nie X, nie Y a Z"), brak kropki po dramatycznym stwierdzeniu, zero self-promo wyjaśnień, konkretna obietnica w CTA.
 - 23.02.2026: Doszkolenie — LinkedIn post opublikowany (Before/After SD). Nowe wzorce: kompresja punch-line'ów (przecinki > kropki), dystans narracyjny (3. osoba), "pytanie jako ramka" dla danych, CTA z konkretną instrukcją ('DM'), bullets •, kolokwializmy ("łączy kropki"), temporal connectors, intrygujące opisy.
 - 20.02.2026: Doszkolenie — Response DM (1 przykład). Nowe wzorce: adaptacja formalności do rozmówcy, pytanie kwalifikujące zamiast pitch, odwołanie do wspólnego gruntu.
 - 19.02.2026: Doszkolenie — LinkedIn DM outreach (1 przykład). Nowa sekcja "LINKEDIN DM (outreach)".

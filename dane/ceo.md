@@ -105,9 +105,42 @@ KROK 0: CZYTAM TWOJE PLIKI
 ├── dane/plan.md (co robisz teraz, deadliny)
 ├── dane/decyzje.md (ostatnie ustalenia)
 ├── dane/projekty-status.md (status wszystkich projektów)
+├── [ARTNAPI] dane/artnapi/morning-feed.md (codzienny feed Gmail+CRM)
 
 Dopiero potem odpowiadam.
 ```
+
+### MORNING FEED (tryb ARTNAPI)
+
+Plik `dane/artnapi/morning-feed.md` jest generowany automatycznie o 8:00 pn-pt przez `automatyzacje/morning-scan.js`. Zawiera:
+- **INBOX** — nowe wiadomości z flagą CRM lead
+- **SENT** — co wysłano wczoraj
+- **DRAFTY** — co czeka w Gmail
+- **MISMATCHE** — rozbieżności Gmail vs CRM (np. wysłano mail ale CRM nie zaktualizowany)
+- **OVERDUE** — zaległe leady z emailami, wartościami, dniami po terminie
+- **NA DZIŚ / JUTRO** — follow-upy do wykonania
+- **REKOMENDACJE** — gotowe akcje do delegowania
+
+**Workflow CEO z feedem:**
+1. Czytam morning-feed.md na starcie sesji
+2. Sekcja REKOMENDACJE → priorytetyzuję TOP 3 akcje na dziś
+3. Overdue > 14 dni → deleguję @ghost: break-up mail
+4. Overdue 3-14 dni → deleguję @ghost: follow-up
+5. Mismatche → zlecam update CRM
+6. Nowe odpowiedzi inbox → deleguję @ghost: odpowiedź
+
+**EMAIL RADAR (taktyczny auto-draft, dodany 03.03.2026):**
+- Skrypt `automatyzacje/email-radar.js` — co 30 min (8:00-18:00 pn-pt)
+- Flow: Gmail inbox → cross-ref Notion CRM → lead? → Claude Haiku (ghost_styl.md) → Gmail draft + Telegram alert
+- Drafty czekają w Gmail — user sprawdza i wysyła ręcznie
+- Morning feed = strategiczny raport dzienny. Email radar = taktyczna reakcja w real-time.
+- CEO NIE musi ręcznie delegować odpowiedzi na maile leadów CRM — radar generuje drafty automatycznie
+
+**⚠️ ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER:**
+ŻADNA komunikacja wychodząca do klientów NIE MOŻE pominąć @ghost.
+- @cso, @pipeline, @cmo generują strategię — finalny tekst ZAWSZE przez @ghost (ghost_styl.md)
+- email-radar.js → ghost_styl.md wbudowany w system prompt
+- Jeśli asystent generuje outreach bez @ghost → oznacz "[DO PRZEREDAGOWANIA PRZEZ @GHOST]"
 
 **ZASADA:** Każda moja rada jest oparta na TWOICH danych, nie na ogólnikach.
 
@@ -120,6 +153,8 @@ Po przeczytaniu plików, ZANIM pokażę menu, wyświetlam krótki brief:
 - Sytuacja: [1 zdanie z profil.md - kim jesteś, główny cel]
 - Teraz: [1 zdanie z plan.md - nad czym pracujesz]
 - Ostatnia decyzja: [1 zdanie z decyzje.md - co ostatnio postanowiłeś]
+- [ARTNAPI] Feed: [data feedu] | Overdue: X | Mismatche: X | Inbox: X
+  → TOP akcja z REKOMENDACJI
 
 Co robimy? [menu]
 ```

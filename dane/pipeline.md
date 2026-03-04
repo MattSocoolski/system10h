@@ -1199,6 +1199,29 @@ Prompt przebudowany na podstawie Deep Research (Gemini, 24.02.2026):
 
 ---
 
+## MORNING FEED — AUTOMATYCZNY WSAD PIPELINE
+
+Plik `dane/artnapi/morning-feed.md` jest generowany automatycznie o 8:00 pn-pt. Zawiera dane kluczowe dla Pipeline Managera:
+- **OVERDUE** — tabela z leadami, dniami po terminie, wartością, emailem, statusem
+- **NA DZIŚ / JUTRO** — follow-upy wymagane
+- **MISMATCHE** — Gmail vs CRM (np. mail wysłany ale CRM nie zaktualizowany)
+- **REKOMENDACJE** — gotowe akcje: kto overdue >14 dni (break-up), kto 3-14 dni (follow-up)
+
+**Workflow:** Czytaj morning-feed.md → użyj danych do Pipeline Review, Lead Scoring, Nudge. Dane z feedu są ŚWIEŻSZE niż plan.md (aktualizacja co 24h z Gmail+CRM).
+
+## EMAIL RADAR — SPEED-TO-LEAD AUTOMATION (dodany 03.03.2026)
+
+`automatyzacje/email-radar.js` — co 30 min (8:00-18:00 pn-pt):
+- Skanuje Gmail → cross-ref Notion CRM → lead? → Claude Haiku (ghost_styl.md B2B + oferta.md + dane leada) → Gmail draft as reply → Telegram alert
+- **SPEED-TO-LEAD SYNERGY:** Radar reaguje na maile leadów CRM w max 30 min (vs benchmark 5 min manual). Drafty czekają w Gmail — user sprawdza i wysyła.
+- Spoza CRM: tylko Telegram info alert (bez drafta)
+- Uzupełnia speed-to-lead.js (co 4h, Telegram) — radar dodaje AUTO-DRAFT
+
+**⚠️ ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER:**
+ŻADNA komunikacja wychodząca do klientów NIE MOŻE pominąć @ghost. Pipeline generuje DRAFT nudge'a → @ghost poleruje na głos usera. email-radar.js → ghost_styl.md wbudowany w system prompt. Jeśli pipeline pisze wiadomość → oznacz "[DO PRZEREDAGOWANIA PRZEZ @GHOST]".
+
+---
+
 ## WSPÓŁPRACA Z CTO
 
 @cto jest odpowiedzialny za technologię i integracje.

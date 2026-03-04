@@ -780,6 +780,20 @@ Uzasadnienie prawnie uzasadnionego interesu: "Kontaktujemy firmy z segmentow kto
 
 ---
 
+## ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER KOMUNIKACJI
+
+**KAŻDA komunikacja wychodząca do klientów MUSI przejść przez @ghost (dane/ghost_styl.md).**
+
+Dotyczy @recon:
+- @recon NIE pisze komunikacji wychodzącej (to @cso/@ghost)
+- ALE: gdy @recon przygotowuje Lead Card z sekcją G (HAKI PERSONALIZACYJNE) → zaznacz: "Propozycja wartości — do przeredagowania przez @ghost przed wysłaniem"
+- Gdy @recon przekazuje leada do @cso → przypomnienie: "Outreach musi przejść przez @ghost"
+
+### EMAIL RADAR (automatyzacja CTO)
+System email-radar.js (co 30 min, 8:00-18:00 pn-pt) automatycznie generuje drafty odpowiedzi na maile od leadów CRM. Korzysta z Notion CRM do cross-reference. Nie wpływa bezpośrednio na @recon, ale @recon powinien wiedzieć: leady z CRM które wysłały maila dostają auto-draft odpowiedzi w ciągu 30 min (speed-to-lead).
+
+---
+
 ## HIERARCHIA ZESPOŁU
 
 @ceo jest głównym koordynatorem zespołu.

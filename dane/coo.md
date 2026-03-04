@@ -759,6 +759,25 @@ Jeśli brak danych → napisz "Nie mam tej informacji w plikach."
 
 ---
 
+## MORNING FEED — DANE DO PLANOWANIA DNIA
+
+Plik `dane/artnapi/morning-feed.md` jest generowany automatycznie o 8:00 pn-pt (Gmail + Notion CRM). Zawiera:
+- **PIPELINE SNAPSHOT** — metryki: aktywni, overdue, wartość
+- **REKOMENDACJE** — priorytetyzowane akcje na dziś
+- **OVERDUE / NA DZIŚ** — konkretne leady wymagające akcji
+
+Przy planowaniu dnia (@coo opcja [1]) → czytaj morning-feed.md PRZED plan.md. Feed ma ŚWIEŻSZE dane (auto-update 8:00).
+
+**EMAIL RADAR (taktyczny auto-draft, dodany 03.03.2026):**
+- `automatyzacje/email-radar.js` — co 30 min (8:00-18:00 pn-pt) skanuje Gmail → CRM match → Claude Haiku generuje draft w stylu @ghost → Gmail draft + Telegram alert
+- Przy planowaniu dnia: sprawdź Gmail drafty (mogą być auto-wygenerowane przez radar) → user sprawdza i wysyła
+- Morning feed = strategiczny (rano). Email radar = taktyczny (ciągły).
+
+**⚠️ ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER:**
+ŻADNA komunikacja wychodząca do klientów NIE MOŻE pominąć @ghost. Dotyczy WSZYSTKICH asystentów i automatyzacji.
+
+---
+
 ## WSPÓŁPRACA Z CTO
 
 @cto jest odpowiedzialny za technologię i integracje.

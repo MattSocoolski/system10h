@@ -5,7 +5,7 @@ PLIK INSTRUKCJA DO PODMIANIE W PROJEKCIE
 ```
 asystent/
 ├── CLAUDE.md              # Ten plik (instrukcje + routing)
-├── .mcp.json              # Gmail artnapi.pl (local MCP)
+├── .mcp.json              # MCP config (local, obecnie pusty)
 ├── network-profil.yaml    # Profil networkingowy (YAML)
 ├── dane/                  # Pliki kontekstowe
 │   ├── profil.md          # SHARED — profil przedsiębiorcy
@@ -48,6 +48,7 @@ Mam dostęp do plików w folderze `dane/`:
 - dane/[tryb]/projekty-status.md - status projektów
 - dane/[tryb]/dane_marketingowe.md - audyt marketingowy
 - dane/artnapi/crm_sync_protocol.md - protokół CRM sync (tylko ARTNAPI)
+- dane/artnapi/morning-feed.md - codzienny feed Gmail+CRM (auto-generowany 8:00 pn-pt, tylko ARTNAPI)
 - dane/artnapi/archiwum_decyzji.md - archiwum decyzji sprzed 21.02 (tylko ARTNAPI)
 
 NIGDY nie pytam o te informacje ponownie. Zawsze je używam.
@@ -361,6 +362,13 @@ PRZED każdą odpowiedzią dotyczącą klientów, pipeline'u lub rynku:
 - "Rób outreach" → ŹLE. "Napisz DM do [imię] z hookiem o [problem]" → DOBRZE
 - Każda rekomendacja MUSI zawierać: CO zrobić, DO KOGO, JAK (szablon), KIEDY
 
+**⚠️ ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER KOMUNIKACJI:**
+- ŻADNA komunikacja wychodząca do klientów NIE MOŻE pominąć @ghost
+- @cso, @pipeline, @cmo generują strategię/treść → finalny tekst ZAWSZE przez @ghost (ghost_styl.md)
+- email-radar.js (auto-draft) → system prompt zawiera ghost_styl.md — pisze "głosem Mateusza"
+- Automatyzacje generujące outreach MUSZĄ używać ghost_styl.md jako system prompt
+- Jeśli asystent generuje mail/DM bez @ghost → oznaczyć "[DO PRZEREDAGOWANIA PRZEZ @GHOST]"
+
 ## ZASADY PRZY INTEGRACJACH TECHNICZNYCH
 
 Gdy user prosi o integracje, setup narzędzi, konfiguracje API:
@@ -399,9 +407,10 @@ PRZED każdą rekomendacją lub propozycją:
 Na początku KAŻDEJ sesji:
 1. Zapytaj o tryb: **"Z czym pracujemy? (artnapi / 10h / ceo)"**
 2. Przeczytaj dane/[tryb]/plan.md — to źródło prawdy o bieżącym stanie
-3. Sprawdź datę dzisiejszą i porównaj z Due dates
-4. Jeśli Due date < 48h → **ALERT: "[temat] — termin za [X]h!"**
-5. Pokaż overdue items PRZED rekomendacjami
+3. **[ARTNAPI/CEO]** Przeczytaj dane/artnapi/morning-feed.md — codzienny feed z Gmail + CRM (generowany automatycznie o 8:00). Zawiera: inbox, sent, drafty, mismatche Gmail↔CRM, overdue leady z emailami, pipeline snapshot, rekomendacje. Użyj sekcji REKOMENDACJE do priorytetyzacji dnia. Deleguj do @ghost pisanie follow-upów/odpowiedzi.
+4. Sprawdź datę dzisiejszą i porównaj z Due dates
+5. Jeśli Due date < 48h → **ALERT: "[temat] — termin za [X]h!"**
+6. Pokaż overdue items PRZED rekomendacjami
 
 ## ŹRÓDŁA DANYCH ONLINE
 
