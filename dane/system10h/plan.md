@@ -105,6 +105,23 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ---
 
+## 💡 KONCEPT DO ZBADANIA: EKOSYSTEM SYSTEM 10H (06.03.2026)
+
+> Źródło: intuicja CEO, kontekst: frustracja ArtNapi + potrzeba budowy własnego biznesu.
+> Status: DO ZBADANIA — nie wdrażać, nie planować. Zbadać niszę.
+
+**Idea:** System 10H to nie tylko Bliźniak — to pełny ekosystem dla handlowca/soloprenera:
+- **Bliźniak** (asystent AI — core, jest)
+- **Strony internetowe / landingi** (done-for-you, szybkie, pod klienta)
+- **Copy** (teksty sprzedażowe, maile, oferty — ghostwriting)
+- **Pakiet:** klient dostaje WSZYSTKO czego potrzebuje żeby sprzedawać, nie tylko AI
+
+**Hipoteza:** Handlowiec B2B nie chce "narzędzia AI" — chce "gotowy system sprzedażowy". Strona + copy + AI = pełny stack.
+
+**Następny krok:** Zbadać popyt (rozmowy z klientami, Deep Research). NIE budować nic nowego przed walidacją.
+
+---
+
 ## 🚀 PRODUCT ROADMAP — BLIŹNIAK BIZNESOWY
 
 > Strategia: DOWÓD → LEJEK → SKALA. Nie odwrotnie.

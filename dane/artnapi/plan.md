@@ -13,6 +13,7 @@
 **GAP:** 4 020 szt/msc z nowych klientów + upselli. WINO-GRONO (2 160 szt) = game changer — cykl nieznany, sprawdzić PON.
 **RAPORT TYGODNIOWY:** Obowiązkowy od 10.03. Format Piotra (KPI + lista firm + komentarz). Spec: materialy-artnapi/2026-03-06_spec_raport_tygodniowy.md
 **STATUS NEGOCJACJI (06.03):** Mail 1 wysłany (faktura luty 11 256 PLN, czekamy potwierdzenie). Mail 2 wysłany (akceptacja modelu + negocjacja klauzuli karnej). Czekamy na call z Piotrem.
+**NA CALL Z PIOTREM (nie w mailu):** Negocjować ratio kartonów 75/25 → 65/35. Argument: kartony = nowi klienci = akwizycja. Praca taka sama jak na paletę, ale prowizja najniższa. Misalignment z celem 8k szt. Backup: 70/30. Frame: "wyrównanie motywacji, nie prośba o więcej kasy."
 
 ---
 
@@ -281,8 +282,6 @@ W1 wykonany częściowo. Cold email szablony PKE gotowe. Negocjacja z Piotrem w 
 | Kolorab | 30 dni | **II.2026** (1000 szt 30x40, 6 790 PLN) | ~III.2026 | 🟢 OK |
 | Odkryj Artystę | nowy | **19.02** (60 szt 40x50, 680 PLN) | ~19.03 | 🟢 OK |
 | UNITRON | powrót! | **03.03** (40 szt MPN) | ~III.2026 | 🟢 OK |
-| Mól | nowy | **03.03** (643 PLN) | — | 🟢 OK |
-| Bąk | nowy | **03.03** (498 PLN) | — | 🟢 OK |
 | Leo Creative | pauza | I.2026 | obiekcja cennik, Due: ~15.03 | 🟡 delikatnie |
 | K. Brodowska | pauza | XI.2025 | PAUZA — ghosting, revisit 15.04 | 🔴 pauza |
 
