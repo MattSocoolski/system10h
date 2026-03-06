@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Match Test | System 10h+</title>
+    <meta name="description" content="Wklej swojego najsłabszego maila sprzedażowego. Dostaniesz go przepisanego — w Twoim stylu, ale tak, że klient odpowie.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Cloudflare Turnstile -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            900: '#0f172a',
+                        },
+                        accent: {
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .glow-bg {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .input-field {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .input-field:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+            outline: none;
+        }
+
+        .input-field::placeholder {
+            color: #64748b;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            border-top: 3px solid #ffffff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, #a855f7, #9333ea);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Background Elements -->
+    <div class="glow-bg top-[-200px] left-[-200px]"></div>
+    <div class="glow-bg bottom-0 right-0" style="background: radial-gradient(circle, rgba(234,179,8,0.1) 0%, rgba(0,0,0,0) 70%);"></div>
+
+    <!-- NAVBAR -->
+    <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <a href="../" class="flex items-center gap-2 hover:opacity-80 transition">
+                        <div class="bg-brand-600 text-white font-bold p-2 rounded-lg">10h+</div>
+                        <span class="font-bold text-xl tracking-tight hidden sm:block">System 10h+</span>
+                    </a>
+                </div>
+                <a href="../" class="text-slate-300 hover:text-white transition flex items-center gap-2 text-sm">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Wróć na stronę
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-32 pb-8 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-3xl mx-auto text-center fade-in-up">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-6">
+                <span class="bg-gradient-to-r from-brand-400 to-accent-400 bg-clip-text text-transparent">Style Match Test</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto mb-4 leading-relaxed">
+                Wklej swojego najsłabszego maila sprzedażowego. Dostaniesz go przepisanego
+                — w Twoim stylu, ale tak, że klient odpowie.
+            </p>
+            <p class="text-sm text-slate-500">
+                Darmowe. Zero zobowiązań. 2 minuty.
+            </p>
+            <p class="text-xs text-slate-600 mt-3">
+                by Mateusz Sokólski, twórca <a href="../" class="text-brand-400 hover:text-brand-300 transition">System 10h+</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- FORM -->
+    <section class="py-12 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-2xl mx-auto">
+            <div class="glass-card rounded-2xl p-6 sm:p-10 fade-in-up">
+
+                <!-- Form State: Default -->
+                <form id="style-match-form">
+                    <div class="space-y-6">
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-slate-300 mb-2">Twój email</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                placeholder="Na ten adres wyślemy przepisanego maila"
+                                class="input-field w-full px-4 py-3 rounded-xl text-white"
+                            >
+                        </div>
+
+                        <!-- Branza -->
+                        <div>
+                            <label for="branza" class="block text-sm font-semibold text-slate-300 mb-2">Branża</label>
+                            <input
+                                type="text"
+                                id="branza"
+                                name="branza"
+                                required
+                                placeholder="np. IT, finanse, produkcja, nieruchomości..."
+                                class="input-field w-full px-4 py-3 rounded-xl text-white"
+                            >
+                        </div>
+
+                        <!-- Co sprzedajesz -->
+                        <div>
+                            <label for="coSprzedajesz" class="block text-sm font-semibold text-slate-300 mb-2">Co sprzedajesz?</label>
+                            <input
+                                type="text"
+                                id="coSprzedajesz"
+                                name="coSprzedajesz"
+                                required
+                                placeholder="np. szkolenia, oprogramowanie, usługi doradcze..."
+                                class="input-field w-full px-4 py-3 rounded-xl text-white"
+                            >
+                        </div>
+
+                        <!-- Twoj mail -->
+                        <div>
+                            <label for="mailTresc" class="block text-sm font-semibold text-slate-300 mb-2">Twój mail sprzedażowy</label>
+                            <textarea
+                                id="mailTresc"
+                                name="mailTresc"
+                                rows="6"
+                                required
+                                placeholder="Wklej tutaj treść swojego maila — cold outreach, follow-up, ofertę..."
+                                class="input-field w-full px-4 py-3 rounded-xl text-white resize-y"
+                            ></textarea>
+                        </div>
+
+                        <!-- Turnstile CAPTCHA -->
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAACd6iHnL7olgQbf1" data-theme="dark"></div>
+
+                        <!-- Submit -->
+                        <button
+                            type="submit"
+                            id="submit-btn"
+                            class="w-full bg-brand-600 hover:bg-brand-500 text-white px-8 py-4 rounded-xl font-bold text-lg transition shadow-lg shadow-brand-500/20 cursor-pointer"
+                        >
+                            Wyślij — odpowiedź w 5 minut
+                        </button>
+
+                        <p class="text-xs text-slate-600 text-center mt-4">
+                            Wysyłając formularz, zgadzasz się z <a href="../polityka-prywatnosci.html" class="text-brand-400 hover:text-brand-300 underline transition">polityką prywatności</a>.
+                        </p>
+                    </div>
+                </form>
+
+                <!-- Form State: Loading -->
+                <div id="form-loading" class="hidden text-center py-12">
+                    <div class="spinner mx-auto mb-6"></div>
+                    <p class="text-lg text-slate-300 font-semibold">Przetwarzam Twojego maila...</p>
+                    <p class="text-sm text-slate-500 mt-2">To może zająć chwilę</p>
+                </div>
+
+                <!-- Form State: Success -->
+                <div id="form-success" class="hidden text-center py-12">
+                    <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-check text-emerald-400 text-3xl"></i>
+                    </div>
+                    <p class="text-xl text-white font-bold mb-2">Gotowe! Sprawdź skrzynkę.</p>
+                    <p class="text-sm text-slate-400">Przepisany mail powinien dotrzeć w ciągu kilku minut.</p>
+                </div>
+
+                <!-- Form State: Error -->
+                <div id="form-error" class="hidden text-center py-12">
+                    <div class="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-xmark text-red-400 text-3xl"></i>
+                    </div>
+                    <p class="text-xl text-white font-bold mb-2">Coś poszło nie tak.</p>
+                    <p class="text-sm text-slate-400 mb-6">Spróbuj ponownie za chwilę.</p>
+                    <button
+                        id="retry-btn"
+                        class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-3 rounded-xl font-semibold transition cursor-pointer"
+                    >
+                        Spróbuj ponownie
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="py-16 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12 fade-in-up">Jak to działa?</h2>
+
+            <div class="space-y-8">
+                <!-- Step 1 -->
+                <div class="flex items-start gap-5 fade-in-up">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">Wklejasz swojego maila</h3>
+                        <p class="text-slate-400">Cold outreach, follow-up, oferta — cokolwiek wysyłasz do klientów.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex items-start gap-5 fade-in-up">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">AI przepisuje — w Twoim stylu, ale lepiej</h3>
+                        <p class="text-slate-400">Zachowuje Twój głos i ton, poprawia strukturę, hook i call-to-action.</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex items-start gap-5 fade-in-up">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-1">Dostajesz porównanie na email</h3>
+                        <p class="text-slate-400">Oryginał vs nowa wersja + konkretna analiza co i dlaczego zostało zmienione.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRIDGE TO PRODUCT -->
+    <section class="pb-8 px-4 sm:px-6 lg:px-8 relative">
+        <div class="max-w-3xl mx-auto text-center fade-in-up">
+            <div class="glass-card rounded-2xl p-8">
+                <p class="text-slate-300 text-base leading-relaxed">
+                    To jest przedsmak tego, co <strong class="text-white">Bliźniak Biznesowy</strong> robi na co dzień — pisze maile w Twoim stylu, broni marży, pilnuje pipeline. Gotowy system, nie kurs.
+                </p>
+                <a href="../#cena" class="inline-block mt-4 text-brand-400 hover:text-brand-300 font-semibold text-sm transition">
+                    Zobacz jak działa pełny system <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-slate-800">
+        <div class="max-w-3xl mx-auto text-center">
+            <p class="text-slate-500 text-sm">
+                System 10h+ by Mateusz Sokólski
+            </p>
+            <a href="../" class="text-brand-400 hover:text-brand-300 text-sm mt-2 inline-block transition">
+                system10h.com
+            </a>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        const API_URL = 'https://live-preview-api.hajlajf-art.workers.dev/style-match';
+
+        // Fade-in-up animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+        // Form handling
+        const form = document.getElementById('style-match-form');
+        const formLoading = document.getElementById('form-loading');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+        const retryBtn = document.getElementById('retry-btn');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Collect form data (field names match worker: email, branza, coSprzedajesz, mailTresc)
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            // Get Turnstile token (worker expects 'turnstileToken')
+            const turnstileInput = document.querySelector('[name="cf-turnstile-response"]');
+            if (turnstileInput && turnstileInput.value) {
+                data.turnstileToken = turnstileInput.value;
+            }
+
+            // Remove the raw cf-turnstile-response key if present
+            delete data['cf-turnstile-response'];
+
+            // Show loading state
+            form.classList.add('hidden');
+            formLoading.classList.remove('hidden');
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Request failed');
+                }
+
+                // Show success
+                formLoading.classList.add('hidden');
+                formSuccess.classList.remove('hidden');
+            } catch (error) {
+                // Show error
+                formLoading.classList.add('hidden');
+                formError.classList.remove('hidden');
+            }
+        });
+
+        // Retry button
+        retryBtn.addEventListener('click', () => {
+            formError.classList.add('hidden');
+            form.classList.remove('hidden');
+
+            // Reset Turnstile
+            if (window.turnstile) {
+                turnstile.reset();
+            }
+        });
+    </script>
+</body>
+</html>

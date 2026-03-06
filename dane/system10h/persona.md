@@ -33,7 +33,7 @@
 3. Odzyskać wieczory — koniec z mailami o 22:00
 4. System który DZIAŁA od dnia 1 — zero nauki, zero konfiguracji
 
-**Budżet:** 2 500 PLN = poważna decyzja (1/3 do 1/2 miesięcznej nadwyżki). Raty 3x pomagają. ROI musi być jasny, szybki i konkretny ("zwraca się po 1 uratowanym dealu").
+**Budżet:** 2 599 PLN = poważna decyzja (1/3 do 1/2 miesięcznej nadwyżki). Raty 2× 1 299,50 pomagają. ROI musi być jasny, szybki i konkretny ("zwraca się po 1 uratowanym dealu").
 
 ---
 
@@ -144,7 +144,7 @@
 | **Status Quo** | "Nowe wdrożenie" | "Nakładka na to co już robisz" |
 | **Autorytet** | Generyki | "Używam tego w Artnapi. UGEARS: Auchan, Empik." |
 | **Social proof** | — | "Właśnie wdrożyłem dla firmy CNC z Wrocławia" |
-| **Anchoring** | "2 500 PLN" | "Wartość 5 200 PLN → Twoja inwestycja 2 500" |
+| **Anchoring** | "2 599 PLN" | "Wartość 7 400 PLN → Twoja inwestycja 2 599" |
 | **Endowment** | — | Demo WOW → pokaż jak działa → nie chcą oddać |
 
 ---

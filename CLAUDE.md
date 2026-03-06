@@ -1,5 +1,64 @@
 PLIK INSTRUKCJA DO PODMIANIE W PROJEKCIE
 
+## ZASADA PROPORCJONALNOŚCI (ANTI-OVERENGINEERING)
+
+**REGUŁA: Złożoność odpowiedzi = złożoność pytania. Działaj ZANIM zaczniesz czytać.**
+
+**SZYBKIE ZADANIA** (odpowiedz w <30s, BEZ czytania plików):
+- "napisz maila do X" → pisze (użyj ghost_styl.md z pamięci)
+- "przeredaguj to" → przeredagowuje od razu
+- "co to znaczy?" → odpowiada
+- Komenda jednokrokowa → wykonaj natychmiast
+
+**ŚREDNIE ZADANIA** (czytaj 1-2 pliki kontekstowe):
+- "jaki status leada X?" → czytaj plan.md
+- "co robić dziś?" → czytaj plan.md + morning-feed.md
+- Follow-up do konkretnego leada → plan.md + ghost_styl.md
+
+**DUŻE ZADANIA** (pełny Protokół Zero, max 5 plików na start):
+- @coo plan tygodnia / @ceo przegląd strategiczny
+- @pipeline pipeline review
+- Analiza wielu leadów jednocześnie
+
+**BLOKADY:**
+- NIE czytaj więcej niż 3 pliki dla zadania które można zrobić z 1-2
+- NIE eksploruj folderów zamiast pisać — jeśli user powiedział CO chce, rób TO
+- NIE czytaj ponownie pliku który już przeczytałeś W TEJ SESJI
+- NIE ładuj więcej niż 1 agenta na raz (chyba że user jawnie deleguje)
+
+## REGUŁA DRAFTÓW (OBOWIĄZUJE WSZYSTKICH)
+
+- Tryb ARTNAPI: Maile → `node automatyzacje/create-gmail-draft.js` → Gmail drafts
+- Tryb 10H: Maile → materialy/[data]_[typ]_[temat].md (lokalne, brak Gmail MCP)
+- **NIGDY:** Nie zapisuj draftów do lokalnych plików jeśli Gmail jest dostępny (tryb ARTNAPI)
+
+## ANTI-DUPLICATE CONTACT GUARD
+
+PRZED draftowaniem JAKIEJKOLWIEK wiadomości do leada:
+
+1. Sprawdź plan.md → "Ostatni kontakt" dla tego leada
+2. [ARTNAPI] Sprawdź morning-feed.md → sekcja SENT (czy nie wysłano już maila)
+3. [ARTNAPI] Sprawdź Gmail drafts (czy email-radar.js nie stworzył już draftu)
+
+**BLOKADA:** Jeśli kontakt był <48h temu i lead NIE odpowiedział → NIE pisz nowego follow-upu.
+**BLOKADA:** Jeśli draft już istnieje w Gmail → NIE twórz duplikatu. Powiedz: "Draft już istnieje w Gmail. Chcesz go edytować?"
+**WYJĄTEK:** User jawnie mówi "pisz mimo to" → OK ale ostrzeż: "Ostatni kontakt był [data]."
+
+## POST-WDROŻENIE TRIGGER (SYSTEM 10H)
+
+Gdy user informuje że klient przeszedł przez wdrożenie Bliźniaka (Architekt done + konfiguracja + handoff) → **AUTOMATYCZNIE przypominaj:**
+
+> "Klient [imię] ma wdrożenie za sobą. Czas na pytania feedbackowe (2-3 tyg po instalacji). Wysłać mu pytania? Odpowiedzi posłużą @ceo (decyzje cenowe), @cmo (case study) i @cso (feedback produktowy)."
+
+**Pytania standardowe (12 pytań, 3 bloki):**
+1. **UŻYTKOWANIE** (5 pytań): częstotliwość, scenariusze, zaskoczenia, co nie zadziałało, czego brakuje
+2. **WYNIKI** (4 pytania): oszczędność czasu, zamknięte deale, alternatywa, perceived value (ile by zapłacił)
+3. **SOCIAL PROOF** (3 pytania): jedno zdanie podsumowania, zgoda na case study, referral
+
+**Trigger:** Status leada w pipeline = INSTALLED + ≥14 dni od instalacji
+**Format:** Telefon 15-20 min (nie pisemnie)
+**Output:** Cytaty dosłowne → case study + decyzje cenowe + feedback produktowy
+
 ## STRUKTURA PROJEKTU
 
 ```
@@ -411,6 +470,8 @@ Na początku KAŻDEJ sesji:
 4. Sprawdź datę dzisiejszą i porównaj z Due dates
 5. Jeśli Due date < 48h → **ALERT: "[temat] — termin za [X]h!"**
 6. Pokaż overdue items PRZED rekomendacjami
+7. **[ARTNAPI/CEO] PONIEDZIAŁEK:** Przypomnienie o raporcie tygodniowym dla Piotra:
+   > "RAPORT TYGODNIOWY: Piątek = deadline raportu dla Piotra. Uruchom: `node automatyzacje/generate-weekly-report.js` → wygeneruje MD + TSV. Uzupełnij ręcznie: rozmowy handlowe, nowi klienci, sztuki, komentarz. Spec: materialy-artnapi/2026-03-06_spec_raport_tygodniowy.md"
 
 ## ŹRÓDŁA DANYCH ONLINE
 

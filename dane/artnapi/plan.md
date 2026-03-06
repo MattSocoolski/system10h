@@ -6,10 +6,13 @@
 ---
 
 ## 🎯 CEL GŁÓWNY
-Wynagrodzenie 9 000 PLN netto/mies. = 6 666 (podstawa) + 2 334 (prowizja).
-**NOWY MODEL PROWIZJI (od 12.02.2026):** Prowizja wbudowana w cenę (jawny podział marży). ~397 PLN/paleta (40x50). Cel = ~6 palet/mies.
-Styczeń 2026: ~7 500 PLN wynagrodzenie (6 666 + ~834 prowizji). Gap: ~1 500 PLN/mies.
-Potrzeba: 8-10 aktywnych regularnych klientów.
+**CEL PIOTRA (od 06.03.2026):** 8 000 szt/mies (1/2 kontenera) w 3 miesiące. 16 000 szt w 9 mies.
+**MODEL PROWIZJI (od 12.02.2026):** Marża firmy / marża handlowca jawnie w cenie. Prowizja = suma marży handlowca - 6 666 (base). Jeśli marża handlowca < 6 666 → tylko base.
+**KLUCZOWE LICZBY:** Avg marża handlowca ~1,38 PLN/szt (realny mix luty). Próg prowizji: ~4 830 szt. Cel 8k szt = ~11 040 PLN total.
+**RECURRING BASE:** ~3 980 szt/msc (BATS 720, Malowisko 1080, Kolorab 1000, Farboteka 240, Wisz 360, Winem 120, Art Wine 160, WATAHA 300).
+**GAP:** 4 020 szt/msc z nowych klientów + upselli. WINO-GRONO (2 160 szt) = game changer — cykl nieznany, sprawdzić PON.
+**RAPORT TYGODNIOWY:** Obowiązkowy od 10.03. Format Piotra (KPI + lista firm + komentarz). Spec: materialy-artnapi/2026-03-06_spec_raport_tygodniowy.md
+**STATUS NEGOCJACJI (06.03):** Mail 1 wysłany (faktura luty 11 256 PLN, czekamy potwierdzenie). Mail 2 wysłany (akceptacja modelu + negocjacja klauzuli karnej). Czekamy na call z Piotrem.
 
 ---
 
@@ -53,13 +56,14 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 ---
 
 ## 📆 LUTY 2026 — ZAMKNIĘTY (REKORD)
-**WYNIK FINALNY:** 52 423 PLN zamówień | 15 deali | 4 878 PLN prowizji (209% celu) ✅
-**Highlights:** WINO-GRONO 15 768 PLN (przyszli SAMI), BATS 5 904 PLN, Kolorab 6 790 PLN, recurring 50%.
-**Nowy model prowizji = 3.8x lepszy avg/deal.** Pełne rozbicie → metryki.md.
+**WYNIK FINALNY:** 58 140 PLN zamówień | 18 deali | 5 585 PLN prowizji (239% celu) ✅
+**Highlights:** WINO-GRONO 15.8k, Kolorab 6.8k, BATS 5.9k. Malowisko 3x, Farboteka 3x, Wisz 2x = recurring machine.
+**Nowy model prowizji = 3x lepszy avg/deal (75% prowizji z 63% przychodu).** Pełne rozbicie → metryki.md.
 
 ## 📆 AKTUALNY MIESIĄC: MARZEC 2026 — 🔥 PUSH MONTH
 **Cel:** 30-45k PLN zamówień | 3 000-4 500 PLN prowizji
-**Nowe zamówienia (02.03):** Malowanie przy winie 1 648 PLN (160 szt, proforma wysłana) | ART Cafe Beskidy ~309 PLN | Kamilla Wielocha 977 PLN (opłacone, odbiór)
+**Zamówienia marzec (arkusz na 04.03):** Wisz 3 240 PLN (360 szt, nowy model) | Kama/Wielocha 977 PLN | Czernianin 1 277 PLN (2×) | Unitron 856 PLN | Mól 643 PLN | Bąk 498 PLN = **7 491 PLN (7 deali)**
+**Brak w arkuszu:** Malowanie przy winie 1 648 PLN + ART Cafe ~309 PLN = ~1 957 PLN (dodać!)
 **7 draftów @ghost GOTOWE** → materialy/2026-03-02_email_*.md
 **Plan egzekucji W1** → materialy/2026-03-02_cso_plan_egzekucji_marzec_w1.md
 **Do zrobienia:**
@@ -70,12 +74,6 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 - [ ] DK Research 50 z BIP (śr-pt)
 
 ---
-
-## 📆 NASTĘPNY MIESIĄC: MARZEC 2026 — 🔥 PUSH MONTH
-> Źródło: Deep research 23.02. Okno Phoenix (CNY luka trwa do V-VI). Aktywuj 01.03.
-
-**Cel:** 30-45k PLN (konserwatywnie). Tryb: FULL PUSH — okno Phoenix + sezon wiosenny + WTZ budżety.
-**Prognoza prowizji:** ~3 000-4 500 PLN (na bazie nowego modelu + recurring base)
 
 ### KPI TYGODNIOWE (2x vs luty)
 | | Luty (avg) | Marzec (cel) |
@@ -145,37 +143,38 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 - ZASADA: Max 2h/tydzień na SHEIN. PUSH MONTH ma priorytet. Jeśli tydzień jest pełny — SHEIN czeka.
 - Pliki: `projekty/shein-europe/`
 
-### PLAN TYGODNIA 1 (03-07.03)
-| Dzień | Kto | Akcja |
-|-------|-----|-------|
-| pon 03.03 | Phoenix | Monitoring phoenix-arts.pl (1. check) |
-| pon 03.03 | Kołakowska | Delikatny check-in ("marzec/kwiecień?") |
-| pon 03.03 | WTZ ×41 | FU D+14 — kto odpowiedział? kto milczy? |
-| wt 04.03 | Dzień Kobiet push | Outreach studia w&p: "Macie towar na 8.03?" |
-| wt 04.03 | Wine&paint batch 1 | ✅ WYSŁANE 23.02 — FU D+3: 26.02 (8 firm) |
-| śr 05.03 | "Phoenix Down" batch 1 | 5-10 nowych studiów (research + outreach) |
-| śr-pt 05-07.03 | Domy Kultury | Research 50 DK z BIP (4 województwa) |
-| czw 06.03 | Wine&paint batch 2 | Cold email: TeamFormacja, Pędzel&Prosecco, Art&Wine Friends, WinoMalowanie, Foodie City |
-| czw 06.03 | BATS/Mroczyk | Restock FU (cykl ~14 dni od 23.02) |
-| pt 07.03 | Malowisko | Restock FU (cykl ~14 dni od 20.02) |
-| pt 07.03 | Pipeline Pulse | Review + KPI tygodnia 1 |
+### PLAN TYGODNIA 1 (03-07.03) — ZAMKNIĘTY
+W1 wykonany częściowo. Cold email szablony PKE gotowe. Negocjacja z Piotrem w toku.
+
+### PLAN TYGODNIA 2 (09-13.03) — CEL: 8 000 SZT MACHINE
+
+**PRIORYTET #1: RECURRING + WINO-GRONO**
+| Dzień | Kto | Akcja | Cel szt |
+|-------|-----|-------|---------|
+| pon 09.03 | **WINO-GRONO** | ZADZWONIĆ: "Jak się sprawdziły? Kiedy następna dostawa?" | 2 160 |
+| pon 09.03 | RestArt/Edukido | FU próbki — domknij na 360+ szt | 360-720 |
+| pon 09.03 | Magazyn | Poprosić o dane logistyczne: PBN, deski (pakowanie, palety) | — |
+| wt 10.03 | Wisz/Farboteka/Winem | Upsell do palet — "następne zamówienie od razu paleta?" | +600 |
+| wt 10.03 | BATS | Restock check (cykl ~14 dni) | 720 |
+| śr 11.03 | Wine&paint batch 2 | Cold email PKE (nowy dwuetapowy model): 5-8 firm | 360-720 |
+| śr 11.03 | Malowisko | Restock check | 360 |
+| czw 12.03 | WTZ FU | D+21 na 41 maili — kto żyje? Nudge reszty | 200-500 |
+| czw 12.03 | DK batch 1 | Wysyłka 50 maili (PKE model: pytanie o zgodę) | — |
+| pt 13.03 | Cennik Piotr | Prześlij kompletny plik (podobrazia + PBN + deski) | — |
+| pt 13.03 | **RAPORT #1** | Pierwszy raport tygodniowy w formacie Piotra | — |
+| pt 13.03 | Pipeline Pulse | Review KPI W2 + pipeline snapshot | — |
+
+**PRIORYTET #2: CENNIK (deadline: piątek 13.03)**
+- [ ] Dane z magazynu (pon): PBN rama/bez ramy, deski 30x40, deski 24x30 — pakowanie, palety
+- [ ] Przeliczyć marże w szablonie Piotra
+- [ ] Wysłać kompletny plik do weryfikacji
+
+**PRIORYTET #3: RAPORT TYGODNIOWY (deadline: piątek 13.03)**
+- [ ] Wygenerować raport W2 z CRM + Gmail
+- [ ] Format Piotra: KPI + lista firm + komentarz
+- [ ] Spec automatyzacji: materialy-artnapi/2026-03-06_spec_raport_tygodniowy.md
 
 ---
-
-## 📅 TEN TYDZIEŃ (24-28.02)
-**Fokus:** Domykanie gorących + retail expansion + start PUSH MONTH przygotowanie.
-> ✅ Zrobione pon-wt: kontener, SHEIN spotkanie, BATS zamówienie, FessNeki próbki, POLBAR cennik, NOZ/VEO, czystka pipeline, retail 3 kanały. Szczegóły → decyzje.md.
-
-### OTWARTE (śr-pt 26-28.02)
-- [ ] **Knihy Dobrovský (CZ)** — TEL do non-book dept jeśli cisza. Due: 27.02.
-- [ ] **POLBAR/Łukasz Kaim** — FU cennik ram A4 (50-100 @ 19,50 | 300+ @ 18,50). Due: 27.02.
-- [ ] **NOZ/VEO (Tomasz Frątczak)** — Czekamy na Piotra (lista EAN WCF/LOW). Wartość: TBD.
-- [ ] **Arte.ee/Kadri** — Check-in ~27.02. Nie naciskać.
-- [ ] **Paintbar (EE)** — Czekamy. FU ~03.03 jeśli cisza.
-- [ ] **RestArt/Edukido** — Próbki wysyłka 26.02. FU: 02.03. GORĄCY.
-- [ ] Dodać 36 nowych WTZ do Notion CRM
-- [ ] Leo Creative — NIE KONTAKTOWAĆ (Due: ~15.03)
-- [ ] Codzienny blok 30 min prospecting
 
 ---
 
@@ -234,9 +233,9 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 ### 🔥🔥 CIEPŁE (aktywne)
 * ~~**Karolina Brodowska:**~~ Ghosting po FU 18.02. → PAUZA 24.02. Revisit: 15.04.
 * **Leo Creative:** Klient/AM. ⚠️ Obiekcja cennik 20.02 ("cenię stałość"). Gwarancja cenowa Q1. Due: ~15.03. Wartość: 4 000 PLN.
-* **UNITRON:** Klient (2x 3k brutto). FU PBN wysłany 18.02. Due: 21.02. Wartość: 3 000 PLN.
+* **UNITRON:** Klient/AM (2x 3k brutto). FU mail 04.03. Due: 09.03. Wartość: 3 000 PLN.
 * ~~**Van Gogh:**~~ → PAUZA 23.02. Zero odpowiedzi. Revisit: 25.03.
-* **Art&Wine (LV):** FU z kalkulatorem B2B wysłany 18.02. Due: 21.02. Wartość: 2 000 PLN.
+* ~~**Art&Wine (LV):**~~ Usunięte z pipeline 05.03.
 * **FlashArt (EE):** FU z kalkulatorem B2B wysłany 18.02. Due: 21.02. Wartość: 2 000 PLN.
 * **Paintbar (EE):** FU z kalkulatorem B2B wysłany 18.02. Due: 21.02. Wartość: 1 500 PLN.
 * **Arte.ee (Estonia):** Nowy cennik EN + kalkulator: 20.02. Due: 24.02. Wartość: 3 000 PLN.
@@ -246,7 +245,7 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 * **ArtisValory (Karolina Walory):** Ghosting po 2x FU (18.02, 21.02). Wykreślona 24.02. Revisit: 15.05.
 * **K. Brodowska:** Ghosting po FU cennik 18.02. Stary Sącz. Wykreślona 24.02. Revisit: 15.04.
 * **Lira Könyv (HU/Anett Kazinczy):** Odmowa 24.02: "no plans to expand suppliers." Revisit: 15.05.2026.
-* **Katarzyna Kołakowska:** "Marzec/kwiecień." Due: 01.03. Wartość: 8 000 PLN. NIE NACISKAĆ.
+* **Katarzyna Kołakowska:** Dogrywanie aktywne. Próbka OK, porównuje dostawców. Due: 09.03. Wartość: 8 000 PLN. Delikatny kontakt OK.
 * **Ornamentai/Rasa (LT):** Parking — "still have canvas". Due: 24.03.
 * **Flowe.sk (SK):** Pełny magazyn. FU wysłany 16.02. Due: 01.03.
 * **HobbySet (LV):** Julija 27.01: "severe frosts, will consider when weather improves." PAUZA pogodowa. Revisit: 15.03.
@@ -260,21 +259,7 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 * **PaintPeople/Sara (SK):** Parking — "will keep in mind".
 
 ### ✅ ZAMKNIĘTE (luty 2026)
-* **WINO-GRONO:** 6 palet (2160 szt) 40x50 @ 7,30 (15 768 PLN) — dostawca się wysypał, przyszli SAMI!
-* malowisko/Ewelina: 360 szt. 40x50 @ 9,10 (3 276 PLN) — wróciła!
-* Farboteka/Joanna: 120 szt. 40x50 @ 10,31 (1 237 PLN) — cennik zaakceptowany
-* adtrade: PBN deska 30x40 (4 666 PLN) — one-shot
-* WATAHA/Blaut: 670 szt. 40x50 (4 535 PLN) — recurring
-* Art Wine/Czernianin: 160 szt. 40x50 (1 277 PLN) — recurring
-* Konrad Wisz: 200 szt. 40x50 (2 033 PLN) — cel 400/mies.
-* Winem malowane: 100 szt. 40x50 (1 077 PLN)
-* Edmundas (LT): 6 szt. MPN (168 PLN) — test CEE
-* Odkryj Artystę: 60 szt. 40x50 (680 PLN) — nowy klient
-* Kolorab: 1000 szt. 30x40 (6 790 PLN) — zaliczka opłacona
-* szkoła: 28 szt. (568 PLN)
-* winem malowane (2nd): 120 szt. 40x50 (1 237 PLN) — repeat
-* malowisko (2nd): 360 szt. 40x50 (3 243 PLN) — repeat 20.02
-* BATS/Mroczyk: 720 szt. 40x50 @ 8,20 (5 904 PLN) — recurring, 2 palety
+**15 deali | 52 423 PLN | 4 878 PLN prowizji (209% celu).** Top: WINO-GRONO 15.8k, Kolorab 6.8k, BATS 5.9k. Pełne rozbicie → metryki.md.
 
 ---
 
@@ -298,44 +283,10 @@ Potrzeba: 8-10 aktywnych regularnych klientów.
 
 ---
 
-## 🇭🇺 CEE WĘGRY — ÉLMÉNYFESTÉS (target list)
-> Intel: Phoenix zabetonowany u detalistów HU. NIE targetować sklepów. Eventy = otwarte.
-> Outreach 10.02 (5 maili), FU 16.02 (5 maili). Czekamy na odpowiedzi. Due FU: 20.02.
-
-**TIER 1 (sieci):** Alkotásutca, FessNeki, MyPaint — wysłane + FU
-**TIER 2 (BP):** BudaP'aint, IsabelOby, Fröcskölő, ArtBuda, Piktor Tanoda, Nem Art, Paint&Drink
-**TIER 3 (poza BP):** Élményfestés Debrecen, YourArt — wysłane + FU
+## 🇭🇺 CEE WĘGRY — ÉLMÉNYFESTÉS
+> Outreach 10.02 + FU 16.02. Alkotásutca PAUZA (ghosting). FessNeki próbki wysłane. Tier 2 (10 firm) nietkniętych. Pełna lista → projekty-artnapi/artnapi-cee/.
 
 ---
-
-## 📬 PLAN WYSYŁKI — STATUS (25-28.02 → 07.03)
-> Czystka pipeline zrobiona 25.02. Fokus: batch day śr 26.02 + domykanie czw-pt + start PUSH MONTH pon 03.03.
-
-### 📅 ZADANIA ZESPOŁU (26.02 → 07.03)
-
-| Dzień | Asystent | Lead / Zadanie | Akcja |
-|-------|----------|----------------|-------|
-| **śr 26.02** | **@cso** | Wine&paint ×8 | FU D+3 cold maile z 23.02 (Integracyjne, Domin, RestArt, Pędzel&Prosecco, Atelier, Foodie City, MalowanieZWinem, Zmalowani) |
-| śr 26.02 | @cso | UNITRON | Overdue FU — "Kiedy wysyłka?" Odpowiedzieć! |
-| śr 26.02 | @cso | Art&Wine (LV) | Overdue FU kalkulator |
-| śr 26.02 | @ghost | Agencje batch 2 | Drafty: TeamFormacja, Art&Wine Friends, WinoMalowanie (re-engagement, NIE cold!) |
-| śr 26.02 | @recon | 36 WTZ do Notion | Mazowieckie 15, Dolnośląskie 7, Wielkopolskie 14 — dodać do CRM |
-| **czw 27.02** | **@cso** | Arte.ee/Kadri | Check-in: "Any questions about the calculator?" Nie naciskać. |
-| czw 27.02 | @cso | POLBAR/Łukasz | FU jeśli brak telefonu — krótki SMS 796 550 855 |
-| czw 27.02 | user | Knihy Dobrovský | TEL do non-book dept jeśli cisza |
-| **pt 28.02** | **@coo** | Pipeline Pulse | Review pipeline + KPI tygodnia + deadline Dzień Kobiet 8.03 |
-| pt 28.02 | @coo | Dashboard | Aktualizacja dashboard.html (KROK 5) |
-| **pon 03.03** | @coo | PUSH MONTH start | Phoenix monitoring + Kołakowska check-in + WTZ FU D+14 |
-| pon 03.03 | @cso | FessNeki | FU feedback próbki (Hermes H1022470156439801512) |
-| pon 03.03 | @cso | Paintbar (EE) | FU Anni (po urlopie, 14 dni cisza) |
-| 03-07.03 | @recon | Domy Kultury | Research 50 DK z BIP (4 województwa) |
-| 03-07.03 | @cso | Phoenix Down batch 1 | 5-10 nowych studiów wine&paint |
-| ~15.03 | @cso | Leo Creative | Delikatny check-in (zero presji) |
-| TBD | Piotr | NOZ/VEO | Decyzja cenowa po propozycji NOZ |
-| **śr 04.03** | **@cso** | PBS Polska | FU D+7 na zapytanie dystrybucyjne (marketing@pbspolska.eu, wysłane 25.02) |
-| śr 04.03 | @cso | Poczta Polska | FU D+7 na odświeżony mail (wysłany 25.02). Opcja: user DM do szefowej zakupów na LinkedIn |
-| 03-07.03 | @recon | Kaufland marketplace | Research wymagań rejestracji sellera kaufland.pl (dokumenty, prowizja, kategoria, czas) |
-| TBD | Piotr | CE marking PBN | BLOKADA RETAIL! Zapytanie wysłane 25.02. Bez CE = zero Kaufland/PBS/PP |
 
 ---
 

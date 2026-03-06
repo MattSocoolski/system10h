@@ -1,10 +1,9 @@
 # OFERTA: BLIŹNIAK BIZNESOWY
 
 ## JEDNA OBIETNICA
-**"Asystent AI który ZNA Twój biznes - i działa według tej wiedzy."**
+**"Gotowy system sprzedażowy AI — skonfigurowany pod Ciebie, nie kolejny kurs do przerabiania."**
 
-Koniec z generycznymi odpowiedziami. Koniec z tłumaczeniem kontekstu od nowa.
-System który pamięta, łączy kropki, i pokazuje Ci rzeczy których sam nie widzisz.
+Nie kurs do przerabiania. Nie kolejny chatbot do promptowania. Gotowy system który zna Twój biznes, pisze w Twoim stylu i działa od dnia 1.
 
 ---
 
@@ -40,6 +39,17 @@ Scenariusze:
 14. **Higiena folderu** — porządek w plikach, limity, wykrywanie śmieci
 15. **Rozwój biznesu** — audyt kwartału, nowe segmenty, upsell, ceny, polecenia, plan 90 dni
 16. **Radar szans** — skanuje Twój biznes i pokazuje co pomijasz + co ciąć
+
+---
+
+## DFY vs DIY — DLACZEGO NIE KURS
+
+|  | Kurs AI (~3 000 PLN) | Bliźniak Biznesowy (2 599 PLN) |
+|--|----------------------|-------------------------------|
+| Co dostajesz | Wiedzę (6 tyg. nauki) | Gotowy system (działa od dnia 1) |
+| Czas do efektu | 6+ tygodni | 2-3 dni |
+| Musisz budować sam? | TAK | NIE — buduję za Ciebie |
+| Prywatność / NDA | Nie adresowane | Pliki lokalne, opt-out treningu |
 
 ---
 
@@ -92,7 +102,7 @@ Scenariusze:
 
 ## CENA
 
-**2 500 PLN netto** (jednorazowo)
+**2 599 PLN netto** (jednorazowo)
 
 ### Co dostajesz (value stacking):
 
@@ -108,12 +118,12 @@ Scenariusze:
 | Inteligentny routing (AI rozpoznaje intencje) | 800 PLN |
 | Gwarancja 30 dni zwrotu bez pytań | — |
 | **Łączna wartość** | **7 400 PLN** |
-| **Twoja inwestycja** | **2 500 PLN** |
+| **Twoja inwestycja** | **2 599 PLN** |
 
 - Zero abonamentu
 - Zero ukrytych kosztów
 - Płatność 100% z góry
-- Raty w rozmowie: 2× 1 250 PLN (tylko gdy klient chce, ale ma problem z cashflow)
+- Raty w rozmowie: 2× 1 299,50 PLN (tylko gdy klient chce, ale ma problem z cashflow)
 
 **ROI:** Zwraca się po 1 uratowanym dealu lub 10h zaoszczędzonego czasu.
 
@@ -127,7 +137,7 @@ Scenariusze:
 | Instantly (outreach) | $37-97/msc | $444-1 164/rok |
 | Jasper (content AI) | $39-69/msc | $468-828/rok |
 | Copy.ai (sales copy) | $29/msc | $348/rok |
-| **Bliźniak Biznesowy** | **jednorazowo** | **2 500 PLN (~$625) i koniec** |
+| **Bliźniak Biznesowy** | **jednorazowo** | **2 599 PLN netto i koniec** |
 
 ---
 
@@ -141,6 +151,7 @@ Scenariusze:
 | Działa w praktyce | Artnapi: kampania CEE w 15 min, 7.5k PLN/msc prowizji |
 | Mierzalne wyniki | Before: 15-30 maili/tyg ręcznie. After: kampania z personalizacją w 15 min |
 | System, nie magia | 30 min/dzień cold outreach = 20-25 targetów/tyg |
+| Pozycjonowanie DFY | Porównywalna cena z kursem AI (2 599 vs ~3 000 PLN), a gotowy od dnia 1 |
 
 ---
 

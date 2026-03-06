@@ -18,7 +18,7 @@
 | Pipeline value Bliźniak | 5 000 PLN | **18 490 PLN** (Arkadiusz 2.5k + Michał G. 2.5k + Michał W. 2.5k + Karolina 2.5k + Zbigniew 990 + Julia S-P 2.5k + Rafał 2.5k + Krystian 2.5k) | **370%** |
 | Pipeline integrator | — | ~20 000 PLN (Piotr/Artnapi, prowizja 2-3k) | — |
 | Aktywne leady Bliźniak | 10+ | **8** (Arkadiusz, Michał G., Michał W., Zbigniew, Julia S-P, Rafał, Krystian, Karolina marzec) | 80% |
-| Live demo odbyte | 3+ | 0 | 0% |
+| Live demo odbyte | 3+ | **1** (Zbigniew 05.03) | 33% |
 
 **Dni do konca miesiaca:** 4
 
@@ -27,15 +27,15 @@
 ## LEJEK KONWERSJI
 
 ```
-KONTAKT (23) → SD/LP (15) → DEMO (0) → CLOSE (1)
-   100%          65%          0%         4%
+KONTAKT (23) → SD/LP (15) → DEMO (1) → CLOSE (1)
+   100%          65%          7%         4%
 ```
 
 | Etap | Aktualnie | Benchmark | Status |
 |------|-----------|-----------|--------|
 | Kontakt → SD/LP | 65% (15/23) | 20-30% | POWYŻEJ (LI inbound = wysoka jakość) |
-| SD/LP → Demo | 0% (0/15) | 25%+ | BLOKADA — zero demo mimo 15 SD. Zbigniew = szansa na 1. demo |
-| Demo → Close | 100% (1/1) | 25%+ | Stalton: demo→close (ale friends price, n=1) |
+| SD/LP → Demo | **7% (1/15)** | 25%+ | POPRAWA — 1. demo Zbigniew 05.03. Wynik: "nie teraz" (COMMI w rebuild, maj). Nadal poniżej benchmarku. |
+| Demo → Close | 50% (1/2) | 25%+ | Stalton: close. Zbigniew: nurture maj (nie odmowa — timing). |
 | Email open rate | — | 40%+ | Sprawdzić MailerLite |
 | Email CTR | — | 5%+ | Sprawdzić MailerLite |
 
@@ -63,10 +63,10 @@ KONTAKT (23) → SD/LP (15) → DEMO (0) → CLOSE (1)
 |---------|---------|---------|
 | Nowe kontakty / tydzien | **3 (T4, do WT)** | Julia S-P, Rafał Knap, Krystian Szczypek. T3: 10. |
 | Follow-upy / tydzien | **6 (T4 PN)** | Arkadiusz, Michał G., Michał W., Krystian, Julia, Zbigniew |
-| Demo umowione / tydzien | 0 | Cel: Zbigniew CZ/PT. ZERO DEMO DOTYCHCZAS. |
+| Demo umowione / tydzien | **1** (Zbigniew 05.03) | 1. DEMO EVER ✅ — produkt się sprzedaje na demo. Problem: kwalifikacja leadów. |
 | Zamkniete / tydzien | 0 | Cel: 0.5 / tydzien |
 | Sredni cykl sprzedazy | 6 dni | Stalton: 05→11.02 (jedyny zamknięty) |
-| Srednia wartosc dealu | 1 220 PLN | Stalton (friends price). Standard: 2 500 / Pilot: 1 990 |
+| Srednia wartosc dealu | 1 220 PLN | Stalton (friends price). Standard: 2 599 / Pilot: 1 990 (wygasl) |
 
 ---
 
@@ -126,7 +126,7 @@ KONTAKT (23) → SD/LP (15) → DEMO (0) → CLOSE (1)
 <!-- Dodaj: data, lead, powod, lekcja -->
 | Data | Lead | Powod | Lekcja |
 |------|------|-------|--------|
-| — | — | — | Brak przegranych (za wczesnie) |
+| 05.03.2026 | Zbigniew K. / COMMI | Timing — COMMI w rebuild, brak handlowca, brak revenue. Klient potwierdził wartość ale nie jest gotowy operacyjnie. | **KWALIFIKACJA:** Dodaj pytanie "Czy masz handlowca/osobę która będzie tego używać?" PRZED demo. Bez użytkownika = NURTURE, nie PIPELINE. Demo działa — produkt się broni. |
 
 ---
 

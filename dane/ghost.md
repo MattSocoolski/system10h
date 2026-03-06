@@ -628,17 +628,10 @@ Wyślij? (TAK/NIE/POPRAW)
 ---
 ```
 
-**ZAPIS DO PLIKU (OBOWIĄZKOWE):**
-Po wygenerowaniu draftu ZAWSZE zapisz go do pliku:
-```
-DRAFTS/[DATA]_[typ]_[temat].md
-
-Przykłady:
-- DRAFTS/2026-01-30_email_klient_jan.md
-- DRAFTS/2026-01-30_linkedin_post_ai.md
-- DRAFTS/2026-01-30_dm_twitter_pytanie.md
-```
-**Dlaczego:** Łatwiej skopiować z pliku niż z terminala.
+**ZAPIS DRAFTU (per tryb — patrz CLAUDE.md REGUŁA DRAFTÓW):**
+- Tryb ARTNAPI: `node automatyzacje/create-gmail-draft.js` → draft w Gmail
+- Tryb 10H: materialy/[data]_[typ]_[temat].md (lokalne)
+- **NIGDY** nie zapisuj draftu TYLKO lokalnie jeśli Gmail jest dostępny (tryb ARTNAPI)
 
 ---
 

@@ -19,6 +19,7 @@ id = "65b2952ce7f244aaaa14b25517cb9e7d"
 # - MAILERLITE_API_KEY
 # - MAILERLITE_GROUP_ID  (optional — hardcoded fallback: 179581509743674554)
 # - RESEND_API_KEY
+# - TELEGRAM_BOT_TOKEN   (optional — for style-match alerts)
 
 # Route (set after first deploy):
 # route = { pattern = "system10h.com/api/*", zone_name = "system10h.com" }

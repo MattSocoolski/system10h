@@ -30,12 +30,12 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 **Fokus:** Demo > outreach. Zamykać ciepłe leady, nie generować nowe.
 
 **Priorytetowe akcje:**
-- [ ] DM do Zbigniewa — soft punch "Dzień z Bliźniakiem" (mock gotowy w projekty/zbigniew/)
+- [x] DM do Zbigniewa — "Dzień z Bliźniakiem" wysłany ✅ 04.03 → DEMO ✅ 05.03 → NURTURE MAJ
 - [ ] DM do Karoliny Durmaj (nowa firma, DM ready od 02.03)
 - [ ] Follow-up Michał Glinka (SD done, był zajęty — czekamy feedback)
 - [ ] Follow-up Rafał Knap (SD done AIBL — próbka/demo)
 - [ ] Demo Krystian Szczypek (AI urzędy, discovery, przyszły tydzień)
-- [ ] Sformalizować prowizję 15% z Kamilem Andruszem (Napi sp. z o.o.)
+- [x] Sformalizować współpracę z Kamilem Andruszem/CQRE — 30% prowizji Faza 1+2, umowa drafted ✅ 04.03
 - [ ] Czekać na odpowiedź Michała Gawlika (WhatsApp wysłany 04.03)
 - [ ] Case study Stalton — draft po feedbacku Natana (~03-10.03)
 - [ ] LinkedIn 2-3 posty/tyg (12 postów gotowych: materialy/2026-03-02_system10h_ghost_posty_marzec.md)
@@ -46,22 +46,23 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 | Lead | Status | Wartość | Ostatni kontakt | Następny krok |
 |------|--------|---------|-----------------|---------------|
-| **Zbigniew Kowalski** (COMMI) | **DM DO WYSŁANIA** | **2 500 PLN** | 23.02 (DM, cisza) | Soft punch DM → "Dzień z Bliźniakiem" demo. Cena 990→2500 (decyzja CEO 02.03). Mock pipeline+stan+Radar gotowe. |
+| **Zbigniew Kowalski** (COMMI) | **NURTURE → MAJ** | **2 500 PLN** | 05.03 (live demo!) | Demo odbyło się ✅ — Zbigniew zobaczył system, potwierdził wartość ("narzędzie dla działającego handlowca"). COMMI w rebuild, szuka programisty + handlowca. Kontakt ~maj 2026. REFERRAL POTENTIAL: 180k ludzi, VP Mówców. |
 | **Michał Gawlik** | **WhatsApp WYSŁANY** | **1 000 PLN** | 04.03 (WhatsApp) | Bliźniak Raportowy (Claude Code Project). Czekamy odpowiedź → call 15 min → build 2-3h. |
-| **Karolina Durmaj** | **DM DO WYSŁANIA** | 2 500 PLN | 11.02 (zmiana firmy) | Nowa firma Jawi (logistyka). DM gotowy — WYSŁAĆ. |
-| **Michał Glinka** | **SD DONE** ✅ | 2 500 PLN | 23.02 ("ten tydzień zajęty") | Follow-up → demo. SD 100% open rate. |
-| **Rafał Knap** (AIBL) | **SD DONE** ✅ | 2 500 PLN | 23.02 (pozytywna odp.) | Follow-up z próbką/demo. 100% open rate. |
+| **Karolina Durmaj** | **NURTURE** | 2 500 PLN | 05.03 (call + demo!) | NIE Javi — poznańska firma importowa (sourcing → sieci PL). Demo done, wartość potwierdzona, cena OK. Ale: 4. dzień w pracy, mąż, NDA. SD link na LI. FU ~19.03. |
+| **Michał Glinka** | **FU WYSŁANY** | 2 500 PLN | 04.03 (follow-up DM) | SD done, follow-up wysłany — proponowane demo CZ/PT. Czekamy odpowiedź. |
 | **Krystian Szczypek** | **DISCOVERY** | 2 500 PLN (Bliźniak) + urzędy | 23.02 (follow-up DM) | Projekt AI urzędy/KPO — demo przyszły tydzień. Max 5h/tyg cap. |
-| **Kamil Andrusz / IAI / Napi** | **PROWIZJA** | **~11 250-15 000 PLN** (pasywny) | 25.02 (oferta złożona) | Prowizja 15% netto. Sformalizować na piśmie DZIŚ. Deadline oferty ~27.03. |
+| **Kamil Andrusz / CQRE / Napi** | **UMOWA W TOKU** | **~22 500-30 000 PLN** (pasywny) | 04.03 (spotkanie) | Współpraca 30% netto Faza 1+2 (nie finder's fee — aktywna praca). Umowa drafted (materialy/). Deadline oferty Kamila ~27.03. |
 | **Natan / Stalton** (CNC) | **INSTALLED** ✅ | 1 220 PLN (zamknięty) | 17.02 | Feedback za 2-3 tyg → case study + pytania referencyjne (projekty/stalton/). |
-| **Arkadiusz Piotrowicz** | LINK WYSŁANY (brak SD) | 2 500 PLN | 23.02 | Nudge z bezpośrednią ofertą demo. |
 | **Michał Wielgosz** | LINK WYSŁANY (brak SD) | 2 500 PLN | 23.02 | Nudge z bezpośrednią ofertą demo. |
-| **Julia Safandowska-Pawlak** | LINK WYSŁANY (brak SD) | 2 500 PLN | 23.02 | Nudge — powiedziała "jutro przetestuję", nie zrobiła. |
 
-**ZAMROŻENI (bez akcji):** Ewa Panek (ghosting), Bagrat (ghosting), Daniel/DANTAR (nie wypalił), Credipass (pauza), Tomek Szacoń (wrócić jeśli się odezwie), Julia Sienkiewicz (trigger: case study), Lena (beta, HOLD), Piotr/Artnapi (integrator — teraz osobny deal z Kamilem).
+**WĄTKI NETWORKINGOWE:**
+- **Małgorzata "Gosia" Jary** (AI Biznes Lab) — FSI (szkolenia AI/IT dla korpo: Accenture, Capgemini, Nordea) + Integrivo (automatyzacje). Potencjał: polecanie Bliźniaka po szkoleniach, prowizja, wspólny produkt szkolenie+wdrożenie. Prompt do eksploracji współpracy przygotowany 06.03. Czekamy na spotkanie.
 
-**Pipeline value aktywny:** ~20 000 PLN (Zbigniew 2.5k + Gawlik 1k + Karolina 2.5k + Glinka 2.5k + Knap 2.5k + Krystian 2.5k + Arkadiusz 2.5k + Wielgosz 2.5k + Julia S-P 2.5k)
-**Pipeline pasywny:** ~11 250-15 000 PLN (Kamil/Napi prowizja 15%)
+**ZAMROŻENI (bez akcji):** Ewa Panek (ghosting), Bagrat (ghosting), Daniel/DANTAR (nie wypalił), Credipass (pauza), Tomek Szacoń (wrócić jeśli się odezwie), Julia Sienkiewicz (trigger: case study), Lena (beta, HOLD), Piotr/Artnapi (integrator — teraz osobny deal z Kamilem), Rafał Knap (wykreślony 04.03), Julia S-P (wykreślona 04.03), Arkadiusz Piotrowicz (usunięty 04.03).
+
+**Pipeline value aktywny:** ~7 500 PLN (Gawlik 1k + Glinka 2.5k + Krystian 2.5k + Wielgosz 2.5k)
+**Pipeline NURTURE (marzec-maj):** 5 000 PLN (Zbigniew 2.5k maj + Karolina 2.5k koniec marca)
+**Pipeline pasywny:** ~22 500-30 000 PLN (Kamil/CQRE/Napi współpraca 30%)
 **Zamknięte:** 1 220 PLN netto (Stalton)
 
 ---
@@ -99,7 +100,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 1. **ZERO "SPOKO, DAJ ZNAĆ"** — "Muszę się zastanowić" → "Nad czym konkretnie?"
 2. **FOLLOW-UP 5x MINIMUM** — D+3 / D+7 / D+14 / D+21 / D+30
 3. **DEMO = CLOSE** — Min. 2 live demo/msc. 0 demo = 0 sprzedaży.
-4. **FULL PRICE OD TERAZ** — 2 500 PLN. Pilot 990/1990 wygasł.
+4. **FULL PRICE OD TERAZ** — 2 599 PLN netto. Pilot 990/1990 wygasł.
 5. **CONTENT = LEAD MACHINE** — 2-3 posty LI/tyg z CTA do SD.
 
 ---
@@ -117,7 +118,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ### FAZA 2: LEJEK (marzec–kwiecień)
 - [ ] Hybrid UX Opcja C (4 kategorie + NL routing)
-- [ ] 3 tiers: Lite (0 PLN) / Solo (2 500) / Pro (4 500-5 000)
+- [ ] 3 tiers: Lite (0 PLN) / Solo (2 599) / Pro (4 500-5 000)
 - [ ] Landing page z pricing table
 - [ ] Self-service Architekt AI na stronie
 - [ ] Vertical Pack CNC/Produkcja (po case study Stalton)

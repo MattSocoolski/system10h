@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bezpieczeństwo danych | Bliźniak Biznesowy by System 10h+</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --brand-50: #faf5ff;
+            --brand-100: #f3e8ff;
+            --brand-400: #c084fc;
+            --brand-500: #a855f7;
+            --brand-600: #9333ea;
+            --brand-900: #0f172a;
+            --accent-400: #facc15;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --green-500: #22c55e;
+            --green-900: #14532d;
+            --red-400: #f87171;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--brand-900);
+            color: var(--slate-50);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 32px;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+        }
+        .header .badge {
+            display: inline-block;
+            background: rgba(168, 85, 247, 0.15);
+            color: var(--brand-400);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 16px;
+            border-radius: 999px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .header h1 span { color: var(--brand-500); }
+        .header .subtitle {
+            color: var(--slate-400);
+            font-size: 16px;
+            max-width: 550px;
+            margin: 0 auto;
+        }
+
+        /* TLDR BOX */
+        .tldr {
+            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+        .tldr h2 {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--green-500);
+            margin-bottom: 16px;
+        }
+        .tldr ol {
+            list-style: none;
+            counter-reset: tldr;
+        }
+        .tldr ol li {
+            counter-increment: tldr;
+            padding: 6px 0;
+            padding-left: 32px;
+            position: relative;
+            color: var(--slate-200);
+            font-size: 15px;
+        }
+        .tldr ol li::before {
+            content: counter(tldr);
+            position: absolute;
+            left: 0;
+            width: 22px;
+            height: 22px;
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--green-500);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            top: 8px;
+        }
+        .tldr ol li strong { color: var(--slate-50); }
+
+        /* SECTIONS */
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(168, 85, 247, 0.2);
+        }
+        .section h2 span { color: var(--brand-500); }
+
+        /* TABLE CARD */
+        .table-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        thead th {
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--brand-400);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 16px;
+            text-align: left;
+        }
+        tbody td {
+            padding: 12px 16px;
+            font-size: 14px;
+            color: var(--slate-300);
+            border-top: 1px solid rgba(255, 255, 255, 0.03);
+            vertical-align: top;
+        }
+        tbody td:first-child {
+            color: var(--slate-100);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        tbody tr:hover {
+            background: rgba(168, 85, 247, 0.04);
+        }
+
+        /* QUOTE */
+        .quote-box {
+            background: rgba(168, 85, 247, 0.08);
+            border-left: 3px solid var(--brand-500);
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 16px 0;
+        }
+        .quote-box p {
+            font-style: italic;
+            color: var(--slate-200);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .quote-box .source {
+            font-style: normal;
+            font-size: 12px;
+            color: var(--slate-400);
+        }
+
+        /* COMPARISON TABLE */
+        .compare-table thead th:first-child { min-width: 140px; }
+        .compare-table .highlight {
+            background: rgba(34, 197, 94, 0.08);
+        }
+        .compare-table .highlight td {
+            color: var(--slate-100);
+            font-weight: 600;
+        }
+        .yes { color: var(--green-500); font-weight: 700; }
+        .no { color: var(--red-400); font-weight: 600; }
+        .mid { color: var(--accent-400); }
+
+        /* FAQ / CONCERNS */
+        .concern {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+        }
+        .concern .q {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--slate-100);
+            margin-bottom: 6px;
+        }
+        .concern .q::before {
+            content: "→ ";
+            color: var(--brand-500);
+        }
+        .concern .a {
+            font-size: 14px;
+            color: var(--slate-400);
+            line-height: 1.5;
+        }
+
+        /* CERTIFICATIONS */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .cert-item {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+        }
+        .cert-item .icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .cert-item .label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--slate-100);
+        }
+        .cert-item .desc {
+            font-size: 11px;
+            color: var(--slate-400);
+            margin-top: 4px;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(168, 85, 247, 0.15);
+        }
+        .footer p {
+            font-size: 13px;
+            color: var(--slate-400);
+        }
+        .footer a {
+            color: var(--brand-400);
+            text-decoration: none;
+        }
+        .footer .brand {
+            font-weight: 700;
+            color: var(--slate-200);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        /* SOURCES */
+        .sources {
+            margin-top: 32px;
+            padding: 16px 20px;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 8px;
+        }
+        .sources h3 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--slate-400);
+            margin-bottom: 8px;
+        }
+        .sources ul {
+            list-style: none;
+        }
+        .sources ul li {
+            font-size: 12px;
+            color: var(--slate-400);
+            padding: 2px 0;
+        }
+        .sources ul li a {
+            color: var(--brand-400);
+            text-decoration: none;
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; color: #1e293b; }
+            .container { padding: 20px; }
+            .header h1 span { color: #9333ea; }
+            .tldr { border-color: #22c55e; }
+            .section h2 span { color: #9333ea; }
+            .table-card, .concern, .cert-item { border: 1px solid #e2e8f0; background: #f8fafc; }
+            thead th { background: #f1f5f9; color: #334155; }
+            tbody td { color: #334155; }
+            .quote-box { border-left-color: #9333ea; background: #faf5ff; }
+            .yes { color: #16a34a; }
+            .no { color: #dc2626; }
+        }
+
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="badge">Dokument bezpieczeństwa</div>
+            <h1>Twoje dane są <span>bezpieczne</span></h1>
+            <p class="subtitle">Jak Bliźniak Biznesowy chroni dane firmowe — architektura lokalna, opt-out treningu i certyfikaty infrastruktury</p>
+        </div>
+
+        <!-- TLDR -->
+        <div class="tldr">
+            <h2>W 30 sekund</h2>
+            <ol>
+                <li><strong>Pliki leżą na Twoim komputerze</strong> — w folderze, który widzisz i kontrolujesz</li>
+                <li><strong>Możesz wyłączyć trenowanie AI na danych</strong> — jedno kliknięcie w ustawieniach płatnego planu</li>
+                <li><strong>Szyfrowanie AES-256 + TLS 1.2+</strong> — standard bankowy</li>
+                <li><strong>Możesz usunąć wszystko w 5 sekund</strong> — skasujesz folder i po sprawie</li>
+            </ol>
+        </div>
+
+        <!-- GDZIE SĄ DANE -->
+        <div class="section">
+            <h2>Gdzie są <span>Twoje dane</span>?</h2>
+            <div class="table-card">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Warstwa</th>
+                            <th>Lokalizacja</th>
+                            <th>Kontrola</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pliki systemowe</td>
+                            <td>Twój dysk twardy, konkretny folder</td>
+                            <td>Ty — 100%</td>
+                        </tr>
+                        <tr>
+                            <td>Historia sesji</td>
+                            <td>Twój dysk (~/.claude/, pliki JSONL)</td>
+                            <td>Ty — /clear lub ręcznie</td>
+                        </tr>
+                        <tr>
+                            <td>Konwersacje</td>
+                            <td>Serwery Anthropic (w trakcie sesji)</td>
+                            <td>Auto-usuwane w 30 dni</td>
+                        </tr>
+                        <tr>
+                            <td>Po zamknięciu</td>
+                            <td>Pliki dalej u Ciebie. Rozmowa znika.</td>
+                            <td>Ty decydujesz</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TRENING -->
+        <div class="section">
+            <h2>Czy AI <span>uczy się</span> na moich danych?</h2>
+            <p style="font-size: 15px; color: var(--slate-300); margin-bottom: 16px;">
+                <strong style="color: var(--slate-50);">Nie, jeśli to wyłączysz.</strong> Na płatnych planach Claude (Pro, Max) masz opcję opt-out:
+            </p>
+            <div class="quote-box">
+                <p>Ustawienia → Privacy → wyłącz "Allow training on my conversations"</p>
+                <span class="source">Jedno kliknięcie. Po wyłączeniu Twoje dane nie trenują żadnego modelu.</span>
+            </div>
+            <p style="font-size: 14px; color: var(--slate-400); margin-top: 12px;">
+                <strong style="color: var(--brand-400);">Ważne rozróżnienie:</strong> Na planach komercyjnych (Team, Enterprise, API) trenowanie jest wyłączone domyślnie i potwierdzone umową prawną (Commercial Terms + DPA). Na planach indywidualnych (Pro, Max) musisz to wyłączyć sam — ale mechanizm działa tak samo.
+            </p>
+        </div>
+
+        <!-- CERTYFIKATY -->
+        <div class="section">
+            <h2>Certyfikaty i <span>zgodność</span></h2>
+            <div class="cert-grid">
+                <div class="cert-item">
+                    <div class="icon">🛡️</div>
+                    <div class="label">SOC 2 Type II</div>
+                    <div class="desc">Niezależny audyt bezpieczeństwa</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">🔘</div>
+                    <div class="label">Opt-out treningu</div>
+                    <div class="desc">1 kliknięcie w ustawieniach</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">📋</div>
+                    <div class="label">ISO 27001:2022</div>
+                    <div class="desc">Zarządzanie bezpieczeństwem informacji</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">🤖</div>
+                    <div class="label">ISO 42001:2023</div>
+                    <div class="desc">Zarządzanie systemami AI</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">🔐</div>
+                    <div class="label">AES-256 + TLS 1.2+</div>
+                    <div class="desc">Szyfrowanie w spoczynku i transmisji</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">⏱️</div>
+                    <div class="label">48h breach notification</div>
+                    <div class="desc">Powiadomienie o naruszeniu</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">🔍</div>
+                    <div class="label">Testy penetracyjne</div>
+                    <div class="desc">Coroczne, niezależne</div>
+                </div>
+                <div class="cert-item">
+                    <div class="icon">🔑</div>
+                    <div class="label">MFA obowiązkowe</div>
+                    <div class="desc">Na wszystkich kontach pracowników</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PORÓWNANIE -->
+        <div class="section">
+            <h2>Porównanie z <span>innymi narzędziami</span></h2>
+            <div class="table-card compare-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Darmowy ChatGPT</th>
+                            <th>Claude Pro</th>
+                            <th>Bliźniak (na Claude Max)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Trening na danych</td>
+                            <td><span class="no">TAK (domyślnie)</span></td>
+                            <td><span class="mid">Opt-out możliwy</span></td>
+                            <td><span class="yes">Opt-out + pliki lokalne</span></td>
+                        </tr>
+                        <tr>
+                            <td>Pliki lokalne</td>
+                            <td><span class="no">Nie (chmura)</span></td>
+                            <td><span class="no">Nie (chmura)</span></td>
+                            <td><span class="yes">TAK (folder na dysku)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Szyfrowanie</td>
+                            <td><span class="mid">Tak</span></td>
+                            <td><span class="mid">AES-256, TLS 1.2+</span></td>
+                            <td><span class="yes">AES-256 + szyfrowanie dysku</span></td>
+                        </tr>
+                        <tr>
+                            <td>Kontrola danych</td>
+                            <td><span class="no">Minimalna</span></td>
+                            <td><span class="mid">Średnia</span></td>
+                            <td><span class="yes">Pełna (folder na dysku)</span></td>
+                        </tr>
+                        <tr>
+                            <td>Usunięcie danych</td>
+                            <td>Wniosek do firmy</td>
+                            <td>Wniosek do firmy</td>
+                            <td><span class="yes">Usuwasz folder</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- OBAWY -->
+        <div class="section">
+            <h2>Konkretne <span>obawy</span> i odpowiedzi</h2>
+
+            <div class="concern">
+                <div class="q">"Moje cenniki trafią do AI i ktoś je zobaczy"</div>
+                <div class="a">Pliki są na Twoim komputerze. Claude je czyta w sesji, ale nie przechowuje na serwerach. Nikt poza Tobą nie ma do nich dostępu.</div>
+            </div>
+
+            <div class="concern">
+                <div class="q">"Dane klientów wyciekną"</div>
+                <div class="a">Anthropic szyfruje dane AES-256 (w spoczynku) + TLS 1.2+ (w transmisji). Certyfikat SOC 2 Type II to potwierdza niezależnym audytem.</div>
+            </div>
+
+            <div class="concern">
+                <div class="q">"Mój pracodawca się dowie, że używam AI"</div>
+                <div class="a">System działa na Twoim prywatnym komputerze. Nie wymaga konta firmowego, nie łączy się z infrastrukturą firmy.</div>
+            </div>
+
+            <div class="concern">
+                <div class="q">"Anthropic sprzeda moje dane"</div>
+                <div class="a">Privacy Policy Anthropic: dane nie są sprzedawane. Na planach komercyjnych potwierdza to DPA. Na Max — obowiązuje Privacy Policy. Dodatkowo: Twoje pliki firmowe leżą na Twoim dysku, nie na serwerach Anthropic.</div>
+            </div>
+
+            <div class="concern">
+                <div class="q">"Co jak zmienię pracę?"</div>
+                <div class="a">Usuwasz pliki starej firmy, wgrywasz nowe dane. Zero śladów, zero ryzyka. System jest Twój, nie firmy.</div>
+            </div>
+
+            <div class="concern" style="background: rgba(168, 85, 247, 0.06); border: 1px solid rgba(168, 85, 247, 0.15);">
+                <div class="q" style="color: var(--brand-400);">Tip: Włącz szyfrowanie dysku</div>
+                <div class="a">Historia sesji na dysku nie jest szyfrowana przez narzędzie. Włącz FileVault (Mac) lub BitLocker (Windows) — to szyfruje cały dysk, łącznie z plikami AI.</div>
+            </div>
+        </div>
+
+        <!-- SOURCES -->
+        <div class="sources">
+            <h3>Źródła — możesz zweryfikować</h3>
+            <ul>
+                <li>Privacy Policy (obowiązuje wszystkich) → <a href="https://www.anthropic.com/privacy" target="_blank">anthropic.com/privacy</a></li>
+                <li>Consumer Terms (Pro/Max) → <a href="https://www.anthropic.com/legal/consumer-terms" target="_blank">anthropic.com/legal/consumer-terms</a></li>
+                <li>Commercial Terms (Team/Enterprise/API) → <a href="https://www.anthropic.com/legal/commercial-terms" target="_blank">anthropic.com/legal/commercial-terms</a></li>
+                <li>Lista sub-procesorów → <a href="https://www.anthropic.com/subprocessors" target="_blank">anthropic.com/subprocessors</a></li>
+            </ul>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p class="brand">Mateusz Sokólski | System 10h+</p>
+            <p>Bliźniak Biznesowy — Asystent AI który ZNA Twój biznes</p>
+            <p style="margin-top: 8px;"><a href="https://system10h.com">system10h.com</a></p>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -4,6 +4,7 @@
 **Imię:** Mateusz Sokólski
 **Wiek:** 28 lat
 **Lokalizacja:** Gliwice, Polska
+**Działalność:** Mateusz Sokólski Account Management, NIP: 8952117558, ul. Warszawska 40/2a, 40-008 Katowice
 **Stan cywilny:** Mąż Mariany (36 lat)
 **Priorytet życiowy:** Służba kaznodziejska i rodzina (praca max 6-7h).
 **Kwestie duchowe i biznesowe — rozdzielone. Zawsze.**

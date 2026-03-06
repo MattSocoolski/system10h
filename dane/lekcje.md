@@ -9,6 +9,18 @@ Trigger words: "okazało się", "nauczyłem się", "to zadziałało", "to nie za
 
 ## SPRZEDAŻ
 
+### [SYSTEM10H] 05.03 | DEMO DZIAŁA — PROBLEM TO KWALIFIKACJA, NIE PRODUKT
+Pierwsze live demo Bliźniaka (Zbigniew/COMMI). System się obronił — klient potwierdził wartość. Ale COMMI nie ma handlowca, nie ma revenue, produkt w rebuild = nie gotowy kupić. Pipeline był napompowany o 2.5k PLN. **Reguła:** "Czy masz handlowca?" = obowiązkowe pytanie PRZED demo. Brak użytkownika = NURTURE.
+> Źródło: rozmowa Zbigniew 05.03
+
+### [SYSTEM10H] 05.03 | KLIENT CI MÓWI KIM JEST TWOJA PERSONA
+Zbigniew: "to narzędzie dla DZIAŁAJĄCEGO handlowca". Celuj w firmy które JUŻ sprzedają i chcą lepiej — nie w firmy które dopiero budują zespół. Startup bez revenue ≠ Twój klient.
+> Źródło: rozmowa Zbigniew 05.03
+
+### [SYSTEM10H] 05.03 | "NIE TERAZ" ≠ "NIE" — ALE NIE LICZ DO PIPELINE
+Zbigniew nie odmówił — powiedział "maj". To NURTURE, nie przegrana. Ale NIGDY nie licz nurture do aktywnego pipeline. Pipeline = kto może kupić W TYM MIESIĄCU.
+> Źródło: analiza CSO po rozmowie Zbigniew
+
 ### [ARTNAPI] 25.02 | TAKTYKA PALETOWA DZIAŁA
 BATS: 720 szt @ 8,20 = prowizja 829 PLN. WINO-GRONO: 2160 szt @ 7,30 = prowizja 1 585 PLN. Upsell do pełnej palety = najwyższa prowizja/szt. ZAWSZE proponuj dobieranie do palety.
 > Źródło: decyzje.md (24.02, analiza CFO)
@@ -33,6 +45,10 @@ TeamFormacja kupił XI.2025, WinoMalowanie kupił XI.2025, Art&Wine Friends rozm
 Phoenix ma 1 łańcuch dostaw (Chiny → Hiszpania → PL), regularnie "między kontenerami". CNY luka trwa do V-VI.2026. Messaging: "10 000 szt na stanie, wysyłka 24h" trafia gdy Phoenix nie ma towaru. Monitoring co poniedziałek.
 > Źródło: decyzje.md (23.02, deep research Phoenix)
 
+### [SHARED] 06.03 | AIBL = TEN SAM TOOLBOX CO TY
+Kursanci AI Biznes Lab (Mirek Burnejko) maja SWOJEGO asystenta AI — taki sam system jak Blizniaki: @ceo, @cso, @cmo, @ghost, routing, pliki kontekstowe, Claude Code, Gemini CLI. To NIE sa ludzie "bez AI" — oni juz MAJA dzialajacego asystenta. Przy matchingu/wspolpracy z AIBL: traktuj jako PEER (rowny partner), nie klient do edukacji. Sprzedawaj KONFIGURACJE I CUSTOMIZACJE (specjalistyczne workflow'y, integracje, automatyzacje), nie sam system bazowy — bo go juz maja. ALBO: wspolne realizacje dla kogos z ICH sieci (ich klienci, ich kontakty) — oni znaja biznes klienta, Ty robisz wdrozenie done-for-you. Model: partner + wykonawca.
+> Zrodlo: insight Mateusz 06.03, kontekst: matching Kasia Kilian-Kowerko
+
 ---
 
 ## MARKETING
@@ -54,6 +70,14 @@ Brushme i Ideyka (konkurenci w Kaufland) mają TYLKO PBN. Żaden nie oferuje pod
 ### [ARTNAPI] 25.02 | GMAIL CHECK PRZED DRAFTAMI — OBOWIĄZKOWY
 Ghost pisał drafty FU bez sprawdzenia co klient odpowiedział. 4 leady miały błędne statusy: Alkotásutca nigdy nie odpisał (a status mówił "czekamy"), HobbySet dał realny powód (mróz), FessNeki czekała 9 dni na próbki. Kolejność: Gmail → analiza → drafty.
 > Źródło: decyzje.md (25.02, czystka pipeline)
+
+### [ARTNAPI] 05.03 | PRZYJĘCIE KONTENERA — 3-STOPNIOWA WERYFIKACJA
+Przed wysłaniem PZ / obliczeniem kosztów, ZAWSZE sprawdź:
+1. **Liczba pozycji:** PZ = invoice (widać od razu)
+2. **Suma sztuk:** PZ = invoice (widać od razu)
+3. **Suma wartości:** plik kosztowy = invoice (przy obliczaniu cen jednostkowych + wgrywaniu do IAI — suma kosztów ze WSZYSTKICH faktur = suma na PZ w IAI)
+Pomyłka na tym etapie = błędne COGS w całym systemie (Amazon, sklep, B2B). Nie da się cofnąć bez bólu.
+> Źródło: błędy przy przyjęciu kontenera III.2026
 
 ### [ARTNAPI] 25.02 | PIPELINE INFLACJA — AUDYT CO TYDZIEŃ
 Pipeline pokazywał 40k PLN. Po Gmail reality check: 25k. Po czystce: 14k. Ghost leady (brak odpowiedzi = "ciepły") zawyżały wartość 3x. Pipeline Pulse co piątek = non-negotiable.

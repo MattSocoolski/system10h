@@ -197,20 +197,25 @@
 - **API:** TAK (Workers API + KV Storage)
 - **MCP:** NIE
 - **Projekt:** `system10h/worker/` → deploy na `system10h.com`
-- **Endpointy produkcyjne:** `POST /generate` (Live Preview), `POST /subscribe` (email capture)
+- **Endpointy produkcyjne:**
+  - `POST /generate` — Live Preview (streaming, Claude Haiku → skrypty sprzedażowe)
+  - `POST /subscribe` — email capture (MailerLite + Resend wyniki)
+  - `POST /style-match` — Style Match Test (Claude Haiku non-streaming → przepisany mail + email Resend + MailerLite grupa `style-match-test` + Telegram alert). Dodany 05.03.2026.
 - **KV Namespace:** `RATE_LIMIT_KV` — rate limiting (5 req/min, 20/h, 50/dzień)
 - **Sekrety (w Cloudflare Dashboard, NIE w .env):**
-  - `ANTHROPIC_API_KEY` — do generowania Live Preview
+  - `ANTHROPIC_API_KEY` — do generowania Live Preview + Style Match
   - `MAILERLITE_API_KEY` — do zapisu subskrybentów
   - `RESEND_API_KEY` — do wysyłki emaili z wynikami
   - `TURNSTILE_SECRET_KEY` — do weryfikacji CAPTCHA
+  - `TELEGRAM_BOT_TOKEN` — do alertów Style Match (opcjonalny)
 - **Gdzie zarządzać:**
   1. Wejdź na https://dash.cloudflare.com/
   2. Workers & Pages → `live-preview-api`
   3. Settings → Variables → Secrets (tam są klucze)
 - **Deploy:** `cd system10h/worker && npx wrangler deploy`
 - **CORS:** `system10h.com`, `www.system10h.com`
-- **Status:** AKTYWNE (produkcja)
+- **Frontend:** `system10h/DEPLOY_EXT/` → Live Preview (`index.html`), Style Match (`style-match/index.html`)
+- **Status:** AKTYWNE (produkcja, wrangler 4.71.0)
 - **Koszt:** Free: 100k req/dzień. Paid: $5/msc za 10M req. KV: free 100k odczytów/dzień.
 
 ---
@@ -389,5 +394,5 @@ TELEGRAM_BOT_TOKEN=xxxxx              # [JEST] ✅
 
 ---
 
-*Ostatnia aktualizacja: 03.03.2026 (+Email Radar: Claude Haiku auto-draft + Gmail polling)*
+*Ostatnia aktualizacja: 05.03.2026 (+Style Match endpoint, Telegram secret, wrangler 4.71.0, security audit A)*
 *Źródło: @cto sesja — konsolidacja systemów, merge z ARTNAPI_OS api-inventory*
