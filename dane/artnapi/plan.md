@@ -232,13 +232,13 @@ W1 wykonany częściowo. Cold email szablony PKE gotowe. Negocjacja z Piotrem w 
 
 ### 🔥🔥 CIEPŁE (aktywne)
 * ~~**Karolina Brodowska:**~~ Ghosting po FU 18.02. → PAUZA 24.02. Revisit: 15.04.
-* **Leo Creative:** Klient/AM. ⚠️ Obiekcja cennik 20.02 ("cenię stałość"). Gwarancja cenowa Q1. Due: ~15.03. Wartość: 4 000 PLN.
+* **Leo Creative:** Klient/AM. ⚠️ Obiekcja cennik 20.02 ("cenię stałość"). Gwarancja cenowa Q1. Due: 15.03. Wartość: 4 000 PLN. Delikatny FU.
 * **UNITRON:** Klient/AM (2x 3k brutto). FU mail 04.03. Due: 09.03. Wartość: 3 000 PLN.
 * ~~**Van Gogh:**~~ → PAUZA 23.02. Zero odpowiedzi. Revisit: 25.03.
 * ~~**Art&Wine (LV):**~~ Usunięte z pipeline 05.03.
-* **FlashArt (EE):** FU z kalkulatorem B2B wysłany 18.02. Due: 21.02. Wartość: 2 000 PLN.
-* **Paintbar (EE):** FU z kalkulatorem B2B wysłany 18.02. Due: 21.02. Wartość: 1 500 PLN.
-* **Arte.ee (Estonia):** Nowy cennik EN + kalkulator: 20.02. Due: 24.02. Wartość: 3 000 PLN.
+* **Paintbar (EE):** Anni odpisała 19.02 — na wakacjach. FU wysłany 04.03. Due: 14.03. Wartość: 1 500 PLN.
+* ~~**FlashArt (EE):**~~ 3 maile (08.02, 18.02, 04.03), zero odpowiedzi. → PARKING. Revisit: V.2026.
+* ~~**Arte.ee (Estonia):**~~ Cisza od 19.02 mimo kalkulatora. FU wysłany 04.03. Brak odpowiedzi. → PARKING. Revisit: IV.2026.
 * **Konrad Wisz:** Upsell paleta — czekamy aż wróci sam. Bez FU. Wartość: 4 000 PLN.
 
 ### 💤 PAUZA
@@ -249,6 +249,8 @@ W1 wykonany częściowo. Cold email szablony PKE gotowe. Negocjacja z Piotrem w 
 * **Ornamentai/Rasa (LT):** Parking — "still have canvas". Due: 24.03.
 * **Flowe.sk (SK):** Pełny magazyn. FU wysłany 16.02. Due: 01.03.
 * **HobbySet (LV):** Julija 27.01: "severe frosts, will consider when weather improves." PAUZA pogodowa. Revisit: 15.03.
+* **FlashArt (EE):** 3 maile (08.02, 18.02, 04.03), zero. PAUZA 06.03. Revisit: V.2026.
+* **Arte.ee (EE):** Cisza od 19.02, FU 04.03 bez odpowiedzi. PAUZA 06.03. Revisit: IV.2026.
 * **Alkotásutca (HU):** 3 maile (10.02, 16.02, 20.02), zero odpowiedzi. PAUZA 25.02. Revisit: IV.2026.
 * **Sztukarnia:** Ghosting po 2 FU (XI.2025 + 20.02). PAUZA 25.02. Revisit: V.2026.
 * **Varsztatovnia:** Cold mail 18.02, zero odpowiedzi. PAUZA 25.02. Revisit: V.2026.
@@ -263,23 +265,26 @@ W1 wykonany częściowo. Cold email szablony PKE gotowe. Negocjacja z Piotrem w 
 
 ---
 
-## 📊 ACCOUNT MANAGEMENT — STALI KLIENCI (12.02.2026)
+## 📊 ACCOUNT MANAGEMENT — STALI KLIENCI (06.03.2026)
 > Sygnał: 🟢 OK | 🟡 zbliża się | 🔴 przeterminowane
 
 | Klient | Cykl | Ostatnie zam. | Next | Sygnał |
 |--------|------|---------------|------|--------|
-| Farboteka/Joanna | 30 dni | **12.02** (120 szt 40x50) | ~12.03 | 🟢 OK |
-| malowisko/Ewelina | 30-45 dni | **20.02** (360 szt 40x50 @ 9,10 — 2nd) | ~20.03 | 🟢 OK |
-| BATS/Mroczyk | 30-45 dni | **23.02** (720 szt 40x50 @ 8,20 — 2 pal) | ~06.03 | 🟢 OK |
-| WATAHA/Blaut | 30-60 dni | II.2026 | ✅ | 🟢 OK |
-| Art Wine/Czernianin | 30-60 dni | II.2026 | ✅ | 🟢 OK |
-| Konrad Wisz | nowy | II.2026 | Czekamy — wróci sam | 🟢 OK |
-| Winem malowane | 14-21 dni | **II.2026** (120 szt 40x50 — 2nd) | ~III.2026 | 🟢 OK |
-| Leo Creative | nowy (1x) | I.2026 | FU cennik 18.02, Due: 21.02 | 🟡 sprawdzić |
+| Malowisko/Ewelina | 10 dni | **25.02** (360 szt, 3rd luty) | ~07.03 | 🟡 sprawdzić |
+| Farboteka/Joanna | 13 dni | **25.02** (120 szt, 3rd luty) | ~10.03 | 🟢 OK |
+| Konrad Wisz | nowy | **03.03** (360 szt @ 9,00 — marzec!) | ~17.03 | 🟢 OK |
+| Art Wine/Czernianin | ~21 dni | **02.03** (160 szt — marzec!) | ~23.03 | 🟢 OK |
+| BATS/Mroczyk | 30-45 dni | **23.02** (720 szt @ 8,15) | overdue ~06.03 | 🔴 sprawdzić |
+| Winem malowane | 14-21 dni | **18.02** (120 szt, 2nd) | overdue | 🔴 FU |
+| WATAHA/Blaut | 30-60 dni | 09.02 | overdue | 🔴 FU |
+| WINO-GRONO | nowy! | **13.02** (2160 szt @ 7,30) | CALL PON 09.03 | 🟡 kluczowy |
 | Kolorab | 30 dni | **II.2026** (1000 szt 30x40, 6 790 PLN) | ~III.2026 | 🟢 OK |
-| WINO-GRONO | nowy! | **13.02** (2160 szt 40x50 @ 7,30) | Due: 28.02 | 🟢 OK |
-| K. Brodowska | klient | XI.2025 | PAUZA — ghosting 24.02, revisit 15.04 | 🔴 pauza |
 | Odkryj Artystę | nowy | **19.02** (60 szt 40x50, 680 PLN) | ~19.03 | 🟢 OK |
+| UNITRON | powrót! | **03.03** (40 szt MPN) | ~III.2026 | 🟢 OK |
+| Mól | nowy | **03.03** (643 PLN) | — | 🟢 OK |
+| Bąk | nowy | **03.03** (498 PLN) | — | 🟢 OK |
+| Leo Creative | pauza | I.2026 | obiekcja cennik, Due: ~15.03 | 🟡 delikatnie |
+| K. Brodowska | pauza | XI.2025 | PAUZA — ghosting, revisit 15.04 | 🔴 pauza |
 
 ---
 

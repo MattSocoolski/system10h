@@ -1,6 +1,6 @@
 # PROJEKTY — STATUS
 
-> Aktualizacja: 24.02.2026
+> Aktualizacja: 06.03.2026
 > Zasada: max 5-6 linii per projekt. Szczegoly w README.md w folderze projektu.
 > Kampanie jednorazowe (Dzien Kobiet, Phoenix Down) — to nie projekty, to akcje w ramach Artnapi B2B PL.
 
@@ -9,30 +9,32 @@
 ## ARTNAPI B2B PL (Sprzedaz hurtowa podobrazi i PBN na rynku polskim)
 
 - Status: AKTYWNY
-- Cel: 8-10 regularnych klientow, 9 000 PLN netto/mies. wynagrodzenia
-- Metryki: 16 zamowien w II.2026 (54 273 PLN), prowizja 4 930 PLN (211% celu), 12 klientow AM
-- Nastepny krok: PUSH MONTH marzec — 2x KPI vs luty, domykanie pipeline 25k PLN
-- Folder: projekty/artnapi-b2b-pl/
+- Cel: 8 000 szt/mies (1/2 kontenera) w 3 mies. Nowy model prowizji: marza handlowca - 6 666 base.
+- Metryki: II.2026 REKORD: 18 zam./58 140 PLN/5 585 PLN prowizji (239%). III.2026: 7 zam./7 491 PLN po W1.
+- Recurring base: ~3 980 szt/msc. Gap: 4 020 szt z nowych + upselli. WINO-GRONO (2 160 szt) = key.
+- Nastepny krok: W2 (09-13.03): WINO-GRONO call PON, RestArt FU, cennik do Piotra PT, raport #1 PT.
+- Folder: projekty-artnapi/artnapi-b2b-pl/
 
 ---
 
 ## ARTNAPI CEE (Ekspansja na rynki LT, LV, EE, HU, CZ, SK)
 
-- Status: AKTYWNY
+- Status: AKTYWNY (spowolniony)
 - Cel: 3-5 klientow CEE do VI.2026
-- Metryki: 1 zamkniety (Edmundas LT, 168 PLN test), 6+ w pipeline
-- Nastepny krok: FU CEE 25.02 (Paintbar, Alkotasutca, HobbySet, Edmundas) + Knihy tel 27.02
-- Folder: projekty/artnapi-cee/ (+ legacy: projekt/artnapi_cee/)
+- Metryki: 1 zamkniety (Edmundas LT, 168 PLN test). Pipeline: Splatter Studio (LT/Warszawa), FessNeki (HU probki), Knihy (CZ).
+- Overdue: FlashArt (EE) + Paintbar (EE) + Arte.ee — brak odpowiedzi >14 dni. Decyzja: breakup lub parking.
+- Nastepny krok: FessNeki feedback probek, Splatter domykanie, Knihy retail pitch.
+- Folder: projekty-artnapi/artnapi-cee/
 
 ---
 
 ## WTZ/DPS (Kampania do Warsztatow Terapii Zajęciowej i Domow Pomocy Spolecznej)
 
-- Status: AKTYWNY
+- Status: AKTYWNY (slow burn)
 - Cel: 10 placowek do VI.2026
-- Metryki: 41 maili wyslanych 18.02, 0 odpowiedzi, 36 nowych WTZ do CRM
-- Nastepny krok: FU D+7 mass 25.02 + dodanie 36 WTZ do Notion CRM
-- Folder: projekty/wtz-dps/
+- Metryki: 41 maili (18.02), 1 odpowiedz negatywna, 2.4% response rate (norma dla instytucji). 36 nowych WTZ w CRM.
+- Nastepny krok: W2 czw 12.03 — FU D+21 na 41 maili + DK batch 1 (50 maili PKE model)
+- Folder: projekty-artnapi/wtz-dps/
 
 ---
 
@@ -40,39 +42,39 @@
 
 - Status: W BUDOWIE
 - Cel: 5-10 DK do VI.2026
-- Metryki: brak — start marzec w1-w2
-- Nastepny krok: Research 50 DK z BIP (4 wojewodztwa) marzec w1
-- Folder: projekty/domy-kultury/
+- Metryki: brak — start marzec W2
+- Nastepny krok: Batch 50 maili PKE (pytanie o zgode) czw 12.03. Nowy dwuetapowy model.
+- Folder: projekty-artnapi/domy-kultury/
 
 ---
 
 ## HOTELE & WINE&PAINT NOWE (Kanal hotelowy + nowe firmy wine&paint)
 
 - Status: AKTYWNY
-- Cel: 2-3 nowe firmy wine&paint do III.2026, test 5 hoteli VII-IX.2026
-- Metryki: batch 1 wyslany 23.02 (8 firm), 18 firm zidentyfikowanych
-- Nastepny krok: FU D+3 batch 1 (26.02) + batch 2 (TeamFormacja, Art&Wine Friends, WinoMalowanie)
-- Folder: projekty/hotele-winepaint/
+- Cel: 2-3 nowe firmy wine&paint do III.2026
+- Metryki: Batch 1 (8 firm, 23.02) → RestArt ODPOWIEDZ + probki wyslane. 18 firm zidentyfikowanych.
+- Nastepny krok: RestArt FU probki PON 09.03 + batch 2 cold email PKE model SR 11.03
+- Folder: projekty-artnapi/hotele-winepaint/
 
 ---
 
 ## SHEIN EUROPE (Drop-ship test — dead stock WCF/LOW PBN na ramie)
 
-- Status: W BUDOWIE (test, low priority)
-- Cel: Utylizacja dead stock WCF/LOW przez SHEIN drop-ship. COGS 29 PLN brutto. 1 ID test.
-- Metryki: Spotkanie 24.02 (model drop-ship, nie consignment). Piotr: warunkowe GO. Mail do Patrycji 24.02 (kurier, way2sent, Baselinker).
-- Nastepny krok: Czekamy na odpowiedz Patrycji. Go/no-go integracji marzec w2. Setup 1 ID marzec w3. Max 2h/tydzien.
-- Folder: projekty/shein-europe/
+- Status: PAUZA (czekamy na Patrycje)
+- Cel: Utylizacja dead stock WCF/LOW. COGS 29 PLN brutto. 1 ID test.
+- Metryki: Mail do Patrycji 24.02 (kurier, way2sent, Baselinker). Brak odpowiedzi.
+- Nastepny krok: Go/no-go na podstawie odpowiedzi Patrycji. Max 2h/tydzien.
+- Folder: projekty-artnapi/shein-europe/
 
 ---
 
-## SYSTEM 10h+ (Usluga AI "Done-For-You" — konfiguracja asystenta AI dla handlowcow)
+## SYSTEM 10h+ (w kontekscie ArtNapi — sprzedaz Kamil/CQRE/Napi)
 
-- Status: AKTYWNY (produkt gotowy, brak klientow)
-- Cel: 1 klient/mies. = +2 500 PLN
-- Metryki: strona gotowa (PL + UA), 0 placących klientow
-- Nastepny krok: Test sprzedazowy — 20 wiadomosci do targetu (LinkedIn/cold mail)
-- Folder: projekty/system-10h/
+- Status: UMOWA W TOKU
+- Cel: 30% netto od kontraktu Kamila (Faza 1+2) = 22 500-30 000 PLN
+- Metryki: Umowa drafted 04.03. Deadline oferty Kamila ~27.03.
+- Nastepny krok: Podpisac umowe z Kamilem. Czekac na oferte.
+- Folder: projekty-artnapi/system-10h/
 
 ---
 
@@ -80,6 +82,5 @@
 
 - Status: PLANOWANY (start X.2026)
 - Cel: Nowy kanal sprzedazy PBN na sezon BN XI-XII
-- Metryki: brak — start outreach X.2026
 - Nastepny krok: Brak do X.2026. Parking.
-- Folder: projekty/gift-boxy-pbn/
+- Folder: projekty-artnapi/gift-boxy-pbn/
