@@ -26,19 +26,78 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ## 📆 AKTUALNY MIESIĄC: MARZEC 2026
 
-**Cel:** Min. 2 × close = 5 000+ PLN netto + sformalizować deal Kamil/Napi (11-15k pasywny)
+**Cel:** Min. 2 × close = 5 000+ PLN netto + sformalizować deal Kamil/Napi (22.5-30k pasywny)
 **Fokus:** Demo > outreach. Zamykać ciepłe leady, nie generować nowe.
+**Strategia 3 tyg (08.03):** W2 odblokuj demo + wznów content → W3 demo sprint → W4 domykanie + Kamil deadline.
 
 **Priorytetowe akcje:**
 - [x] DM do Zbigniewa — "Dzień z Bliźniakiem" wysłany ✅ 04.03 → DEMO ✅ 05.03 → NURTURE MAJ
-- [ ] DM do Karoliny Durmaj (nowa firma, DM ready od 02.03)
-- [ ] Follow-up Michał Glinka (SD done, był zajęty — czekamy feedback)
-- [ ] Follow-up Rafał Knap (SD done AIBL — próbka/demo)
-- [ ] Demo Krystian Szczypek (AI urzędy, discovery, przyszły tydzień)
-- [x] Sformalizować współpracę z Kamilem Andruszem/CQRE — 30% prowizji Faza 1+2, umowa drafted ✅ 04.03
-- [ ] Czekać na odpowiedź Michała Gawlika (WhatsApp wysłany 04.03)
-- [ ] Case study Stalton — draft po feedbacku Natana (~03-10.03)
-- [ ] LinkedIn 2-3 posty/tyg (12 postów gotowych: materialy/2026-03-02_system10h_ghost_posty_marzec.md)
+- [x] DM do Karoliny Durmaj ✅ 05.03 (call + demo) → NURTURE, FU ~19.03
+- [ ] Follow-up Michał Glinka — FU wysłany 04.03, proponowane demo CZ/PT. **PON 09.03: 2. nudge z konkretnym terminem.**
+- [x] ~~Follow-up Rafał Knap~~ — wykreślony 04.03
+- [ ] Demo Krystian Szczypek (AI urzędy, discovery). **ŚR 11.03: ustal termin + gate check (pipeline urzędów?).**
+- [x] Sformalizować współpracę z Kamilem Andruszem/CQRE — 30% prowizji Faza 1+2, umowa drafted ✅ 04.03. **W2: sfinalizuj docx, wyślij do review.**
+- [ ] Follow-up Michał Gawlik — WhatsApp 04.03. **PON 09.03: 2. nudge.**
+- [ ] Nudge Michał Wielgosz — link wysłany 23.02, brak SD. **WT 10.03: DM z ofertą demo.**
+- [ ] Case study Stalton — czeka na feedback Natana. **W3: ping jeśli brak odpowiedzi.**
+- [ ] LinkedIn 2-3 posty/tyg — **0 opublikowanych w marcu!** 12 gotowych: materialy/2026-03-02_system10h_ghost_posty_marzec.md. **Start PON 09.03.**
+- [ ] Gosia Jary / FSI — ping "Kiedy spotkanie?" Potencjał: polecanie Bliźniaka po szkoleniach.
+- [ ] Referral ask Zbigniew — 3 intro z sieci (180k, VP Mówców). Do końca marca.
+
+### PLAN TYGODNIA 2 (09-13.03) — ODBLOKUJ PIPELINE
+
+**@CSO — Follow-up blitz (cel: 2 demo umówione):**
+
+| Dzień | Lead | Akcja |
+|-------|------|-------|
+| PON 09 | Michał Glinka | FU DM: konkretna propozycja terminu demo (CZ/PT) |
+| PON 09 | Michał Gawlik | WhatsApp FU: "15 min call, mam gotowy koncept" |
+| WT 10 | Michał Wielgosz | Nudge DM z ofertą demo na żywo |
+| ŚR 11 | Krystian Szczypek | DM: termin discovery + pytanie "masz urzędy w pipeline?" |
+| CZW 12 | Nowy outreach ×2 | 2 DM LinkedIn do handlowców B2B solo |
+| PT 13 | Pipeline review | Kto odpowiedział, scoring, decyzje |
+
+**@CMO — Wznowienie contentu (cel: 3 posty LI):**
+
+| Dzień | Akcja |
+|-------|-------|
+| PON 09 | Post LI #1 z CTA do SD (z 12 gotowych) |
+| ŚR 11 | Post LI #2: "Skończyłeś kurs AI?" (DFY vs DIY, decyzja 05.03) |
+| PT 13 | Post LI #3 + Style Match Test spec |
+
+**@CEO — Strategia:**
+- Umowa Kamil/CQRE → docx finalizacja
+- Metryki.md update (12 dni nieaktualne!)
+- Gosia Jary ping
+
+### PLAN TYGODNIA 3 (16-20.03) — DEMO SPRINT
+
+**@CSO (cel: MIN 1 live demo):**
+
+| Dzień | Akcja |
+|-------|-------|
+| PON 16 | Odpowiedzi z W2 → umów demo NATYCHMIAST |
+| ŚR 18 | Karolina Durmaj FU D+14: lekki check-in, zero presji |
+| ŚR-CZW | Live demo ×1-2 (Glinka / Wielgosz / Krystian) |
+| CZW 19 | Nowy outreach ×3 DM |
+| PT 20 | Scoring + pipeline review |
+
+**@CMO:** 3 posty LI (#4-6). Style Match Test build (jeśli spec OK). Komentarze LI 5-10.
+**@CEO:** Case study Stalton (ping Natana). Kamil status. Krystian gate check.
+
+### PLAN TYGODNIA 4 (23-27.03) — DOMYKANIE
+
+**@CSO:** Domykanie demo leads → close 2 599 PLN. Karolina jeśli W3+. Outreach ×3.
+**@CMO:** 3 posty LI (#7-9). Style Match Test LIVE (jeśli gotowy). Analiza content→lead.
+**@CEO:** **Kamil/CQRE deadline oferty ~27.03.** Scorecard marzec. Referral ask Zbigniew.
+
+### SCORECARD MARZEC — SCENARIUSZE
+
+| Scenariusz | Deale | PLN netto |
+|------------|-------|-----------|
+| MINIMUM | 1 close + Kamil signed | 2 599 + umowa |
+| REALISTYCZNY | 1 close + Gawlik + Kamil | 3 599 + umowa |
+| OPTIMUM | 2 close + Gawlik + Kamil | 6 099 + umowa |
 
 ---
 
@@ -80,10 +139,12 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 | # | Deal | Wartość | Cel | Status |
 |---|------|---------|-----|--------|
 | ✅ | Stalton | 1 220 PLN | 11.02 | ZAMKNIĘTY |
-| 2 | Zbigniew K. | **2 500 PLN** | marzec | [ ] |
-| 3 | Michał Gawlik | **1 000 PLN** | marzec | [ ] |
-| 4 | Deal standard | 2 500 PLN | marzec-kwiecień | [ ] |
-| | **TOTAL** | **7 220 PLN** | | **17% (1 220/7 000)** |
+| 2 | ~~Zbigniew K.~~ | ~~2 500 PLN~~ | ~~marzec~~ | NURTURE MAJ (demo OK, timing nie) |
+| 3 | Michał Gawlik | **1 000 PLN** | marzec | [ ] WhatsApp FU 09.03 |
+| 4 | Glinka / Wielgosz / Krystian | **2 500 PLN** | marzec-kwiecień | [ ] Demo W2-W3 |
+| 5 | Kamil/CQRE (pasywny) | **22 500-30 000 PLN** | deadline ~27.03 | [ ] Umowa + oferta |
+| | **TOTAL (bez Kamil)** | **4 720 PLN** | | **17% (1 220/7 000)** |
+| | **TOTAL (z Kamil)** | **~25-32k PLN** | | Game changer |
 
 ### KPI MIESIĘCZNE
 

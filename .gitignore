@@ -24,6 +24,11 @@ node_modules/
 
 # Pliki binarne
 *.xlsx
+*.pdf
+
+# Wrażliwe dokumenty (umowy, dane osobowe)
+materialy/*umowa*
+materialy/*contract*
 
 # Generowane grafiki (carousel-generator.js)
 materialy/carousel_*/

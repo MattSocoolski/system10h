@@ -9,33 +9,48 @@
 
 ---
 
-## CEL MIESIACA: LUTY 2026
+## CEL MIESIACA: LUTY 2026 — ZAMKNIĘTY
+
+| Metryka | Cel | Wynik | % |
+|---------|-----|-------|---|
+| Sprzedaze zamkniete | 2 | 1 (Stalton) | 50% |
+| Przychod | 5 000 PLN | 1 220 PLN netto | 24% |
+| Pipeline value Bliźniak | 5 000 PLN | 18 490 PLN | 370% |
+| Live demo odbyte | 3+ | 0 | 0% |
+
+**Lekcja:** Wąskie gardło SD→Demo (0% konwersja z 8 leadów). Pilot 1 990 PLN wygasł 28.02 bez zamknięcia.
+
+---
+
+## CEL MIESIACA: MARZEC 2026
 
 | Metryka | Cel | Aktualnie | % |
 |---------|-----|-----------|---|
-| Sprzedaze zamkniete | 2 | 1 | 50% |
-| Przychod | 5 000 PLN | 1 220 PLN netto | 24% |
-| Pipeline value Bliźniak | 5 000 PLN | **18 490 PLN** (Arkadiusz 2.5k + Michał G. 2.5k + Michał W. 2.5k + Karolina 2.5k + Zbigniew 990 + Julia S-P 2.5k + Rafał 2.5k + Krystian 2.5k) | **370%** |
-| Pipeline integrator | — | ~20 000 PLN (Piotr/Artnapi, prowizja 2-3k) | — |
-| Aktywne leady Bliźniak | 10+ | **8** (Arkadiusz, Michał G., Michał W., Zbigniew, Julia S-P, Rafał, Krystian, Karolina marzec) | 80% |
-| Live demo odbyte | 3+ | **1** (Zbigniew 05.03) | 33% |
+| Sprzedaze zamkniete | 2+ | 0 (Stalton 1 220 PLN zamknięty w lutym) | 0% |
+| Przychod | 5 000+ PLN | 0 PLN (nowe w marcu) | 0% |
+| Pipeline value aktywny | 10 000+ PLN | **7 500 PLN** (Gawlik 1k + Glinka 2.5k + Krystian 2.5k + Wielgosz 2.5k) | 75% |
+| Pipeline NURTURE | — | **5 000 PLN** (Zbigniew 2.5k maj + Karolina 2.5k koniec marca) | — |
+| Pipeline pasywny | — | **~22 500-30 000 PLN** (Kamil/CQRE 30% prowizji) | — |
+| Aktywne leady Bliźniak | 5+ | **4** (Gawlik, Glinka, Krystian, Wielgosz) | 80% |
+| Live demo odbyte | 2+ | **2** (Zbigniew 05.03, Karolina 05.03) | 100% |
 
-**Dni do konca miesiaca:** 4
+**Cel Q1-Q2:** 7 000 PLN netto do 31.05.2026. Zamknięte: 1 220 PLN. Luka: 5 780 PLN.
+**Dni do konca miesiaca:** 23
 
 ---
 
 ## LEJEK KONWERSJI
 
 ```
-KONTAKT (23) → SD/LP (15) → DEMO (1) → CLOSE (1)
-   100%          65%          7%         4%
+KONTAKT (23) → SD/LP (15) → DEMO (2) → CLOSE (1)
+   100%          65%         13%         4%
 ```
 
 | Etap | Aktualnie | Benchmark | Status |
 |------|-----------|-----------|--------|
 | Kontakt → SD/LP | 65% (15/23) | 20-30% | POWYŻEJ (LI inbound = wysoka jakość) |
-| SD/LP → Demo | **7% (1/15)** | 25%+ | POPRAWA — 1. demo Zbigniew 05.03. Wynik: "nie teraz" (COMMI w rebuild, maj). Nadal poniżej benchmarku. |
-| Demo → Close | 50% (1/2) | 25%+ | Stalton: close. Zbigniew: nurture maj (nie odmowa — timing). |
+| SD/LP → Demo | **13% (2/15)** | 25%+ | POPRAWA — 2 demo live (Zbigniew 05.03, Karolina 05.03). Nadal poniżej benchmarku ale trend ↑. |
+| Demo → Close | 50% (1/2) | 25%+ | Stalton: close. Zbigniew: nurture maj (timing, nie odmowa). Karolina: nurture koniec marca (nowa praca). Produkt się sprzedaje na demo. |
 | Email open rate | — | 40%+ | Sprawdzić MailerLite |
 | Email CTR | — | 5%+ | Sprawdzić MailerLite |
 
@@ -45,15 +60,15 @@ KONTAKT (23) → SD/LP (15) → DEMO (1) → CLOSE (1)
 
 | Kanal | Leady | SD/LP | Do Demo | Zamkniete | Notatki |
 |-------|-------|-------|---------|-----------|---------|
-| **LinkedIn inbound (post)** | **7** | **7** | 0 | 0 | Arkadiusz Piotrowicz, Michał Glinka, Michał W., Julia S-P, Rafał Knap (AIBL), Krystian Szczypek — 19-23.02. Tomek→NURTURE (znajomy, zasięg) |
+| **LinkedIn inbound (post)** | **7** | **7** | 0 | 0 | ~~Arkadiusz Piotrowicz~~ (usunięty 04.03), Michał Glinka, Michał W., ~~Julia S-P~~ (wykreślona 04.03), ~~Rafał Knap~~ (wykreślony 04.03), Krystian Szczypek — 19-23.02. Tomek→NURTURE (znajomy, zasięg) |
 | LinkedIn inbound (stary) | 1 | 0 | 1 | 0 | Ewa Panek (ZAMROŻONA) |
-| Siec (cieply) | 4 | 2 | 1 | **1** | Credipass (PAUZA), **Stalton ✅**, **Piotr (INTEGRATOR)**, **Zbigniew K. (STRATEGIC)** |
+| Siec (cieply) | 4 | 2 | **2** | **1** | Credipass (PAUZA), **Stalton ✅**, **Piotr (INTEGRATOR)**, **Zbigniew K. (DEMO 05.03 → NURTURE MAJ)** |
 | **LP outreach DM** | **4** | **4** | 0 | 0 | Kamil G. (odmowa), Agnieszka, Marek, Joanna — 19.02 |
-| Cold outreach | 1 | 0 | 0 | 0 | Karolina (MARZEC) |
+| Cold outreach | 1 | 1 | **1** | 0 | **Karolina Durmaj (DEMO 05.03 → NURTURE, FU ~19.03)** |
 | Event/networking | 2 | 0 | 0 | 0 | Julia Sienk. (NURTURE), Daniel (ZAMROŻONY) |
 | Warm Circle | 2 | 0 | 0 | 0 | "Będę pamiętać" — referral seeds |
 | Beta-test | 1 | — | — | — | Lena (nie liczy) |
-| **SUMA** | **22** | **13** | **2** | **1** | |
+| **SUMA** | **22** | **14** | **4** | **1** | |
 
 ---
 
@@ -61,12 +76,12 @@ KONTAKT (23) → SD/LP (15) → DEMO (1) → CLOSE (1)
 
 | Metryka | Wartosc | Notatki |
 |---------|---------|---------|
-| Nowe kontakty / tydzien | **3 (T4, do WT)** | Julia S-P, Rafał Knap, Krystian Szczypek. T3: 10. |
-| Follow-upy / tydzien | **6 (T4 PN)** | Arkadiusz, Michał G., Michał W., Krystian, Julia, Zbigniew |
-| Demo umowione / tydzien | **1** (Zbigniew 05.03) | 1. DEMO EVER ✅ — produkt się sprzedaje na demo. Problem: kwalifikacja leadów. |
+| Nowe kontakty / tydzien | **0 (T5)** | Brak nowych — fokus na domykanie ciepłych. T4: 3, T3: 10. |
+| Follow-upy / tydzien | **5 (T5)** | Glinka FU, Gawlik WhatsApp, Zbigniew demo, Karolina demo, Wielgosz pending |
+| Demo umowione / tydzien | **2 (T5)** | Zbigniew 05.03 ✅ + Karolina 05.03 ✅. Produkt się sprzedaje na demo — oba potwierdziły wartość. |
 | Zamkniete / tydzien | 0 | Cel: 0.5 / tydzien |
 | Sredni cykl sprzedazy | 6 dni | Stalton: 05→11.02 (jedyny zamknięty) |
-| Srednia wartosc dealu | 1 220 PLN | Stalton (friends price). Standard: 2 599 / Pilot: 1 990 (wygasl) |
+| Srednia wartosc dealu | 1 220 PLN | Stalton (friends price). Standard: 2 599 PLN netto |
 
 ---
 
@@ -102,15 +117,27 @@ KONTAKT (23) → SD/LP (15) → DEMO (1) → CLOSE (1)
 | PT 20.02 | Zbigniew + audyt | Zbigniew pipeline (990 PLN strategic) + health check decyzje.md + Artnapi prowizja 3 195 PLN |
 | **Podsumowanie** | **10 nowych kontaktów, 0 demo, 0 close. Pipeline 13 490 → content machine działa.** | |
 
-### Tydzien 4 (23-28.02) — AKTUALNY (PILOT DEADLINE)
+### Tydzien 4 (23-28.02) — ZAMKNIĘTY (PILOT DEADLINE)
 
 | Dzien | Planowane | Wynik |
 |-------|-----------|-------|
 | PN 23.02 | Follow-upy + DM Zbigniew + kontener Artnapi | ✅ Follow-upy: Arkadiusz, Michał G., Michał W., Krystian. SD: Julia S-P, Rafał Knap. DM Zbigniew (aktywny, SD nie zrobił). Michał G.: "ten tyg zajęty". Julia: "jutro przetestuję". Post LI Before/After SD ✅. |
-| WT 24.02 | Integrator Kamil+Piotr + nudge Zbigniew + komentarze LI | *[w trakcie]* |
-| ŚR 26.02 | Post LI "AI vs handlowiec" + demo prep COMMI + PILOT DEADLINE start | *[zaplanowane]* |
-| CZ 27.02 | Spotkanie Zbigniew (live demo COMMI) + follow-up ALL | *[zaplanowane]* |
-| PT 28.02 | Post LI "Pipeline zero" + PILOT DEADLINE OSTATNI DZIEŃ + metryki review | *[zaplanowane]* |
+| WT 24.02 | Integrator Kamil+Piotr + nudge Zbigniew + komentarze LI | *[zamknięty]* |
+| ŚR 26.02 | Post LI "AI vs handlowiec" + demo prep COMMI + PILOT DEADLINE start | *[zamknięty]* |
+| CZ 27.02 | Spotkanie Zbigniew (live demo COMMI) + follow-up ALL | *[zamknięty]* |
+| PT 28.02 | Post LI "Pipeline zero" + PILOT DEADLINE OSTATNI DZIEŃ + metryki review | *[zamknięty]* |
+| **Podsumowanie** | **Pilot 1 990 PLN wygasł 28.02 bez nowych zamknięć. Pipeline utrzymany.** | |
+
+### Tydzien 5 (03-07.03) — ZAMKNIĘTY
+
+| Dzien | Planowane | Wynik |
+|-------|-----------|-------|
+| WT 03.03 | Pipeline cleanup + FU blitz | ✅ Wykreśleni: Rafał Knap, Julia S-P, Arkadiusz Piotrowicz. Czyszczenie pipeline. |
+| ŚR 04.03 | FU Glinka + WhatsApp Gawlik + DM Zbigniew + Kamil spotkanie | ✅ FU Glinka (proponowane demo CZ/PT). WhatsApp Gawlik. Zbigniew "Dzień z Bliźniakiem" wysłany. Kamil spotkanie → umowa 30% drafted. |
+| CZ 05.03 | Demo Zbigniew + Demo Karolina | ✅ **2 LIVE DEMO!** Zbigniew: wartość potwierdzona, ale COMMI w rebuild → NURTURE MAJ. Karolina: call + demo, wartość OK, timing nie (nowa praca) → NURTURE, FU ~19.03. |
+| PT 06.03 | Gosia Jary prep + ecosystem concept | Prompt współpracy Gosia prepared. Koncept ekosystem System 10H zapisany. |
+| PT 07.03 | Plan W2 + strategia 3-tygodniowa | ✅ Plan W2 (09-13.03) gotowy: FU blitz + content wznowienie. |
+| **Podsumowanie** | **2 live demo (1. i 2. w historii!), pipeline oczyszczony, 0 nowych leadów, 0 close. Kamil umowa drafted.** | |
 
 ---
 
@@ -147,4 +174,4 @@ KONTAKT (23) → SD/LP (15) → DEMO (1) → CLOSE (1)
 
 ---
 
-*Ostatnia aktualizacja: 24.02.2026 (WT: pipeline 18 490 PLN, +3 nowe leady LI, Tomek→NURTURE, 8 aktywnych leadów, T3 zamknięty, T4 otwarty, follow-upy 6x wysłane PN)*
+*Ostatnia aktualizacja: 08.03.2026 (NIE: pipeline aktywny 7 500 PLN, NURTURE 5 000 PLN, pasywny 22.5-30k. 4 aktywne leady. 2 live demo w T5 (Zbigniew + Karolina). Zbigniew→NURTURE MAJ, Karolina→NURTURE. Rafał/Julia/Arkadiusz wykreśleni. T4+T5 zamknięte, T6 otwarty.)*

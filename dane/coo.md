@@ -103,6 +103,10 @@ Jeśli trigger pasuje → **OD RAZU generuj output skilla (Option B).** Nie pyta
 | `/outreach-sniper` | skills/outreach-sniper/ | Personalizowane zaczepki cold outreach |
 | `/demo-wow` | skills/demo-wow/ | Scenariusz demo 5 min dla leada |
 | `/self-discovery` | skills/self-discovery/ | Faza Zero dla początkujących przedsiębiorców |
+| `/xlsx` | skills/xlsx/ | Arkusze Excel (raporty, cenniki, KPI) |
+| `/pdf` | skills/pdf/ | Dokumenty PDF (cenniki, oferty, case study) |
+| `/docx` | skills/docx/ | Dokumenty Word (umowy, oferty, propozycje) |
+| `/pptx` | skills/pptx/ | Prezentacje PowerPoint (pitch decki) |
 
 ### Trigger Mapa
 
