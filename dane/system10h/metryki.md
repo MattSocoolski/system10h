@@ -81,7 +81,7 @@ KONTAKT (23) → SD/LP (15) → DEMO (2) → CLOSE (1)
 | Demo umowione / tydzien | **2 (T5)** | Zbigniew 05.03 ✅ + Karolina 05.03 ✅. Produkt się sprzedaje na demo — oba potwierdziły wartość. |
 | Zamkniete / tydzien | 0 | Cel: 0.5 / tydzien |
 | Sredni cykl sprzedazy | 6 dni | Stalton: 05→11.02 (jedyny zamknięty) |
-| Srednia wartosc dealu | 1 220 PLN | Stalton (friends price). Standard: 2 599 PLN netto |
+| Srednia wartosc dealu | 1 220 PLN | Stalton (friends price). Standard: 2 999 PLN netto |
 
 ---
 

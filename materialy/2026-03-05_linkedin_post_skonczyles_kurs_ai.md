@@ -19,7 +19,7 @@ Właśnie dlatego buduję system10h.
 Ktoś siada z Tobą na godzinę, prześwietla Twój biznes, a potem BUDUJE ZA CIEBIE gotowy system AI z 16 scenariuszami sprzedażowymi, pamięcią operacyjną i Twoim stylem komunikacji.
 
 Potrzebny czas? Zero tygodni nauki. Działa od dnia 1.
-Koszt? 2 599 PLN jednorazowo, porównywalnie z kursem, ale od razu gotowe.
+Koszt? 2 999 PLN jednorazowo, porównywalnie z kursem, ale od razu gotowe.
 
 Kurs daje wiedzę.
 system10h daje wynik.

@@ -34,7 +34,7 @@
 **Pierwszy krok:** 30-min demo live — Mateusz pokazuje jak Blizniaki pisze maile/follow-upy w stylu Kasi. Kasia wkleja swoj prawdziwy mail, widzi roznice.
 
 **Potencjalny wynik:**
-- Mateusz: 2 599 PLN (sprzedaz) + case study "AI w firmie dotacyjnej" (unikalna nisza!)
+- Mateusz: 2 999 PLN (sprzedaz) + case study "AI w firmie dotacyjnej" (unikalna nisza!)
 - Kasia: Oszczednosc 1-2h dziennie na korespondencji, lepsze follow-upy z klientami
 
 **Prawdopodobienstwo:** WYSOKIE — matching 82% z tagiem KLIENT, Kasia aktywnie wdraza AI, uzywa tych samych narzedzi.

@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalkulator cen hurtowych — ArtNapi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --purple: #653C91;
+  --purple-deep: #4A2B6B;
+  --purple-light: #8B6BAF;
+  --gold: #FFC157;
+  --gold-soft: #FFD68A;
+  --gold-glow: rgba(255, 193, 87, 0.15);
+  --green: #22C55E;
+  --green-soft: #DCFCE7;
+  --green-deep: #16A34A;
+  --red: #EF4444;
+  --red-soft: #FEE2E2;
+  --bg: #0F0B15;
+  --bg-card: #1A1424;
+  --bg-card-hover: #221C2E;
+  --bg-input: #2A2236;
+  --text: #F1ECF5;
+  --text-dim: #9B8FB0;
+  --text-muted: #6B5F7E;
+  --border: #2E2640;
+  --border-active: #653C91;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.3);
+  --shadow-glow: 0 0 40px rgba(101, 60, 145, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.calc-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* ─── HEADER ─── */
+.calc-header {
+  text-align: center;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.calc-header::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(ellipse, rgba(101,60,145,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.brand {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+
+.calc-title {
+  font-size: clamp(24px, 5vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, var(--text) 0%, var(--purple-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.calc-subtitle {
+  color: var(--text-dim);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* ─── LANG TOGGLE ─── */
+.lang-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 20px auto 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 3px;
+  width: fit-content;
+}
+
+.lang-btn {
+  background: none;
+  border: none;
+  color: var(--text-dim);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lang-btn.active {
+  background: var(--purple);
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(101,60,145,0.4);
+}
+
+.lang-btn:hover:not(.active) { color: var(--text); }
+
+.lang-flag { font-size: 15px; }
+
+/* ─── PRODUCT TABS ─── */
+.product-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.product-tabs::-webkit-scrollbar { display: none; }
+
+.product-tab {
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.product-tab:hover { border-color: var(--purple-light); color: var(--text); }
+
+.product-tab.active {
+  background: var(--purple-deep);
+  border-color: var(--purple);
+  color: #fff;
+}
+
+/* ─── QUANTITY SECTION ─── */
+.qty-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.qty-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+
+.qty-input-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.qty-number {
+  width: 120px;
+  background: var(--bg-input);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--gold);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s;
+  -moz-appearance: textfield;
+}
+.qty-number::-webkit-outer-spin-button,
+.qty-number::-webkit-inner-spin-button { -webkit-appearance: none; }
+.qty-number:focus { border-color: var(--purple); }
+
+.qty-unit {
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.qty-slider-wrap { position: relative; }
+
+.qty-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-input);
+  outline: none;
+  position: relative;
+  z-index: 2;
+  background-image: linear-gradient(var(--purple), var(--purple));
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+}
+
+.product-spec {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.02);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--purple);
+}
+
+.delivery-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.05) 100%);
+  border: 1px solid rgba(34,197,94,0.2);
+  color: var(--green);
+}
+
+.delivery-banner.hidden { display: none; }
+
+.qty-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(255,193,87,0.4);
+  transition: transform 0.15s;
+}
+.qty-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.qty-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--gold);
+  cursor: pointer;
+  border: none;
+}
+
+.tier-marks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  position: relative;
+}
+
+.tier-mark {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-family: 'DM Mono', monospace;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 2px 4px;
+}
+.tier-mark:hover { color: var(--gold); }
+.tier-mark.active { color: var(--gold); font-weight: 500; }
+
+/* ─── PRICING DISPLAY ─── */
+.price-hero {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle at top right, var(--gold-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+
+.price-main {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(36px, 8vw, 52px);
+  font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.price-currency {
+  font-size: 20px;
+  color: var(--gold-soft);
+  font-weight: 400;
+}
+
+.price-unit {
+  font-size: 15px;
+  color: var(--text-dim);
+  font-weight: 400;
+}
+
+.price-market {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.price-market-val {
+  text-decoration: line-through;
+  color: var(--red);
+  font-family: 'DM Mono', monospace;
+}
+
+.price-market-label {
+  font-size: 12px;
+  background: var(--red-soft);
+  color: var(--red);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.price-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.stat-box {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+}
+
+.stat-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-family: 'DM Mono', monospace;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.stat-value.green { color: var(--green); }
+.stat-value.gold { color: var(--gold); }
+
+.stat-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-top: 2px;
+}
+
+/* ─── TIER CARDS ─── */
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  .tiers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.tier-card {
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+}
+
+.tier-card:hover { border-color: var(--purple-light); transform: translateY(-2px); }
+
+.tier-card.active {
+  border-color: var(--gold);
+  background: linear-gradient(180deg, rgba(255,193,87,0.08) 0%, var(--bg-card) 100%);
+  box-shadow: 0 0 24px rgba(255,193,87,0.12);
+}
+
+.tier-card.best {
+  border-color: var(--gold);
+}
+
+.tier-badge {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
+
+.tier-badge.popular {
+  background: var(--purple);
+  color: #fff;
+}
+
+.tier-badge.best-price {
+  background: var(--gold);
+  color: var(--purple-deep);
+}
+
+.tier-name {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  margin-top: 6px;
+  margin-bottom: 8px;
+}
+
+.tier-price {
+  font-family: 'DM Mono', monospace;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.tier-card.active .tier-price { color: var(--gold); }
+
+.tier-discount {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.tier-discount.none { color: var(--text-muted); }
+
+.tier-qty {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-family: 'DM Mono', monospace;
+}
+
+.tier-delivery {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  color: var(--green);
+  margin-top: 6px;
+  font-weight: 500;
+}
+
+/* ─── NUDGE BAR ─── */
+.nudge {
+  background: linear-gradient(135deg, rgba(101,60,145,0.15) 0%, rgba(255,193,87,0.08) 100%);
+  border: 1px solid var(--purple);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: nudgePulse 3s ease-in-out infinite;
+}
+
+@keyframes nudgePulse {
+  0%, 100% { border-color: var(--purple); }
+  50% { border-color: var(--gold); }
+}
+
+.nudge.hidden { display: none; }
+
+.nudge-icon { font-size: 22px; flex-shrink: 0; }
+
+.nudge-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.nudge-highlight {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* ─── SAVINGS BAR ─── */
+.savings-bar-wrap {
+  margin-bottom: 20px;
+}
+
+.savings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.savings-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+}
+
+.savings-pct {
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--green);
+}
+
+.savings-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-input);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.savings-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green) 0%, var(--gold) 100%);
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── ANNUAL PROJECTION ─── */
+.annual {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.annual-left {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.4;
+}
+
+.annual-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--green);
+  white-space: nowrap;
+}
+
+/* ─── TRANSPORT (EUR) ─── */
+.transport-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+  display: none;
+}
+
+.transport-section.visible { display: block; }
+
+.transport-title {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.transport-select {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 12px;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239B8FB0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+}
+
+.transport-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.transport-stat {
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+}
+
+.transport-stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.transport-stat-val {
+  font-family: 'DM Mono', monospace;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ─── CTA ─── */
+.cta-section {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--gold);
+  color: var(--purple-deep);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 36px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.25s;
+  text-decoration: none;
+  box-shadow: 0 4px 20px rgba(255,193,87,0.3);
+}
+
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255,193,87,0.4);
+}
+
+.cta-secondary {
+  display: block;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.cta-secondary a {
+  color: var(--purple-light);
+  text-decoration: none;
+}
+.cta-secondary a:hover { text-decoration: underline; }
+
+.cta-sub {
+  margin-top: 10px;
+  font-size: 12px;
+  color: var(--green);
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+/* ─── FOOTER ─── */
+.calc-footer {
+  text-align: center;
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-contact {
+  font-size: 14px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.footer-name { font-weight: 600; color: var(--text); }
+
+.footer-company {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
+.footer-note {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.calc-header { animation: fadeUp 0.5s ease-out; }
+.product-tabs { animation: fadeUp 0.5s ease-out 0.05s both; }
+.qty-section { animation: fadeUp 0.5s ease-out 0.1s both; }
+.price-hero { animation: fadeUp 0.5s ease-out 0.15s both; }
+.tiers-grid { animation: fadeUp 0.5s ease-out 0.2s both; }
+
+/* ─── PRINT ─── */
+@media print {
+  body { background: #fff; color: #111; }
+  .calc-wrap { padding: 0; }
+  .qty-slider-wrap, .lang-toggle, .cta-section, .nudge { display: none; }
+  .tier-card, .price-hero, .qty-section, .stat-box, .annual, .transport-section {
+    border-color: #ddd;
+    background: #fff;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="calc-wrap">
+
+  <!-- HEADER -->
+  <div class="calc-header">
+    <div class="brand">ArtNapi</div>
+    <h1 class="calc-title" id="calcTitle">Kalkulator cen hurtowych</h1>
+    <p class="calc-subtitle" id="calcSubtitle">Wybierz produkt i ilość — zobacz ile oszczędzasz</p>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="pl" onclick="setLang('pl')">
+        <span class="lang-flag">🇵🇱</span> PLN
+      </button>
+      <button class="lang-btn" data-lang="eur" onclick="setLang('eur')">
+        <span class="lang-flag">🇪🇺</span> EUR
+      </button>
+    </div>
+  </div>
+
+  <!-- PRODUCT TABS -->
+  <div class="product-tabs" id="productTabs"></div>
+
+  <!-- PRODUCT SPEC -->
+  <div class="product-spec" id="productSpec">Bawełna 280g · krosna sosnowe · potrójny grunt</div>
+
+  <!-- DELIVERY BANNER -->
+  <div class="delivery-banner" id="deliveryBanner">
+    <span>✓</span> Darmowa dostawa w całej Polsce
+  </div>
+
+  <!-- QUANTITY INPUT -->
+  <div class="qty-section">
+    <div class="qty-label" id="qtyLabel">Ilość zamówienia</div>
+    <div class="qty-input-row">
+      <input type="number" class="qty-number" id="qtyInput" value="360" min="1">
+      <span class="qty-unit" id="qtyUnit">szt.</span>
+    </div>
+    <div class="qty-slider-wrap">
+      <input type="range" class="qty-slider" id="qtySlider" min="120" max="1300" value="360" step="10">
+      <div class="tier-marks" id="tierMarks"></div>
+    </div>
+  </div>
+
+  <!-- PRICE HERO -->
+  <div class="price-hero">
+    <div class="price-market" id="marketRow">
+      <span id="marketLabel">Średnia rynkowa:</span>
+      <span class="price-market-val" id="marketPrice">11,00 PLN</span>
+      <span class="price-market-label" id="marketBadge">−18% taniej</span>
+    </div>
+    <div class="price-row">
+      <span class="price-main" id="priceMain">9,00</span>
+      <span class="price-currency" id="priceCurrency">PLN</span>
+      <span class="price-unit" id="priceUnitLabel">/ szt. netto</span>
+    </div>
+    <div class="price-stats">
+      <div class="stat-box">
+        <div class="stat-label" id="totalLabel">Wartość zamówienia</div>
+        <div class="stat-value gold" id="totalValue">3 240 PLN</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label" id="savingsLabel">Oszczędzasz</div>
+        <div class="stat-value green" id="savingsValue">468 PLN</div>
+        <div class="stat-sub" id="savingsSub">vs cena kartonowa</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAVINGS BAR -->
+  <div class="savings-bar-wrap" id="savingsBarWrap">
+    <div class="savings-header">
+      <span class="savings-label" id="savingsBarLabel">Oszczędność vs rynek</span>
+      <span class="savings-pct" id="savingsPct">−18%</span>
+    </div>
+    <div class="savings-track">
+      <div class="savings-fill" id="savingsFill" style="width: 36%"></div>
+    </div>
+  </div>
+
+  <!-- TIER CARDS -->
+  <div class="tiers-grid" id="tiersGrid"></div>
+
+  <!-- NUDGE -->
+  <div class="nudge hidden" id="nudge">
+    <span class="nudge-icon">💡</span>
+    <span class="nudge-text" id="nudgeText"></span>
+  </div>
+
+  <!-- ANNUAL PROJECTION -->
+  <div class="annual">
+    <div class="annual-left" id="annualText">
+      Przy zamówieniach<br><strong>co miesiąc</strong> oszczędzasz rocznie:
+    </div>
+    <div class="annual-val" id="annualVal">5 616 PLN</div>
+  </div>
+
+  <!-- TRANSPORT (EUR ONLY) -->
+  <div class="transport-section" id="transportSection">
+    <div class="transport-title" id="transportTitle">Transport to your city</div>
+    <select class="transport-select" id="transportCity" onchange="updateCalc()">
+      <option value="">— Select destination —</option>
+      <option value="prague">Prague (CZ) — cheapest route</option>
+      <option value="budapest">Budapest (HU)</option>
+      <option value="bratislava">Bratislava (SK)</option>
+      <option value="vilnius">Vilnius (LT)</option>
+      <option value="kaunas">Kaunas (LT)</option>
+      <option value="riga">Riga (LV)</option>
+      <option value="tallinn">Tallinn (EE)</option>
+      <option value="bucharest">Bucharest (RO)</option>
+    </select>
+    <div class="transport-info" id="transportInfo" style="display:none;">
+      <div class="transport-stat">
+        <div class="transport-stat-label">Transport cost</div>
+        <div class="transport-stat-val" id="transportCost">€100</div>
+      </div>
+      <div class="transport-stat">
+        <div class="transport-stat-label">Per piece (incl. transport)</div>
+        <div class="transport-stat-val" id="transportPerPc">€8.74</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a class="cta-btn" id="ctaBtn" href="#">
+      <span id="ctaIcon">📦</span>
+      <span id="ctaText">Wyślij zapytanie ofertowe</span>
+    </a>
+    <div class="cta-sub" id="ctaSub">Odpowiadamy w 2h · darmowe próbki na start</div>
+    <div class="cta-secondary">
+      <span id="ctaContact">Mateusz Sokólski — </span>
+      <a href="tel:+48534852707">+48 534 852 707</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="calc-footer">
+    <div class="footer-contact">
+      <span class="footer-name">Mateusz Sokólski</span> · Manager ds. rozwoju sprzedaży · ArtNapi
+    </div>
+    <div class="footer-company" id="footerCompany">
+      NAPI Sp. z o.o. · ul. Sąsiedzka 3 / D11-D12, 05-806 Sokołów · NIP: 5342622747
+    </div>
+    <div class="footer-note" id="footerNote">
+      Ceny netto, nie stanowią oferty handlowej w rozumieniu art. 66 §1 KC.
+      Darmowa dostawa w całej Polsce.
+      Dane konkurencji: ceny publiczne artmaker.pl, Phoenix Art, Koh-i-noor (marzec 2026).
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+
+const DATA = {
+  pl: {
+    currency: 'PLN',
+    unit: 'szt.',
+    products: [
+      {
+        id: 'canvas-40x50',
+        name: 'Podobrazia 40×50',
+        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
+        palletQty: 360,
+        cartonQty: 120,
+        marketPrice: 11.00,
+        tiers: [
+          { name: 'Kartony', min: 120, max: 359, price: 10.30, discount: 0 },
+          { name: '1 Paleta', min: 360, max: 719, price: 9.00, discount: 13 },
+          { name: '2 Palety', min: 720, max: 1079, price: 8.15, discount: 21 },
+          { name: '3 Palety', min: 1080, max: 99999, price: 7.30, discount: 29 },
+        ]
+      },
+      {
+        id: 'canvas-30x40',
+        name: 'Podobrazia 30×40',
+        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
+        palletQty: 480,
+        cartonQty: 120,
+        marketPrice: null,
+        tiers: [
+          { name: 'Kartony', min: 120, max: 479, price: 7.46, discount: 0 },
+          { name: '1 Paleta', min: 480, max: 959, price: 6.75, discount: 10 },
+          { name: '2 Palety', min: 960, max: 1439, price: 6.11, discount: 18 },
+          { name: '3 Palety', min: 1440, max: 99999, price: 5.00, discount: 33 },
+        ]
+      },
+      {
+        id: 'canvas-20x30',
+        name: 'Podobrazia 20×30',
+        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
+        palletQty: 720,
+        cartonQty: 120,
+        marketPrice: null,
+        tiers: [
+          { name: 'Kartony', min: 120, max: 719, price: 6.70, discount: 0 },
+          { name: '1 Paleta', min: 720, max: 1439, price: 5.49, discount: 18 },
+          { name: '2 Palety', min: 1440, max: 2159, price: 4.54, discount: 32 },
+          { name: '3 Palety', min: 2160, max: 99999, price: 3.68, discount: 45 },
+        ]
+      },
+      {
+        id: 'canvas-20x20',
+        name: 'Podobrazia 20×20',
+        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
+        palletQty: 1200,
+        cartonQty: 120,
+        marketPrice: null,
+        tiers: [
+          { name: 'Kartony', min: 120, max: 1199, price: 5.96, discount: 0 },
+          { name: '1 Paleta', min: 1200, max: 2399, price: 4.75, discount: 20 },
+          { name: '2 Palety', min: 2400, max: 3599, price: 3.80, discount: 36 },
+          { name: '3 Palety', min: 3600, max: 99999, price: 2.94, discount: 51 },
+        ]
+      },
+      {
+        id: 'panel-30x40',
+        name: 'Panel 30×40 (8 szt)',
+        spec: 'Deska 3mm · zestaw 8 paneli · gotowe do malowania',
+        palletQty: 300,
+        cartonQty: 18,
+        marketPrice: null,
+        isSet: true,
+        setUnit: 'zest.',
+        tiers: [
+          { name: 'Kartony', min: 18, max: 299, price: 24.27, discount: 0 },
+          { name: '1 Paleta', min: 300, max: 599, price: 23.33, discount: 4 },
+          { name: '2 Palety', min: 600, max: 1199, price: 20.41, discount: 16 },
+          { name: '3 Palety', min: 1200, max: 99999, price: 19.27, discount: 21 },
+        ]
+      },
+      {
+        id: 'panel-40x50',
+        name: 'Panel 40×50 (3 szt)',
+        spec: 'Deska 3mm · zestaw 3 paneli · gotowe do malowania',
+        palletQty: 336,
+        cartonQty: 18,
+        marketPrice: null,
+        isSet: true,
+        setUnit: 'szt.',
+        tiers: [
+          { name: 'Kartony', min: 18, max: 335, price: 7.88, discount: 0 },
+          { name: '1 Paleta', min: 336, max: 671, price: 6.84, discount: 13 },
+          { name: '2 Palety', min: 672, max: 1007, price: 6.24, discount: 21 },
+          { name: '3 Palety', min: 1008, max: 99999, price: 5.10, discount: 35 },
+        ]
+      },
+      {
+        id: 'pbn-frame',
+        name: 'PBN 40×50 (rama)',
+        spec: 'Malowanie po numerach · płótno + farby + pędzle · na ramie',
+        palletQty: 180,
+        cartonQty: 30,
+        marketPrice: null,
+        tiers: [
+          { name: 'Kartony', min: 30, max: 179, price: 25.37, discount: 0 },
+          { name: '1 Paleta', min: 180, max: 359, price: 22.37, discount: 12 },
+          { name: '2 Palety', min: 360, max: 539, price: 20.40, discount: 20 },
+          { name: '3 Palety', min: 540, max: 99999, price: 17.37, discount: 32 },
+        ]
+      },
+      {
+        id: 'pbn-noframe',
+        name: 'PBN 40×50 (bez ramy)',
+        spec: 'Malowanie po numerach · płótno + farby + pędzle · bez ramy',
+        palletQty: 450,
+        cartonQty: 75,
+        marketPrice: null,
+        tiers: [
+          { name: 'Kartony', min: 75, max: 449, price: 20.72, discount: 0 },
+          { name: '1 Paleta', min: 450, max: 899, price: 17.72, discount: 14 },
+          { name: '2 Palety', min: 900, max: 1349, price: 15.75, discount: 24 },
+          { name: '3 Palety', min: 1350, max: 99999, price: 12.72, discount: 39 },
+        ]
+      },
+      {
+        id: 'diamond',
+        name: 'Haft diamentowy',
+        spec: 'Zestaw haft diamentowy · pełen komplet materiałów',
+        palletQty: 1200,
+        cartonQty: 120,
+        marketPrice: null,
+        tiers: [
+          { name: 'Kartony', min: 120, max: 1199, price: 20.46, discount: 0 },
+          { name: '1 Paleta', min: 1200, max: 2399, price: 17.46, discount: 15 },
+          { name: '2 Palety', min: 2400, max: 3599, price: 15.49, discount: 24 },
+          { name: '3 Palety', min: 3600, max: 99999, price: 12.46, discount: 39 },
+        ]
+      }
+    ]
+  },
+  eur: {
+    currency: 'EUR',
+    unit: 'pcs',
+    products: [
+      {
+        // PLN from Excel "EUR 40x50" sheet ÷ 4.3 (safe rate)
+        // PLN source: 10.05 / 8.82 / 8.11 / 7.05
+        id: 'canvas-40x50-eur',
+        name: '40×50 cm Canvas',
+        spec: 'Cotton 280g · pine stretcher bars · triple primed',
+        palletQty: 360,
+        cartonQty: 120,
+        marketPrice: null,
+        tiers: [
+          { name: 'Cartons', min: 120, max: 359, price: 2.34, discount: 0 },
+          { name: '1 Pallet', min: 360, max: 719, price: 2.05, discount: 12 },
+          { name: '2 Pallets', min: 720, max: 1079, price: 1.89, discount: 19 },
+          { name: '3+ Pallets', min: 1080, max: 99999, price: 1.64, discount: 30 },
+        ]
+      },
+      {
+        // PLN from Excel "EUR 30x40" sheet ÷ 4.3 (safe rate)
+        // PLN source: 7.63 / 6.94 / 6.28 / 5.14
+        id: 'canvas-30x40-eur',
+        name: '30×40 cm Canvas',
+        spec: 'Cotton 280g · pine stretcher bars · triple primed',
+        palletQty: 480,
+        cartonQty: 120,
+        marketPrice: null,
+        tiers: [
+          { name: 'Cartons', min: 120, max: 479, price: 1.77, discount: 0 },
+          { name: '1 Pallet', min: 480, max: 959, price: 1.61, discount: 9 },
+          { name: '2 Pallets', min: 960, max: 1439, price: 1.46, discount: 18 },
+          { name: '3+ Pallets', min: 1440, max: 99999, price: 1.20, discount: 33 },
+        ]
+      }
+    ],
+    transport: {
+      prague:     { name: 'Prague (CZ)',     pallet: 100,   carton: 49.88  },
+      budapest:   { name: 'Budapest (HU)',   pallet: 131,   carton: 54.00  },
+      bratislava: { name: 'Bratislava (SK)', pallet: 151,   carton: 53.63  },
+      vilnius:    { name: 'Vilnius (LT)',    pallet: 103,   carton: 46.78  },
+      kaunas:     { name: 'Kaunas (LT)',     pallet: 116,   carton: null   },
+      riga:       { name: 'Riga (LV)',       pallet: 120,   carton: 47.84  },
+      tallinn:    { name: 'Tallinn (EE)',    pallet: 141,   carton: 51.90  },
+      bucharest:  { name: 'Bucharest (RO)',  pallet: 187,   carton: 100.15 },
+    }
+  }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+
+let lang = 'pl';
+let selectedProduct = 0;
+let qty = 360;
+
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
+
+function fmt(num, decimals = 2) {
+  if (lang === 'pl') return num.toFixed(decimals).replace('.', ',');
+  return num.toFixed(decimals);
+}
+
+function fmtInt(num) {
+  if (lang === 'pl') return num.toLocaleString('pl-PL');
+  return num.toLocaleString('en-US');
+}
+
+function fmtMoney(num) {
+  const cur = lang === 'pl' ? 'PLN' : '€';
+  const val = fmt(num, num >= 100 ? 0 : 2);
+  return lang === 'pl' ? `${val} PLN` : `€${val}`;
+}
+
+function getProducts() {
+  return DATA[lang].products;
+}
+
+function getProduct() {
+  return getProducts()[selectedProduct];
+}
+
+function getTier(product, quantity) {
+  for (let i = product.tiers.length - 1; i >= 0; i--) {
+    if (quantity >= product.tiers[i].min) return i;
+  }
+  return 0;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════════════
+
+function renderTabs() {
+  const tabs = document.getElementById('productTabs');
+  tabs.innerHTML = '';
+  getProducts().forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'product-tab' + (i === selectedProduct ? ' active' : '');
+    btn.textContent = p.name;
+    btn.onclick = () => { selectedProduct = i; initProduct(); };
+    tabs.appendChild(btn);
+  });
+}
+
+function initProduct() {
+  const p = getProduct();
+  const minQty = p.tiers[0].min;
+  const maxQty = Math.ceil(p.tiers[3].min * 1.25);
+
+  const slider = document.getElementById('qtySlider');
+  slider.min = minQty;
+  slider.max = maxQty;
+  slider.step = p.cartonQty >= 100 ? 10 : (p.cartonQty >= 30 ? 5 : 1);
+
+  if (qty < minQty) qty = minQty;
+  if (qty > maxQty) qty = p.tiers[3].min;
+
+  document.getElementById('qtyInput').value = qty;
+  document.getElementById('qtyInput').min = minQty;
+  slider.value = qty;
+
+  const unitText = p.isSet ? (p.setUnit || 'zest.') : DATA[lang].unit;
+  document.getElementById('qtyUnit').textContent = unitText;
+
+  // Product spec
+  document.getElementById('productSpec').textContent = p.spec;
+
+  // Delivery banner
+  const banner = document.getElementById('deliveryBanner');
+  banner.textContent = lang === 'pl'
+    ? '✓ Darmowa dostawa w całej Polsce'
+    : '✓ Free delivery within Poland';
+  banner.classList.remove('hidden');
+
+  renderTabs();
+  renderTierMarks();
+  updateSliderFill();
+  updateCalc();
+}
+
+function renderTierMarks() {
+  const p = getProduct();
+  const marks = document.getElementById('tierMarks');
+  marks.innerHTML = '';
+  p.tiers.forEach((t, i) => {
+    const mark = document.createElement('span');
+    mark.className = 'tier-mark' + (getTier(p, qty) === i ? ' active' : '');
+    mark.textContent = t.min >= 1000 ? (t.min / 1000) + 'k' : t.min;
+    mark.onclick = () => {
+      qty = t.min;
+      document.getElementById('qtyInput').value = qty;
+      document.getElementById('qtySlider').value = qty;
+      updateCalc();
+    };
+    marks.appendChild(mark);
+  });
+}
+
+function renderTierCards() {
+  const p = getProduct();
+  const currentTier = getTier(p, qty);
+  const grid = document.getElementById('tiersGrid');
+  const cur = DATA[lang].currency;
+  grid.innerHTML = '';
+
+  const labels = lang === 'pl'
+    ? { popular: 'Najpopularniejszy', best: 'Najlepsza cena', free: '✓ Darmowa dostawa', freeShort: '✓ Free delivery' }
+    : { popular: 'Most popular', best: 'Best price', free: '✓ Free delivery', freeShort: '✓ Free delivery' };
+
+  p.tiers.forEach((t, i) => {
+    const card = document.createElement('div');
+    card.className = 'tier-card' + (i === currentTier ? ' active' : '') + (i === 3 ? ' best' : '');
+    card.onclick = () => {
+      qty = t.min;
+      document.getElementById('qtyInput').value = qty;
+      document.getElementById('qtySlider').value = Math.min(qty, parseInt(document.getElementById('qtySlider').max));
+      updateCalc();
+    };
+
+    let badge = '';
+    if (i === 1) badge = `<div class="tier-badge popular">${labels.popular}</div>`;
+    if (i === 3) badge = `<div class="tier-badge best-price">${labels.best}</div>`;
+
+    const delivery = `<div class="tier-delivery">${labels.free}</div>`;
+
+    const discountText = t.discount > 0
+      ? `<div class="tier-discount">−${t.discount}%</div>`
+      : `<div class="tier-discount none">—</div>`;
+
+    card.innerHTML = `
+      ${badge}
+      <div class="tier-name">${t.name}</div>
+      <div class="tier-price">${fmt(t.price)} ${cur === 'EUR' ? '€' : ''}</div>
+      ${discountText}
+      <div class="tier-qty">${lang === 'pl' ? 'od' : 'from'} ${fmtInt(t.min)} ${p.isSet ? (p.setUnit || 'zest.') : DATA[lang].unit}</div>
+      ${delivery}
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function updateCalc() {
+  const p = getProduct();
+  const tierIdx = getTier(p, qty);
+  const tier = p.tiers[tierIdx];
+  const basePrice = p.tiers[0].price;
+  const cur = DATA[lang].currency;
+
+  // Price display
+  document.getElementById('priceMain').textContent = fmt(tier.price);
+  document.getElementById('priceCurrency').textContent = cur === 'EUR' ? '€' : 'PLN';
+  document.getElementById('priceUnitLabel').textContent =
+    `/ ${p.isSet ? (p.setUnit || 'zest.') : DATA[lang].unit} netto`;
+
+  // Market price (only for 40x50 PL)
+  const marketRow = document.getElementById('marketRow');
+  if (p.marketPrice && tier.price < p.marketPrice) {
+    marketRow.style.display = 'flex';
+    const mktSaving = Math.round((1 - tier.price / p.marketPrice) * 100);
+    document.getElementById('marketPrice').textContent = fmt(p.marketPrice) + ' PLN';
+    document.getElementById('marketBadge').textContent = `−${mktSaving}% ${lang === 'pl' ? 'taniej' : 'cheaper'}`;
+    document.getElementById('marketLabel').textContent =
+      lang === 'pl' ? 'Średnia rynkowa:' : 'Market average:';
+  } else {
+    marketRow.style.display = 'none';
+  }
+
+  // Total & savings
+  const total = qty * tier.price;
+  const baseCost = qty * basePrice;
+  const savings = baseCost - total;
+
+  document.getElementById('totalValue').textContent = fmtMoney(total);
+  document.getElementById('savingsValue').textContent = savings > 0 ? fmtMoney(savings) : '—';
+  document.getElementById('savingsSub').textContent =
+    savings > 0
+      ? (lang === 'pl' ? 'vs cena kartonowa' : 'vs carton price')
+      : (lang === 'pl' ? 'zamów więcej i oszczędź' : 'order more to save');
+
+  document.getElementById('totalLabel').textContent =
+    lang === 'pl' ? 'Wartość zamówienia' : 'Order value';
+  document.getElementById('savingsLabel').textContent =
+    lang === 'pl' ? 'Oszczędzasz' : 'You save';
+
+  // Savings bar
+  let savingsPct = 0;
+  if (p.marketPrice) {
+    savingsPct = Math.round((1 - tier.price / p.marketPrice) * 100);
+    document.getElementById('savingsBarLabel').textContent =
+      lang === 'pl' ? 'Oszczędność vs rynek' : 'Savings vs market';
+  } else {
+    savingsPct = tier.discount;
+    document.getElementById('savingsBarLabel').textContent =
+      lang === 'pl' ? 'Oszczędność vs kartony' : 'Savings vs cartons';
+  }
+  document.getElementById('savingsPct').textContent = savingsPct > 0 ? `−${savingsPct}%` : '0%';
+  document.getElementById('savingsFill').style.width = Math.min(savingsPct * 2, 100) + '%';
+
+  // Nudge
+  const nudgeEl = document.getElementById('nudge');
+  if (tierIdx < 3) {
+    const nextTier = p.tiers[tierIdx + 1];
+    const gap = nextTier.min - qty;
+    if (gap > 0 && gap <= nextTier.min * 0.5) {
+      nudgeEl.classList.remove('hidden');
+      const extraSaving = qty * (tier.price - nextTier.price);
+      document.getElementById('nudgeQty').textContent = fmtInt(gap);
+      document.getElementById('nudgeSave').textContent = fmtMoney(extraSaving);
+      document.getElementById('nudge').querySelector('.nudge-text').innerHTML = lang === 'pl'
+        ? `Dorzuć jeszcze <span class="nudge-highlight">${fmtInt(gap)}</span> ${p.isSet ? (p.setUnit || 'zest.') : 'szt.'} i oszczędź dodatkowe <span class="nudge-highlight">${fmtMoney(extraSaving)}</span> na zamówieniu`
+        : `Add just <span class="nudge-highlight">${fmtInt(gap)}</span> more ${p.isSet ? 'sets' : 'pcs'} and save an extra <span class="nudge-highlight">${fmtMoney(extraSaving)}</span> per order`;
+    } else {
+      nudgeEl.classList.add('hidden');
+    }
+  } else {
+    nudgeEl.classList.add('hidden');
+  }
+
+  // Annual projection
+  const annualSavings = savings * 12;
+  document.getElementById('annualVal').textContent = annualSavings > 0 ? fmtMoney(annualSavings) : '—';
+  document.querySelector('.annual').style.opacity = annualSavings > 0 ? '1' : '0.4';
+  document.getElementById('annualText').innerHTML = lang === 'pl'
+    ? 'Przy zamówieniach<br><strong>co miesiąc</strong> oszczędzasz rocznie:'
+    : 'With <strong>monthly</strong> orders<br>your annual savings:';
+
+  // Transport (EUR)
+  const transportSection = document.getElementById('transportSection');
+  if (lang === 'eur') {
+    transportSection.classList.add('visible');
+    const cityKey = document.getElementById('transportCity').value;
+    const transportInfo = document.getElementById('transportInfo');
+    if (cityKey && DATA.eur.transport[cityKey]) {
+      const t = DATA.eur.transport[cityKey];
+      const isPallet = tierIdx >= 1;
+      const cost = isPallet ? t.pallet : (t.carton || t.pallet);
+      const perPc = tier.price + (cost / qty);
+      transportInfo.style.display = 'grid';
+      document.getElementById('transportCost').textContent = `€${cost}`;
+      document.getElementById('transportPerPc').textContent = `€${perPc.toFixed(2)}`;
+      document.getElementById('transportPerPc').parentElement.querySelector('.transport-stat-label').textContent =
+        'All-in per piece';
+    } else {
+      transportInfo.style.display = 'none';
+    }
+  } else {
+    transportSection.classList.remove('visible');
+  }
+
+  // Tier cards & marks
+  renderTierCards();
+  renderTierMarks();
+
+  // CTA
+  const subject = lang === 'pl'
+    ? `Zapytanie: ${p.name} — ${fmtInt(qty)} ${p.isSet ? (p.setUnit || 'zest.') : 'szt.'}`
+    : `Inquiry: ${p.name} — ${fmtInt(qty)} pcs`;
+  const body = lang === 'pl'
+    ? `Dzień dobry,\n\nChciałbym zapytać o:\n\nProdukt: ${p.name}\nIlość: ${fmtInt(qty)} ${p.isSet ? (p.setUnit || 'zest.') : 'szt.'}\nCena z kalkulatora: ${fmt(tier.price)} ${cur}/szt. netto\n\nProszę o potwierdzenie ceny i dostępności.\n\nPozdrawiam`
+    : `Hello,\n\nI'd like to inquire about:\n\nProduct: ${p.name}\nQuantity: ${fmtInt(qty)} pcs\nCalculator price: €${fmt(tier.price)}/pc net\n\nPlease confirm availability and pricing.\n\nBest regards`;
+
+  document.getElementById('ctaBtn').href =
+    `mailto:mateusz.sokolski@artnapi.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  document.getElementById('ctaText').textContent =
+    lang === 'pl' ? 'Wyślij zapytanie ofertowe' : 'Send inquiry';
+  document.getElementById('ctaSub').textContent =
+    lang === 'pl' ? 'Odpowiadamy w 2h · darmowe próbki na start' : 'We reply within 2h · free samples available';
+  document.getElementById('ctaIcon').textContent =
+    lang === 'pl' ? '📦' : '📧';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EVENTS
+// ═══════════════════════════════════════════════════════════════
+
+function updateSliderFill() {
+  const slider = document.getElementById('qtySlider');
+  const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+  slider.style.backgroundSize = pct + '% 100%';
+}
+
+document.getElementById('qtySlider').addEventListener('input', function() {
+  qty = parseInt(this.value);
+  document.getElementById('qtyInput').value = qty;
+  updateSliderFill();
+  updateCalc();
+});
+
+document.getElementById('qtyInput').addEventListener('input', function() {
+  const val = parseInt(this.value);
+  if (!isNaN(val) && val > 0) {
+    qty = val;
+    const slider = document.getElementById('qtySlider');
+    slider.value = Math.min(Math.max(val, parseInt(slider.min)), parseInt(slider.max));
+    updateCalc();
+  }
+});
+
+function setLang(newLang) {
+  lang = newLang;
+  selectedProduct = 0;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  document.getElementById('calcTitle').textContent =
+    lang === 'pl' ? 'Kalkulator cen hurtowych' : 'Wholesale price calculator';
+  document.getElementById('calcSubtitle').textContent =
+    lang === 'pl' ? 'Wybierz produkt i ilość — zobacz ile oszczędzasz' : 'Select product and quantity — see how much you save';
+  document.getElementById('qtyLabel').textContent =
+    lang === 'pl' ? 'Ilość zamówienia' : 'Order quantity';
+  document.getElementById('transportTitle').textContent =
+    lang === 'pl' ? 'Transport do Twojego miasta' : 'Transport to your city';
+  document.getElementById('footerNote').textContent = lang === 'pl'
+    ? 'Ceny netto, nie stanowią oferty handlowej w rozumieniu art. 66 §1 KC. Darmowa dostawa w całej Polsce. Dane konkurencji: ceny publiczne artmaker.pl, Phoenix Art, Koh-i-noor (marzec 2026).'
+    : 'Net prices, free delivery within Poland included. Transport to CEE — see table above. Prices valid as of March 2026.';
+  document.getElementById('footerCompany').textContent = lang === 'pl'
+    ? 'NAPI Sp. z o.o. · ul. Sąsiedzka 3 / D11-D12, 05-806 Sokołów · NIP: 5342622747'
+    : 'NAPI Sp. z o.o. · ul. Sąsiedzka 3 / D11-D12, 05-806 Sokołów, Poland · VAT: PL5342622747';
+
+  qty = getProduct().tiers[1].min;
+  initProduct();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+
+setLang('pl');
+</script>
+
+</body>
+</html>

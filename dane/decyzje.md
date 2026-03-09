@@ -37,6 +37,76 @@
 
 ## AKTYWNE DECYZJE
 
+### [SHARED] 09.03.2026 | FINANSE | UMOWA NAPI × CQRE v2 — 4 POPRAWKI WYSŁANE
+
+**KONTEKST:** Kamil Andrusz (CQRE) przysłał nowy draft umowy współpracy (Chatwoot+n8n+AI dla NAPI). @CEO review: umowa profesjonalna, ale 4 luki.
+
+**DECYZJA:** Wysłano 4 poprawki do Kamila:
+1. **Zakres prac (§2.3):** Dopisać konkretne zadania + cap godzin (np. 80h)
+2. **Gwarancja płatności (§4.5):** Termin graniczny 90 dni — po nim Kamil płaci z własnych
+3. **Kara poufność (§5.3):** Obniżyć z 20k do 50% wynagrodzenia
+4. **Zakaz przejmowania (§5a):** Zawęzić do Chatwoot/n8n/odpowiedników (nie "wszelkie usługi AI")
+
+**DLACZEGO:** Bez tych poprawek Mateusz ponosi ryzyko nieograniczonego scope, braku płatności i blokady usług AI dla własnej firmy przez 12 mies.
+
+**NASTĘPNY KROK:** Czekamy na odpowiedź Kamila. Jeśli OK → podpis. Jeśli nie → negocjuj dalej.
+
+---
+
+### [ARTNAPI] 09.03.2026 | OPERACJE | SAMOGRAJ — 4 DECYZJE ARCHITEKTONICZNE
+
+**KONTEKST:** Budowa systemu "samograj" — autonomicznej maszyny sprzedażowej ArtNapi opartej na AI (eating own dog food — System 10H). Architektura v1.1 z edge cases.
+
+**DECYZJE:**
+
+1. **D1 — MailerLite jako kanał repeat orders:** TAK. Nowe konto na @artnapi.pl (obecne jest pod System 10H). Free tier: 1000 subskrybentów, 12k maili/msc. Do: auto-remindery zamówień D+30, seasonal campaigns, nurturing. @cto buduje.
+2. **D2 — Tagi klienta w CRM Notion:** TAK. Nowe pole `tag_klienta` w Notion CRM (select: REPEAT, CHURN_RISK, ONE_TIME, SEASONAL, PAUSED). Sterują logiką auto-follow-upów i reminderów. @cto dodaje.
+3. **D3 — Auto @recon co 2 tygodnie:** TAK. Gemini DR + @recon batch. Koszt: ~$0 (Gemini free tier). Generuje nowe listy targetów automatycznie.
+4. **D4 — Adi Trade retention pitch:** TAK. @cso przygotuje "Plan B" pitch zanim ich kontener dotrze. Tag: CHURN_RISK.
+
+**DLACZEGO:** User ma ograniczony czas (nie 8h dziennie). System musi działać autonomicznie z minimalnymi interwencjami.
+
+**NASTĘPNE KROKI:**
+- @cto: Nowe konto MailerLite @artnapi.pl + pole `tag_klienta` w Notion CRM (W2)
+- @cto: Telegram reminder raportu tygodniowego — CZWARTEK (nie piątek)
+- @cso: Adi Trade retention pitch (przed spotkaniem z Piotrem)
+- @recon: Pierwszy batch auto-research (W3)
+
+---
+
+### [ARTNAPI] 09.03.2026 | OPERACJE | RAPORT TYGODNIOWY — DEADLINE CZWARTEK + TELEGRAM REMINDER
+
+**KONTEKST:** User nie chce pamiętać o raporcie tygodniowym. Ma bota Telegram (Ultron) z TELEGRAM_BOT_TOKEN. Chce automatyczny reminder.
+
+**DECYZJA:**
+1. **Deadline raportu:** CZWARTEK (zmiana z piątku).
+2. **Telegram reminder:** Bot Ultron wysyła reminder w czwartek rano (np. 8:30) z tekstem: "Raport tygodniowy — deadline dziś. Uruchom: `node automatyzacje/generate-weekly-report.js`"
+3. **Docelowo:** Auto-generowanie raportu + wysyłka na Telegram (bez interwencji usera).
+
+**DLACZEGO:** User jest ENTP-A — systemy muszą przypominać, nie user musi pamiętać.
+
+**NASTĘPNY KROK:** @cto ustawia cron + Telegram webhook na czwartek 8:30.
+
+---
+
+### [SYSTEM10H] 09.03.2026 | FINANSE + MARKETING | PODWYŻKA CENY: 2 599 → 2 999 PLN NETTO
+
+**KONTEKST:** Infografika porównawcza "Kurs AI vs Bliźniak" ujawniła problem pozycjonowania — produkt DFY (lepszy, szybszy, spersonalizowany) był TAŃSZY niż kurs DIY (~3 000 PLN). Podświadomy sygnał: tańszy = gorszy. 0/7 obiekcji cenowych w pipeline, Karolina Durmaj powiedziała wprost "cena nie wygórowana".
+
+**DECYZJA:**
+1. **Nowa cena:** 2 999 PLN netto (jednorazowo). Podwyżka +400 PLN (+15%).
+2. **Raty:** 2× 1 499,50 PLN.
+3. **Obowiązuje od:** 09.03.2026. Żaden lead nie był jeszcze na etapie negocjacji cenowej.
+4. **Zmienione pliki:** oferta.md, plan.md, persona.md, metryki.md, network-profil.yaml, 2 materiały, strona (index.html + solo_ua.html + blog).
+5. **DO ZROBIENIA (user):** Deploy strony, sprawdzić MailerLite, sprawdzić Self-Discovery/Architekt.
+6. **Pro tier:** Bez zmian (4 500-5 000 PLN, Faza 2).
+
+**DLACZEGO:** Premium DFY musi kosztować >= kurs DIY. Okrągła liczba. Zero obiekcji cenowych = margines. +15% przychodu per deal bez dodatkowej pracy.
+
+**NASTĘPNY KROK:** Deploy strony. Zaktualizowany post LI #2 z nową ceną + grafiką.
+
+---
+
 ### [ARTNAPI] 06.03.2026 | SPRZEDAZ + OPERACJE | COLD EMAIL — DWUETAPOWY MODEL (PKE COMPLIANCE)
 
 **KONTEKST:** Deep Research cold email best practices PL (Gemini 06.03). Nowa ustawa PKE Art. 398 (2024) zabrania wysylania ofert handlowych bez uprzedniej zgody — dotyczy tez B2B. Dotychczasowe cold maile ArtNapi (cennik + probki w 1. mailu) sa technicznie niezgodne z PKE.

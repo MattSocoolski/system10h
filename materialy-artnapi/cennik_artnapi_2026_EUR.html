@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B2B Price List — Artnapi 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple:        #653C91;
+    --purple-dark:   #553285;
+    --purple-light:  #f3eef8;
+    --gold:          #FFC157;
+    --gold-light:    #fff8e8;
+    --green:         #27ae60;
+    --green-light:   #eaf7ed;
+    --gray:          #f7f7f8;
+    --gray-text:     #888;
+    --text:          #2d2d2d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lexend', sans-serif;
+    color: var(--text);
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+    color: #fff;
+    padding: 40px 40px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .header .brand {
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .header .tagline {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 90%;
+    line-height: 1.4;
+  }
+
+  /* PRODUCT SECTION */
+  .product-section {
+    padding: 32px 24px 8px;
+  }
+  .product-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 4px;
+  }
+  .product-subtitle {
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 4px;
+  }
+  .product-pallet-info {
+    font-size: 12px;
+    color: var(--gray-text);
+    margin-bottom: 20px;
+  }
+
+  /* TIER GRID */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  /* TIER CARD */
+  .tier {
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+  }
+  .tier:hover {
+    transform: translateY(-2px);
+  }
+
+  .tier-name {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .tier-qty {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .tier-price {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .tier-currency {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-text);
+    margin-bottom: 10px;
+  }
+  .tier-save {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+
+  /* TIER VARIANTS */
+  .tier.basic {
+    background: var(--gray);
+    border-color: #e8e8e8;
+  }
+  .tier.basic .tier-name { color: var(--gray-text); }
+  .tier.basic .tier-price { color: var(--text); }
+  .tier.basic .tier-save { display: none; }
+
+  .tier.pal1 {
+    background: var(--purple-light);
+    border-color: #e4d5f0;
+  }
+  .tier.pal1 .tier-name { color: var(--purple); }
+  .tier.pal1 .tier-price { color: var(--purple-dark); }
+  .tier.pal1 .tier-save {
+    background: #e4d5f0;
+    color: var(--purple);
+  }
+
+  .tier.pal2 {
+    background: linear-gradient(180deg, #f3eef8 0%, #e9ddf4 100%);
+    border-color: var(--purple);
+  }
+  .tier.pal2 .tier-name { color: var(--purple-dark); }
+  .tier.pal2 .tier-price { color: var(--purple-dark); }
+  .tier.pal2 .tier-save {
+    background: var(--purple);
+    color: #fff;
+  }
+
+  .tier.best {
+    background: linear-gradient(180deg, var(--gold-light) 0%, #ffecbf 100%);
+    border-color: var(--gold);
+    box-shadow: 0 4px 20px rgba(255,193,87,0.3);
+  }
+  .tier.best .tier-name { color: #b8860b; }
+  .tier.best .tier-price { color: #8b6914; }
+  .tier.best .tier-save {
+    background: var(--gold);
+    color: #5a4210;
+    font-weight: 600;
+  }
+
+  /* BEST PRICE BADGE */
+  .best-badge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: #5a4210;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 0 24px;
+  }
+
+  /* TRANSPORT SECTION */
+  .transport-section {
+    padding: 32px 24px 8px;
+  }
+  .transport-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 4px;
+  }
+  .transport-subtitle {
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 20px;
+  }
+  .transport-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 24px;
+  }
+  .transport-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .transport-table thead th {
+    background: #edeaf0;
+    color: var(--purple-dark);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid #d9d1e2;
+  }
+  .transport-table thead th:not(:first-child) {
+    text-align: right;
+  }
+  .transport-table tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .transport-table tbody td:not(:first-child) {
+    text-align: right;
+    font-weight: 500;
+  }
+  .transport-table tbody tr:nth-child(even) {
+    background: var(--gray);
+  }
+  .transport-table tbody tr:hover {
+    background: var(--purple-light);
+  }
+  .transport-table .na {
+    color: var(--gray-text);
+    font-weight: 400;
+  }
+
+  /* FOOTER */
+  .footer-benefits {
+    margin: 20px 24px;
+    padding: 20px 24px;
+    background: var(--green-light);
+    border-radius: 12px;
+    border-left: 4px solid var(--green);
+  }
+  .footer-benefits p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .footer-benefits strong {
+    color: var(--green);
+  }
+
+  .footer-note {
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 12px;
+    color: var(--gray-text);
+  }
+
+  .footer-contact {
+    background: var(--gray);
+    padding: 24px;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
+  .footer-contact .name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 2px;
+  }
+  .footer-contact .role {
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 8px;
+  }
+  .footer-contact .details {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .footer-contact .company {
+    font-size: 12px;
+    color: var(--gray-text);
+    margin-top: 8px;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .tiers {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .header { padding: 28px 20px 24px; }
+    .header h1 { font-size: 22px; }
+    .product-section { padding: 24px 16px 8px; }
+    .transport-section { padding: 24px 16px 8px; }
+    .tier-price { font-size: 24px; }
+    .divider { margin: 0 16px; }
+    .footer-benefits { margin: 16px; }
+    .transport-table { font-size: 13px; }
+    .transport-table thead th,
+    .transport-table tbody td { padding: 8px 12px; }
+  }
+
+  @media print {
+    body { max-width: 100%; }
+    .tier:hover { transform: none; }
+    .transport-table tbody tr:hover { background: inherit; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="brand">Artnapi</div>
+  <h1>B2B Price List 2026</h1>
+  <div class="tagline">One price &mdash; delivery included within Poland. Transport to CEE &mdash; see table below.</div>
+</div>
+
+<!-- ===== STRETCHED CANVASES 40x50 ===== -->
+<div class="product-section">
+  <div class="product-title">Stretched Canvases 40&times;50 cm</div>
+  <div class="product-subtitle">Adr&eacute; Art&oacute; &mdash; cotton 280g, pine stretcher bars, triple-primed</div>
+  <div class="product-pallet-info">Pallet = 360 pcs &nbsp;|&nbsp; Carton = 40 pcs</div>
+
+  <div class="tiers">
+
+    <div class="tier basic">
+      <div class="tier-name">Cartons</div>
+      <div class="tier-qty">1&ndash;359 pcs</div>
+      <div class="tier-price">&euro;9.77</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save"></div>
+    </div>
+
+    <div class="tier pal1">
+      <div class="tier-name">1 Pallet</div>
+      <div class="tier-qty">360 pcs</div>
+      <div class="tier-price">&euro;8.46</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save">&minus;13%</div>
+    </div>
+
+    <div class="tier pal2">
+      <div class="tier-name">2 Pallets</div>
+      <div class="tier-qty">720 pcs</div>
+      <div class="tier-price">&euro;7.61</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save">&minus;22%</div>
+    </div>
+
+    <div class="tier best">
+      <div class="best-badge">Best Price</div>
+      <div class="tier-name">3+ Pallets</div>
+      <div class="tier-qty">1,080+ pcs</div>
+      <div class="tier-price">&euro;7.30</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save">&minus;25%</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== STRETCHED CANVASES 30x40 ===== -->
+<div class="product-section">
+  <div class="product-title">Stretched Canvases 30&times;40 cm</div>
+  <div class="product-subtitle">Adr&eacute; Art&oacute; &mdash; cotton 280g, pine stretcher bars, triple-primed</div>
+  <div class="product-pallet-info">Pallet = 480 pcs &nbsp;|&nbsp; Carton = 40 pcs</div>
+
+  <div class="tiers">
+
+    <div class="tier basic">
+      <div class="tier-name">Cartons</div>
+      <div class="tier-qty">1&ndash;479 pcs</div>
+      <div class="tier-price">&euro;7.05</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save"></div>
+    </div>
+
+    <div class="tier pal1">
+      <div class="tier-name">1 Pallet</div>
+      <div class="tier-qty">480 pcs</div>
+      <div class="tier-price">&euro;6.34</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save">&minus;10%</div>
+    </div>
+
+    <div class="tier pal2">
+      <div class="tier-name">2 Pallets</div>
+      <div class="tier-qty">960 pcs</div>
+      <div class="tier-price">&euro;5.70</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save">&minus;19%</div>
+    </div>
+
+    <div class="tier best">
+      <div class="best-badge">Best Price</div>
+      <div class="tier-name">3+ Pallets</div>
+      <div class="tier-qty">1,440+ pcs</div>
+      <div class="tier-price">&euro;4.56</div>
+      <div class="tier-currency">EUR net / pc</div>
+      <div class="tier-save">&minus;35%</div>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ===== TRANSPORT COSTS ===== -->
+<div class="transport-section">
+  <div class="transport-title">Transport Costs to CEE</div>
+  <div class="transport-subtitle">EUR net per shipment, ex-works Poland</div>
+
+  <div class="transport-table-wrap">
+    <table class="transport-table">
+      <thead>
+        <tr>
+          <th>Destination</th>
+          <th>Pallet</th>
+          <th>Carton</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Prague (CZ)</td>
+          <td>&euro;100</td>
+          <td>&euro;49.88</td>
+        </tr>
+        <tr>
+          <td>Budapest (HU)</td>
+          <td>&euro;131</td>
+          <td>&euro;54.00</td>
+        </tr>
+        <tr>
+          <td>Bratislava (SK)</td>
+          <td>&euro;151</td>
+          <td>&euro;53.63</td>
+        </tr>
+        <tr>
+          <td>Vilnius (LT)</td>
+          <td>&euro;103</td>
+          <td>&euro;46.78</td>
+        </tr>
+        <tr>
+          <td>Kaunas (LT)</td>
+          <td>&euro;116</td>
+          <td class="na">&mdash;</td>
+        </tr>
+        <tr>
+          <td>Riga (LV)</td>
+          <td>&euro;120</td>
+          <td>&euro;47.84</td>
+        </tr>
+        <tr>
+          <td>Tallinn (EE)</td>
+          <td>&euro;141</td>
+          <td>&euro;51.90</td>
+        </tr>
+        <tr>
+          <td>Bucharest (RO)</td>
+          <td>&euro;187</td>
+          <td>&euro;100.15</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<div class="footer-benefits">
+  <p>
+    <strong>Simple rule:</strong> order by pallet &mdash; get the best price and transparent pricing.
+    All prices EUR net, ex-works Poland. 10,000+ pcs in stock, dispatch within 24h, EU invoice, warranty.
+  </p>
+</div>
+
+<div class="footer-note">
+  Prices valid from March 2026. Transport quoted separately &mdash; see table above. This price list does not constitute a commercial offer.
+</div>
+
+<div class="footer-contact">
+  <div class="name">Mateusz Sok&oacute;lski</div>
+  <div class="role">Artnapi &mdash; Key Account Manager</div>
+  <div class="details">+48 534 852 707 &nbsp;|&nbsp; mateusz.sokolski@artnapi.pl</div>
+  <div class="company">Napi sp. z o.o. &middot; artnapi.pl &middot; S&#261;siedzka 3 D11-D12, 05-806 Sok&oacute;l&oacute;w</div>
+</div>
+
+</body>
+</html>

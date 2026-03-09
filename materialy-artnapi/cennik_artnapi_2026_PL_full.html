@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cennik B2B — Artnapi 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================
+     ARTNAPI CENNIK B2B — PEŁNA EDYCJA MARZEC 2026
+     Font: Lexend | Kolory: #653C91 purple, #FFC157 gold
+     Format: A4 print-ready (210mm x 297mm)
+     ============================================ */
+  :root {
+    --purple:        #653C91;
+    --purple-dark:   #553285;
+    --purple-light:  #f3eef8;
+    --gold:          #FFC157;
+    --gold-light:    #fff8e8;
+    --green:         #27ae60;
+    --green-light:   #eaf7ed;
+    --gray:          #f7f7f8;
+    --gray-text:     #888;
+    --text:          #2d2d2d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lexend', sans-serif;
+    color: var(--text);
+    background: #fff;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+    color: #fff;
+    padding: 40px 40px 32px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+  .header .brand {
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .header .tagline {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  /* NAGŁÓWEK KATEGORII */
+  .page-header {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+    color: #fff;
+    padding: 28px 32px 20px;
+  }
+  .page-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+  .page-header .page-desc {
+    font-size: 13px;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+
+  /* SEKCJA PRODUKTU */
+  .product-section {
+    padding: 28px 24px 8px;
+  }
+  .product-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 4px;
+  }
+  .product-subtitle {
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  /* GRID TIERÓW */
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  /* KARTA TIERU */
+  .tier {
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+    position: relative;
+    border: 2px solid transparent;
+    transition: transform 0.2s;
+  }
+  .tier:hover { transform: translateY(-2px); }
+
+  .tier-name {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+  }
+  .tier-qty {
+    font-size: 13px;
+    font-weight: 400;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+  .tier-price {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .tier-currency {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--gray-text);
+    margin-bottom: 10px;
+  }
+  .tier-save {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    border-radius: 100px;
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .tier-delivery {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--green);
+    margin-top: 4px;
+  }
+
+  /* TIER WARIANTY */
+  .tier.basic {
+    background: var(--gray);
+    border-color: #e8e8e8;
+  }
+  .tier.basic .tier-name { color: var(--gray-text); }
+  .tier.basic .tier-price { color: var(--text); }
+  .tier.basic .tier-save { display: none; }
+
+  .tier.pal1 {
+    background: var(--purple-light);
+    border-color: #e4d5f0;
+  }
+  .tier.pal1 .tier-name { color: var(--purple); }
+  .tier.pal1 .tier-price { color: var(--purple-dark); }
+  .tier.pal1 .tier-save {
+    background: #e4d5f0;
+    color: var(--purple);
+  }
+
+  .tier.pal2 {
+    background: linear-gradient(180deg, #f3eef8 0%, #e9ddf4 100%);
+    border-color: var(--purple);
+  }
+  .tier.pal2 .tier-name { color: var(--purple-dark); }
+  .tier.pal2 .tier-price { color: var(--purple-dark); }
+  .tier.pal2 .tier-save {
+    background: var(--purple);
+    color: #fff;
+  }
+
+  .tier.best {
+    background: linear-gradient(180deg, var(--gold-light) 0%, #ffecbf 100%);
+    border-color: var(--gold);
+    box-shadow: 0 4px 20px rgba(255,193,87,0.3);
+  }
+  .tier.best .tier-name { color: #b8860b; }
+  .tier.best .tier-price { color: #8b6914; }
+  .tier.best .tier-save {
+    background: var(--gold);
+    color: #5a4210;
+    font-weight: 600;
+  }
+
+  /* BADGE */
+  .best-badge {
+    position: absolute;
+    top: -11px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: #5a4210;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 14px;
+    border-radius: 100px;
+    white-space: nowrap;
+  }
+
+  /* SEPARATOR */
+  .divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 0 24px;
+  }
+
+  /* FOOTER */
+  .footer-benefits {
+    margin: 20px 24px;
+    padding: 20px 24px;
+    background: var(--green-light);
+    border-radius: 12px;
+    border-left: 4px solid var(--green);
+  }
+  .footer-benefits p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+  }
+  .footer-benefits strong { color: var(--green); }
+
+  .footer-note {
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 12px;
+    color: var(--gray-text);
+  }
+
+  .footer-contact {
+    background: var(--gray);
+    padding: 24px;
+    text-align: center;
+    border-top: 1px solid #eee;
+  }
+  .footer-contact .name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--purple);
+    margin-bottom: 2px;
+  }
+  .footer-contact .role {
+    font-size: 13px;
+    color: var(--gray-text);
+    margin-bottom: 8px;
+  }
+  .footer-contact .details {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* RESPONSYWNOŚĆ */
+  @media (max-width: 640px) {
+    .tiers {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .header { padding: 28px 20px 24px; }
+    .header h1 { font-size: 22px; }
+    .page-header { padding: 20px 16px 16px; }
+    .page-header h2 { font-size: 18px; }
+    .product-section { padding: 24px 16px 8px; }
+    .tier-price { font-size: 24px; }
+    .divider { margin: 0 16px; }
+    .footer-benefits { margin: 16px; }
+  }
+
+  /* ===== PRINT — A4 ===== */
+  @media print {
+    @page {
+      size: A4;
+      margin: 12mm 10mm 16mm 10mm;
+    }
+
+    body {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .tier:hover { transform: none; }
+
+    .page-break {
+      page-break-before: always;
+    }
+
+    .header, .page-header,
+    .tier.best, .tier.pal1, .tier.pal2, .tier.basic,
+    .footer-benefits, .footer-contact {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .product-section {
+      page-break-inside: avoid;
+    }
+    .tiers {
+      page-break-inside: avoid;
+    }
+    .page-footer {
+      page-break-inside: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     STRONA 1: PODOBRAZIA NA KROSNACH
+     ============================================================ -->
+
+<div class="header">
+  <div class="brand">Artnapi</div>
+  <h1>Cennik B2B 2026</h1>
+  <div class="tagline">Jedna cena &#8212; dostawa wliczona</div>
+</div>
+
+<div class="page-header">
+  <h2>Podobrazia na krosnach</h2>
+  <div class="page-desc">Adr&#233; Art&#243; &#8212; bawe&#322;na 280g, krosna sosnowe, potr&#243;jny grunt</div>
+</div>
+
+<!-- 40x50 -->
+<div class="product-section">
+  <div class="product-title">Podobrazia 40&#215;50 cm</div>
+  <div class="product-subtitle">Adr&#233; Art&#243; &#8212; bawe&#322;na 280g, krosna sosnowe, potr&#243;jny grunt &#160;|&#160; Paleta = 360 szt. &#160;|&#160; Karton = 40 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">120&#8211;359 szt.</div>
+      <div class="tier-price">10,30</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">360 szt.</div>
+      <div class="tier-price">9,00</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;13%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">720 szt.</div>
+      <div class="tier-price">8,15</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;21%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">1 080 szt.</div>
+      <div class="tier-price">7,30</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;29%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 30x40 -->
+<div class="product-section">
+  <div class="product-title">Podobrazia 30&#215;40 cm</div>
+  <div class="product-subtitle">Adr&#233; Art&#243; &#8212; bawe&#322;na 280g, krosna sosnowe, potr&#243;jny grunt &#160;|&#160; Paleta = 480 szt. &#160;|&#160; Karton = 40 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">120&#8211;479 szt.</div>
+      <div class="tier-price">7,46</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">480 szt.</div>
+      <div class="tier-price">6,75</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;10%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">960 szt.</div>
+      <div class="tier-price">6,11</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;18%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">1 440 szt.</div>
+      <div class="tier-price">5,00</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;33%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 20x30 -->
+<div class="product-section">
+  <div class="product-title">Podobrazia 20&#215;30 cm</div>
+  <div class="product-subtitle">Adr&#233; Art&#243; &#160;|&#160; Paleta = 720 szt. &#160;|&#160; Karton = 40 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">120&#8211;719 szt.</div>
+      <div class="tier-price">6,70</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">720 szt.</div>
+      <div class="tier-price">5,49</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;18%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">1 440 szt.</div>
+      <div class="tier-price">4,54</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;32%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">2 160 szt.</div>
+      <div class="tier-price">3,68</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;45%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 20x20 -->
+<div class="product-section">
+  <div class="product-title">Podobrazia 20&#215;20 cm</div>
+  <div class="product-subtitle">Adr&#233; Art&#243; &#160;|&#160; Paleta = 1 200 szt. &#160;|&#160; Karton = 40 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">120&#8211;1 199 szt.</div>
+      <div class="tier-price">5,96</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">1 200 szt.</div>
+      <div class="tier-price">4,75</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;20%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">2 400 szt.</div>
+      <div class="tier-price">3,80</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;36%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">3 600 szt.</div>
+      <div class="tier-price">2,94</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;51%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER STRONA 1 -->
+<div class="page-footer">
+  <div class="footer-benefits">
+    <p>
+      <strong>Zasada jest prosta:</strong> im wi&#281;cej zamawiasz &#8212; tym lepsz&#261; cen&#281; dostajesz.
+      Darmowa dostawa w ca&#322;ej Polsce, niezale&#380;nie od wielko&#347;ci zam&#243;wienia. Ceny netto z dostaw&#261; w cenie. Magazyn w Polsce, wysy&#322;ka 24h, faktura VAT, r&#281;kojmia.
+    </p>
+  </div>
+  <div class="footer-note">
+    Cennik obowi&#261;zuje od marca 2026. Cennik nie stanowi oferty handlowej w rozumieniu art. 66 KC.
+  </div>
+  <div class="footer-contact">
+    <div class="name">Mateusz Sok&#243;lski</div>
+    <div class="role">Artnapi &#8212; Manager ds. rozwoju sprzeda&#380;y</div>
+    <div class="details">534 852 707 &#160;|&#160; mateusz.sokolski@artnapi.pl</div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     STRONA 2: PODOBRAZIA NA DESCE (PANELE)
+     ============================================================ -->
+
+<div class="page-break"></div>
+
+<div class="page-header">
+  <h2>Podobrazia na desce (panele)</h2>
+  <div class="page-desc">Panele malarskie na desce 3mm &#8212; gotowe do malowania</div>
+</div>
+
+<!-- 30x40 na desce — zestaw 8 szt. -->
+<div class="product-section">
+  <div class="product-title">Panel 30&#215;40 cm na desce 3mm</div>
+  <div class="product-subtitle">Zestaw 8 szt. &#160;|&#160; Paleta = 300 zestaw&#243;w &#160;|&#160; Karton = 16 zestaw&#243;w</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">18&#8211;299 zest.</div>
+      <div class="tier-price">24,27</div>
+      <div class="tier-currency">PLN netto / zestaw</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">300 zest.</div>
+      <div class="tier-price">23,33</div>
+      <div class="tier-currency">PLN netto / zestaw</div>
+      <div class="tier-save">&#8722;4%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">600 zest.</div>
+      <div class="tier-price">20,41</div>
+      <div class="tier-currency">PLN netto / zestaw</div>
+      <div class="tier-save">&#8722;16%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">1 200 zest.</div>
+      <div class="tier-price">19,27</div>
+      <div class="tier-currency">PLN netto / zestaw</div>
+      <div class="tier-save">&#8722;21%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- 40x50 na desce — zestaw 3 szt. -->
+<div class="product-section">
+  <div class="product-title">Panel 40&#215;50 cm na desce 3mm</div>
+  <div class="product-subtitle">Zestaw 3 szt. &#160;|&#160; Paleta = 336 szt. &#160;|&#160; Karton = 30 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">18&#8211;335 szt.</div>
+      <div class="tier-price">7,88</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">336 szt.</div>
+      <div class="tier-price">6,84</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;13%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">672 szt.</div>
+      <div class="tier-price">6,24</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;21%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">1 008 szt.</div>
+      <div class="tier-price">5,10</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;35%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER STRONA 2 -->
+<div class="page-footer">
+  <div class="footer-benefits">
+    <p>
+      <strong>Zasada jest prosta:</strong> im wi&#281;cej zamawiasz &#8212; tym lepsz&#261; cen&#281; dostajesz.
+      Darmowa dostawa w ca&#322;ej Polsce, niezale&#380;nie od wielko&#347;ci zam&#243;wienia. Ceny netto z dostaw&#261; w cenie. Magazyn w Polsce, wysy&#322;ka 24h, faktura VAT, r&#281;kojmia.
+    </p>
+  </div>
+  <div class="footer-note">
+    Cennik obowi&#261;zuje od marca 2026. Cennik nie stanowi oferty handlowej w rozumieniu art. 66 KC.
+  </div>
+  <div class="footer-contact">
+    <div class="name">Mateusz Sok&#243;lski</div>
+    <div class="role">Artnapi &#8212; Manager ds. rozwoju sprzeda&#380;y</div>
+    <div class="details">534 852 707 &#160;|&#160; mateusz.sokolski@artnapi.pl</div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     STRONA 3: ZESTAWY PBN & HAFT DIAMENTOWY
+     ============================================================ -->
+
+<div class="page-break"></div>
+
+<div class="page-header">
+  <h2>Zestawy PBN &amp; Haft diamentowy</h2>
+  <div class="page-desc">Kompletne zestawy do malowania po numerach i haftu diamentowego</div>
+</div>
+
+<!-- PBN 40x50 na ramie -->
+<div class="product-section">
+  <div class="product-title">PBN 40&#215;50 cm na ramie</div>
+  <div class="product-subtitle">Kompletny zestaw: p&#322;&#243;tno na ramie + farby + p&#281;dzle &#160;|&#160; Paleta = 180 szt. &#160;|&#160; Karton = 30 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">30&#8211;179 szt.</div>
+      <div class="tier-price">25,37</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">180 szt.</div>
+      <div class="tier-price">22,37</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;12%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">360 szt.</div>
+      <div class="tier-price">20,40</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;20%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">540 szt.</div>
+      <div class="tier-price">17,37</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;32%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- PBN 40x50 bez ramy -->
+<div class="product-section">
+  <div class="product-title">PBN 40&#215;50 cm bez ramy</div>
+  <div class="product-subtitle">Kompletny zestaw: p&#322;&#243;tno zrolowane + farby + p&#281;dzle &#160;|&#160; Paleta = 450 szt. &#160;|&#160; Karton = 75 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">75&#8211;449 szt.</div>
+      <div class="tier-price">20,72</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">450 szt.</div>
+      <div class="tier-price">17,72</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;14%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">900 szt.</div>
+      <div class="tier-price">15,75</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;24%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">1 350 szt.</div>
+      <div class="tier-price">12,72</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;39%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Haft diamentowy -->
+<div class="product-section">
+  <div class="product-title">Haft diamentowy</div>
+  <div class="product-subtitle">Kompletny zestaw &#160;|&#160; Paleta = 1 200 szt. &#160;|&#160; Karton = 50 szt.</div>
+
+  <div class="tiers">
+    <div class="tier basic">
+      <div class="tier-name">Kartony</div>
+      <div class="tier-qty">120&#8211;1 199 szt.</div>
+      <div class="tier-price">20,46</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save"></div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal1">
+      <div class="tier-name">1 Paleta</div>
+      <div class="tier-qty">1 200 szt.</div>
+      <div class="tier-price">17,46</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;15%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier pal2">
+      <div class="tier-name">2 Palety</div>
+      <div class="tier-qty">2 400 szt.</div>
+      <div class="tier-price">15,49</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;24%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+    <div class="tier best">
+      <div class="best-badge">Najlepsza cena</div>
+      <div class="tier-name">3 Palety</div>
+      <div class="tier-qty">3 600 szt.</div>
+      <div class="tier-price">12,46</div>
+      <div class="tier-currency">PLN netto / szt.</div>
+      <div class="tier-save">&#8722;39%</div>
+      <div class="tier-delivery">darmowa dostawa</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER STRONA 3 -->
+<div class="page-footer">
+  <div class="footer-benefits">
+    <p>
+      <strong>Zasada jest prosta:</strong> im wi&#281;cej zamawiasz &#8212; tym lepsz&#261; cen&#281; dostajesz.
+      Darmowa dostawa w ca&#322;ej Polsce, niezale&#380;nie od wielko&#347;ci zam&#243;wienia. Ceny netto z dostaw&#261; w cenie. Magazyn w Polsce, wysy&#322;ka 24h, faktura VAT, r&#281;kojmia.
+    </p>
+  </div>
+  <div class="footer-note">
+    Cennik obowi&#261;zuje od marca 2026. Cennik nie stanowi oferty handlowej w rozumieniu art. 66 KC.
+  </div>
+  <div class="footer-contact">
+    <div class="name">Mateusz Sok&#243;lski</div>
+    <div class="role">Artnapi &#8212; Manager ds. rozwoju sprzeda&#380;y</div>
+    <div class="details">534 852 707 &#160;|&#160; mateusz.sokolski@artnapi.pl</div>
+  </div>
+</div>
+
+</body>
+</html>

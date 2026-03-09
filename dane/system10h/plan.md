@@ -87,7 +87,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ### PLAN TYGODNIA 4 (23-27.03) — DOMYKANIE
 
-**@CSO:** Domykanie demo leads → close 2 599 PLN. Karolina jeśli W3+. Outreach ×3.
+**@CSO:** Domykanie demo leads → close 2 999 PLN. Karolina jeśli W3+. Outreach ×3.
 **@CMO:** 3 posty LI (#7-9). Style Match Test LIVE (jeśli gotowy). Analiza content→lead.
 **@CEO:** **Kamil/CQRE deadline oferty ~27.03.** Scorecard marzec. Referral ask Zbigniew.
 
@@ -95,9 +95,9 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 | Scenariusz | Deale | PLN netto |
 |------------|-------|-----------|
-| MINIMUM | 1 close + Kamil signed | 2 599 + umowa |
-| REALISTYCZNY | 1 close + Gawlik + Kamil | 3 599 + umowa |
-| OPTIMUM | 2 close + Gawlik + Kamil | 6 099 + umowa |
+| MINIMUM | 1 close + Kamil signed | 2 999 + umowa |
+| REALISTYCZNY | 1 close + Gawlik + Kamil | 3 999 + umowa |
+| OPTIMUM | 2 close + Gawlik + Kamil | 6 998 + umowa |
 
 ---
 
@@ -105,22 +105,22 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 | Lead | Status | Wartość | Ostatni kontakt | Następny krok |
 |------|--------|---------|-----------------|---------------|
-| **Zbigniew Kowalski** (COMMI) | **NURTURE → MAJ** | **2 500 PLN** | 05.03 (live demo!) | Demo odbyło się ✅ — Zbigniew zobaczył system, potwierdził wartość ("narzędzie dla działającego handlowca"). COMMI w rebuild, szuka programisty + handlowca. Kontakt ~maj 2026. REFERRAL POTENTIAL: 180k ludzi, VP Mówców. |
+| **Zbigniew Kowalski** (COMMI) | **NURTURE → MAJ** | **2 999 PLN** | 05.03 (live demo!) | Demo odbyło się ✅ — Zbigniew zobaczył system, potwierdził wartość ("narzędzie dla działającego handlowca"). COMMI w rebuild, szuka programisty + handlowca. Kontakt ~maj 2026. REFERRAL POTENTIAL: 180k ludzi, VP Mówców. |
 | **Michał Gawlik** | **WhatsApp WYSŁANY** | **1 000 PLN** | 04.03 (WhatsApp) | Bliźniak Raportowy (Claude Code Project). Czekamy odpowiedź → call 15 min → build 2-3h. |
-| **Karolina Durmaj** | **NURTURE** | 2 500 PLN | 05.03 (call + demo!) | NIE Javi — poznańska firma importowa (sourcing → sieci PL). Demo done, wartość potwierdzona, cena OK. Ale: 4. dzień w pracy, mąż, NDA. SD link na LI. FU ~19.03. |
-| **Michał Glinka** | **FU WYSŁANY** | 2 500 PLN | 04.03 (follow-up DM) | SD done, follow-up wysłany — proponowane demo CZ/PT. Czekamy odpowiedź. |
-| **Krystian Szczypek** | **DISCOVERY** | 2 500 PLN (Bliźniak) + urzędy | 23.02 (follow-up DM) | Projekt AI urzędy/KPO — demo przyszły tydzień. Max 5h/tyg cap. |
+| **Karolina Durmaj** | **NURTURE** | 2 999 PLN | 05.03 (call + demo!) | NIE Javi — poznańska firma importowa (sourcing → sieci PL). Demo done, wartość potwierdzona, cena OK. Ale: 4. dzień w pracy, mąż, NDA. SD link na LI. FU ~19.03. |
+| **Michał Glinka** | **FU WYSŁANY** | 2 999 PLN | 04.03 (follow-up DM) | SD done, follow-up wysłany — proponowane demo CZ/PT. Czekamy odpowiedź. |
+| **Krystian Szczypek** | **DISCOVERY** | 2 999 PLN (Bliźniak) + urzędy | 23.02 (follow-up DM) | Projekt AI urzędy/KPO — demo przyszły tydzień. Max 5h/tyg cap. |
 | **Kamil Andrusz / CQRE / Napi** | **UMOWA W TOKU** | **~22 500-30 000 PLN** (pasywny) | 04.03 (spotkanie) | Współpraca 30% netto Faza 1+2 (nie finder's fee — aktywna praca). Umowa drafted (materialy/). Deadline oferty Kamila ~27.03. |
 | **Natan / Stalton** (CNC) | **INSTALLED** ✅ | 1 220 PLN (zamknięty) | 17.02 | Feedback za 2-3 tyg → case study + pytania referencyjne (projekty/stalton/). |
-| **Michał Wielgosz** | LINK WYSŁANY (brak SD) | 2 500 PLN | 23.02 | Nudge z bezpośrednią ofertą demo. |
+| **Michał Wielgosz** | LINK WYSŁANY (brak SD) | 2 999 PLN | 23.02 | Nudge z bezpośrednią ofertą demo. |
 
 **WĄTKI NETWORKINGOWE:**
 - **Małgorzata "Gosia" Jary** (AI Biznes Lab) — FSI (szkolenia AI/IT dla korpo: Accenture, Capgemini, Nordea) + Integrivo (automatyzacje). Potencjał: polecanie Bliźniaka po szkoleniach, prowizja, wspólny produkt szkolenie+wdrożenie. Prompt do eksploracji współpracy przygotowany 06.03. Czekamy na spotkanie.
 
 **ZAMROŻENI (bez akcji):** Ewa Panek (ghosting), Bagrat (ghosting), Daniel/DANTAR (nie wypalił), Credipass (pauza), Tomek Szacoń (wrócić jeśli się odezwie), Julia Sienkiewicz (trigger: case study), Lena (beta, HOLD), Piotr/Artnapi (integrator — teraz osobny deal z Kamilem), Rafał Knap (wykreślony 04.03), Julia S-P (wykreślona 04.03), Arkadiusz Piotrowicz (usunięty 04.03).
 
-**Pipeline value aktywny:** ~7 500 PLN (Gawlik 1k + Glinka 2.5k + Krystian 2.5k + Wielgosz 2.5k)
-**Pipeline NURTURE (marzec-maj):** 5 000 PLN (Zbigniew 2.5k maj + Karolina 2.5k koniec marca)
+**Pipeline value aktywny:** ~8 997 PLN (Gawlik 1k + Glinka 2 999 + Krystian 2 999 + Wielgosz 2 999)
+**Pipeline NURTURE (marzec-maj):** 5 998 PLN (Zbigniew 2 999 maj + Karolina 2 999 koniec marca)
 **Pipeline pasywny:** ~22 500-30 000 PLN (Kamil/CQRE/Napi współpraca 30%)
 **Zamknięte:** 1 220 PLN netto (Stalton)
 
@@ -139,11 +139,11 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 | # | Deal | Wartość | Cel | Status |
 |---|------|---------|-----|--------|
 | ✅ | Stalton | 1 220 PLN | 11.02 | ZAMKNIĘTY |
-| 2 | ~~Zbigniew K.~~ | ~~2 500 PLN~~ | ~~marzec~~ | NURTURE MAJ (demo OK, timing nie) |
+| 2 | ~~Zbigniew K.~~ | ~~2 999 PLN~~ | ~~marzec~~ | NURTURE MAJ (demo OK, timing nie) |
 | 3 | Michał Gawlik | **1 000 PLN** | marzec | [ ] WhatsApp FU 09.03 |
-| 4 | Glinka / Wielgosz / Krystian | **2 500 PLN** | marzec-kwiecień | [ ] Demo W2-W3 |
+| 4 | Glinka / Wielgosz / Krystian | **2 999 PLN** | marzec-kwiecień | [ ] Demo W2-W3 |
 | 5 | Kamil/CQRE (pasywny) | **22 500-30 000 PLN** | deadline ~27.03 | [ ] Umowa + oferta |
-| | **TOTAL (bez Kamil)** | **4 720 PLN** | | **17% (1 220/7 000)** |
+| | **TOTAL (bez Kamil)** | **5 219 PLN** | | **17% (1 220/7 000)** |
 | | **TOTAL (z Kamil)** | **~25-32k PLN** | | Game changer |
 
 ### KPI MIESIĘCZNE
@@ -161,7 +161,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 1. **ZERO "SPOKO, DAJ ZNAĆ"** — "Muszę się zastanowić" → "Nad czym konkretnie?"
 2. **FOLLOW-UP 5x MINIMUM** — D+3 / D+7 / D+14 / D+21 / D+30
 3. **DEMO = CLOSE** — Min. 2 live demo/msc. 0 demo = 0 sprzedaży.
-4. **FULL PRICE OD TERAZ** — 2 599 PLN netto. Pilot 990/1990 wygasł.
+4. **FULL PRICE OD TERAZ** — 2 999 PLN netto. Pilot 990/1990 wygasł.
 5. **CONTENT = LEAD MACHINE** — 2-3 posty LI/tyg z CTA do SD.
 
 ---
@@ -196,7 +196,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ### FAZA 2: LEJEK (marzec–kwiecień)
 - [ ] Hybrid UX Opcja C (4 kategorie + NL routing)
-- [ ] 3 tiers: Lite (0 PLN) / Solo (2 599) / Pro (4 500-5 000)
+- [ ] 3 tiers: Lite (0 PLN) / Solo (2 999) / Pro (4 500-5 000)
 - [ ] Landing page z pricing table
 - [ ] Self-service Architekt AI na stronie
 - [ ] Vertical Pack CNC/Produkcja (po case study Stalton)
