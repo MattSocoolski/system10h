@@ -20,7 +20,7 @@ W sekcji **Project Knowledge** dodaj dwa pliki:
 Kliknij "Add content" → wklej zawartość każdego pliku.
 
 ### Krok 3: Napisz "cześć"
-Bliźniak pokaże Ci menu z 13 opcjami. Wybierz numer lub napisz po swojemu.
+Bliźniak pokaże Ci menu z 16 opcjami. Wybierz numer lub napisz po swojemu.
 
 ---
 
@@ -36,7 +36,7 @@ cd blizniiak-biznesowy
 Skopiuj do folderu pliki które dostałeś/aś ode mnie:
 - **`CLAUDE.md`** — plik systemowy (instrukcje dla AI)
 - **`dna.md`** — Twoje Biznesowe DNA
-- **`SKILL.md`** — instrukcja Bliźniaka (13 workflow'ów)
+- **`SKILL.md`** — instrukcja Bliźniaka (16 workflow'ów)
 
 ### Krok 3: Uruchom Claude Code
 ```bash
@@ -48,7 +48,7 @@ Bliźniak załaduje Twoje DNA i pokaże menu. Gotowe.
 
 ---
 
-## Menu Bliźniaka (15 opcji)
+## Menu Bliźniaka (16 opcji)
 
 Po uruchomieniu zobaczysz:
 
@@ -69,6 +69,7 @@ Po uruchomieniu zobaczysz:
 | 13 | Deep Research | Zbadaj rynek/konkurencję — generuje prompt do Gemini lub Claude |
 | **14** | **Higiena folderu** | **Porządek w plikach — sprawdza limity, wykrywa śmieci** |
 | **15** | **Rozwój biznesu** | **Audyt, nowe segmenty, upsell, ceny, polecenia, plan 90 dni** |
+| **16** | **Radar szans** | **Ukryte szanse przychodowe — PLN/h, co pominąć, wild card** |
 
 **Albo** napisz po prostu co potrzebujesz — Bliźniak sam rozpozna.
 
@@ -111,6 +112,17 @@ Napisz "higiena" lub "14" — dostaniesz raport z rekomendacjami.
 | F. Plan 90 dni | 3 priorytety na następny kwartał |
 
 Napisz "rozwój" lub "15" — wybierzesz tryb.
+
+---
+
+## Radar szans (opcja 16) — ukryte przychody
+
+Bliźniak analizuje CAŁE Twoje DNA + stan operacyjny i szuka:
+- **Top szansa** — największa okazja przychodowa z estymacją PLN/h
+- **1 rzecz do porzucenia** — co zabiera czas bez zwrotu
+- **1 wild card** — nieoczywisty pomysł z potencjałem
+
+Napisz "radar" lub "16" — dostaniesz analizę.
 
 ---
 

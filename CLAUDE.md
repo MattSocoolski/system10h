@@ -38,11 +38,23 @@ PRZED draftowaniem JAKIEJKOLWIEK wiadomości do leada:
 
 1. Sprawdź plan.md → "Ostatni kontakt" dla tego leada
 2. [ARTNAPI] Sprawdź morning-feed.md → sekcja SENT (czy nie wysłano już maila)
-3. [ARTNAPI] Sprawdź Gmail drafts (czy email-radar.js nie stworzył już draftu)
+3. [ARTNAPI] Sprawdź Gmail drafts (czy @ghost/@ceo nie stworzył już draftu w tej sesji)
 
 **BLOKADA:** Jeśli kontakt był <48h temu i lead NIE odpowiedział → NIE pisz nowego follow-upu.
 **BLOKADA:** Jeśli draft już istnieje w Gmail → NIE twórz duplikatu. Powiedz: "Draft już istnieje w Gmail. Chcesz go edytować?"
 **WYJĄTEK:** User jawnie mówi "pisz mimo to" → OK ale ostrzeż: "Ostatni kontakt był [data]."
+
+## EMAIL VERIFICATION GUARD (COLD OUTREACH)
+
+PRZED stworzeniem draftu do NOWEGO leada (którego NIE MA w CRM/Gmail):
+
+1. **NIGDY nie wymyślaj adresów email.** Nie konstruuj adresów z domeny (np. kontakt@firma.pl) — to prowadzi do bounców.
+2. **OBOWIĄZEK WERYFIKACJI:** Przed draftem do nowej firmy MUSISZ:
+   - Sprawdzić stronę www firmy (WebFetch/WebSearch) → sekcja Kontakt
+   - LUB znaleźć email w Google/LinkedIn
+   - LUB potwierdzić adres z CRM/Gmail (jeśli firma była kontaktowana)
+3. **BLOKADA:** Jeśli nie możesz zweryfikować emaila → NIE twórz draftu. Zamiast tego: zapisz firmę jako "do weryfikacji adresu" i podaj userowi do ręcznego sprawdzenia.
+4. **Dotyczy też agentów:** Każdy agent tworzący cold outreach drafty MUSI mieć tę regułę w prompcie.
 
 ## POST-WDROŻENIE TRIGGER (SYSTEM 10H)
 
@@ -424,7 +436,7 @@ PRZED każdą odpowiedzią dotyczącą klientów, pipeline'u lub rynku:
 **⚠️ ŻELAZNA ZASADA — @GHOST JAKO GATEKEEPER KOMUNIKACJI:**
 - ŻADNA komunikacja wychodząca do klientów NIE MOŻE pominąć @ghost
 - @cso, @pipeline, @cmo generują strategię/treść → finalny tekst ZAWSZE przez @ghost (ghost_styl.md)
-- email-radar.js (auto-draft) → system prompt zawiera ghost_styl.md — pisze "głosem Mateusza"
+- email-radar.js → alert-only (Telegram). Drafty tworzone w sesji @ceo z pełnym @ghost kontekstem.
 - Automatyzacje generujące outreach MUSZĄ używać ghost_styl.md jako system prompt
 - Jeśli asystent generuje mail/DM bez @ghost → oznaczyć "[DO PRZEREDAGOWANIA PRZEZ @GHOST]"
 

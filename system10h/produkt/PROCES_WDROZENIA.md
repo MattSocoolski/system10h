@@ -7,7 +7,7 @@
 ## KROK 1: Self-Discovery (opcjonalny — Ścieżka Discovery)
 
 **Dla kogo:** Przedsiębiorcy, którzy jeszcze nie mają jasności kim są biznesowo i komu sprzedają.
-**Co się dzieje:** 12 pytań w rozmowie z AI (~30 min). Na wyjściu: Profil + Persona + DNA-READY IMPORT.
+**Co się dzieje:** 18 pytań w rozmowie z AI (~40 min). Na wyjściu: Profil + Persona + DNA-READY IMPORT.
 **Narzędzie:** Skill `self-discovery` w Claude Code / standalone prompt (działa w dowolnym AI).
 **Output:** Blok `DNA-READY IMPORT` gotowy do wklejenia w Architekta.
 
@@ -20,7 +20,7 @@
 **Dla kogo:** Każdy klient.
 **Co się dzieje:** Głęboki wywiad z AI-Architektem (~35 pytań w 8 sekcjach). Klient odpowiada na pytania o profilu, kliencie, ofercie, cenach, stylu, obiekcjach, procedurach i workflow'ie.
 **Kluczowy moment:** Architekt prosi o 2-3 prawdziwe maile → analiza stylometryczna.
-**Czas:** ~45-60 min (Express) / ~30 min (z SD import).
+**Czas:** ~45-60 min (Express) / ~40 min (z SD import).
 **Output:** Kompletny plik `dna.md` v2.0 (8 sekcji).
 **Narzędzie:** Skill `dna-interviewer` (Architekt).
 
@@ -48,7 +48,7 @@
 2. Demo: Tworzenie oferty (WF2) — live na prawdziwym dna.md (5 min)
 3. Demo: Obrona ceny / Bad Cop (WF3) — jak Bliźniak broni marży (5 min)
 4. Demo: Cold Outreach (WF6) — jak pisać zaczepki (5 min)
-5. Lista wszystkich 15 workflow'ów + triggery (2 min)
+5. Lista wszystkich 16 workflow'ów + triggery (2 min)
 
 **Delivery:** Link do Loom w mailu handoff.
 
@@ -69,7 +69,7 @@
 
 | Krok | Czas | Kto |
 |------|------|-----|
-| 1. Self-Discovery | ~30 min | Klient sam (AI) |
+| 1. Self-Discovery | ~40 min | Klient sam (AI) |
 | 2. Architekt | ~45-60 min | Klient sam (AI) |
 | 3. Instalacja | ~15 min | Klient + moja asysta |
 | 4. Szkolenie | ~20 min | Klient ogląda Loom |

@@ -18,7 +18,7 @@
 | **Artnapi** (KAM) | Prowizja B2B | ~7 500 PLN | ~170 PLN/h | 70% (4-5h/dzień) |
 | **Bliźniak Biznesowy** (System 10h+) | Wdrożenie jednorazowe | 1 220 PLN* (cel: 5 000) | ~400-830 PLN/h | 30% (1.5-2h/dzień) |
 
-*Pierwsza sprzedaż: 11.02.2026 (Natan/Stalton CNC, Wrocław, friends price 1 220 netto). Standard: 2 500 PLN netto. Pilot: 1 990 PLN (do 28.02).
+*Pierwsza sprzedaż: 11.02.2026 (Natan/Stalton CNC, Wrocław, friends price 1 220 netto). Standard: 2 999 PLN netto (od 09.03). Pilot wygasł 28.02.
 
 **Kluczowy insight:** Bliźniak generuje **2.5-5x więcej PLN/godzinę** niż Artnapi. Każda godzina przesunięta na Bliźniaka = wyższy ROI. Artnapi = stabilność. Bliźniak = dźwignia.
 
@@ -45,11 +45,12 @@
 **Nazwy:** Bliźniak Biznesowy (wewnętrzna) / System 10h+ (zewnętrzna, marketing)
 **Czas:** ~1.5-2h dziennie.
 **Status:** 1 płacący klient (Natan/Stalton CNC, Wrocław — INSTALLED 17.02). 8 aktywnych leadów. Pipeline: 13 490 PLN.
-**Produkt:** Done-for-you AI system dla handlowców B2B. 15 scenariuszy + inteligentny routing.
-**Cena:** 2 500 PLN netto. Pilot: 1 990 PLN (+ monitoring 30 dni, limit 2, do 28.02). Raty: 2× 1 250 PLN.
-**Lead magnet:** Self-Discovery (12 pytań, Archetyp Sprzedażowy + Business DNA) + Live Preview (system10h.com/preview)
+**Produkt:** Done-for-you AI system dla handlowców B2B. 16 scenariuszy + inteligentny routing + Protokół Wiarygodności + Głęboki Profil Stylu + Aktywna Pamięć (v7.0).
+**Cena:** 2 999 PLN netto (od 09.03). Raty: 2× 1 499,50 PLN. PRO pakiet: 4 999 PLN (architektura gotowa).
+**Lead magnet:** Self-Discovery v2 (18 pytań, kwalifikacja BASE/PRO) + Live Preview (system10h.com/preview)
 **Lejek:** Outreach/LinkedIn → SD / Live Preview → Calendly → 15 min call → Close
-**Wdrożenie:** ~3h pracy (SD + Architekt + konfiguracja + szkolenie) = ~830 PLN/h przy pełnej cenie.
+**Wdrożenie:** ~3h pracy (SD + Architekt + konfiguracja + szkolenie) = ~1 000 PLN/h przy pełnej cenie.
+**Materiały sprzedażowe:** Prezentacja 8-slajdowa (szablon HTML→PDF, brand System 10H): `system10h/produkt/prezentacja_template.html`
 
 ---
 
@@ -127,18 +128,20 @@
 
 ---
 
-## SYTUACJA FINANSOWA (stan: 24.02.2026)
+## SYTUACJA FINANSOWA (stan: 12.03.2026)
 
 | Pozycja | Kwota |
 |---------|-------|
 | Dochód wspólny (z Marianą) | ~9 000 PLN netto |
 | Wydatki | ~7 500 PLN |
 | Nadwyżka | ~1 500 PLN |
-| Dług | **18 500 PLN** (0% odsetek) |
+| Dług | **17 500 PLN** (Ruslan + UGEARS, 0% odsetek) |
+| Spłacone | Kurs AI — w pełni spłacony ✅ |
 | **Bliźniak — zamknięte** | **1 220 PLN netto (Stalton)** |
+| **Kamil/CQRE — umowa** | **~27 000 PLN** (prowizja 30% z F1 15k + F2 75k) |
 
 **Jedna sprzedaż Bliźniaka = cała miesięczna luka finansowa.**
-**Projekcja:** 2 Bliźniaki/msc × 2 000 PLN avg + Artnapi 9k = 13 000 PLN → dług 0 do lipca.
+**Projekcja:** Kamil F1 (4 500 PLN prowizji) + 1 Bliźniak (2 999) + Artnapi 9k = 16 500 PLN/msc. Dług 0 szybciej niż planowano.
 
 ---
 
@@ -177,4 +180,4 @@ Nie "guru AI". Nie "wykładowca od promptów".
 
 ---
 
-*Profil zaktualizowany: 20.02.2026 (Wersja 8.2 — sync: nazwa System 10h+, Pilot 1 990 PLN, raty 2x1300/3x900, Self-Discovery + Live Preview jako lead magnet, pipeline 13 490 PLN, 8 leadów, lejek sprzedażowy)*
+*Profil zaktualizowany: 12.03.2026 (Wersja 9.0 — Bliźniak v7.0, cena 2 999 PLN, 16 scenariuszy, SD v2 18 pytań, PRO 4 999 PLN, dług 17 500 PLN, kurs spłacony, umowa Kamil/CQRE podpisana ~27k PLN, szablon prezentacji)*

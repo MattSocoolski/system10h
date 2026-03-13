@@ -37,19 +37,176 @@
 
 ## AKTYWNE DECYZJE
 
-### [SHARED] 09.03.2026 | FINANSE | UMOWA NAPI × CQRE v2 — 4 POPRAWKI WYSŁANE
+### [ARTNAPI] 12.03.2026 | OPERACJE | FIX: AUTOMATYZACJE — ANGIELSKI DLA ZAGRANICZNYCH LEADÓW
 
-**KONTEKST:** Kamil Andrusz (CQRE) przysłał nowy draft umowy współpracy (Chatwoot+n8n+AI dla NAPI). @CEO review: umowa profesjonalna, ale 4 luki.
+**KONTEKST:** followup-guardian.js i restock-reminder.js generowały drafty po polsku dla WSZYSTKICH leadów, w tym zagranicznych (HobbySet LV, FlashArt EE, Malu Vino CZ, Knihy CZ). Przyczyna: cały system prompt po polsku, Haiku ignorował słabą regułę "pisz po angielsku dla CEE". Bonus bug: `dateKey` undefined → 7-dniowe czyszczenie stanu nie działało.
 
-**DECYZJA:** Wysłano 4 poprawki do Kamila:
-1. **Zakres prac (§2.3):** Dopisać konkretne zadania + cap godzin (np. 80h)
-2. **Gwarancja płatności (§4.5):** Termin graniczny 90 dni — po nim Kamil płaci z własnych
-3. **Kara poufność (§5.3):** Obniżyć z 20k do 50% wynagrodzenia
-4. **Zakaz przejmowania (§5a):** Zawęzić do Chatwoot/n8n/odpowiedników (nie "wszelkie usługi AI")
+**DECYZJA:**
+1. **lib.js:** Nowa eksportowana funkcja `isForeignLead()` — sprawdza pole `kraj` w CRM + fallback po domenie emaila (.cz, .sk, .hu, .lv, .ee, .de, .nl + 12 innych TLD)
+2. **followup-guardian.js + restock-reminder.js:** Osobne pełne angielskie system prompty + user prompty + sygnatury EN dla foreign leads. Guard: `if (isForeignLead) → EN path`. PL path bez zmian.
+3. **ghost_styl.md regex fix:** Sekcja "B2B SPRZEDAŻ" teraz poprawnie oddzielona od "B2B ENGLISH" (wcześniej regex ładował obie razem)
+4. **Bug fix:** `dateKey` → `todayStr` w followup-guardian.js (7-dniowa pamięć draftów teraz działa poprawnie)
+5. **generateSubject:** EN subject line dla foreign leads ("Restock reminder" zamiast "Uzupełnienie zapasów")
+6. **Dry-run OK:** 4/4 zagraniczne leady (Malu Vino CZ, HobbySet LV, FlashArt EE, Knihy CZ) generują angielskie drafty
 
-**DLACZEGO:** Bez tych poprawek Mateusz ponosi ryzyko nieograniczonego scope, braku płatności i blokady usług AI dla własnej firmy przez 12 mies.
+**DLACZEGO:** Polskie maile do firm z Estonii/Łotwy/Czech = nieprofesjonalne. Angielski prompt = wyższy response rate + spójność z ręcznymi szablonami EN.
 
-**NASTĘPNY KROK:** Czekamy na odpowiedź Kamila. Jeśli OK → podpis. Jeśli nie → negocjuj dalej.
+**NASTĘPNY KROK:** Monitoring — sprawdzić Gmail drafty po 17:00 (cron followup-guardian) czy nowe drafty zagranicznych leadów są w EN.
+
+---
+
+### [SYSTEM10H] 12.03.2026 | PRODUKT | BLIŹNIAK v7.0 + ARCHITEKTURA PRO
+
+**KONTEKST:** Analiza systemu ArtNapi (Samograj, morning-feed, ghost_styl, decyzje/lekcje) → co z tego wzbogaci produkt Bliźniak (2,999 PLN). Stan.md już miał DECYZJE i LEKCJE ale pasywnie. Brakowało: antyhalucynacji, głębokiej stylometrii, aktywnych triggerów.
+
+**DECYZJA:**
+1. **BASE v7.0 (zrealizowane):** +Protokół Wiarygodności (CLAUDE.md), +Aktywna Pamięć z trigger words, +Głęboki Profil Stylu (S5 z 3 warstwami + 5 kontekstami), dna-interviewer prosi o 3-5 maili zamiast 2-3
+2. **Self-Discovery v2 (zrealizowane):** +3 pytania kwalifikujące (Q16-18: czas na powtarzalne, poranny brief, sabotażysta). Output: SYSTEM-FIT w DNA-READY IMPORT → Architekt rozpoznaje i proponuje PRO
+3. **Value stacking:** 7,400 → 9,000 PLN (nowe pozycje: Protokół Wiarygodności 500, Głęboki Profil Stylu 600, stan.md v1.1 +200)
+4. **Bliźniak PRO (architektura):** 3 skrypty Telegram (morning-brief, followup-alert, weekly-pulse) parsujące stan.md. Zero API, zero chmury. Addon ~1,999 PLN. Plan w `dane/system10h/blizniakpro_architektura.md`
+5. **Czerwona linia BASE:** Bez zmian (zero integracji). PRO: jedyna integracja = Telegram Bot (5 min, 0 PLN)
+6. **Cena PRO:** Opcja A — **pakiet 4,999 PLN** (BASE + PRO razem). Prostsze, wyższa wartość na start.
+
+**DLACZEGO:** ArtNapi dowodzi że automatyzacje (morning-feed, followup-guardian) to game changer. Wersja "lite" z Telegram + stan.md daje 80% wartości bez złożoności API. Pakiet 4,999 PLN to jedyny produkt do sprzedania — zero komplikacji z addonami.
+
+**NASTĘPNY KROK:** Zbudować 3 skrypty template PRO → test na 1 kliencie beta. Aktualizacja strony + MailerLite z SD v2.
+
+---
+
+### [ARTNAPI] 12.03.2026 | OPERACJE | SAMOGRAJ LITE — RESTOCK REMINDER (OPCJA B)
+
+**KONTEKST:** Samograj (09.03) miał 4 decyzje, 0 zrealizowanych. CEO+CTO audit: pełna architektura z MailerLite = overengineering. Uproszczona wersja (Opcja B) osiąga 80% efektu.
+
+**DECYZJA:**
+1. **Opcja B:** Osobny skrypt `restock-reminder.js` (NIE rozszerzenie followup-guardian.js)
+2. **Notion CRM:** Nowe pola `tag_klienta` (select: REPEAT/CHURN_RISK/ONE_TIME/SEASONAL/PAUSED) + `cykl_dni` (number)
+3. **Logika:** Status "Klient/AM" + tag REPEAT + `ostatni_kontakt + cykl_dni < dziś` → auto-draft restock w Gmail + Telegram alert
+4. **Cron:** Poniedziałek 9:00 (raz/tydzień)
+5. **MailerLite (D1 z 09.03):** ODŁOŻONE na kwiecień — dopiero przy >50 klientów AM
+6. **D2 (tagi):** ZROBIONE via Notion API
+7. **D3 (auto @recon):** TIER 2, za tydzień
+8. **D4 (Ad-trade pitch):** Do zrobienia osobno przez @cso
+
+**DLACZEGO:** Nie ruszaj czegoś co działa (followup-guardian). Restock ma inną kadencję i prompt. Izolacja = łatwiejszy debug.
+
+**NASTĘPNY KROK:** @cto buduje skrypt (w toku). Po deploy: test --dry-run, potem cron.
+
+---
+
+### [ARTNAPI] 12.03.2026 | SPRZEDAŻ | EU DISTRIBUTOR EXPANSION — PLAN URUCHOMIONY
+
+**KONTEKST:** Deep Research DONE — 40 dystrybutorów w 14 krajach EU, Top 10 z kontaktami. Cennik paletowy PBN (rama + bez ramy) obliczony. Katalog B2B EN (HTML) gotowy.
+
+**DECYZJA:**
+1. **Tier 1 outreach (marzec W3-W4):** 5 firm — HobbySet (LV reactivation), NEOART (HU), Kippers Hobby (NL), MPK Toys (CZ), Dagros-Brunsting (NL)
+2. **Tier 2 outreach (kwiecień):** 5 firm — Vaessen Creative, CC Hobby, OZ International, VBS Hobby, Panduro
+3. **Cennik EXW:** Do omówienia z Piotrem — dystrybutor potrzebuje niższej ceny niż end-buyer B2B
+4. **Materiały:** Katalog B2B EU (HTML) DONE. Szablony cold intro EN w przygotowaniu.
+5. **Targi:** PITF Prague V.2026 (decyzja IV), Creativeworld Frankfurt I.2027 (rezerwacja IX.2026)
+6. **Zasada:** Max 3h/tydzień na EU outreach — marzec = PUSH MONTH, nie rozpraszamy
+
+**DLACZEGO:** Raport potwierdza: Skandynawia ZERO dominant PBN brand, Benelux najlepsza infrastruktura hobby wholesale, CZ bliskość geograficzna. 3-5 dystrybutorów = 2 000-5 000 szt/mies.
+
+**NASTĘPNY KROK:** @recon weryfikacja emaili Top 10 → @cso+@ghost outreach Tier 1 → HobbySet jako pierwszy (already in CRM).
+
+---
+
+### [ARTNAPI] 12.03.2026 | SPRZEDAŻ | NEGOCJACJA 350g CANVAS Z RITĄ
+
+**KONTEKST:** Rita dała 1$/szt za 380g canvas. Zbyt drogo (+20% vs obecne 0.83$/280g). Piotr: "przy 0.85$ za 350g możemy przejść na nie wszystkich na rynku wycisnąć".
+
+**DECYZJA:** Kontr-propozycja: 350g (nie 380g) po ~0.85$/szt. Argument: kontener od razu jeśli cena OK. Mail wysłany 12.03.
+
+**DLACZEGO:** 350g @ 0.85$ = premium linia po cenie zbliżonej do obecnej. Game changer na rynku.
+
+**NASTĘPNY KROK:** Czekamy na odpowiedź Rity. Jeśli 0.85-0.88$ → zamówienie kontenera.
+
+---
+
+### [ARTNAPI] 11.03.2026 | STRATEGIA | CE MARKING — FABRYKA MA CERTYFIKATY
+
+**KONTEKST:** Mail do Rity ws. CE marking. Odpowiedź: fabryka MA CE + BSCI + FSC. Wcześniejszy research wskazywał koszty 1 500-5 000 EUR na testy — okazuje się zbędny. Czekamy na: kopie certyfikatów PDF, info które produkty objęte, EN 71 (zabawka) vs 14+ (dorosły).
+
+**DECYZJA:** Temat retail/CE prowadzi INNY ASYSTENT (checklista wejścia). Ten system trackuje tylko status certyfikatów od Rity. Nie ponosimy kosztów testów — fabryka ma. Retail potencjalnie odblokowany (Kaufland, PBS, Poczta Polska) po otrzymaniu dokumentacji.
+
+**DLACZEGO:** Game changer — koszt wejścia w retail = 0 PLN zamiast szacowanych 1 500-5 000 EUR. Retail to nowy kanał dystrybucji (wolumeny 10x B2B).
+
+**NASTĘPNY KROK:** Czekać na odpowiedź Rity z PDF certyfikatów + info o produktach objętych CE. ETA: 24-48h. Po otrzymaniu → przekazać drugiemu asystentowi do checklisty retail.
+
+---
+
+### [SYSTEM10H] 11.03.2026 (update 12.03) | STRATEGIA | MODUL SOFT — 2-FAZOWY MODEL (PILOT → KNOW-HOW)
+
+**KONTEKST:** Lena poleciła Modul Soft (firma IT, partner 1C, 40+ specjalistów, 200+ wdrożeń ERP, Łódź). Spotkanie z Olą (dyr. sprzedaży, kuma Leny). Nowy intel od Leny (12.03): Ola = analityk (księgowa→konsultant→analityk→dyr. sprzedaży). Właściciel = programista ("potężny umysł"). Mają 3 filary: programiści 1C, sysadmini (hosting+rutyna), konsulting (CRM+ERP). Mają własny produkt Kanban. Klienci: budżetowe (opór) + prywatne. Ola rozumie potrzebę AI.
+
+**DECYZJA:** Model 2-fazowy (zmiana z jednego Model C):
+• **Faza 1 — Pilot wewnętrzny:** 1-2 Bliźniaki v7.0 dla handlowców Oli @ 2 999 PLN/os. Standard, niski risk, 30 dni test. Total: 2 999-5 998 PLN.
+• **Faza 2 — Know-how transfer (po udanym pilocie):** Szkolenie 8 000 PLN + 3× co-delivery 2 500 PLN = 15 500 PLN. Zero royalty — MS ustala własne ceny (sugerowane 3 500-5 000 PLN/wdrożenie u ich klientów).
+• **Total potencjał Faza 1+2:** 18 500-21 500 PLN
+• ROI dla MS: 10 wdrożeń/rok × 3 500-5 000 PLN = 35-50k PLN przychodu. 2-3x ROI w roku 1.
+• Priorytet: ŚREDNI — czekamy na termin od Leny. NIE kosztem aktywnego pipeline.
+
+**DLACZEGO:** Faza 1 (pilot) obniża barierę wejścia — Ola testuje zanim zainwestuje w know-how. Potencjał 21.5k PLN z jednego deala (5x obecny rekord). MS ma 200+ klientów → jeśli ruszą z Fazą 2, to case study + skalowalny kanał sprzedaży.
+
+**NASTĘPNY KROK:** Odpowiedzieć Lenie: "Jestem gotowy, umów spotkanie z Olą (45 min)." Przed spotkaniem: demo pod branżę IT/ERP. Strategia: materialy/2026-03-11_modul_soft_strategy.md.
+
+---
+
+### [ARTNAPI] 10.03.2026 | OPERACJE | SPOTKANIE Z PIOTREM — ZAMÓWIENIA + STRATEGIA
+
+**KONTEKST:** Spotkanie Mateusz × Piotr 10.03. Omówiono zamówienia z Chin, cenniki, CE, koszty magazynowe, cele. Raport wysłany do Piotra i Nazara (Gmail draft).
+
+**DECYZJE:**
+1. **2 kontenery:** Kontener 1 = podobrazia. Kontener 2 = PBN + sztalugi (kod 3498)
+2. **Test lepszej gramatury 40x50:** 2 000 szt na próbę (cena do potwierdzenia @Rita). Dodać kod 3354
+3. **PBN bez ramy = cel retail:** Konkurencja nie ma. CE marking jako wyróżnik
+4. **Tempo vs kontener:** Obecne 8k/mies = pół kontenera. Pełny = 19k → potrzeba 10k+/mies lub wyższa składowa magazynowania
+5. **Inne towary (farby, pędzle):** Zbadać zapotrzebowanie, cenę, odbiorców — nie decydować teraz
+6. **Kartony mix (rozmiary w jednym kartonie):** Sprawdzić wpływ na cenę
+
+**DLACZEGO:** Kluczowe ustalenia operacyjne przed złożeniem zamówienia w Chinach.
+
+**NASTĘPNY KROK:** 4 pytania do Rity (gramatury, PBN ilości, CE, sztalugi wpływ na czas). Svitlana: próbki + reklamacje. Mateusz: kalkulator m³ + wielokrotności kartonów.
+
+---
+
+### [ARTNAPI] 10.03.2026 | OPERACJE | KOSZTY MAGAZYNOWE — KALKULACJA POD CEL
+
+**KONTEKST:** Ustalono z Piotrem metodologię liczenia kosztów magazynowych pod cel sprzedażowy.
+
+**DECYZJA:** Koszt wydania (45 PLN) i przechowania przeliczać per sztuka, pod cel powtarzalnej ilości sprzedaży (wydanie ÷ ilość na palecie × cel).
+
+**DLACZEGO:** Transparentna kalkulacja marży z uwzględnieniem realnych kosztów magazynu.
+
+**NASTĘPNY KROK:** Przeliczyć koszty magazynowe per produkt pod cel sprzedażowy. Mateusz, ten tydzień.
+
+---
+
+### [ARTNAPI] 10.03.2026 | OPERACJE | IAI — ZMIANA GRUPY RABATOWEJ
+
+**KONTEKST:** Podczas spotkania ustalono, że grupa rabatowa w IdoSell wymaga zmiany.
+
+**DECYZJA:** Zmienić grupę rabatową w IAI. Cel retail: PBN bez ramy (bo nikt nie ma + CE).
+
+**DLACZEGO:** Alignment z nową strategią retail PBN bez ramy.
+
+**NASTĘPNY KROK:** Zmienić konfigurację w IAI. Do ustalenia kto.
+
+---
+
+### [SHARED] 12.03.2026 | FINANSE | UMOWA NAPI × CQRE — PODPISANA ✅
+
+**KONTEKST:** Kamil Andrusz (CQRE) — współpraca na wdrożenie Chatwoot+n8n+AI dla NAPI/Unizo. Umowa podpisana. Spotkanie z Piotrem (Unizo/Napi) 12.03 — omówienie wdrożenia.
+
+**DECYZJA:**
+1. **Umowa podpisana** ✅ między Mateusz Sokólski AM a CQRE Kamil Andrusz
+2. **Faza 1:** 15 000 PLN netto → prowizja Mateusza ~4 500 PLN (30%)
+3. **Faza 2:** ~75 000 PLN netto → prowizja Mateusza ~22 500 PLN (30%)
+4. **Total prowizji:** ~27 000 PLN za odpowiednią część pracy
+
+**DLACZEGO:** Mateusz aktywnie pracuje w obu fazach (nie tylko finder's fee). 27k PLN = game changer finansowy.
+
+**NASTĘPNY KROK:** Realizacja Fazy 1 z Kamilem. Spotkanie z Piotrem odbyło się 12.03.
 
 ---
 

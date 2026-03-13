@@ -8,7 +8,7 @@
 
 **Rynek:** Hotele 3-5* z animacjami/warsztatami (resort, SPA, family)
 **Insight:** Hotele kupuja podobrazia ad hoc (Allegro, sklepy plastyczne, 15-25 PLN/szt). ZERO dedykowanego dostawcy B2B.
-**Nasz sweet spot:** 9,00 PLN/szt all-in z dostawa (paleta 360 szt) vs 15-25 PLN w detalu.
+**Nasz sweet spot:** 9,00 PLN/szt all-in z dostawa (paleta 320 szt) vs 15-25 PLN w detalu.
 **Decision chain:** Animator (champion) → Kierownik animacji → GM (budzet)
 **Sezonowosc:** Maj-wrzesien = peak (50-100 podobrazi/weekend). Ferie zimowe = mini-peak.
 **WorldHotel:** 10-12 marca 2026, Warszawa. 2 tygodnie.
@@ -124,7 +124,7 @@ Widzialem ze [FIRMA] robi eventy wine&paint w hotelach. Fajny model.
 
 Pytanie: ile teraz placiicie za podobrazia i skad je bierzecie?
 
-Dostarczamy podobrazia 40x50 (280g, potrojnie gruntowane) za 9 PLN netto all-in z dostawa. Przy 2 paletach (720 szt) — 8,20 PLN. Magazyn pod Warszawa, 10 000 sztuk na stanie. Zamowienie rano = paczka nastepnego dnia.
+Dostarczamy podobrazia 40x50 (280g, potrojnie gruntowane) za 9 PLN netto all-in z dostawa. Przy 2 paletach (640 szt) — 8,15 PLN. Magazyn pod Warszawa, 10 000 sztuk na stanie. Zamowienie rano = paczka nastepnego dnia.
 
 Przy 20 eventach miesiecznie po 20 osob = 400 ploten. Przy 9 PLN to 3 600 PLN/mies. Przy 15 PLN z Allegro to 6 000 PLN. Roznica: 2 400 PLN miesiecznie w kieszeni.
 
@@ -280,8 +280,8 @@ OBIEKCJA 1: "Mamy juz dostawce / kupujemy w [sklep]"
 "Jasne, nie namawiam do zmiany. Jedno pytanie — ile placiicie
 za sztuke? [SLUCHAJ]
 
-Bo u nas przy 120 sztukach to 10,31 PLN all-in, przy palecie
-360 szt — 9,00 PLN. Z dostawa wliczona.
+Bo u nas przy 120 sztukach to 10,30 PLN all-in, przy palecie
+320 szt — 9,00 PLN. Z dostawa wliczona.
 
 Przy 50 plonach tygodniowo w sezonie to roznica
 300-500 PLN na TYDZIEN.
@@ -352,9 +352,9 @@ sprawdzic czy doszlo. Dziekuje!"
    ┌─────────────────────────────────────┐
    │  ARTNAPI — Podobrazia B2B           │
    │                                     │
-   │  40x50: 10,31 PLN (120+ szt)        │
-   │         9,00 PLN (paleta 360 szt)   │
-   │         8,20 PLN (2 palety)         │
+   │  40x50: 10,30 PLN (120+ szt)        │
+   │         9,00 PLN (paleta 320 szt)   │
+   │         8,15 PLN (2 palety)         │
    │                                     │
    │  30x40: 7,46 PLN (120+ szt)         │
    │         6,75 PLN (paleta 480 szt)   │
@@ -539,18 +539,18 @@ Hej [IMIE],
 Jak rozmawalismy — wycena pod [HOTEL]:
 
 WARIANT A: 120 szt/mies. (kartony)
-→ 40x50: 10,31 PLN/szt all-in z dostawa
-→ Miesiecznie: 1 237 PLN netto
+→ 40x50: 10,30 PLN/szt all-in z dostawa
+→ Miesiecznie: 1 236 PLN netto
 
-WARIANT B: 360 szt/mies. (pelna paleta)
+WARIANT B: 320 szt/mies. (pelna paleta)
 → 40x50: 9,00 PLN/szt all-in z dostawa
-→ Miesiecznie: 3 240 PLN netto
-→ Oszczednosc vs kartony: 472 PLN/mies.
+→ Miesiecznie: 2 880 PLN netto
+→ Oszczednosc vs kartony: 416 PLN/mies.
 
-WARIANT C: 720 szt/mies. (2 palety)
-→ 40x50: 8,20 PLN/szt all-in z dostawa
-→ Miesiecznie: 5 904 PLN netto
-→ Oszczednosc vs kartony: 1 519 PLN/mies.
+WARIANT C: 640 szt/mies. (2 palety)
+→ 40x50: 8,15 PLN/szt all-in z dostawa
+→ Miesiecznie: 5 216 PLN netto
+→ Oszczednosc vs kartony: 1 376 PLN/mies.
 
 Zasady:
 - Ceny netto, all-in (zero dodatkowych kosztow)
@@ -600,7 +600,7 @@ Hej [IMIE],
 Rozumiem. Pytanie: ile teraz placisz za plotno 40x50?
 
 Jesli z Allegro — to 18-22 PLN. U nas 9 PLN all-in z dostawa
-(przy palecie 360 szt).
+(przy palecie 320 szt).
 
 Przy 200 plotnach miesiecznie to roznica 1 800 - 2 600 PLN.
 Rocznie: 21 000 - 31 000 PLN oszczednosci. Na tych samych plotnach.

@@ -1,6 +1,6 @@
 # BIBLIOTEKA SCENARIUSZY BLIŹNIAKA BIZNESOWEGO
 
-12 gotowych scenariuszy. Każdy referencuje `dna.md` jako źródło danych.
+16 gotowych scenariuszy. Każdy referencuje `dna.md` jako źródło danych.
 
 ---
 
@@ -188,4 +188,56 @@ Co odpowiedzieć?
 
 ---
 
-*Wersja: 2.0 | Data: 2026-02-09*
+## WF13: Deep Research
+
+**KIEDY:** Chcesz zbadać nowy segment rynku, konkurencję lub trend.
+**JAK:** Napisz "deep research" lub "zbadaj rynek [branża]" + podaj kontekst.
+**CO SPRAWDZA W DNA:** S1 (profil), S2 (klient), S3 (oferta)
+**PRZYKŁAD:**
+```
+Zbadaj rynek [branża] w Polsce — trendy, konkurencja, potencjał.
+Interesuje mnie ile firm w tym segmencie mogłoby kupić mój produkt.
+```
+
+---
+
+## WF14: Higiena folderu (File Health Check)
+
+**KIEDY:** Chcesz sprawdzić porządek w plikach po miesiącu używania.
+**JAK:** Napisz "higiena" lub "sprawdź porządek w plikach" lub "health check".
+**CO SPRAWDZA W DNA:** Wszystkie sekcje (sprawdzenie integralności)
+**PRZYKŁAD:**
+```
+Sprawdź porządek w plikach.
+```
+
+---
+
+## WF15: Rozwój biznesu (Business Growth)
+
+**KIEDY:** Chcesz zaplanować wzrost na następny kwartał.
+**JAK:** Napisz "rozwój" lub "plan na Q2" lub "jak zwiększyć przychód?".
+**CO SPRAWDZA W DNA:** S1 (profil), S2 (klient), S3 (oferta), S4 (zasady), S7 (procedury), S8 (workflow)
+**PRZYKŁAD:**
+```
+Plan na Q2. Chcę zwiększyć przychód o 30%.
+Obecni klienci: 12, średnia wartość: 3000 PLN.
+Nowe segmenty? Upsell? Ceny?
+```
+
+---
+
+## WF16: Radar szans (Opportunity Radar)
+
+**KIEDY:** Szukasz ukrytych szans przychodowych — co pomijasz, gdzie jest kasa.
+**JAK:** Napisz "radar" lub "co pomijam?" lub "gdzie jest kasa?".
+**CO SPRAWDZA W DNA:** S1-S8 + stan.md
+**PRZYKŁAD:**
+```
+Radar. Co pomijam? Gdzie jest kasa której nie widzę?
+Mam 8 klientów, robię głównie usługi wdrożeniowe.
+```
+
+---
+
+*Wersja: 3.0 | Data: 2026-03-12*

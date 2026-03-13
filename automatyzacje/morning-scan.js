@@ -394,6 +394,51 @@ async function run() {
   }
   md.push('');
 
+  // --- SUGESTIE: niewykorzystane możliwości systemu (max 5) ---
+  const suggestions = [];
+  const dow = now.getDay(); // 1=Mon ... 5=Fri
+
+  // 1. Poniedziałek: @recon targets
+  if (dow === 1) {
+    suggestions.push('PON: @recon moze wygenerowac 10 targetow z Google Maps/BIP. Wpisz "@recon [segment]"');
+  }
+
+  // 2. Content: brak postów LinkedIn (mid-week reminder)
+  if (dow === 3 || dow === 5) {
+    suggestions.push('CONTENT: Masz @content + carousel-generator. 1 post/tydz na LinkedIn = inbound leady. Wpisz "@content"');
+  }
+
+  // 3. Pipeline scoring: piątek
+  if (dow === 5) {
+    suggestions.push('SCORING: @pipeline moze policzyc Pipeline Velocity i BANT scoring. Wpisz "@pipeline"');
+  }
+
+  // 4. Batch outreach: leads w CRM bez outreachu
+  const noContact = active.filter(l => !l.lastContact);
+  if (noContact.length > 3) {
+    suggestions.push(`BATCH: ${noContact.length} leadow w CRM BEZ kontaktu. @ghost moze przygotowac batch maili w 5 min`);
+  }
+
+  // 5. Restock: AM klienci (poniedziałek info)
+  if (dow === 1 && am.length > 0) {
+    suggestions.push(`RESTOCK: restock-reminder.js sprawdzi ${am.length} klientow AM o 9:00. Drafty w Gmail.`);
+  }
+
+  // 6. Overdue cleanup
+  const criticalOverdue = overdue.filter(l => daysDiff(now, l.due) >= 14);
+  if (criticalOverdue.length > 3) {
+    suggestions.push(`CZYSTKA: ${criticalOverdue.length} leadow >14 dni overdue. Zamroz lub breakup — nie pompuj pipeline`);
+  }
+
+  if (suggestions.length > 0) {
+    md.push('## SUGESTIE — niewykorzystane mozliwosci');
+    md.push('');
+    for (const s of suggestions.slice(0, 5)) {
+      md.push(`- ${s}`);
+    }
+    md.push('');
+  }
+
   // --- WRITE FEED FILE ---
   const feedContent = md.join('\n');
   writeFileSync(FEED_PATH, feedContent, 'utf-8');

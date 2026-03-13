@@ -33,14 +33,14 @@ Sklepy i Sprzedawcy, którzy chcą importowych cen, ale polskiej obsługi, ręko
 * **Sztalugi:** Import "economy" (szary karton) - idealny tani upsell.
 * **Logistyka:** Magazyn Sokołów (Polska). Wysyłka 24h. Dostawa WLICZONA w cenę.
 
-### CENNIK PODOBRAZIA 40x50 (360 szt./paleta) — netto, all-in z dostawą
+### CENNIK PODOBRAZIA 40x50 (320 szt./paleta) — netto, all-in z dostawą
 
 | Próg | Ilość | Cena netto | Marża handlowca/szt |
 |------|-------|-----------|---------------------|
-| KARTONY | 120–359 szt | **10,31 PLN** | 1,12 PLN |
-| 1 PALETA | 360 szt | **9,00 PLN** | 1,10 PLN |
-| 2 PALETY | 720 szt | **8,20 PLN** | 1,18 PLN |
-| 3 PALETY | 1080 szt | **7,31 PLN** | 0,73 PLN |
+| KARTONY | 120–319 szt | **10,30 PLN** | 1,37 PLN |
+| 1 PALETA | 320 szt | **9,00 PLN** | 1,28 PLN |
+| 2 PALETY | 640 szt | **8,15 PLN** | 1,46 PLN |
+| 3 PALETY | 960 szt | **7,30 PLN** | 1,08 PLN |
 
 ### CENNIK PODOBRAZIA 30x40 (480 szt./paleta) — netto, all-in z dostawą
 
@@ -52,7 +52,7 @@ Sklepy i Sprzedawcy, którzy chcą importowych cen, ale polskiej obsługi, ręko
 | 3 PALETY | 1440 szt | **4,97 PLN** | 0,50 PLN |
 
 **Zasada dla Klienta:**
-"Chcesz najlepszą cenę? Zamów pełne palety. Przy zamówieniu 500 szt: 360 × 9,00 + 140 × 10,31. Lepiej dobierz do 720 — cena spada do 8,20 all-in."
+"Chcesz najlepszą cenę? Zamów pełne palety. Przy zamówieniu 500 szt: 320 × 9,00 + 180 × 10,30. Lepiej dobierz do 640 — cena spada do 8,15 all-in."
 
 ---
 
@@ -169,12 +169,12 @@ Mateusz broni WARTOŚCI, nie ceny. Przyznaje rację, tłumaczy logicznie, kładz
 | Phoenix 1000 szt | 8,85 | ❌ + transport | ~9,40-9,95 | ⚠️ Problemy z dostępnością |
 | Phoenix flat | 9,00 | ❌ + transport | ~9,55-10,10 | ⚠️ Braki towaru (CNY luka) |
 | **ARTNAPI 1 pal** | **9,00** | **✅ tak** | **9,00** | ✅ |
-| **ARTNAPI kartony** | **10,31** | **✅ tak** | **10,31** | ✅ |
+| **ARTNAPI kartony** | **10,30** | **✅ tak** | **10,30** | ✅ |
 | Artmaker | 11,00 | ? | ~11,50+ | Aktywny |
 | Koh-i-noor | 11,82 | ✅ od 100 szt | 11,82 | Ograniczone stany |
 
 **Pozycjonowanie (deep research 23.02):**
-- Od palety (360 szt) w górę = **ARTNAPI TAŃSZY niż Phoenix** po doliczeniu transportu
+- Od palety (320 szt) w górę = **ARTNAPI TAŃSZY niż Phoenix** po doliczeniu transportu
 - Pod paletą = Phoenix na papierze tańszy, ale: braki towaru + transport = realna cena wyższa
 - Argument: "U nas 9,00 to FINALNA cena z dostawą pod drzwi. U Phoenixa 9,00 + transport palety 200-400 PLN."
 
@@ -187,9 +187,9 @@ Mateusz broni WARTOŚCI, nie ceny. Przyznaje rację, tłumaczy logicznie, kładz
 ### TAKTYKA PALETOWA (obowiązkowa od 23.02)
 
 ```
-Gdy klient pyta o kartony (120-359 szt @ 10,31):
-→ "Przy 360 szt cena spada do 9,00 all-in z dostawą.
-   Różnica 1,31/szt × 360 = 472 PLN oszczędności.
+Gdy klient pyta o kartony (120-319 szt @ 10,30):
+→ "Przy 320 szt cena spada do 9,00 all-in z dostawą.
+   Różnica 1,30/szt × 320 = 416 PLN oszczędności.
    Dobierzecie do palety?"
 
 Gdy klient porównuje z Phoenix:
@@ -199,44 +199,73 @@ Gdy klient porównuje z Phoenix:
 
 ---
 
-## 🌍 CENNIK CEE / EXPORT (EUR netto)
+## 🌍 CENNIK CEE / EXPORT (EUR netto, ALL-IN z dostawą)
 
 **Kalkulator online:** https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-**Kurs:** 1 PLN = 0.2287 EUR (4.38 PLN/EUR)
+**Cennik HTML:** materialy-artnapi/cennik_artnapi_2026_EUR.html (per-country, do wysłania klientom)
+**Kurs:** 1 EUR = 4.30 PLN
+**Model:** Ceny ALL-IN (produkt + magazyn + wydanie + dostawa do miasta klienta). Zero dodatkowych kosztów.
+**Formuła:** COGS = baseCost + delivery + storage + picking → FLOOR = COGS × 1.25 → tier markup
+**Delivery:** Palety = palletCost / palletQty | KARTONY 40x50/30x40 = boxCost / 40 (realne koszty paczek od 10.03.2026)
 
-### PODOBRAZIA 40x50 (EUR/szt, BEZ transportu)
+### PODOBRAZIA 40x50 — per country (EUR/szt, ALL-IN z dostawą)
 
-| Próg | Ilość | Cena EUR netto |
-|------|-------|---------------|
-| KARTONY | 1-359 | **€9.77** |
-| 1 PALETA | 360-719 | **€8.46** |
-| 2 PALETY | 720-1079 | **€7.61** |
-| 3+ PALETY | 1080+ | **€7.30** |
+| Kraj | Kartony | 1 Paleta | 2 Palety | 3+ Palety |
+|------|---------|----------|----------|-----------|
+| 🇨🇿 CZ (Prague) | **€2.33** | **€2.03** | **€1.87** | **€1.62** |
+| 🇸🇰 SK (Bratislava) | **€2.36** | **€2.25** | **€2.07** | **€1.80** |
+| 🇭🇺 HU (Budapest) | **€2.36** | **€2.16** | **€1.99** | **€1.73** |
+| 🇱🇹 LT (Vilnius) | **€2.31** | **€2.04** | **€1.88** | **€1.63** |
+| 🇱🇻 LV (Riga) | **€2.32** | **€2.11** | **€1.95** | **€1.69** |
+| 🇪🇪 EE (Tallinn) | **€2.35** | **€2.21** | **€2.03** | **€1.76** |
+| 🇷🇴 RO (Bucharest) | **€2.70** | **€2.41** | **€2.21** | **€1.92** |
 
-### PODOBRAZIA 30x40 (EUR/szt, BEZ transportu)
+### PODOBRAZIA 30x40 — per country (EUR/szt, ALL-IN z dostawą)
 
-| Próg | Ilość | Cena EUR netto |
-|------|-------|---------------|
-| KARTONY | 1-479 | **€7.05** |
-| 1 PALETA | 480-959 | **€6.34** |
-| 2 PALETY | 960-1439 | **€5.70** |
-| 3+ PALETY | 1440+ | **€4.56** |
+| Kraj | Kartony | 1 Paleta | 2 Palety | 3+ Palety |
+|------|---------|----------|----------|-----------|
+| 🇨🇿 CZ (Prague) | **€1.86** | **€1.60** | **€1.45** | **€1.18** |
+| 🇸🇰 SK (Bratislava) | **€1.89** | **€1.77** | **€1.58** | **€1.31** |
+| 🇭🇺 HU (Budapest) | **€1.89** | **€1.70** | **€1.53** | **€1.26** |
+| 🇱🇹 LT (Vilnius) | **€1.84** | **€1.61** | **€1.45** | **€1.19** |
+| 🇱🇻 LV (Riga) | **€1.85** | **€1.67** | **€1.50** | **€1.23** |
+| 🇪🇪 EE (Tallinn) | **€1.88** | **€1.74** | **€1.55** | **€1.29** |
+| 🇷🇴 RO (Bucharest) | **€2.23** | **€1.90** | **€1.67** | **€1.41** |
 
-### TRANSPORT (EUR netto, per przesyłka)
+### KOSZTY PALET per kraj (PLN, źródło: 1000pcs offer)
 
-| Miasto | Paleta | Karton |
-|--------|--------|--------|
-| Vilnius (LT) | €103 | €46.78 |
-| Kowno (LT) | €116 | — |
-| Ryga (LV) | €120 | €47.84 |
-| Tallin (EE) | €141 | €51.90 |
-| Praga (CZ) | €100 | €49.88 |
-| Bratysława (SK) | €151 | €53.63 |
-| Budapeszt (HU) | €131 | €54.00 |
-| Bukareszt (RO) | €187 | €100.15 |
+| Kraj | Koszt palety (PLN) |
+|------|--------------------|
+| CZ | 430 |
+| SK | 649.3 |
+| HU | 563.3 |
+| LT | 442.9 |
+| LV | 516 |
+| EE | 606.3 |
+| RO | 804.1 |
+| PL (domestic) | 155 |
 
-**Zasada CSO:** NIE podawaj cen EUR w mailu — kieruj na kalkulator. Ceny mogą się zmienić.
-**Wzorzec w mailu:** "Check exact pricing for your city: [link do kalkulatora]"
+### KOSZTY PACZEK per kraj (PLN/box, 40 szt per box)
+
+| Kraj | Koszt paczki (PLN) |
+|------|--------------------|
+| CZ | 49.88 |
+| SK | 53.63 |
+| HU | 54.00 |
+| LT | 46.78 |
+| LV | 47.84 |
+| EE | 51.90 |
+| RO | 100.15 |
+
+**Uwaga:** Ceny KARTONY od 10.03.2026 kalkulowane z realnym kosztem paczki (nie prorata z palety). Dotyczy tylko 40x50 i 30x40.
+
+**Zasada CSO:** ZAWSZE kieruj na kalkulator online (priorytet) LUB wyślij cennik HTML jako załącznik (fallback).
+**URL kalkulatora:** https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
+**Wzorzec PL:** "Przygotowałem interaktywny kalkulator cen — wybierz produkt i ilość, zobaczysz cenę all-in z dostawą: [URL]"
+**Wzorzec EN (CEE):** "I've prepared an interactive price calculator — select your country to see all-in pricing incl. delivery: [URL]"
+**PKE Mail 2 (po zgodzie):** "Przygotowałem dla Was interaktywny kalkulator cen: [URL]. Wybierz produkt, ilość — zobaczysz cenę all-in z dostawą. Chętnie omówię szczegóły telefonicznie."
+**Pełna lista produktów w EUR:** 9 produktów (4 podobrazia, 2 panele, 3 PBN/hobby) — patrz cennik HTML lub kalkulator.
+**GHOST GATE:** Każda wiadomość wychodząca z linkiem do kalkulatora MUSI przejść przez @ghost (ghost_styl.md B2B/EN).
 
 ---
 

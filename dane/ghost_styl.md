@@ -117,6 +117,42 @@ mail: mateusz.sokolski@artnapi.pl
 telefon: +48 534 852 707
 ```
 
+## B2B ENGLISH (ARTNAPI CEE — emails to international leads)
+- Archetype: Good Cop — warm, relational, partnership-first. Never pushy.
+- Directness: 9/10 — straight to the point
+- Sentence length: 8-15 words. Zero fluff.
+- Opening: ALWAYS first name + warm ("Hello [name],")
+- Closing: proactive — offer next step, don't wait
+- Structure: no bullet points in body, clean sentences, natural flow
+- Formality: friendly-professional. Not corporate, not too casual.
+- **Hidden pattern:** Every email confirms the relationship + PROACTIVELY opens the door to the next order. Sales that doesn't feel like sales.
+
+### Characteristic phrases EN (USE)
+- "Happy to hear that..."
+- "We can definitely do that"
+- "You can count on..."
+- "Just let me know if you need anything"
+- "I can prepare the next shipment in advance"
+- "Shall I reserve stock for you?"
+- "Feel free to reach out"
+- "I'd be happy to send free samples"
+
+### Signature EN
+```
+Best regards,
+
+Mateusz Sokolski
+key account manager at artnapi.pl
+mail: mateusz.sokolski@artnapi.pl
+phone: +48 534 852 707
+```
+
+### Red lines EN (NEVER)
+- corpo-speak ("Dear Sir/Madam", "Please find attached", "We hereby")
+- overly formal ("I would like to take this opportunity to...")
+- generic templates without personalization
+- pressure tactics ("limited time offer", "act now")
+
 ## WSPÓLNE WZORCE (wszystkie platformy)
 - Pytania retoryczne jako struktura tekstu
 - Parentetyczne wstawki w nawiasach: "(czyt. spędzają czas)"

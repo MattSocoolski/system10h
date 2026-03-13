@@ -132,8 +132,28 @@ export function parseNotionLead(page) {
     due: getDate(p['Due']),
     lastContact: getDate(p['ostatni kontakt']),
     notes: getText(p['notatki']),
-    summary: getText(p['Summary'])
+    summary: getText(p['Summary']),
+    tag: getSelect(p['tag_klienta'])
   };
+}
+
+// --- Language detection ---
+export function isForeignLead(lead) {
+  const country = (lead.country || '').toUpperCase();
+  // Explicit country set and not Poland
+  if (country && country !== 'PL' && country !== 'POLSKA' && country !== 'POLAND') {
+    return true;
+  }
+  // Fallback: check email TLD for known EU country domains
+  if (!country && lead.email) {
+    const tld = lead.email.split('.').pop().toLowerCase();
+    const foreignTLDs = [
+      'cz', 'sk', 'hu', 'lt', 'lv', 'ee', 'de', 'nl', 'fr', 'se', 'dk',
+      'at', 'ro', 'bg', 'hr', 'si', 'fi', 'no', 'be', 'pt', 'es', 'it', 'ie', 'uk', 'ch'
+    ];
+    return foreignTLDs.includes(tld);
+  }
+  return false;
 }
 
 // --- State persistence ---

@@ -374,7 +374,7 @@ TELEGRAM_BOT_TOKEN=xxxxx              # [JEST] ✅
 - **Base URL:** `https://docs.google.com/spreadsheets/d/e/2PACX-1vR-SUkz1MISFvx0tQGwO02bZenANU-90GYQT1OqxQDia4blrhg0_R7egEm4sqhMdi47HhcuipNo0z3i/pub?output=csv`
 - **Zakładki (dodaj &gid=X do URL):**
   - `gid=0` → 10/25 | `gid=1421765063` → 11/25 | `gid=1654399783` → 12/25
-  - `gid=1964597183` → 1/26 | `gid=2096709391` → 2/26
+  - `gid=1964597183` → 1/26 | `gid=2096709391` → 2/26 | `gid=32746766` → 3/26
 - **UWAGA:** URL robi redirect 307 — trzeba zrobić drugi WebFetch na redirect URL
 - **Status:** AKTYWNE
 - **Koszt:** Free (publiczny arkusz)

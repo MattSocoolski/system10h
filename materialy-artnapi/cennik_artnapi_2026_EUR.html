@@ -7,519 +7,284 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --purple:        #653C91;
-    --purple-dark:   #553285;
-    --purple-light:  #f3eef8;
-    --gold:          #FFC157;
-    --gold-light:    #fff8e8;
-    --green:         #27ae60;
-    --green-light:   #eaf7ed;
-    --gray:          #f7f7f8;
-    --gray-text:     #888;
-    --text:          #2d2d2d;
-  }
+:root {
+  --purple: #653C91;
+  --purple-dark: #553285;
+  --purple-light: #f3eef8;
+  --gold: #FFC157;
+  --gold-light: #fff8e8;
+  --green: #27ae60;
+  --green-light: #eaf7ed;
+  --gray: #f7f7f8;
+  --gray-text: #888;
+  --text: #2d2d2d;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Lexend',sans-serif; color:var(--text); background:#fff; max-width:800px; margin:0 auto; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* HEADER */
+.header { background:linear-gradient(135deg,var(--purple),var(--purple-dark)); color:#fff; padding:40px 40px 28px; text-align:center; }
+.header h1 { font-size:28px; font-weight:700; letter-spacing:-0.5px; margin-bottom:6px; }
+.header .brand { font-size:14px; font-weight:300; opacity:0.7; text-transform:uppercase; letter-spacing:3px; margin-bottom:16px; }
+.header .tagline { display:inline-block; background:rgba(255,255,255,0.15); padding:8px 20px; border-radius:100px; font-size:14px; font-weight:400; max-width:90%; line-height:1.4; margin-bottom:20px; }
 
-  body {
-    font-family: 'Lexend', sans-serif;
-    color: var(--text);
-    background: #fff;
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0;
-  }
+/* COUNTRY BAR */
+.country-bar { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; }
+.country-btn { background:rgba(255,255,255,0.12); border:2px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.7); font-family:inherit; font-size:13px; font-weight:500; padding:8px 18px; border-radius:100px; cursor:pointer; transition:all 0.2s; }
+.country-btn:hover { background:rgba(255,255,255,0.2); color:#fff; }
+.country-btn.active { background:rgba(255,255,255,0.95); color:var(--purple-dark); border-color:rgba(255,255,255,0.95); font-weight:600; }
+.country-select { background:rgba(255,255,255,0.12); border:2px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.7); font-family:inherit; font-size:13px; padding:8px 32px 8px 14px; border-radius:100px; cursor:pointer; outline:none; -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; transition:all 0.2s; }
+.country-select:hover { background-color:rgba(255,255,255,0.2); color:#fff; }
+.country-select.active { background-color:rgba(255,255,255,0.95); color:var(--purple-dark); border-color:rgba(255,255,255,0.95); font-weight:600; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%23553285' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); }
+.country-select option { background:#fff; color:var(--text); }
 
-  /* HEADER */
-  .header {
-    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
-    color: #fff;
-    padding: 40px 40px 32px;
-    text-align: center;
-  }
-  .header h1 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    margin-bottom: 6px;
-  }
-  .header .brand {
-    font-size: 14px;
-    font-weight: 300;
-    opacity: 0.7;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 16px;
-  }
-  .header .tagline {
-    display: inline-block;
-    background: rgba(255,255,255,0.15);
-    padding: 8px 20px;
-    border-radius: 100px;
-    font-size: 14px;
-    font-weight: 400;
-    max-width: 90%;
-    line-height: 1.4;
-  }
+/* SECTION HEADING */
+.section-heading { padding:28px 24px 8px; font-size:14px; font-weight:600; color:var(--purple-dark); text-transform:uppercase; letter-spacing:2px; border-top:2px solid #eee; margin-top:8px; }
+.section-heading.first { border-top:none; margin-top:0; }
 
-  /* PRODUCT SECTION */
-  .product-section {
-    padding: 32px 24px 8px;
-  }
-  .product-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--purple);
-    margin-bottom: 4px;
-  }
-  .product-subtitle {
-    font-size: 13px;
-    color: var(--gray-text);
-    margin-bottom: 4px;
-  }
-  .product-pallet-info {
-    font-size: 12px;
-    color: var(--gray-text);
-    margin-bottom: 20px;
-  }
+/* PRODUCT */
+.product-section { padding:20px 24px 8px; }
+.product-title { font-size:18px; font-weight:600; color:var(--purple); margin-bottom:4px; }
+.product-subtitle { font-size:13px; color:var(--gray-text); margin-bottom:4px; }
+.product-info { font-size:12px; color:var(--gray-text); margin-bottom:16px; }
 
-  /* TIER GRID */
-  .tiers {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-  }
+/* TIER GRID */
+.tiers { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:20px; }
+.tier { border-radius:12px; padding:18px 14px; text-align:center; position:relative; border:2px solid transparent; transition:transform 0.2s; }
+.tier:hover { transform:translateY(-2px); }
+.tier-name { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:6px; }
+.tier-qty { font-size:12px; font-weight:400; margin-bottom:12px; color:var(--gray-text); }
+.tier-price { font-size:26px; font-weight:700; line-height:1; margin-bottom:2px; }
+.tier-currency { font-size:12px; font-weight:400; color:var(--gray-text); margin-bottom:8px; }
+.tier-save { font-size:11px; font-weight:500; padding:3px 10px; border-radius:100px; display:inline-block; margin-bottom:6px; }
+.tier-delivery { font-size:10px; font-weight:500; color:var(--green); margin-top:2px; }
 
-  /* TIER CARD */
-  .tier {
-    border-radius: 12px;
-    padding: 20px 16px;
-    text-align: center;
-    position: relative;
-    border: 2px solid transparent;
-    transition: transform 0.2s;
-  }
-  .tier:hover {
-    transform: translateY(-2px);
-  }
+/* TIER VARIANTS */
+.tier.basic { background:var(--gray); border-color:#e8e8e8; }
+.tier.basic .tier-name { color:var(--gray-text); }
+.tier.basic .tier-price { color:var(--text); }
+.tier.basic .tier-save { display:none; }
+.tier.pal1 { background:var(--purple-light); border-color:#e4d5f0; }
+.tier.pal1 .tier-name { color:var(--purple); }
+.tier.pal1 .tier-price { color:var(--purple-dark); }
+.tier.pal1 .tier-save { background:#e4d5f0; color:var(--purple); }
+.tier.pal2 { background:linear-gradient(180deg,#f3eef8,#e9ddf4); border-color:var(--purple); }
+.tier.pal2 .tier-name { color:var(--purple-dark); }
+.tier.pal2 .tier-price { color:var(--purple-dark); }
+.tier.pal2 .tier-save { background:var(--purple); color:#fff; }
+.tier.best { background:linear-gradient(180deg,var(--gold-light),#ffecbf); border-color:var(--gold); box-shadow:0 4px 20px rgba(255,193,87,0.3); }
+.tier.best .tier-name { color:#b8860b; }
+.tier.best .tier-price { color:#8b6914; }
+.tier.best .tier-save { background:var(--gold); color:#5a4210; font-weight:600; }
+.best-badge { position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:var(--gold); color:#5a4210; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:3px 12px; border-radius:100px; white-space:nowrap; }
 
-  .tier-name {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
-  }
-  .tier-qty {
-    font-size: 13px;
-    font-weight: 400;
-    margin-bottom: 14px;
-    line-height: 1.3;
-  }
-  .tier-price {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 1;
-    margin-bottom: 2px;
-  }
-  .tier-currency {
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--gray-text);
-    margin-bottom: 10px;
-  }
-  .tier-save {
-    font-size: 12px;
-    font-weight: 500;
-    padding: 4px 10px;
-    border-radius: 100px;
-    display: inline-block;
-    margin-bottom: 8px;
-  }
+/* DIVIDER */
+.divider { border:none; border-top:1px solid #eee; margin:4px 24px; }
 
-  /* TIER VARIANTS */
-  .tier.basic {
-    background: var(--gray);
-    border-color: #e8e8e8;
-  }
-  .tier.basic .tier-name { color: var(--gray-text); }
-  .tier.basic .tier-price { color: var(--text); }
-  .tier.basic .tier-save { display: none; }
+/* FOOTER */
+.footer-benefits { margin:20px 24px; padding:18px 24px; background:var(--green-light); border-radius:12px; border-left:4px solid var(--green); }
+.footer-benefits p { font-size:14px; line-height:1.6; }
+.footer-benefits strong { color:var(--green); }
+.footer-note { text-align:center; padding:12px 24px; font-size:12px; color:var(--gray-text); }
+.footer-contact { background:var(--gray); padding:24px; text-align:center; border-top:1px solid #eee; }
+.footer-contact .name { font-size:16px; font-weight:600; color:var(--purple); margin-bottom:2px; }
+.footer-contact .role { font-size:13px; color:var(--gray-text); margin-bottom:8px; }
+.footer-contact .details { font-size:13px; color:var(--text); margin-bottom:4px; }
+.footer-contact .company { font-size:12px; color:var(--gray-text); margin-top:8px; }
 
-  .tier.pal1 {
-    background: var(--purple-light);
-    border-color: #e4d5f0;
-  }
-  .tier.pal1 .tier-name { color: var(--purple); }
-  .tier.pal1 .tier-price { color: var(--purple-dark); }
-  .tier.pal1 .tier-save {
-    background: #e4d5f0;
-    color: var(--purple);
-  }
-
-  .tier.pal2 {
-    background: linear-gradient(180deg, #f3eef8 0%, #e9ddf4 100%);
-    border-color: var(--purple);
-  }
-  .tier.pal2 .tier-name { color: var(--purple-dark); }
-  .tier.pal2 .tier-price { color: var(--purple-dark); }
-  .tier.pal2 .tier-save {
-    background: var(--purple);
-    color: #fff;
-  }
-
-  .tier.best {
-    background: linear-gradient(180deg, var(--gold-light) 0%, #ffecbf 100%);
-    border-color: var(--gold);
-    box-shadow: 0 4px 20px rgba(255,193,87,0.3);
-  }
-  .tier.best .tier-name { color: #b8860b; }
-  .tier.best .tier-price { color: #8b6914; }
-  .tier.best .tier-save {
-    background: var(--gold);
-    color: #5a4210;
-    font-weight: 600;
-  }
-
-  /* BEST PRICE BADGE */
-  .best-badge {
-    position: absolute;
-    top: -11px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--gold);
-    color: #5a4210;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 4px 14px;
-    border-radius: 100px;
-    white-space: nowrap;
-  }
-
-  /* DIVIDER */
-  .divider {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 0 24px;
-  }
-
-  /* TRANSPORT SECTION */
-  .transport-section {
-    padding: 32px 24px 8px;
-  }
-  .transport-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--purple);
-    margin-bottom: 4px;
-  }
-  .transport-subtitle {
-    font-size: 13px;
-    color: var(--gray-text);
-    margin-bottom: 20px;
-  }
-  .transport-table-wrap {
-    overflow-x: auto;
-    margin-bottom: 24px;
-  }
-  .transport-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-  }
-  .transport-table thead th {
-    background: #edeaf0;
-    color: var(--purple-dark);
-    font-weight: 600;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 2px solid #d9d1e2;
-  }
-  .transport-table thead th:not(:first-child) {
-    text-align: right;
-  }
-  .transport-table tbody td {
-    padding: 10px 16px;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  .transport-table tbody td:not(:first-child) {
-    text-align: right;
-    font-weight: 500;
-  }
-  .transport-table tbody tr:nth-child(even) {
-    background: var(--gray);
-  }
-  .transport-table tbody tr:hover {
-    background: var(--purple-light);
-  }
-  .transport-table .na {
-    color: var(--gray-text);
-    font-weight: 400;
-  }
-
-  /* FOOTER */
-  .footer-benefits {
-    margin: 20px 24px;
-    padding: 20px 24px;
-    background: var(--green-light);
-    border-radius: 12px;
-    border-left: 4px solid var(--green);
-  }
-  .footer-benefits p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--text);
-  }
-  .footer-benefits strong {
-    color: var(--green);
-  }
-
-  .footer-note {
-    text-align: center;
-    padding: 12px 24px;
-    font-size: 12px;
-    color: var(--gray-text);
-  }
-
-  .footer-contact {
-    background: var(--gray);
-    padding: 24px;
-    text-align: center;
-    border-top: 1px solid #eee;
-  }
-  .footer-contact .name {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--purple);
-    margin-bottom: 2px;
-  }
-  .footer-contact .role {
-    font-size: 13px;
-    color: var(--gray-text);
-    margin-bottom: 8px;
-  }
-  .footer-contact .details {
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 4px;
-  }
-  .footer-contact .company {
-    font-size: 12px;
-    color: var(--gray-text);
-    margin-top: 8px;
-  }
-
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    .tiers {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    .header { padding: 28px 20px 24px; }
-    .header h1 { font-size: 22px; }
-    .product-section { padding: 24px 16px 8px; }
-    .transport-section { padding: 24px 16px 8px; }
-    .tier-price { font-size: 24px; }
-    .divider { margin: 0 16px; }
-    .footer-benefits { margin: 16px; }
-    .transport-table { font-size: 13px; }
-    .transport-table thead th,
-    .transport-table tbody td { padding: 8px 12px; }
-  }
-
-  @media print {
-    body { max-width: 100%; }
-    .tier:hover { transform: none; }
-    .transport-table tbody tr:hover { background: inherit; }
-  }
+@media (max-width:640px) {
+  .tiers { grid-template-columns:repeat(2,1fr); gap:10px; }
+  .header { padding:28px 20px 24px; }
+  .header h1 { font-size:22px; }
+  .product-section { padding:16px 16px 8px; }
+  .section-heading { padding:24px 16px 6px; }
+  .tier-price { font-size:22px; }
+  .divider { margin:4px 16px; }
+  .footer-benefits { margin:16px; }
+}
+@media print {
+  body { max-width:100%; }
+  .tier:hover { transform:none; }
+  .country-bar { display:none; }
+}
 </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
 <div class="header">
   <div class="brand">Artnapi</div>
-  <h1>B2B Price List 2026</h1>
-  <div class="tagline">One price &mdash; delivery included within Poland. Transport to CEE &mdash; see table below.</div>
-</div>
-
-<!-- ===== STRETCHED CANVASES 40x50 ===== -->
-<div class="product-section">
-  <div class="product-title">Stretched Canvases 40&times;50 cm</div>
-  <div class="product-subtitle">Adr&eacute; Art&oacute; &mdash; cotton 280g, pine stretcher bars, triple-primed</div>
-  <div class="product-pallet-info">Pallet = 360 pcs &nbsp;|&nbsp; Carton = 40 pcs</div>
-
-  <div class="tiers">
-
-    <div class="tier basic">
-      <div class="tier-name">Cartons</div>
-      <div class="tier-qty">1&ndash;359 pcs</div>
-      <div class="tier-price">&euro;9.77</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save"></div>
-    </div>
-
-    <div class="tier pal1">
-      <div class="tier-name">1 Pallet</div>
-      <div class="tier-qty">360 pcs</div>
-      <div class="tier-price">&euro;8.46</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save">&minus;13%</div>
-    </div>
-
-    <div class="tier pal2">
-      <div class="tier-name">2 Pallets</div>
-      <div class="tier-qty">720 pcs</div>
-      <div class="tier-price">&euro;7.61</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save">&minus;22%</div>
-    </div>
-
-    <div class="tier best">
-      <div class="best-badge">Best Price</div>
-      <div class="tier-name">3+ Pallets</div>
-      <div class="tier-qty">1,080+ pcs</div>
-      <div class="tier-price">&euro;7.30</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save">&minus;25%</div>
-    </div>
-
+  <h1 id="title">B2B Price List 2026</h1>
+  <div class="tagline" id="tagline">All-in pricing &mdash; delivery to Prague included</div>
+  <div class="country-bar">
+    <button class="country-btn" id="plBtn" onclick="setCountry('pl')">&#127477;&#127473; PLN</button>
+    <select class="country-select active" id="countrySel" onchange="setCountry(this.value)">
+      <option value="" disabled>&#127758; EUR &mdash; select country</option>
+      <option value="cz" selected>&#127464;&#127487; Czech Republic</option>
+      <option value="sk">&#127480;&#127472; Slovakia</option>
+      <option value="hu">&#127469;&#127482; Hungary</option>
+      <option value="lt">&#127473;&#127481; Lithuania</option>
+      <option value="lv">&#127473;&#127483; Latvia</option>
+      <option value="ee">&#127466;&#127466; Estonia</option>
+      <option value="ro">&#127479;&#127476; Romania</option>
+    </select>
   </div>
 </div>
 
-<hr class="divider">
+<div id="products"></div>
 
-<!-- ===== STRETCHED CANVASES 30x40 ===== -->
-<div class="product-section">
-  <div class="product-title">Stretched Canvases 30&times;40 cm</div>
-  <div class="product-subtitle">Adr&eacute; Art&oacute; &mdash; cotton 280g, pine stretcher bars, triple-primed</div>
-  <div class="product-pallet-info">Pallet = 480 pcs &nbsp;|&nbsp; Carton = 40 pcs</div>
-
-  <div class="tiers">
-
-    <div class="tier basic">
-      <div class="tier-name">Cartons</div>
-      <div class="tier-qty">1&ndash;479 pcs</div>
-      <div class="tier-price">&euro;7.05</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save"></div>
-    </div>
-
-    <div class="tier pal1">
-      <div class="tier-name">1 Pallet</div>
-      <div class="tier-qty">480 pcs</div>
-      <div class="tier-price">&euro;6.34</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save">&minus;10%</div>
-    </div>
-
-    <div class="tier pal2">
-      <div class="tier-name">2 Pallets</div>
-      <div class="tier-qty">960 pcs</div>
-      <div class="tier-price">&euro;5.70</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save">&minus;19%</div>
-    </div>
-
-    <div class="tier best">
-      <div class="best-badge">Best Price</div>
-      <div class="tier-name">3+ Pallets</div>
-      <div class="tier-qty">1,440+ pcs</div>
-      <div class="tier-price">&euro;4.56</div>
-      <div class="tier-currency">EUR net / pc</div>
-      <div class="tier-save">&minus;35%</div>
-    </div>
-
-  </div>
-</div>
-
-<hr class="divider">
-
-<!-- ===== TRANSPORT COSTS ===== -->
-<div class="transport-section">
-  <div class="transport-title">Transport Costs to CEE</div>
-  <div class="transport-subtitle">EUR net per shipment, ex-works Poland</div>
-
-  <div class="transport-table-wrap">
-    <table class="transport-table">
-      <thead>
-        <tr>
-          <th>Destination</th>
-          <th>Pallet</th>
-          <th>Carton</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Prague (CZ)</td>
-          <td>&euro;100</td>
-          <td>&euro;49.88</td>
-        </tr>
-        <tr>
-          <td>Budapest (HU)</td>
-          <td>&euro;131</td>
-          <td>&euro;54.00</td>
-        </tr>
-        <tr>
-          <td>Bratislava (SK)</td>
-          <td>&euro;151</td>
-          <td>&euro;53.63</td>
-        </tr>
-        <tr>
-          <td>Vilnius (LT)</td>
-          <td>&euro;103</td>
-          <td>&euro;46.78</td>
-        </tr>
-        <tr>
-          <td>Kaunas (LT)</td>
-          <td>&euro;116</td>
-          <td class="na">&mdash;</td>
-        </tr>
-        <tr>
-          <td>Riga (LV)</td>
-          <td>&euro;120</td>
-          <td>&euro;47.84</td>
-        </tr>
-        <tr>
-          <td>Tallinn (EE)</td>
-          <td>&euro;141</td>
-          <td>&euro;51.90</td>
-        </tr>
-        <tr>
-          <td>Bucharest (RO)</td>
-          <td>&euro;187</td>
-          <td>&euro;100.15</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ===== FOOTER ===== -->
-<div class="footer-benefits">
-  <p>
-    <strong>Simple rule:</strong> order by pallet &mdash; get the best price and transparent pricing.
-    All prices EUR net, ex-works Poland. 10,000+ pcs in stock, dispatch within 24h, EU invoice, warranty.
-  </p>
-</div>
-
-<div class="footer-note">
-  Prices valid from March 2026. Transport quoted separately &mdash; see table above. This price list does not constitute a commercial offer.
-</div>
-
+<div class="footer-benefits"><p id="benefitsText"></p></div>
+<div class="footer-note" id="footerNote"></div>
 <div class="footer-contact">
   <div class="name">Mateusz Sok&oacute;lski</div>
-  <div class="role">Artnapi &mdash; Key Account Manager</div>
+  <div class="role" id="role">Artnapi &mdash; Key Account Manager</div>
   <div class="details">+48 534 852 707 &nbsp;|&nbsp; mateusz.sokolski@artnapi.pl</div>
-  <div class="company">Napi sp. z o.o. &middot; artnapi.pl &middot; S&#261;siedzka 3 D11-D12, 05-806 Sok&oacute;l&oacute;w</div>
+  <div class="company">NAPI sp. z o.o. &middot; artnapi.pl &middot; S&#261;siedzka 3 D11-D12, 05-806 Sok&oacute;l&oacute;w</div>
 </div>
 
+<script>
+const EUR_RATE = 4.3;
+const C = {
+  pl:{name:'Polska',city:'',pallet:155,box:0,cur:'PLN',rate:1},
+  cz:{name:'Czech Republic',city:'Prague',pallet:430,box:49.88,cur:'EUR',rate:4.3},
+  sk:{name:'Slovakia',city:'Bratislava',pallet:649.3,box:53.63,cur:'EUR',rate:4.3},
+  hu:{name:'Hungary',city:'Budapest',pallet:563.3,box:54.00,cur:'EUR',rate:4.3},
+  lt:{name:'Lithuania',city:'Vilnius',pallet:442.9,box:46.78,cur:'EUR',rate:4.3},
+  lv:{name:'Latvia',city:'Riga',pallet:516,box:47.84,cur:'EUR',rate:4.3},
+  ee:{name:'Estonia',city:'Tallinn',pallet:606.3,box:51.90,cur:'EUR',rate:4.3},
+  ro:{name:'Romania',city:'Bucharest',pallet:804.1,box:100.15,cur:'EUR',rate:4.3},
+};
+
+const P = [
+  {id:'c40',g:'canvas',n:{pl:'Podobrazia 40\u00d750 cm',en:'Stretched Canvases 40\u00d750 cm'},s:{pl:'Adr\u00e9 Art\u00f3 \u2014 bawe\u0142na 280g, krosna sosnowe, potr\u00f3jny grunt',en:'Adr\u00e9 Art\u00f3 \u2014 cotton 280g, pine stretcher bars, triple-primed'},bc:3.95,st:0.375,pk:0.08,pq:320,cq:40,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:120,max:319,tp:'add',v:3},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:320,max:639,tp:'mult',v:1.25},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:640,max:959,tp:'mult',v:1.15},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:960,max:99999,tp:'floor',v:0}]},
+  {id:'c30',g:'canvas',n:{pl:'Podobrazia 30\u00d740 cm',en:'Stretched Canvases 30\u00d740 cm'},s:{pl:'Adr\u00e9 Art\u00f3 \u2014 bawe\u0142na 280g, krosna sosnowe, potr\u00f3jny grunt',en:'Adr\u00e9 Art\u00f3 \u2014 cotton 280g, pine stretcher bars, triple-primed'},bc:2.84,st:0.28,pk:0.05,pq:480,cq:40,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:120,max:479,tp:'add',v:2.49},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:480,max:959,tp:'mult',v:1.35},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:960,max:1439,tp:'add',v:1.14},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:1440,max:99999,tp:'floor',v:0}]},
+  {id:'c20x30',g:'canvas',n:{pl:'Podobrazia 20\u00d730 cm',en:'Stretched Canvases 20\u00d730 cm'},s:{pl:'Adr\u00e9 Art\u00f3 \u2014 bawe\u0142na 280g, krosna sosnowe, potr\u00f3jny grunt',en:'Adr\u00e9 Art\u00f3 \u2014 cotton 280g, pine stretcher bars, triple-primed'},bc:2.29,st:0.375,pk:0.06,pq:720,cq:40,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:120,max:719,tp:'add',v:3.02},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:720,max:1439,tp:'add',v:1.81},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:1440,max:2159,tp:'add',v:0.86},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:2160,max:99999,tp:'floor',v:0}]},
+  {id:'c20x20',g:'canvas',n:{pl:'Podobrazia 20\u00d720 cm',en:'Stretched Canvases 20\u00d720 cm'},s:{pl:'Adr\u00e9 Art\u00f3 \u2014 bawe\u0142na 280g, krosna sosnowe, potr\u00f3jny grunt',en:'Adr\u00e9 Art\u00f3 \u2014 cotton 280g, pine stretcher bars, triple-primed'},bc:1.79,st:0.375,pk:0.06,pq:1200,cq:40,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:120,max:1199,tp:'add',v:3.02},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:1200,max:2399,tp:'add',v:1.81},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:2400,max:3599,tp:'add',v:0.86},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:3600,max:99999,tp:'floor',v:0}]},
+  {id:'pn30',g:'panel',n:{pl:'Panel 30\u00d740 (zestaw 8 szt)',en:'30\u00d740 Panel (8 pcs set)'},s:{pl:'Deska 3mm \u00b7 zestaw 8 paneli \u00b7 gotowe do malowania',en:'3mm board \u00b7 set of 8 panels \u00b7 ready to paint'},bc:14.46,st:0.39,pk:0.05,pq:300,cq:18,u:{pl:'zest.',en:'sets'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:18,max:299,tp:'add',v:5},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:300,max:599,tp:'add',v:4.06},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:600,max:1199,tp:'add',v:1.14},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:1200,max:99999,tp:'floor',v:0}]},
+  {id:'pn40',g:'panel',n:{pl:'Panel 40\u00d750 (zestaw 3 szt)',en:'40\u00d750 Panel (3 pcs set)'},s:{pl:'Deska 3mm \u00b7 zestaw 3 paneli \u00b7 gotowe do malowania',en:'3mm board \u00b7 set of 3 panels \u00b7 ready to paint'},bc:3.18,st:0.39,pk:0.05,pq:336,cq:18,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:18,max:335,tp:'add',v:2.78},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:336,max:671,tp:'add',v:1.74},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:672,max:1007,tp:'add',v:1.14},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:1008,max:99999,tp:'floor',v:0}]},
+  {id:'pbnf',g:'pbn',n:{pl:'PBN 40\u00d750 (na ramie)',en:'PBN 40\u00d750 (framed)'},s:{pl:'Malowanie po numerach \u00b7 p\u0142\u00f3tno + farby + p\u0119dzle \u00b7 na ramie',en:'Paint by numbers \u00b7 canvas + paints + brushes \u00b7 framed'},bc:11.0,st:0.375,pk:0.06,pq:180,cq:30,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:30,max:179,tp:'add',v:10},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:180,max:359,tp:'add',v:7},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:360,max:539,tp:'add',v:5.03},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:540,max:99999,tp:'add',v:2}]},
+  {id:'pbnu',g:'pbn',n:{pl:'PBN 40\u00d750 (bez ramy)',en:'PBN 40\u00d750 (unframed)'},s:{pl:'Malowanie po numerach \u00b7 p\u0142\u00f3tno + farby + p\u0119dzle \u00b7 bez ramy',en:'Paint by numbers \u00b7 canvas + paints + brushes \u00b7 unframed'},bc:7.8,st:0.375,pk:0.06,pq:450,cq:75,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:75,max:449,tp:'add',v:10},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:450,max:899,tp:'add',v:7},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:900,max:1349,tp:'add',v:5.03},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:1350,max:99999,tp:'add',v:2}]},
+  {id:'diam',g:'pbn',n:{pl:'Haft diamentowy',en:'Diamond Painting'},s:{pl:'Zestaw haft diamentowy \u00b7 pe\u0142en komplet materia\u0142\u00f3w',en:'Diamond painting kit \u00b7 complete set'},bc:7.8,st:0.375,pk:0.06,pq:1200,cq:120,u:{pl:'szt.',en:'pcs'},t:[
+    {n:{pl:'Kartony',en:'Cartons'},min:120,max:1199,tp:'add',v:10},
+    {n:{pl:'1 Paleta',en:'1 Pallet'},min:1200,max:2399,tp:'add',v:7},
+    {n:{pl:'2 Palety',en:'2 Pallets'},min:2400,max:3599,tp:'add',v:5.03},
+    {n:{pl:'3+ Palety',en:'3+ Pallets'},min:3600,max:99999,tp:'add',v:2}]},
+];
+
+const PLO = {
+  c40:[10.30,9.00,8.15,7.30], c30:[7.46,6.75,6.11,4.97],
+  c20x30:[6.70,5.49,4.54,3.68], c20x20:[5.96,4.75,3.80,2.94],
+  pn30:[24.27,23.33,20.41,19.27], pn40:[7.88,6.84,6.24,5.10],
+  pbnf:[25.37,22.37,20.40,17.37], pbnu:[20.72,17.72,15.75,12.72],
+  diam:[20.46,17.46,15.49,12.46],
+};
+
+function calc(d,i,pc,bc,r){
+  const t=d.t[i], isCrt=(i===0), hasBox=isCrt&&bc>0&&(d.id==='c40'||d.id==='c30');
+  const del=hasBox?(bc/40):(pc/d.pq), cogs=d.bc+del+d.st+d.pk, fl=cogs*1.25;
+  let p; if(t.tp==='add')p=fl+t.v; else if(t.tp==='mult')p=fl*t.v; else p=fl;
+  return Math.round((p/r)*100)/100;
+}
+function fmt(n,pl){return pl?n.toFixed(2).replace('.',','):n.toFixed(2);}
+function fI(n){return n>=1000?n.toLocaleString('en-US'):String(n);}
+
+let cc='cz';
+
+function setCountry(c){
+  if(!c)return; cc=c;
+  const pb=document.getElementById('plBtn'),sl=document.getElementById('countrySel');
+  if(c==='pl'){pb.classList.add('active');sl.classList.remove('active');sl.value='';}
+  else{pb.classList.remove('active');sl.classList.add('active');sl.value=c;}
+  render();
+}
+
+function render(){
+  const co=C[cc], pl=cc==='pl', lang=pl?'pl':'en', cur=co.cur;
+  document.getElementById('title').textContent=pl?'Cennik B2B 2026':'B2B Price List 2026';
+  document.getElementById('tagline').innerHTML=pl
+    ?'Jedna cena &mdash; dostawa wliczona'
+    :'All-in pricing &mdash; delivery to '+co.city+' included';
+  document.getElementById('benefitsText').innerHTML=pl
+    ?'<strong>Zasada jest prosta:</strong> im wi\u0119cej zamawiasz \u2014 tym lepsz\u0105 cen\u0119 dostajesz. Darmowa dostawa w ca\u0142ej Polsce. Magazyn w Polsce, wysy\u0142ka 24h, faktura VAT, r\u0119kojmia.'
+    :'<strong>Simple rule:</strong> order by pallet \u2014 get the best price and free delivery to '+co.city+'. 10,000+ pcs in stock, dispatch within 24h, EU invoice, warranty.';
+  document.getElementById('footerNote').textContent=pl
+    ?'Ceny netto, obowi\u0105zuj\u0105 od marca 2026. Cennik nie stanowi oferty handlowej w rozumieniu art. 66 KC.'
+    :'Net prices incl. delivery to '+co.city+'. Valid from March 2026. EUR/PLN rate: '+EUR_RATE+'.';
+  document.getElementById('role').innerHTML=pl
+    ?'Artnapi &mdash; Manager ds. rozwoju sprzeda\u017cy'
+    :'Artnapi &mdash; Key Account Manager';
+
+  const groups=[
+    {k:'canvas',t:{pl:'Podobrazia \u2014 Adr\u00e9 Art\u00f3',en:'Stretched Canvases \u2014 Adr\u00e9 Art\u00f3'}},
+    {k:'panel',t:{pl:'Panele malarskie \u2014 Adr\u00e9 Art\u00f3',en:'Painting Panels \u2014 Adr\u00e9 Art\u00f3'}},
+    {k:'pbn',t:{pl:'Malowanie po numerach & Hobby',en:'Paint by Numbers & Hobby'}},
+  ];
+  const cls=['basic','pal1','pal2','best'];
+  const bestL=pl?'Najlepsza cena':'Best Price';
+  const delL=pl?'\u2713 darmowa dostawa':'\u2713 delivery to '+co.city;
+
+  let h='';
+  groups.forEach((g,gi)=>{
+    h+='<div class="section-heading'+(gi===0?' first':'')+'">'+g.t[lang]+'</div>';
+    const prods=P.filter(p=>p.g===g.k);
+    prods.forEach((d,pi)=>{
+      const ov=pl?PLO[d.id]:null;
+      const prices=d.t.map((_,i)=>ov?ov[i]:calc(d,i,co.pallet,co.box||0,co.rate));
+      const bp=prices[0];
+      const u=d.u[lang], us=u==='szt.'?'szt':(u==='pcs'?'pc':u);
+      h+='<div class="product-section">';
+      h+='<div class="product-title">'+d.n[lang]+'</div>';
+      h+='<div class="product-subtitle">'+d.s[lang]+'</div>';
+      h+='<div class="product-info">'+(pl?'Paleta':'Pallet')+' = '+fI(d.pq)+' '+u+' &nbsp;|&nbsp; '+(pl?'Karton':'Carton')+' = '+fI(d.cq)+' '+u+'</div>';
+      h+='<div class="tiers">';
+      d.t.forEach((t,i)=>{
+        const pr=prices[i];
+        const disc=bp>0?Math.round((1-pr/bp)*100):0;
+        const ps=cur==='EUR'?'\u20ac'+fmt(pr,false):fmt(pr,true);
+        const cl=cur+(pl?' netto':' net')+' / '+us;
+        const qs=i===0?fI(t.min)+'\u2013'+fI(t.max)+' '+u:(i<3?fI(t.min)+' '+u:fI(t.min)+'+ '+u);
+        const badge=i===3?'<div class="best-badge">'+bestL+'</div>':'';
+        const save=disc>0?'<div class="tier-save">\u2212'+disc+'%</div>':'';
+        h+='<div class="tier '+cls[i]+'">'+badge+'<div class="tier-name">'+t.n[lang]+'</div><div class="tier-qty">'+qs+'</div><div class="tier-price">'+ps+'</div><div class="tier-currency">'+cl+'</div>'+save+'<div class="tier-delivery">'+delL+'</div></div>';
+      });
+      h+='</div></div>';
+      if(pi<prods.length-1)h+='<hr class="divider">';
+    });
+  });
+  document.getElementById('products').innerHTML=h;
+}
+render();
+</script>
 </body>
 </html>

@@ -135,6 +135,12 @@
 - Sposób otwierania: [np. "Cześć [imię]," / "Dzień dobry,"]
 - Sposób zamykania: [np. "Co myślisz?" / "Daj znać do piątku."]
 
+### Konteksty komunikacji
+- Nowy lead: [ton, formalność, długość, otwarcie]
+- Stały klient: [ton, formalność, długość, otwarcie]
+- Follow-up (brak odpowiedzi): [ton, eskalacja, CTA]
+- LinkedIn / DM: [ton, długość, styl]
+
 ---
 
 ## S6. OBIEKCJE (Battle Cards)

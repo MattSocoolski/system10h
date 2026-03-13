@@ -134,6 +134,27 @@ body {
 
 .lang-flag { font-size: 15px; }
 
+.country-select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.country-select:hover, .country-select:focus {
+  border-color: var(--border-active);
+  outline: none;
+}
+.country-select.active {
+  border-color: var(--purple);
+  background: var(--purple-deep);
+}
+
 /* ─── PRODUCT TABS ─── */
 .product-tabs {
   display: flex;
@@ -262,6 +283,13 @@ body {
 }
 
 .delivery-banner.hidden { display: none; }
+
+.qty-carton-info {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-left: 8px;
+  font-family: 'DM Mono', monospace;
+}
 
 .qty-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -781,7 +809,7 @@ body {
   body { background: #fff; color: #111; }
   .calc-wrap { padding: 0; }
   .qty-slider-wrap, .lang-toggle, .cta-section, .nudge { display: none; }
-  .tier-card, .price-hero, .qty-section, .stat-box, .annual, .transport-section {
+  .tier-card, .price-hero, .qty-section, .stat-box, .annual {
     border-color: #ddd;
     background: #fff;
     print-color-adjust: exact;
@@ -800,12 +828,19 @@ body {
     <h1 class="calc-title" id="calcTitle">Kalkulator cen hurtowych</h1>
     <p class="calc-subtitle" id="calcSubtitle">Wybierz produkt i ilość — zobacz ile oszczędzasz</p>
     <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="pl" onclick="setLang('pl')">
+      <button class="lang-btn active" data-lang="pl" onclick="setCountry('pl')">
         <span class="lang-flag">🇵🇱</span> PLN
       </button>
-      <button class="lang-btn" data-lang="eur" onclick="setLang('eur')">
-        <span class="lang-flag">🇪🇺</span> EUR
-      </button>
+      <select class="country-select" id="countrySelect" onchange="setCountry(this.value)">
+        <option value="" disabled selected>🌍 EUR — select country</option>
+        <option value="cz">🇨🇿 Czech Republic</option>
+        <option value="sk">🇸🇰 Slovakia</option>
+        <option value="hu">🇭🇺 Hungary</option>
+        <option value="lt">🇱🇹 Lithuania</option>
+        <option value="lv">🇱🇻 Latvia</option>
+        <option value="ee">🇪🇪 Estonia</option>
+        <option value="ro">🇷🇴 Romania</option>
+      </select>
     </div>
   </div>
 
@@ -826,6 +861,7 @@ body {
     <div class="qty-input-row">
       <input type="number" class="qty-number" id="qtyInput" value="360" min="1">
       <span class="qty-unit" id="qtyUnit">szt.</span>
+      <span class="qty-carton-info" id="qtyCartonInfo"></span>
     </div>
     <div class="qty-slider-wrap">
       <input type="range" class="qty-slider" id="qtySlider" min="120" max="1300" value="360" step="10">
@@ -886,32 +922,6 @@ body {
     <div class="annual-val" id="annualVal">5 616 PLN</div>
   </div>
 
-  <!-- TRANSPORT (EUR ONLY) -->
-  <div class="transport-section" id="transportSection">
-    <div class="transport-title" id="transportTitle">Transport to your city</div>
-    <select class="transport-select" id="transportCity" onchange="updateCalc()">
-      <option value="">— Select destination —</option>
-      <option value="prague">Prague (CZ) — cheapest route</option>
-      <option value="budapest">Budapest (HU)</option>
-      <option value="bratislava">Bratislava (SK)</option>
-      <option value="vilnius">Vilnius (LT)</option>
-      <option value="kaunas">Kaunas (LT)</option>
-      <option value="riga">Riga (LV)</option>
-      <option value="tallinn">Tallinn (EE)</option>
-      <option value="bucharest">Bucharest (RO)</option>
-    </select>
-    <div class="transport-info" id="transportInfo" style="display:none;">
-      <div class="transport-stat">
-        <div class="transport-stat-label">Transport cost</div>
-        <div class="transport-stat-val" id="transportCost">€100</div>
-      </div>
-      <div class="transport-stat">
-        <div class="transport-stat-label">Per piece (incl. transport)</div>
-        <div class="transport-stat-val" id="transportPerPc">€8.74</div>
-      </div>
-    </div>
-  </div>
-
   <!-- CTA -->
   <div class="cta-section">
     <a class="cta-btn" id="ctaBtn" href="#">
@@ -944,226 +954,230 @@ body {
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-// DATA
+// PRICING ENGINE V2 — PER-COUNTRY
 // ═══════════════════════════════════════════════════════════════
 
-const DATA = {
-  pl: {
-    currency: 'PLN',
-    unit: 'szt.',
-    products: [
-      {
-        id: 'canvas-40x50',
-        name: 'Podobrazia 40×50',
-        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
-        palletQty: 360,
-        cartonQty: 120,
-        marketPrice: 11.00,
-        tiers: [
-          { name: 'Kartony', min: 120, max: 359, price: 10.30, discount: 0 },
-          { name: '1 Paleta', min: 360, max: 719, price: 9.00, discount: 13 },
-          { name: '2 Palety', min: 720, max: 1079, price: 8.15, discount: 21 },
-          { name: '3 Palety', min: 1080, max: 99999, price: 7.30, discount: 29 },
-        ]
-      },
-      {
-        id: 'canvas-30x40',
-        name: 'Podobrazia 30×40',
-        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
-        palletQty: 480,
-        cartonQty: 120,
-        marketPrice: null,
-        tiers: [
-          { name: 'Kartony', min: 120, max: 479, price: 7.46, discount: 0 },
-          { name: '1 Paleta', min: 480, max: 959, price: 6.75, discount: 10 },
-          { name: '2 Palety', min: 960, max: 1439, price: 6.11, discount: 18 },
-          { name: '3 Palety', min: 1440, max: 99999, price: 5.00, discount: 33 },
-        ]
-      },
-      {
-        id: 'canvas-20x30',
-        name: 'Podobrazia 20×30',
-        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
-        palletQty: 720,
-        cartonQty: 120,
-        marketPrice: null,
-        tiers: [
-          { name: 'Kartony', min: 120, max: 719, price: 6.70, discount: 0 },
-          { name: '1 Paleta', min: 720, max: 1439, price: 5.49, discount: 18 },
-          { name: '2 Palety', min: 1440, max: 2159, price: 4.54, discount: 32 },
-          { name: '3 Palety', min: 2160, max: 99999, price: 3.68, discount: 45 },
-        ]
-      },
-      {
-        id: 'canvas-20x20',
-        name: 'Podobrazia 20×20',
-        spec: 'Bawełna 280g · krosna sosnowe · potrójny grunt',
-        palletQty: 1200,
-        cartonQty: 120,
-        marketPrice: null,
-        tiers: [
-          { name: 'Kartony', min: 120, max: 1199, price: 5.96, discount: 0 },
-          { name: '1 Paleta', min: 1200, max: 2399, price: 4.75, discount: 20 },
-          { name: '2 Palety', min: 2400, max: 3599, price: 3.80, discount: 36 },
-          { name: '3 Palety', min: 3600, max: 99999, price: 2.94, discount: 51 },
-        ]
-      },
-      {
-        id: 'panel-30x40',
-        name: 'Panel 30×40 (8 szt)',
-        spec: 'Deska 3mm · zestaw 8 paneli · gotowe do malowania',
-        palletQty: 300,
-        cartonQty: 18,
-        marketPrice: null,
-        isSet: true,
-        setUnit: 'zest.',
-        tiers: [
-          { name: 'Kartony', min: 18, max: 299, price: 24.27, discount: 0 },
-          { name: '1 Paleta', min: 300, max: 599, price: 23.33, discount: 4 },
-          { name: '2 Palety', min: 600, max: 1199, price: 20.41, discount: 16 },
-          { name: '3 Palety', min: 1200, max: 99999, price: 19.27, discount: 21 },
-        ]
-      },
-      {
-        id: 'panel-40x50',
-        name: 'Panel 40×50 (3 szt)',
-        spec: 'Deska 3mm · zestaw 3 paneli · gotowe do malowania',
-        palletQty: 336,
-        cartonQty: 18,
-        marketPrice: null,
-        isSet: true,
-        setUnit: 'szt.',
-        tiers: [
-          { name: 'Kartony', min: 18, max: 335, price: 7.88, discount: 0 },
-          { name: '1 Paleta', min: 336, max: 671, price: 6.84, discount: 13 },
-          { name: '2 Palety', min: 672, max: 1007, price: 6.24, discount: 21 },
-          { name: '3 Palety', min: 1008, max: 99999, price: 5.10, discount: 35 },
-        ]
-      },
-      {
-        id: 'pbn-frame',
-        name: 'PBN 40×50 (rama)',
-        spec: 'Malowanie po numerach · płótno + farby + pędzle · na ramie',
-        palletQty: 180,
-        cartonQty: 30,
-        marketPrice: null,
-        tiers: [
-          { name: 'Kartony', min: 30, max: 179, price: 25.37, discount: 0 },
-          { name: '1 Paleta', min: 180, max: 359, price: 22.37, discount: 12 },
-          { name: '2 Palety', min: 360, max: 539, price: 20.40, discount: 20 },
-          { name: '3 Palety', min: 540, max: 99999, price: 17.37, discount: 32 },
-        ]
-      },
-      {
-        id: 'pbn-noframe',
-        name: 'PBN 40×50 (bez ramy)',
-        spec: 'Malowanie po numerach · płótno + farby + pędzle · bez ramy',
-        palletQty: 450,
-        cartonQty: 75,
-        marketPrice: null,
-        tiers: [
-          { name: 'Kartony', min: 75, max: 449, price: 20.72, discount: 0 },
-          { name: '1 Paleta', min: 450, max: 899, price: 17.72, discount: 14 },
-          { name: '2 Palety', min: 900, max: 1349, price: 15.75, discount: 24 },
-          { name: '3 Palety', min: 1350, max: 99999, price: 12.72, discount: 39 },
-        ]
-      },
-      {
-        id: 'diamond',
-        name: 'Haft diamentowy',
-        spec: 'Zestaw haft diamentowy · pełen komplet materiałów',
-        palletQty: 1200,
-        cartonQty: 120,
-        marketPrice: null,
-        tiers: [
-          { name: 'Kartony', min: 120, max: 1199, price: 20.46, discount: 0 },
-          { name: '1 Paleta', min: 1200, max: 2399, price: 17.46, discount: 15 },
-          { name: '2 Palety', min: 2400, max: 3599, price: 15.49, discount: 24 },
-          { name: '3 Palety', min: 3600, max: 99999, price: 12.46, discount: 39 },
-        ]
-      }
+const EUR_RATE = 4.3;
+
+const COUNTRIES = {
+  pl: { name: 'Polska', nameEn: 'Poland', pallet: 155, box: 0, currency: 'PLN', rate: 1, city: '' },
+  cz: { name: 'Czechy', nameEn: 'Czech Republic', pallet: 430, box: 49.88, currency: 'EUR', rate: 4.3, city: 'Prague' },
+  sk: { name: 'Słowacja', nameEn: 'Slovakia', pallet: 649.3, box: 53.63, currency: 'EUR', rate: 4.3, city: 'Bratislava' },
+  hu: { name: 'Węgry', nameEn: 'Hungary', pallet: 563.3, box: 54.00, currency: 'EUR', rate: 4.3, city: 'Budapest' },
+  lt: { name: 'Litwa', nameEn: 'Lithuania', pallet: 442.9, box: 46.78, currency: 'EUR', rate: 4.3, city: 'Vilnius' },
+  lv: { name: 'Łotwa', nameEn: 'Latvia', pallet: 516, box: 47.84, currency: 'EUR', rate: 4.3, city: 'Riga' },
+  ee: { name: 'Estonia', nameEn: 'Estonia', pallet: 606.3, box: 51.90, currency: 'EUR', rate: 4.3, city: 'Tallinn' },
+  ro: { name: 'Rumunia', nameEn: 'Romania', pallet: 804.1, box: 100.15, currency: 'EUR', rate: 4.3, city: 'Bucharest' },
+};
+
+// Product definitions — cost structure + tier formulas
+const PRODUCT_DEFS = [
+  {
+    id: 'canvas-40x50',
+    name: { pl: 'Podobrazia 40×50', en: '40×50 cm Canvas' },
+    spec: { pl: 'Bawełna 280g · krosna sosnowe · potrójny grunt', en: 'Cotton 280g · pine stretcher bars · triple primed' },
+    baseCost: 3.95, storage: 0.375, picking: 0.08,
+    palletQty: 320, cartonQty: 40,
+    marketPrice: 11.00,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 120, max: 319, type: 'add', val: 3 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 320, max: 639, type: 'mult', val: 1.25 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 640, max: 959, type: 'mult', val: 1.15 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 960, max: 99999, type: 'floor', val: 0 },
     ]
   },
-  eur: {
-    currency: 'EUR',
-    unit: 'pcs',
-    products: [
-      {
-        // PLN from Excel "EUR 40x50" sheet ÷ 4.3 (safe rate)
-        // PLN source: 10.05 / 8.82 / 8.11 / 7.05
-        id: 'canvas-40x50-eur',
-        name: '40×50 cm Canvas',
-        spec: 'Cotton 280g · pine stretcher bars · triple primed',
-        palletQty: 360,
-        cartonQty: 120,
-        marketPrice: null,
-        tiers: [
-          { name: 'Cartons', min: 120, max: 359, price: 2.34, discount: 0 },
-          { name: '1 Pallet', min: 360, max: 719, price: 2.05, discount: 12 },
-          { name: '2 Pallets', min: 720, max: 1079, price: 1.89, discount: 19 },
-          { name: '3+ Pallets', min: 1080, max: 99999, price: 1.64, discount: 30 },
-        ]
-      },
-      {
-        // PLN from Excel "EUR 30x40" sheet ÷ 4.3 (safe rate)
-        // PLN source: 7.63 / 6.94 / 6.28 / 5.14
-        id: 'canvas-30x40-eur',
-        name: '30×40 cm Canvas',
-        spec: 'Cotton 280g · pine stretcher bars · triple primed',
-        palletQty: 480,
-        cartonQty: 120,
-        marketPrice: null,
-        tiers: [
-          { name: 'Cartons', min: 120, max: 479, price: 1.77, discount: 0 },
-          { name: '1 Pallet', min: 480, max: 959, price: 1.61, discount: 9 },
-          { name: '2 Pallets', min: 960, max: 1439, price: 1.46, discount: 18 },
-          { name: '3+ Pallets', min: 1440, max: 99999, price: 1.20, discount: 33 },
-        ]
-      }
-    ],
-    transport: {
-      prague:     { name: 'Prague (CZ)',     pallet: 100,   carton: 49.88  },
-      budapest:   { name: 'Budapest (HU)',   pallet: 131,   carton: 54.00  },
-      bratislava: { name: 'Bratislava (SK)', pallet: 151,   carton: 53.63  },
-      vilnius:    { name: 'Vilnius (LT)',    pallet: 103,   carton: 46.78  },
-      kaunas:     { name: 'Kaunas (LT)',     pallet: 116,   carton: null   },
-      riga:       { name: 'Riga (LV)',       pallet: 120,   carton: 47.84  },
-      tallinn:    { name: 'Tallinn (EE)',    pallet: 141,   carton: 51.90  },
-      bucharest:  { name: 'Bucharest (RO)',  pallet: 187,   carton: 100.15 },
-    }
-  }
+  {
+    id: 'canvas-30x40',
+    name: { pl: 'Podobrazia 30×40', en: '30×40 cm Canvas' },
+    spec: { pl: 'Bawełna 280g · krosna sosnowe · potrójny grunt', en: 'Cotton 280g · pine stretcher bars · triple primed' },
+    baseCost: 2.84, storage: 0.28, picking: 0.05,
+    palletQty: 480, cartonQty: 40,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 120, max: 479, type: 'add', val: 2.49 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 480, max: 959, type: 'mult', val: 1.35 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 960, max: 1439, type: 'add', val: 1.14 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1440, max: 99999, type: 'floor', val: 0 },
+    ]
+  },
+  {
+    id: 'canvas-20x30',
+    name: { pl: 'Podobrazia 20×30', en: '20×30 cm Canvas' },
+    spec: { pl: 'Bawełna 280g · krosna sosnowe · potrójny grunt', en: 'Cotton 280g · pine stretcher bars · triple primed' },
+    baseCost: 2.29, storage: 0.375, picking: 0.06,
+    palletQty: 720, cartonQty: 40,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 120, max: 719, type: 'add', val: 3.02 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 720, max: 1439, type: 'add', val: 1.81 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 1440, max: 2159, type: 'add', val: 0.86 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 2160, max: 99999, type: 'floor', val: 0 },
+    ]
+  },
+  {
+    id: 'canvas-20x20',
+    name: { pl: 'Podobrazia 20×20', en: '20×20 cm Canvas' },
+    spec: { pl: 'Bawełna 280g · krosna sosnowe · potrójny grunt', en: 'Cotton 280g · pine stretcher bars · triple primed' },
+    baseCost: 1.79, storage: 0.375, picking: 0.06,
+    palletQty: 1200, cartonQty: 40,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 120, max: 1199, type: 'add', val: 3.02 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 1200, max: 2399, type: 'add', val: 1.81 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 2400, max: 3599, type: 'add', val: 0.86 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 3600, max: 99999, type: 'floor', val: 0 },
+    ]
+  },
+  {
+    id: 'panel-30x40',
+    name: { pl: 'Panel 30×40 (8 szt)', en: '30×40 Panel (8 pcs set)' },
+    spec: { pl: 'Deska 3mm · zestaw 8 paneli · gotowe do malowania', en: '3mm board · set of 8 panels · ready to paint' },
+    baseCost: 14.46, storage: 0.39, picking: 0.05,
+    palletQty: 300, cartonQty: 16,
+    isSet: true, setUnit: { pl: 'zest.', en: 'sets' },
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 16, max: 303, type: 'add', val: 5 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 304, max: 607, type: 'add', val: 4.06 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 608, max: 1199, type: 'add', val: 1.14 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1200, max: 99999, type: 'floor', val: 0 },
+    ]
+  },
+  {
+    id: 'panel-40x50',
+    name: { pl: 'Panel 40×50 (3 szt)', en: '40×50 Panel (3 pcs set)' },
+    spec: { pl: 'Deska 3mm · zestaw 3 paneli · gotowe do malowania', en: '3mm board · set of 3 panels · ready to paint' },
+    baseCost: 3.18, storage: 0.39, picking: 0.05,
+    palletQty: 336, cartonQty: 30,
+    isSet: true, setUnit: { pl: 'szt.', en: 'pcs' },
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 30, max: 329, type: 'add', val: 2.78 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 330, max: 659, type: 'add', val: 1.74 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 660, max: 989, type: 'add', val: 1.14 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 990, max: 99999, type: 'floor', val: 0 },
+    ]
+  },
+  {
+    id: 'pbn-frame',
+    name: { pl: 'PBN 40×50 (rama)', en: 'PBN 40×50 (framed)' },
+    spec: { pl: 'Malowanie po numerach · płótno + farby + pędzle · na ramie', en: 'Paint by numbers · canvas + paints + brushes · framed' },
+    baseCost: 11.0, storage: 0.375, picking: 0.06,
+    palletQty: 180, cartonQty: 30,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 30, max: 179, type: 'add', val: 10 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 180, max: 359, type: 'add', val: 7 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 360, max: 539, type: 'add', val: 5.03 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 540, max: 99999, type: 'add', val: 2 },
+    ]
+  },
+  {
+    id: 'pbn-noframe',
+    name: { pl: 'PBN 40×50 (bez ramy)', en: 'PBN 40×50 (unframed)' },
+    spec: { pl: 'Malowanie po numerach · płótno + farby + pędzle · bez ramy', en: 'Paint by numbers · canvas + paints + brushes · unframed' },
+    baseCost: 7.8, storage: 0.375, picking: 0.06,
+    palletQty: 450, cartonQty: 75,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 75, max: 449, type: 'add', val: 10 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 450, max: 899, type: 'add', val: 7 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 900, max: 1349, type: 'add', val: 5.03 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1350, max: 99999, type: 'add', val: 2 },
+    ]
+  },
+  {
+    id: 'diamond',
+    name: { pl: 'Haft diamentowy', en: 'Diamond painting' },
+    spec: { pl: 'Zestaw haft diamentowy · pełen komplet materiałów', en: 'Diamond painting kit · complete set' },
+    baseCost: 7.8, storage: 0.375, picking: 0.06,
+    palletQty: 1200, cartonQty: 50,
+    tiers: [
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 50, max: 1199, type: 'add', val: 10 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 1200, max: 2399, type: 'add', val: 7 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 2400, max: 3599, type: 'add', val: 5.03 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 3600, max: 99999, type: 'add', val: 2 },
+    ]
+  },
+];
+
+// PL prices are MANUALLY SET (approved selling prices, different from formula)
+// These override the formula-calculated prices for PL only
+const PL_PRICE_OVERRIDES = {
+  'canvas-40x50': [10.30, 9.00, 8.15, 7.30],
+  'canvas-30x40': [7.46, 6.75, 6.11, 5.00],
+  'canvas-20x30': [6.70, 5.49, 4.54, 3.68],
+  'canvas-20x20': [5.96, 4.75, 3.80, 2.94],
+  'panel-30x40':  [24.27, 23.33, 20.41, 19.27],
+  'panel-40x50':  [7.88, 6.84, 6.24, 5.10],
+  'pbn-frame':    [25.37, 22.37, 20.40, 17.37],
+  'pbn-noframe':  [20.72, 17.72, 15.75, 12.72],
+  'diamond':      [20.46, 17.46, 15.49, 12.46],
 };
 
 // ═══════════════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════════════
 
-let lang = 'pl';
+let country = 'pl';
 let selectedProduct = 0;
 let qty = 360;
 
 // ═══════════════════════════════════════════════════════════════
-// HELPERS
+// PRICING ENGINE
 // ═══════════════════════════════════════════════════════════════
 
-function fmt(num, decimals = 2) {
-  if (lang === 'pl') return num.toFixed(decimals).replace('.', ',');
-  return num.toFixed(decimals);
-}
+function calcTierPrice(def, tierIdx, palletCost, boxCost, rate) {
+  const tier = def.tiers[tierIdx];
+  const isCartons = (tierIdx === 0);
+  const hasBoxData = isCartons && boxCost > 0 && (def.id === 'canvas-40x50' || def.id === 'canvas-30x40');
+  const delivery = hasBoxData ? (boxCost / 40) : (palletCost / def.palletQty);
+  const cogs = def.baseCost + delivery + def.storage + def.picking;
+  const floor = cogs * 1.25;
 
-function fmtInt(num) {
-  if (lang === 'pl') return num.toLocaleString('pl-PL');
-  return num.toLocaleString('en-US');
-}
+  let price;
+  if (tier.type === 'add') price = floor + tier.val;
+  else if (tier.type === 'mult') price = floor * tier.val;
+  else price = floor;
 
-function fmtMoney(num) {
-  const cur = lang === 'pl' ? 'PLN' : '€';
-  const val = fmt(num, num >= 100 ? 0 : 2);
-  return lang === 'pl' ? `${val} PLN` : `€${val}`;
+  return Math.round((price / rate) * 100) / 100;
 }
 
 function getProducts() {
-  return DATA[lang].products;
+  const c = COUNTRIES[country];
+  const lang = country === 'pl' ? 'pl' : 'en';
+  const ispl = country === 'pl';
+
+  return PRODUCT_DEFS.map(def => {
+    const overrides = ispl ? PL_PRICE_OVERRIDES[def.id] : null;
+
+    return {
+      id: def.id,
+      name: def.name[lang],
+      spec: def.spec[lang],
+      palletQty: def.palletQty,
+      cartonQty: def.cartonQty,
+      marketPrice: ispl ? (def.marketPrice || null) : null,
+      isSet: def.isSet || false,
+      setUnit: def.setUnit ? def.setUnit[lang] : null,
+      tiers: def.tiers.map((t, i) => ({
+        name: t.name[lang],
+        min: t.min,
+        max: t.max,
+        price: overrides ? overrides[i] : calcTierPrice(def, i, c.pallet, c.box || 0, c.rate),
+        discount: 0, // will be calculated below
+      }))
+    };
+  }).map(p => {
+    // Calculate discounts relative to first tier
+    const basePrice = p.tiers[0].price;
+    p.tiers.forEach(t => {
+      t.discount = basePrice > 0 ? Math.round((1 - t.price / basePrice) * 100) : 0;
+    });
+    p.tiers[0].discount = 0;
+    return p;
+  });
+}
+
+function getCurrency() {
+  return COUNTRIES[country].currency;
+}
+
+function getLang() {
+  return country === 'pl' ? 'pl' : 'en';
 }
 
 function getProduct() {
@@ -1175,6 +1189,26 @@ function getTier(product, quantity) {
     if (quantity >= product.tiers[i].min) return i;
   }
   return 0;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════════
+
+function fmt(num, decimals = 2) {
+  if (country === 'pl') return num.toFixed(decimals).replace('.', ',');
+  return num.toFixed(decimals);
+}
+
+function fmtInt(num) {
+  if (country === 'pl') return num.toLocaleString('pl-PL');
+  return num.toLocaleString('en-US');
+}
+
+function fmtMoney(num) {
+  const cur = getCurrency();
+  const val = fmt(num, num >= 100 ? 0 : 2);
+  return cur === 'PLN' ? `${val} PLN` : `€${val}`;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -1195,22 +1229,26 @@ function renderTabs() {
 
 function initProduct() {
   const p = getProduct();
+  const lang = getLang();
   const minQty = p.tiers[0].min;
   const maxQty = Math.ceil(p.tiers[3].min * 1.25);
 
   const slider = document.getElementById('qtySlider');
   slider.min = minQty;
   slider.max = maxQty;
-  slider.step = p.cartonQty >= 100 ? 10 : (p.cartonQty >= 30 ? 5 : 1);
+  slider.step = p.cartonQty;
 
+  if (qty < minQty) qty = minQty;
+  qty = Math.round(qty / p.cartonQty) * p.cartonQty;
   if (qty < minQty) qty = minQty;
   if (qty > maxQty) qty = p.tiers[3].min;
 
   document.getElementById('qtyInput').value = qty;
   document.getElementById('qtyInput').min = minQty;
+  document.getElementById('qtyInput').step = p.cartonQty;
   slider.value = qty;
 
-  const unitText = p.isSet ? (p.setUnit || 'zest.') : DATA[lang].unit;
+  const unitText = p.isSet ? (p.setUnit || (lang === 'pl' ? 'zest.' : 'sets')) : (lang === 'pl' ? 'szt.' : 'pcs');
   document.getElementById('qtyUnit').textContent = unitText;
 
   // Product spec
@@ -1218,9 +1256,12 @@ function initProduct() {
 
   // Delivery banner
   const banner = document.getElementById('deliveryBanner');
-  banner.textContent = lang === 'pl'
-    ? '✓ Darmowa dostawa w całej Polsce'
-    : '✓ Free delivery within Poland';
+  if (country === 'pl') {
+    banner.textContent = '✓ Darmowa dostawa w całej Polsce';
+  } else {
+    const c = COUNTRIES[country];
+    banner.textContent = `✓ All-in price incl. delivery to ${c.city}`;
+  }
   banner.classList.remove('hidden');
 
   renderTabs();
@@ -1249,14 +1290,18 @@ function renderTierMarks() {
 
 function renderTierCards() {
   const p = getProduct();
+  const lang = getLang();
   const currentTier = getTier(p, qty);
   const grid = document.getElementById('tiersGrid');
-  const cur = DATA[lang].currency;
+  const cur = getCurrency();
   grid.innerHTML = '';
 
   const labels = lang === 'pl'
     ? { popular: 'Najpopularniejszy', best: 'Najlepsza cena', free: '✓ Darmowa dostawa', freeShort: '✓ Free delivery' }
     : { popular: 'Most popular', best: 'Best price', free: '✓ Free delivery', freeShort: '✓ Free delivery' };
+
+  const deliveryLabel = lang === 'pl' ? labels.free
+    : `✓ Incl. delivery to ${COUNTRIES[country].city}`;
 
   p.tiers.forEach((t, i) => {
     const card = document.createElement('div');
@@ -1272,18 +1317,20 @@ function renderTierCards() {
     if (i === 1) badge = `<div class="tier-badge popular">${labels.popular}</div>`;
     if (i === 3) badge = `<div class="tier-badge best-price">${labels.best}</div>`;
 
-    const delivery = `<div class="tier-delivery">${labels.free}</div>`;
+    const delivery = `<div class="tier-delivery">${deliveryLabel}</div>`;
 
     const discountText = t.discount > 0
       ? `<div class="tier-discount">−${t.discount}%</div>`
       : `<div class="tier-discount none">—</div>`;
+
+    const unitLabel = p.isSet ? (p.setUnit || (lang === 'pl' ? 'zest.' : 'sets')) : (lang === 'pl' ? 'szt.' : 'pcs');
 
     card.innerHTML = `
       ${badge}
       <div class="tier-name">${t.name}</div>
       <div class="tier-price">${fmt(t.price)} ${cur === 'EUR' ? '€' : ''}</div>
       ${discountText}
-      <div class="tier-qty">${lang === 'pl' ? 'od' : 'from'} ${fmtInt(t.min)} ${p.isSet ? (p.setUnit || 'zest.') : DATA[lang].unit}</div>
+      <div class="tier-qty">${lang === 'pl' ? 'od' : 'from'} ${fmtInt(t.min)} ${unitLabel}</div>
       ${delivery}
     `;
     grid.appendChild(card);
@@ -1292,16 +1339,26 @@ function renderTierCards() {
 
 function updateCalc() {
   const p = getProduct();
+  const lang = getLang();
   const tierIdx = getTier(p, qty);
   const tier = p.tiers[tierIdx];
   const basePrice = p.tiers[0].price;
-  const cur = DATA[lang].currency;
+  const cur = getCurrency();
+  const unitLabel = p.isSet ? (p.setUnit || (lang === 'pl' ? 'zest.' : 'sets')) : (lang === 'pl' ? 'szt.' : 'pcs');
+
+  // Carton count info
+  const cartonCount = Math.round(qty / p.cartonQty);
+  if (lang === 'pl') {
+    document.getElementById('qtyCartonInfo').textContent = '= ' + cartonCount + ' ' + (cartonCount === 1 ? 'karton' : (cartonCount < 5 ? 'kartony' : 'kartonów'));
+  } else {
+    document.getElementById('qtyCartonInfo').textContent = '= ' + cartonCount + ' ' + (cartonCount === 1 ? 'carton' : 'cartons');
+  }
 
   // Price display
   document.getElementById('priceMain').textContent = fmt(tier.price);
   document.getElementById('priceCurrency').textContent = cur === 'EUR' ? '€' : 'PLN';
   document.getElementById('priceUnitLabel').textContent =
-    `/ ${p.isSet ? (p.setUnit || 'zest.') : DATA[lang].unit} netto`;
+    `/ ${unitLabel} netto`;
 
   // Market price (only for 40x50 PL)
   const marketRow = document.getElementById('marketRow');
@@ -1355,9 +1412,7 @@ function updateCalc() {
     if (gap > 0 && gap <= nextTier.min * 0.5) {
       nudgeEl.classList.remove('hidden');
       const extraSaving = qty * (tier.price - nextTier.price);
-      document.getElementById('nudgeQty').textContent = fmtInt(gap);
-      document.getElementById('nudgeSave').textContent = fmtMoney(extraSaving);
-      document.getElementById('nudge').querySelector('.nudge-text').innerHTML = lang === 'pl'
+      nudgeEl.querySelector('.nudge-text').innerHTML = lang === 'pl'
         ? `Dorzuć jeszcze <span class="nudge-highlight">${fmtInt(gap)}</span> ${p.isSet ? (p.setUnit || 'zest.') : 'szt.'} i oszczędź dodatkowe <span class="nudge-highlight">${fmtMoney(extraSaving)}</span> na zamówieniu`
         : `Add just <span class="nudge-highlight">${fmtInt(gap)}</span> more ${p.isSet ? 'sets' : 'pcs'} and save an extra <span class="nudge-highlight">${fmtMoney(extraSaving)}</span> per order`;
     } else {
@@ -1375,29 +1430,6 @@ function updateCalc() {
     ? 'Przy zamówieniach<br><strong>co miesiąc</strong> oszczędzasz rocznie:'
     : 'With <strong>monthly</strong> orders<br>your annual savings:';
 
-  // Transport (EUR)
-  const transportSection = document.getElementById('transportSection');
-  if (lang === 'eur') {
-    transportSection.classList.add('visible');
-    const cityKey = document.getElementById('transportCity').value;
-    const transportInfo = document.getElementById('transportInfo');
-    if (cityKey && DATA.eur.transport[cityKey]) {
-      const t = DATA.eur.transport[cityKey];
-      const isPallet = tierIdx >= 1;
-      const cost = isPallet ? t.pallet : (t.carton || t.pallet);
-      const perPc = tier.price + (cost / qty);
-      transportInfo.style.display = 'grid';
-      document.getElementById('transportCost').textContent = `€${cost}`;
-      document.getElementById('transportPerPc').textContent = `€${perPc.toFixed(2)}`;
-      document.getElementById('transportPerPc').parentElement.querySelector('.transport-stat-label').textContent =
-        'All-in per piece';
-    } else {
-      transportInfo.style.display = 'none';
-    }
-  } else {
-    transportSection.classList.remove('visible');
-  }
-
   // Tier cards & marks
   renderTierCards();
   renderTierMarks();
@@ -1408,7 +1440,7 @@ function updateCalc() {
     : `Inquiry: ${p.name} — ${fmtInt(qty)} pcs`;
   const body = lang === 'pl'
     ? `Dzień dobry,\n\nChciałbym zapytać o:\n\nProdukt: ${p.name}\nIlość: ${fmtInt(qty)} ${p.isSet ? (p.setUnit || 'zest.') : 'szt.'}\nCena z kalkulatora: ${fmt(tier.price)} ${cur}/szt. netto\n\nProszę o potwierdzenie ceny i dostępności.\n\nPozdrawiam`
-    : `Hello,\n\nI'd like to inquire about:\n\nProduct: ${p.name}\nQuantity: ${fmtInt(qty)} pcs\nCalculator price: €${fmt(tier.price)}/pc net\n\nPlease confirm availability and pricing.\n\nBest regards`;
+    : `Hello,\n\nI'd like to inquire about:\n\nProduct: ${p.name}\nQuantity: ${fmtInt(qty)} pcs\nCalculator price: €${fmt(tier.price)}/pc net\nDelivery to: ${COUNTRIES[country].city}\n\nPlease confirm availability and pricing.\n\nBest regards`;
 
   document.getElementById('ctaBtn').href =
     `mailto:mateusz.sokolski@artnapi.pl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -1432,7 +1464,11 @@ function updateSliderFill() {
 }
 
 document.getElementById('qtySlider').addEventListener('input', function() {
-  qty = parseInt(this.value);
+  const p = getProduct();
+  const raw = parseInt(this.value);
+  qty = Math.round(raw / p.cartonQty) * p.cartonQty;
+  if (qty < p.tiers[0].min) qty = p.tiers[0].min;
+  this.value = qty;
   document.getElementById('qtyInput').value = qty;
   updateSliderFill();
   updateCalc();
@@ -1444,29 +1480,56 @@ document.getElementById('qtyInput').addEventListener('input', function() {
     qty = val;
     const slider = document.getElementById('qtySlider');
     slider.value = Math.min(Math.max(val, parseInt(slider.min)), parseInt(slider.max));
+    updateSliderFill();
     updateCalc();
   }
 });
 
-function setLang(newLang) {
-  lang = newLang;
+document.getElementById('qtyInput').addEventListener('blur', function() {
+  const p = getProduct();
+  const val = parseInt(this.value);
+  if (!isNaN(val) && val > 0) {
+    qty = Math.max(Math.round(val / p.cartonQty) * p.cartonQty, p.cartonQty);
+    if (qty < p.tiers[0].min) qty = p.tiers[0].min;
+    this.value = qty;
+    const slider = document.getElementById('qtySlider');
+    slider.value = Math.min(Math.max(qty, parseInt(slider.min)), parseInt(slider.max));
+    updateSliderFill();
+    updateCalc();
+  }
+});
+
+function setCountry(newCountry) {
+  if (!newCountry) return;
+  country = newCountry;
   selectedProduct = 0;
 
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.lang === lang);
-  });
+  // Update toggle UI
+  const plBtn = document.querySelector('.lang-btn[data-lang="pl"]');
+  const countrySelect = document.getElementById('countrySelect');
 
+  if (country === 'pl') {
+    plBtn.classList.add('active');
+    countrySelect.classList.remove('active');
+    countrySelect.value = '';
+  } else {
+    plBtn.classList.remove('active');
+    countrySelect.classList.add('active');
+    countrySelect.value = country;
+  }
+
+  // Update labels
+  const lang = getLang();
   document.getElementById('calcTitle').textContent =
     lang === 'pl' ? 'Kalkulator cen hurtowych' : 'Wholesale price calculator';
   document.getElementById('calcSubtitle').textContent =
-    lang === 'pl' ? 'Wybierz produkt i ilość — zobacz ile oszczędzasz' : 'Select product and quantity — see how much you save';
+    lang === 'pl' ? 'Wybierz produkt i ilość — zobacz ile oszczędzasz'
+    : `Prices include delivery to ${COUNTRIES[country].city}`;
   document.getElementById('qtyLabel').textContent =
     lang === 'pl' ? 'Ilość zamówienia' : 'Order quantity';
-  document.getElementById('transportTitle').textContent =
-    lang === 'pl' ? 'Transport do Twojego miasta' : 'Transport to your city';
   document.getElementById('footerNote').textContent = lang === 'pl'
     ? 'Ceny netto, nie stanowią oferty handlowej w rozumieniu art. 66 §1 KC. Darmowa dostawa w całej Polsce. Dane konkurencji: ceny publiczne artmaker.pl, Phoenix Art, Koh-i-noor (marzec 2026).'
-    : 'Net prices, free delivery within Poland included. Transport to CEE — see table above. Prices valid as of March 2026.';
+    : `Net prices incl. delivery to ${COUNTRIES[country].city}. Prices valid as of March 2026. EUR/PLN rate: ${EUR_RATE}.`;
   document.getElementById('footerCompany').textContent = lang === 'pl'
     ? 'NAPI Sp. z o.o. · ul. Sąsiedzka 3 / D11-D12, 05-806 Sokołów · NIP: 5342622747'
     : 'NAPI Sp. z o.o. · ul. Sąsiedzka 3 / D11-D12, 05-806 Sokołów, Poland · VAT: PL5342622747';
@@ -1479,7 +1542,7 @@ function setLang(newLang) {
 // INIT
 // ═══════════════════════════════════════════════════════════════
 
-setLang('pl');
+setCountry('pl');
 </script>
 
 </body>

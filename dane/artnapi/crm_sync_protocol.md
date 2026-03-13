@@ -61,6 +61,27 @@ DISPATCH:
 | F3 | Overdue >30d | `Due < dziś - 30` | "Kill / reactivate?" |
 | F4 | Konflikt danych | Telefon/mail w Notion != Gmail signature | "Który poprawny?" |
 | F5 | Brak w prowizjach | Status = "Zamknięta-Wygrana" AND brak w arkuszu prowizji | "Dodać do Sheets?" |
+| F6 | Duplikat | Ten sam lead w 2+ bazach (Pipeline `19a268dd` + BAZA KLIENTÓW `27e862e1`) | "Który zostawić? Archiwizuję duplikat." |
+
+---
+
+## PROCEDURA ARCHIVE (po decyzji "Kill" lub "Duplikat")
+
+### Kiedy
+- F3: User odpowiedział "Kill" na leada overdue >30d
+- F6: Wykryto duplikat leada między bazami
+
+### Jak
+```bash
+node automatyzacje/notion-archive.js PAGE_ID
+```
+Archiwizuje stronę (soft-delete → kosz Notion, odwracalne 30 dni).
+
+### Zasady
+- **ZAWSZE pytaj usera** przed archiwizacją — NIGDY automatycznie
+- **ZAWSZE sprawdź OBE bazy** (`19a268dd` Pipeline + `27e862e1` BAZA KLIENTÓW) przed uznaniem za duplikat
+- Po archiwizacji: potwierdź userowi "Zarchiwizowano: [firma] (PAGE_ID). Odwracalne 30 dni w koszu Notion."
+- Jeśli lead ma historię kontaktu → PRZENIEŚ notatki do zachowanego rekordu PRZED archiwizacją
 
 ---
 

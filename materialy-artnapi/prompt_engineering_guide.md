@@ -139,7 +139,7 @@ Cześć [imię],
 Widzę że [nazwa] robi warsztaty malowania — świetna sprawa.
 
 Mamy podobrazia 40x50 (bawełna 280g, potrójnie gruntowane) z polskiego
-magazynu. 9 PLN netto all-in z dostawą przy palecie (360 szt).
+magazynu. 9 PLN netto all-in z dostawą przy palecie (320 szt).
 10 000 sztuk na stanie, wysyłka 24h.
 
 Mogę wysłać 2-3 sztuki do testów — zero zobowiązań. Daj znać.

@@ -9,6 +9,10 @@ Trigger words: "okazało się", "nauczyłem się", "to zadziałało", "to nie za
 
 ## SPRZEDAŻ
 
+### [ARTNAPI] 11.03 | NIŻSZY PRÓG PALETY > NIŻSZA CENA
+Zmiana palety 40x50 z 360→320 szt. Niższy próg palety = silniejszy argument sprzedażowy niż niższa cena. Klient nie kupuje bo "tanio" — kupuje bo "łatwo spróbować". 320 < 360 = mniejsze ryzyko = szybsza decyzja. Używaj w każdym FU: "Paleta to teraz 320 szt — niższy próg wejścia."
+> Źródło: aktualizacja cennika 11.03, analiza @cso
+
 ### [SYSTEM10H] 05.03 | DEMO DZIAŁA — PROBLEM TO KWALIFIKACJA, NIE PRODUKT
 Pierwsze live demo Bliźniaka (Zbigniew/COMMI). System się obronił — klient potwierdził wartość. Ale COMMI nie ma handlowca, nie ma revenue, produkt w rebuild = nie gotowy kupić. Pipeline był napompowany o 2.5k PLN. **Reguła:** "Czy masz handlowca?" = obowiązkowe pytanie PRZED demo. Brak użytkownika = NURTURE.
 > Źródło: rozmowa Zbigniew 05.03
@@ -67,6 +71,10 @@ Brushme i Ideyka (konkurenci w Kaufland) mają TYLKO PBN. Żaden nie oferuje pod
 
 ## OPERACJE
 
+### [ARTNAPI] 12.03 | NIE RUSZAJ CZEGOŚ CO DZIAŁA — OSOBNY SKRYPT > ROZSZERZENIE
+Follow-up Guardian działa stabilnie od tygodni. Zamiast dodawać logikę restocku do istniejącego skryptu (ryzyko zepsucia), zbudowaliśmy osobny `restock-reminder.js`. Inna kadencja (tyg vs dzień), inny prompt, izolowany debug. Zasada: jeśli automatyzacja jest stabilna — nie dokładaj do niej nowych funkcji. Nowy plik = zero ryzyka dla starego.
+> Źródło: CEO+CTO audit architektura Samograj 12.03
+
 ### [ARTNAPI] 25.02 | GMAIL CHECK PRZED DRAFTAMI — OBOWIĄZKOWY
 Ghost pisał drafty FU bez sprawdzenia co klient odpowiedział. 4 leady miały błędne statusy: Alkotásutca nigdy nie odpisał (a status mówił "czekamy"), HobbySet dał realny powód (mróz), FessNeki czekała 9 dni na próbki. Kolejność: Gmail → analiza → drafty.
 > Źródło: decyzje.md (25.02, czystka pipeline)
@@ -82,6 +90,10 @@ Pomyłka na tym etapie = błędne COGS w całym systemie (Amazon, sklep, B2B). N
 ### [ARTNAPI] 25.02 | PIPELINE INFLACJA — AUDYT CO TYDZIEŃ
 Pipeline pokazywał 40k PLN. Po Gmail reality check: 25k. Po czystce: 14k. Ghost leady (brak odpowiedzi = "ciepły") zawyżały wartość 3x. Pipeline Pulse co piątek = non-negotiable.
 > Źródło: decyzje.md (24.02, pipeline korekta)
+
+### [SHARED] 11.03 | NOTION CRM — SZUKAJ GLOBALNIE, NIE W JEDNYM DATA SOURCE
+Przy szukaniu leada w Notion CRM — szukaj GLOBALNIE (bez data_source_url), a nie tylko w jednym data source. Mamy 2 bazy: `19a268dd` (Pipeline/Leads) i `27e862e1` (BAZA KLIENTÓW/AM). Lead może być w KAŻDEJ z nich. Szukanie tylko w jednej → duplikaty, pominięte dane, błędne statusy. Przykład: ArtSplash/Miłosz Truchan — był w BAZA KLIENTÓW, szukaliśmy tylko w Pipeline → stworzono duplikat.
+> Źródło: błąd przy aktualizacji ArtSplash 11.03, fix @cto
 
 ### [ARTNAPI] 25.02 | WTZ MASS MAIL: 2.4% RESPONSE = NORMA DLA INSTYTUCJI
 41 maili → 1 odpowiedź ("nie"). To NIE porażka — to baseline dla instytucji publicznych. FU D+7 obowiązkowy, D+14 snajperski. Budżety kwartalne = okno zakupowe. Cierpliwość.

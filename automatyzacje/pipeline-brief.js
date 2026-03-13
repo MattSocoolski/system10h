@@ -16,6 +16,7 @@ const ACTIVE_STATUSES = [
 ];
 
 async function run() {
+  console.log(`[DIGEST] Started at ${new Date().toISOString()}`);
   const now = today();
   const todayStr = formatDate(now);
   const dayNames = ['niedz.', 'pon.', 'wt.', 'śr.', 'czw.', 'pt.', 'sob.'];

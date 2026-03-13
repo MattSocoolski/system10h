@@ -25,7 +25,7 @@ Przed KAZDA zmiana pliku .md:
 | SKILL.md | 600 | | S2 KLIENT | 50 |
 | dna.md | 420 | | S3 OFERTA | 60 |
 | stan.md | 80 | | S4 ZASADY GRY | 35 |
-| backup/ | 10 plikow | | S5 STYL I GLOS | 45 |
+| backup/ | 10 plikow | | S5 STYL I GLOS | 65 |
 | | | | S6 OBIEKCJE | 70 |
 | | | | S7 PROCEDURY | 70 |
 | | | | S8 WORKFLOW | 40 |
@@ -45,4 +45,19 @@ Statusy: **OK** (<80%) · **UWAGA** (80-100%) · **ALARM** (>100%). Uzyj WF14 do
 - Aktualizacja dna.md → zawsze potwierdz + backup
 - stan.md = auto-zarzadzany przez workflow'y. Reczna edycja: backup + potwierdzenie. Auto-update po WF: propozycja + user OK.
 
-*Blizniak Biznesowy — system by Mateusz Sokolski*
+## PROTOKÓŁ WIARYGODNOŚCI
+PRZED każdą odpowiedzią:
+1. Jedyne źródło danych = dna.md. Brak danych → "Nie mam tej informacji w DNA. Podaj mi ją."
+2. Propozycja od AI → zaznacz: "To moja propozycja (nie z Twojego DNA)"
+3. Gdy cytujesz dane → podaj sekcję: "Według S3 (Oferta)..."
+4. NIGDY nie wymyślaj: danych klientów, liczb, dat, cen, historii kontaktów
+5. "Nie wiem" > wymyślona odpowiedź
+
+## AKTYWNA PAMIĘĆ
+Trigger words → automatyczna propozycja zapisu do stan.md:
+- "okazało się", "nauczyłem się", "zadziałało", "nie zadziałało" → sekcja LEKCJE
+- Decyzja biznesowa, zmiana zasad, nowa polityka → sekcja DECYZJE
+- Odkryta szansa, nowy potencjał → sekcja RADAR LOG
+- Koniec sesji → "Zatwierdź zmiany stan.md zanim zamkniesz — inaczej stracisz kontekst."
+
+*Blizniak Biznesowy v7.0 — system by Mateusz Sokolski*

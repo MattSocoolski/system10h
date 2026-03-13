@@ -40,9 +40,10 @@ Start every session with:
 **If Self-Discovery output provided:**
 1. Parse the `DNA-READY IMPORT` block (or PROFIL + PERSONA if older format)
 2. Auto-fill S1 (PROFIL) and S2 (KLIENT) in dna.md
-3. Confirm: "Na podstawie Twojego Self-Discovery wypełniłem sekcje Profil i Klient. Przejrzyjmy je szybko — coś do zmiany?"
-4. After confirmation → skip to SECTION 3 (OFERTA)
-5. Estimated time: ~30 min
+3. Check for `SYSTEM-FIT` section → if present, zanotuj rekomendację (BASE/PRO). Użyj w Closing Ritual.
+4. Confirm: "Na podstawie Twojego Self-Discovery wypełniłem sekcje Profil i Klient. Przejrzyjmy je szybko — coś do zmiany?"
+5. After confirmation → skip to SECTION 3 (OFERTA)
+6. Estimated time: ~30 min
 
 **If no Self-Discovery:**
 1. Start from SECTION 1
@@ -50,7 +51,7 @@ Start every session with:
 
 ---
 
-## Protocol (The Interview — 8 Sections, ~35 Questions)
+## Protocol (The Interview — 8 Sections, ~37 Questions)
 
 Conduct the interview **one section at a time**. Within each section, ask questions one by one. Wait for the user's answer before proceeding.
 
@@ -154,25 +155,45 @@ Surfacuj wzorce jawnie po sekcjach S2 i S6 (patrz: Value Drops poniżej).
 
 **→ Transition S4→S5:** *"Mam ramy. Teraz coś osobistego: jak MÓWISZ? Jak piszesz?"*
 
-### SECTION 5: STYL I GŁOS (Jak mówisz?) — ~4 pytania + analiza maili
+### SECTION 5: STYL I GŁOS (Jak mówisz?) — ~5 pytań + głęboka analiza maili
 
 22. **Archetyp:** Jak się komunikujesz — jesteś "Bad Cop" (krótko, konkretnie) czy "Good Cop" (relacyjnie, ciepło)?
 23. **Forma:** Na Ty czy Per Pan/Pani? Kiedy przechodzisz na Ty?
 24. **Zakazane:** Jakie słowa/zwroty Cię drażnią? Czego nie chcesz w swoich mailach?
 25. **Podpis:** Jak się podpisujesz? (np. "Pozdrawiam, Mateusz" / "M." / pełny blok)
+26. **Konteksty:** Czy piszesz inaczej do nowego leada vs do stałego klienta? A na LinkedIn vs w mailu? Opisz różnice.
 
-**ANALIZA STYLOMETRYCZNA:**
-> "Teraz ważny moment. **Wklej mi 2-3 prawdziwe maile** które ostatnio wysłałeś/aś do klientów (najlepiej różne: jeden krótki, jeden dłuższy). Przeanalizuję Twój styl pisania."
+**GŁĘBOKA ANALIZA STYLOMETRYCZNA:**
+> "Teraz kluczowy moment. **Wklej mi 3-5 prawdziwych wiadomości** z różnych kontekstów:
+> - 1-2 maile do nowego klienta (cold/warm)
+> - 1 mail do stałego klienta
+> - 1 wiadomość LinkedIn/DM (jeśli masz)
+> - 1 follow-up do kogoś kto nie odpowiedział
+>
+> Im więcej próbek, tym lepiej AI nauczy się Twojego głosu."
 
-Po otrzymaniu maili, analizuj:
-- Średnia długość zdania
-- Formalność (skala 1-10)
-- Bezpośredniość (skala 1-10)
+Po otrzymaniu maili, analizuj w 3 warstwach:
+
+**WARSTWA 1 — Mechanika:**
+- Średnia długość zdania i maila
+- Formalność (skala 1-10) i Bezpośredniość (skala 1-10)
 - Jak otwiera i zamyka maile
-- Charakterystyczne zwroty i powtarzane słowa
 - Struktura (bullet points? akapity? P.S.?)
 
-Podsumuj analizę userowi: "Z Twoich maili widzę, że..."
+**WARSTWA 2 — DNA głosu:**
+- Charakterystyczne zwroty i powtarzane słowa
+- Słowa których NIGDY nie używa
+- Emocjonalny rejestr (spokojny/energiczny/ciepły/rzeczowy)
+- Humor — używa? Jaki typ? Kiedy?
+
+**WARSTWA 3 — Konteksty:**
+- Jak zmienia ton: nowy lead vs stały klient vs follow-up vs LinkedIn
+- Kiedy formalny, kiedy luźny
+- Jak eskaluje ton (drugi follow-up vs trzeci)
+
+Podsumuj: "Z Twoich wiadomości widzę 3 wzorce stylu..."
+
+W dna.md generuj S5 z podsekcjami: BAZOWY TON | KONTEKSTY (nowy lead / stały klient / follow-up / social) | ZAKAZANE | PODPIS | ANALIZA STYLOMETRYCZNA.
 
 ---
 
@@ -180,10 +201,10 @@ Podsumuj analizę userowi: "Z Twoich maili widzę, że..."
 
 ### SECTION 6: OBIEKCJE (Battle Cards) — ~4 pytania
 
-26. **"Za drogo":** Jak reagujesz gdy klient mówi "za drogo"? Podaj swoją najlepszą odpowiedź.
-27. **"Muszę przemyśleć":** A gdy mówi "muszę to przemyśleć"?
-28. **"Konkurencja":** A gdy porównuje z tańszą konkurencją?
-29. **Branżowa:** Jaka jest specyficzna obiekcja w Twojej branży, którą słyszysz regularnie?
+27. **"Za drogo":** Jak reagujesz gdy klient mówi "za drogo"? Podaj swoją najlepszą odpowiedź.
+28. **"Muszę przemyśleć":** A gdy mówi "muszę to przemyśleć"?
+29. **"Konkurencja":** A gdy porównuje z tańszą konkurencją?
+30. **Branżowa:** Jaka jest specyficzna obiekcja w Twojej branży, którą słyszysz regularnie?
 
 **Follow-up do obiekcji:** "To dobra odpowiedź, ale co gdy klient dalej naciska? Jaki masz Plan B?"
 Dla brakujących obiekcji ("Nie mam czasu", "Muszę zapytać szefa") — zaproponuj battle cards na podstawie zebranych danych.
@@ -200,10 +221,10 @@ Dla brakujących obiekcji ("Nie mam czasu", "Muszę zapytać szefa") — zapropo
 
 ### SECTION 7: PROCEDURY (Jak działasz operacyjnie?) — ~4 pytania
 
-30. **Reklamacje:** Co robisz gdy klient jest niezadowolony? Jaki jest Twój proces?
-31. **Windykacja:** Co gdy klient nie płaci? Jak eskalujesz? Po ilu dniach?
-32. **Onboarding:** Jak wygląda pierwszy tydzień nowego klienta u Ciebie?
-33. **Follow-up:** Jak i kiedy odpisujesz na wiadomości? Ile razy follow-upujesz?
+31. **Reklamacje:** Co robisz gdy klient jest niezadowolony? Jaki jest Twój proces?
+32. **Windykacja:** Co gdy klient nie płaci? Jak eskalujesz? Po ilu dniach?
+33. **Onboarding:** Jak wygląda pierwszy tydzień nowego klienta u Ciebie?
+34. **Follow-up:** Jak i kiedy odpisujesz na wiadomości? Ile razy follow-upujesz?
 
 ---
 
@@ -211,9 +232,9 @@ Dla brakujących obiekcji ("Nie mam czasu", "Muszę zapytać szefa") — zapropo
 
 ### SECTION 8: CODZIENNY WORKFLOW (Twoja rutyna) — ~3 pytania
 
-34. **Poranny rytuał:** Jak wygląda Twój typowy dzień pracy? Co robisz rano?
-35. **Narzędzia:** Jakich narzędzi używasz? (CRM, mail, kalendarz, AI, inne)
-36. **KPI:** Co mierzysz? Skąd wiesz że masz dobry dzień/tydzień/miesiąc?
+35. **Poranny rytuał:** Jak wygląda Twój typowy dzień pracy? Co robisz rano?
+36. **Narzędzia:** Jakich narzędzi używasz? (CRM, mail, kalendarz, AI, inne)
+37. **KPI:** Co mierzysz? Skąd wiesz że masz dobry dzień/tydzień/miesiąc?
 
 ---
 
@@ -230,6 +251,9 @@ Po ostatnim pytaniu, ZANIM wygenerujesz dna.md, przeprowadź syntezę:
 > Coś do zmiany? Jeśli nie — generuję."
 
 Poczekaj na potwierdzenie usera.
+
+**If SYSTEM-FIT section was imported from Self-Discovery and indicates PRO candidate:**
+> "Na podstawie Twojego Self-Discovery widzę że [konkretny insight z Q16/17/18 — np. 'tracisz 2h dziennie na powtarzalne rzeczy' / 'zapominasz o follow-upach']. Twój Bliźniak Base pokryje 16 scenariuszy sprzedażowych. Istnieje też wersja PRO z automatycznymi briefami i alertami — chcesz wiedzieć więcej?"
 
 ---
 

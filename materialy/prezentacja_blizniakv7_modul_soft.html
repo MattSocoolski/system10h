@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bliźniak Biznesowy v7.0 — Prezentacja dla Modul Soft</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #0f172a;
+            --navy-light: #1e293b;
+            --slate-700: #334155;
+            --slate-500: #64748b;
+            --slate-400: #94a3b8;
+            --slate-200: #e2e8f0;
+            --white: #f8fafc;
+            --purple-50: #faf5ff;
+            --purple-100: #f3e8ff;
+            --purple-300: #d8b4fe;
+            --purple-400: #c084fc;
+            --purple-500: #a855f7;
+            --purple-600: #9333ea;
+            --purple-700: #7e22ce;
+            --yellow-400: #facc15;
+            --yellow-500: #eab308;
+            --emerald-400: #34d399;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            background: var(--navy);
+            color: var(--white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============ SLIDE SYSTEM ============ */
+        .slide {
+            width: 100%;
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ============ PRINT / PDF ============ */
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+
+        @media print {
+            body { background: var(--navy) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .slide {
+                page-break-after: always;
+                min-height: 100vh;
+                height: 100vh;
+                padding: 48px 64px;
+            }
+            .slide:last-child { page-break-after: avoid; }
+            .no-print { display: none !important; }
+        }
+
+        /* ============ BACKGROUNDS ============ */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            right: -120px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .slide > * { position: relative; z-index: 1; }
+
+        /* ============ TYPOGRAPHY ============ */
+        .slide-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--purple-400);
+            margin-bottom: 16px;
+        }
+
+        h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+        }
+
+        h2 {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 32px;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: var(--slate-400);
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 640px;
+        }
+
+        .text-purple { color: var(--purple-400); }
+        .text-yellow { color: var(--yellow-400); }
+        .text-emerald { color: var(--emerald-400); }
+        .text-slate { color: var(--slate-400); }
+        .text-small { font-size: 13px; color: var(--slate-500); }
+
+        /* ============ LOGO ============ */
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+        .logo-badge {
+            background: var(--purple-600);
+            color: white;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 10px;
+        }
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.3px;
+        }
+
+        /* ============ CARDS & GRID ============ */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+        .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+
+        .card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 28px;
+        }
+
+        .card-accent {
+            border-color: rgba(168, 85, 247, 0.2);
+            background: rgba(168, 85, 247, 0.06);
+        }
+
+        .card-yellow {
+            border-color: rgba(250, 204, 21, 0.2);
+            background: rgba(250, 204, 21, 0.04);
+        }
+
+        .card h3 { color: var(--white); }
+        .card p { color: var(--slate-400); font-size: 14px; line-height: 1.6; }
+
+        .icon-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        .icon-purple { background: rgba(168, 85, 247, 0.15); color: var(--purple-400); }
+        .icon-yellow { background: rgba(250, 204, 21, 0.15); color: var(--yellow-400); }
+        .icon-emerald { background: rgba(52, 211, 153, 0.15); color: var(--emerald-400); }
+
+        /* ============ TABLE ============ */
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 14px;
+        }
+        thead th {
+            text-align: left;
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--purple-400);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        tbody td {
+            padding: 11px 16px;
+            color: var(--slate-200);
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        tbody tr:last-child td { border-bottom: none; }
+        .row-total td {
+            font-weight: 700;
+            color: var(--white);
+            border-top: 2px solid var(--purple-600);
+            padding-top: 14px;
+        }
+        .row-price td {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--yellow-400);
+        }
+
+        /* ============ FLOW ============ */
+        .flow {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+        .flow-step {
+            flex: 1;
+            text-align: center;
+            padding: 24px 16px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+        .flow-step:first-child { border-radius: 16px 0 0 16px; }
+        .flow-step:last-child { border-radius: 0 16px 16px 0; }
+        .flow-arrow {
+            font-size: 20px;
+            color: var(--purple-500);
+            margin: 0 -4px;
+            z-index: 2;
+        }
+        .flow-step .step-num {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--purple-600);
+            color: white;
+            font-weight: 700;
+            font-size: 13px;
+            line-height: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .flow-step h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .flow-step p {
+            font-size: 12px;
+            color: var(--slate-500);
+        }
+
+        /* ============ LISTS ============ */
+        .wf-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 32px;
+            font-size: 14px;
+            color: var(--slate-200);
+        }
+        .wf-list li {
+            list-style: none;
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        .wf-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--purple-500);
+        }
+
+        /* ============ DIVIDER ============ */
+        .divider {
+            width: 48px;
+            height: 3px;
+            background: var(--purple-600);
+            border-radius: 2px;
+            margin: 20px 0;
+        }
+
+        /* ============ BADGES ============ */
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .badge-purple { background: rgba(168, 85, 247, 0.15); color: var(--purple-400); }
+        .badge-yellow { background: rgba(250, 204, 21, 0.15); color: var(--yellow-400); }
+        .badge-emerald { background: rgba(52, 211, 153, 0.15); color: var(--emerald-400); }
+
+        /* ============ FOOTER ============ */
+        .slide-footer {
+            position: absolute;
+            bottom: 24px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--slate-500);
+        }
+
+        /* ============ CTA SLIDE ============ */
+        .cta-box {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15) 0%, rgba(234, 179, 8, 0.08) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 24px;
+            padding: 48px;
+            text-align: center;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* ============ PHASE CARDS ============ */
+        .phase-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 32px;
+            position: relative;
+        }
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            border-radius: 20px 20px 0 0;
+        }
+        .phase-1::before { background: var(--purple-500); }
+        .phase-2::before { background: var(--yellow-500); }
+        .phase-num {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        /* ============ COMPARISON ============ */
+        .vs-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--navy);
+            border: 2px solid var(--purple-600);
+            font-weight: 800;
+            font-size: 13px;
+            color: var(--purple-400);
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1: COVER ==================== -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center;">
+    <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 30% 50%, rgba(168,85,247,0.1) 0%, transparent 60%), radial-gradient(ellipse at 70% 80%, rgba(234,179,8,0.05) 0%, transparent 50%);z-index:0;"></div>
+
+    <div style="position:relative;z-index:1;">
+        <div class="logo" style="justify-content:center; margin-bottom: 48px;">
+            <div class="logo-badge">10h+</div>
+            <span class="logo-text">System 10h+</span>
+        </div>
+
+        <h1 style="font-size: 56px; margin-bottom: 20px;">
+            Bliźniak Biznesowy <span class="text-purple">v7.0</span>
+        </h1>
+
+        <p class="subtitle" style="max-width: 580px; margin: 0 auto 40px;">
+            Gotowy system sprzedażowy AI — skonfigurowany pod Twój biznes, nie kolejny kurs do przerabiania.
+        </p>
+
+        <div style="display:flex; gap:16px; justify-content:center; margin-bottom: 48px;">
+            <span class="badge badge-purple">16 workflow'ów</span>
+            <span class="badge badge-emerald">Zero abonamentu</span>
+            <span class="badge badge-yellow">Działa od dnia 1</span>
+        </div>
+
+        <p style="font-size: 14px; color: var(--slate-500);">
+            Przygotowano dla: <strong style="color: var(--slate-200);">Modul Soft Sp. z o.o.</strong>
+        </p>
+        <p style="font-size: 12px; color: var(--slate-500); margin-top: 4px;">
+            Mateusz Sokólski &middot; marzec 2026
+        </p>
+    </div>
+
+    <div class="slide-footer">
+        <span>system10h.com</span>
+        <span>1 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 2: PROBLEM ==================== -->
+<div class="slide">
+    <div class="slide-label">Problem</div>
+    <h2>Twój handlowiec traci <span class="text-purple">5-8 godzin tygodniowo</span><br>na powtarzalne zadania</h2>
+
+    <div class="grid-3" style="margin-bottom: 32px;">
+        <div class="card">
+            <div class="icon-circle icon-purple">&#9993;</div>
+            <h3>Maile i oferty</h3>
+            <p>Pisanie ofert, follow-upów, odpowiedzi na obiekcje — za każdym razem od zera, bez kontekstu poprzednich rozmów.</p>
+        </div>
+        <div class="card">
+            <div class="icon-circle icon-yellow">&#128200;</div>
+            <h3>Pipeline w głowie</h3>
+            <p>Kto czeka na follow-up? Ile zaległych? Kto jest gorący? Odpowiedzi rozrzucone po CRM, mailu i kartkach.</p>
+        </div>
+        <div class="card">
+            <div class="icon-circle icon-emerald">&#129302;</div>
+            <h3>AI nie pomaga</h3>
+            <p>ChatGPT pisze generyczne odpowiedzi. Nie zna Twojej oferty, Twojego klienta, Twojego stylu. Wymyśla dane.</p>
+        </div>
+    </div>
+
+    <div class="card card-accent" style="max-width: 680px;">
+        <p style="font-size: 15px; color: var(--slate-200); line-height: 1.7;">
+            <strong style="color: var(--purple-400);">Kluczowy insight:</strong>
+            81% firm deklaruje wdrożenie AI, ale tylko 19% handlowców faktycznie z niego korzysta.
+            Ci co korzystają? <strong style="color: var(--white);">3,7x częściej realizują plan sprzedażowy.</strong>
+            <span style="color: var(--slate-500);">— Deloitte Digital, 2025</span>
+        </p>
+    </div>
+
+    <div class="slide-footer">
+        <span>System 10h+ &middot; Bliźniak Biznesowy v7.0</span>
+        <span>2 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 3: SOLUTION ==================== -->
+<div class="slide">
+    <div class="slide-label">Rozwiązanie</div>
+    <h2>Bliźniak = AI które <span class="text-purple">zna Twój biznes</span></h2>
+
+    <p class="subtitle" style="margin-bottom: 36px;">
+        Skonfigurowany "mózg" AI spersonalizowany pod Twoją firmę. 8 sekcji Biznesowego DNA, 16 scenariuszy sprzedażowych, pamięć operacyjna.
+    </p>
+
+    <div class="grid-4">
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S1</h3>
+            <p style="font-size: 13px;">Profil firmy, misja, supermoce, origin story</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S2</h3>
+            <p style="font-size: 13px;">Klient docelowy — avatar, bóle, pragnienia</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S3</h3>
+            <p style="font-size: 13px;">Oferta — produkty, ceny, USP, dowody</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S4</h3>
+            <p style="font-size: 13px;">Zasady — polityka cenowa, rabaty, warunki</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S5</h3>
+            <p style="font-size: 13px;">Styl komunikacji — 3-warstwowa analiza z maili</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S6</h3>
+            <p style="font-size: 13px;">Obiekcje — 6 battle cards z odpowiedziami</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S7</h3>
+            <p style="font-size: 13px;">Procedury — reklamacje, onboarding, windykacja</p>
+        </div>
+        <div class="card" style="padding: 20px;">
+            <h3 style="font-size: 14px; color: var(--purple-300); margin-bottom: 4px;">S8</h3>
+            <p style="font-size: 13px;">Workflow — narzędzia, KPI, poranny rytuał</p>
+        </div>
+    </div>
+
+    <p style="font-size: 13px; color: var(--slate-500); margin-top: 24px; text-align: center;">
+        Wszystko wydobyte w jednym wywiadzie z Architektem AI (~45 min, ~37 pytań)
+    </p>
+
+    <div class="slide-footer">
+        <span>System 10h+ &middot; Bliźniak Biznesowy v7.0</span>
+        <span>3 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 4: FEATURES ==================== -->
+<div class="slide">
+    <div class="slide-label">Funkcje</div>
+    <h2>16 scenariuszy + 3 nowe mechanizmy <span class="text-purple">v7.0</span></h2>
+
+    <div class="grid-2" style="gap: 40px;">
+        <div>
+            <h3 style="margin-bottom: 16px; color: var(--slate-400); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">Gotowe scenariusze</h3>
+            <ul class="wf-list">
+                <li>Odpowiedź na maila</li>
+                <li>Ofertowanie (30 sek)</li>
+                <li>Obrona ceny (Bad Cop)</li>
+                <li>Follow-up</li>
+                <li>Windykacja (4 etapy)</li>
+                <li>Cold/Warm Outreach</li>
+                <li>Research prospekta</li>
+                <li>Meeting Prep</li>
+                <li>Content (posty, case study)</li>
+                <li>Briefing pipeline'u</li>
+                <li>Propozycja handlowa</li>
+                <li>Obsługa reklamacji</li>
+                <li>Deep Research</li>
+                <li>Higiena folderu</li>
+                <li>Rozwój biznesu</li>
+                <li>Radar szans</li>
+            </ul>
+        </div>
+
+        <div>
+            <h3 style="margin-bottom: 16px; color: var(--slate-400); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">Nowe w v7.0</h3>
+
+            <div class="card card-accent" style="margin-bottom: 16px;">
+                <h3 style="font-size: 15px;">&#128737; Protokół Wiarygodności</h3>
+                <p>AI nie halucynuje — cytuje źródła z DNA, nie wymyśla danych, mówi "nie wiem" gdy nie wie. Zero wymysłów.</p>
+            </div>
+
+            <div class="card card-accent" style="margin-bottom: 16px;">
+                <h3 style="font-size: 15px;">&#127912; Głęboki Profil Stylu</h3>
+                <p>3-warstwowa analiza z 3-5 prawdziwych maili: mechanika, DNA głosu, konteksty. Inaczej pisze do nowego leada, inaczej do stałego klienta.</p>
+            </div>
+
+            <div class="card card-accent">
+                <h3 style="font-size: 15px;">&#128161; Aktywna Pamięć</h3>
+                <p>System wykrywa momenty decyzji i lekcji w rozmowie, sam proponuje zapis. Następnego dnia pamięta kontekst.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>System 10h+ &middot; Bliźniak Biznesowy v7.0</span>
+        <span>4 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 5: HOW IT WORKS ==================== -->
+<div class="slide">
+    <div class="slide-label">Jak to działa</div>
+    <h2>Od wywiadu do działającego systemu w <span class="text-purple">2-3 dni</span></h2>
+
+    <div class="flow" style="margin-bottom: 40px;">
+        <div class="flow-step">
+            <div class="step-num">1</div>
+            <h4>Wywiad z Architektem</h4>
+            <p>~45 min, ~37 pytań<br>+ analiza maili</p>
+        </div>
+        <span class="flow-arrow">&#10140;</span>
+        <div class="flow-step">
+            <div class="step-num">2</div>
+            <h4>Biznesowe DNA</h4>
+            <p>8 sekcji, ~240 pól<br>Twoja tożsamość AI</p>
+        </div>
+        <span class="flow-arrow">&#10140;</span>
+        <div class="flow-step">
+            <div class="step-num">3</div>
+            <h4>Instalacja</h4>
+            <p>Claude Projects<br>+ konfiguracja</p>
+        </div>
+        <span class="flow-arrow">&#10140;</span>
+        <div class="flow-step">
+            <div class="step-num">4</div>
+            <h4>Szkolenie</h4>
+            <p>Loom 15-20 min<br>3 demo na żywo</p>
+        </div>
+    </div>
+
+    <div class="grid-3">
+        <div class="card" style="text-align: center;">
+            <h3 style="font-size: 32px; color: var(--purple-400); margin-bottom: 4px;">0</h3>
+            <p style="font-size: 13px;">Abonamentów</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h3 style="font-size: 32px; color: var(--purple-400); margin-bottom: 4px;">0</h3>
+            <p style="font-size: 13px;">Integracji do konfigurowania</p>
+        </div>
+        <div class="card" style="text-align: center;">
+            <h3 style="font-size: 32px; color: var(--purple-400); margin-bottom: 4px;">30 dni</h3>
+            <p style="font-size: 13px;">Gwarancja zwrotu bez pytań</p>
+        </div>
+    </div>
+
+    <p style="font-size: 14px; color: var(--slate-400); margin-top: 28px; text-align: center;">
+        Pliki lokalne, opt-out treningu AI. Twoje dane zostają u Ciebie — nie w chmurze, nie w API.
+    </p>
+
+    <div class="slide-footer">
+        <span>System 10h+ &middot; Bliźniak Biznesowy v7.0</span>
+        <span>5 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 6: FOR MODUL SOFT ==================== -->
+<div class="slide">
+    <div class="slide-label">Propozycja dla Modul Soft</div>
+    <h2>Dwie fazy — od pilota do <span class="text-purple">nowej linii przychodowej</span></h2>
+
+    <div class="grid-2" style="gap: 32px; margin-bottom: 32px;">
+        <div class="phase-card phase-1">
+            <div class="phase-num text-purple">Faza 1 — Pilot wewnętrzny</div>
+            <h3 style="font-size: 20px; margin-bottom: 16px;">Bliźniak dla zespołu sprzedaży</h3>
+            <ul style="list-style: none; font-size: 14px; color: var(--slate-200);">
+                <li style="padding: 5px 0;">&#10003; &nbsp;1-2 Bliźniaki v7.0 dla handlowców</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Wywiad z Architektem AI (~45 min/os.)</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Pełna konfiguracja + instalacja</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Szkolenie + 30 dni wsparcia</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Gwarancja zwrotu 30 dni</li>
+            </ul>
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
+                <span style="font-size: 28px; font-weight: 800; color: var(--white);">2 999 PLN</span>
+                <span style="color: var(--slate-500); font-size: 13px;"> netto / osoba, jednorazowo</span>
+            </div>
+        </div>
+
+        <div class="phase-card phase-2">
+            <div class="phase-num text-yellow">Faza 2 — Program partnerski</div>
+            <h3 style="font-size: 20px; margin-bottom: 16px;">Know-how transfer + co-delivery</h3>
+            <ul style="list-style: none; font-size: 14px; color: var(--slate-200);">
+                <li style="padding: 5px 0;">&#10003; &nbsp;Szkolenie metodologii (1 dzień intensive)</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Pakiet szablonów (Architekt, DNA, SKILL)</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;3 wspólne wdrożenia u Waszych klientów</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Samodzielne wdrażanie po szkoleniu</li>
+                <li style="padding: 5px 0;">&#10003; &nbsp;Zero royalty — cały zysk Wasz</li>
+            </ul>
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06);">
+                <span style="font-size: 28px; font-weight: 800; color: var(--white);">15 500 PLN</span>
+                <span style="color: var(--slate-500); font-size: 13px;"> netto (po udanym pilocie)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card card-yellow" style="max-width: 100%;">
+        <p style="font-size: 14px; color: var(--slate-200); line-height: 1.7;">
+            <strong style="color: var(--yellow-400);">ROI programu partnerskiego:</strong>
+            Inwestycja ~21 500 PLN (Faza 1+2). Wdrożenie u klienta: ~4-6h pracy, cena 3 500-5 000 PLN.
+            <strong style="color: var(--white);">10 wdrożeń/rok = 35 000-50 000 PLN przychodu.</strong>
+            Marża 80%+. Zwrot inwestycji: 2-3x w pierwszym roku.
+        </p>
+    </div>
+
+    <div class="slide-footer">
+        <span>System 10h+ &middot; Bliźniak Biznesowy v7.0</span>
+        <span>6 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 7: VALUE STACKING ==================== -->
+<div class="slide">
+    <div class="slide-label">Wartość</div>
+    <h2>Co dostaje <span class="text-purple">każdy handlowiec</span></h2>
+
+    <div class="grid-2" style="gap: 40px;">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th style="text-align: right;">Wartość</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Biznesowe DNA v2.1 — 8 sekcji, ~240 pól + głęboka stylometria</td><td style="text-align: right;">1 500 PLN</td></tr>
+                    <tr><td>Pamięć operacyjna v1.1 — aktywne wykrywanie decyzji i lekcji</td><td style="text-align: right;">600 PLN</td></tr>
+                    <tr><td>Bliźniak v7.0 — 16 workflow'ów + Radar Szans</td><td style="text-align: right;">2 800 PLN</td></tr>
+                    <tr><td>Protokół Wiarygodności — zero halucynacji</td><td style="text-align: right;">500 PLN</td></tr>
+                    <tr><td>Głęboki Profil Stylu — 3-warstwowa analiza</td><td style="text-align: right;">600 PLN</td></tr>
+                    <tr><td>Szkolenie Loom (3 demo na żywo)</td><td style="text-align: right;">500 PLN</td></tr>
+                    <tr><td>Biblioteka 16 scenariuszy</td><td style="text-align: right;">600 PLN</td></tr>
+                    <tr><td>Quick Start + instrukcja + inteligentny routing</td><td style="text-align: right;">1 000 PLN</td></tr>
+                    <tr><td>Wsparcie mailowe 30 dni</td><td style="text-align: right;">900 PLN</td></tr>
+                    <tr class="row-total"><td>Łączna wartość</td><td style="text-align: right;">9 000 PLN</td></tr>
+                    <tr class="row-price"><td>Inwestycja</td><td style="text-align: right;">2 999 PLN</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h3 style="margin-bottom: 20px; color: var(--slate-400); font-size: 12px; letter-spacing: 2px; text-transform: uppercase;">vs. abonamentowe narzędzia AI</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Narzędzie</th>
+                        <th style="text-align: right;">Koszt / rok</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Lavender (email AI)</td><td style="text-align: right; color: var(--slate-400);">$348-588</td></tr>
+                    <tr><td>Instantly (outreach)</td><td style="text-align: right; color: var(--slate-400);">$444-1 164</td></tr>
+                    <tr><td>MS Copilot for Sales</td><td style="text-align: right; color: var(--slate-400);">~$600</td></tr>
+                    <tr><td>Salesforce Einstein</td><td style="text-align: right; color: var(--slate-400);">$600-900</td></tr>
+                    <tr style="border-top: 2px solid var(--purple-600);">
+                        <td style="padding-top: 14px;"><strong style="color: var(--yellow-400);">Bliźniak v7.0</strong></td>
+                        <td style="text-align: right; padding-top: 14px;"><strong style="color: var(--yellow-400);">2 999 PLN — raz</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="card" style="margin-top: 24px; text-align: center;">
+                <p style="font-size: 13px; color: var(--slate-400); margin-bottom: 4px;">Gwarancja</p>
+                <p style="font-size: 18px; font-weight: 700; color: var(--emerald-400);">30 dni — pełny zwrot, zero pytań</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>System 10h+ &middot; Bliźniak Biznesowy v7.0</span>
+        <span>7 / 8</span>
+    </div>
+</div>
+
+
+<!-- ==================== SLIDE 8: CTA ==================== -->
+<div class="slide" style="justify-content: center; align-items: center;">
+    <div class="cta-box">
+        <div class="logo" style="justify-content:center; margin-bottom: 32px;">
+            <div class="logo-badge">10h+</div>
+            <span class="logo-text">System 10h+</span>
+        </div>
+
+        <h2 style="font-size: 32px; margin-bottom: 16px;">Umówmy spotkanie</h2>
+
+        <p class="subtitle" style="margin: 0 auto 36px; text-align: center; max-width: 480px;">
+            45 minut — discovery + live demo na przykładzie Waszej branży. Zero zobowiązań.
+        </p>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; align-items: center;">
+            <div style="font-size: 18px; font-weight: 600; color: var(--white);">
+                Mateusz Sokólski
+            </div>
+            <div style="font-size: 14px; color: var(--slate-400);">
+                AI-Sales Inspirator &middot; System 10h+
+            </div>
+            <div style="display: flex; gap: 24px; margin-top: 8px; font-size: 14px;">
+                <span style="color: var(--purple-300);">mateusz@system10h.com</span>
+                <span style="color: var(--slate-500);">&middot;</span>
+                <span style="color: var(--purple-300);">+48 534 852 707</span>
+            </div>
+            <div style="margin-top: 8px;">
+                <span style="font-size: 13px; color: var(--slate-500);">system10h.com</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-footer">
+        <span>&copy; 2026 System 10h+</span>
+        <span>8 / 8</span>
+    </div>
+</div>
+
+</body>
+</html>

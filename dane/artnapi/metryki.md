@@ -1,5 +1,5 @@
 # METRYKI SPRZEDAZY — DASHBOARD
-> Ostatnia aktualizacja: 06.03.2026
+> Ostatnia aktualizacja: 10.03.2026
 > Zrodlo danych: arkusz prowizji + CRM Notion + pliki lokalne
 > ZASADA: Aktualizuj CO TYDZIEN (piatek) lub przy @cso/@coo fetch.
 > NOWY MODEL PROWIZJI (od 12.02): marza firmy / marza handlowca jawnie w cenie. Prowizja = suma marzy handlowca - 6 666 base.
@@ -21,7 +21,7 @@ CEL PIOTRA:              8 000 szt/mies w 3 mies. Kara: brak prowizji jesli nie 
 |---------|-------------|-------|----------|--------|-------|
 | I/2026  | ~22 000 | 6 | ~834 | 36% | start w firmie |
 | **II/2026** | **58 140** | **18** | **5 585** | **239%** | **REKORD. WINO-GRONO + recurring** |
-| III/2026 | 7 491* | 7 | 758 | 32% | *W1, +~2k brak w arkuszu* |
+| III/2026 | ~29 688 | 5+ | w toku | — | W1-W2: WINO-GRONO 1080szt/7.9k + ad-trade 2400szt/7k + Malowisko 350szt/3.6k + Wisz 360szt/3.2k + HR Consulting 120szt/1.2k. Marża handl: ~4 948 PLN (GAP do progu: ~1 718) |
 
 > Pelne rozbicie luty deal-by-deal → backup/metryki_luty_rozbicie_2026-03-04.md
 
@@ -63,18 +63,20 @@ NOWI:       6 zam. = 26 073 PLN (45%)
 
 ---
 
-## ACCOUNT HEALTH — STALI KLIENCI (06.03)
+## ACCOUNT HEALTH — STALI KLIENCI (10.03)
 
 | Klient | Cykl | Ostatnie zam. | Next okno | Sygnal |
 |--------|------|---------------|-----------|--------|
-| Malowisko/Ewelina | 10 dni | 25.02 (360 szt) | ~07.03 | 🟡 sprawdzic |
-| Farboteka/Joanna | 13 dni | 25.02 (120 szt) | ~10.03 | 🟢 OK |
-| Konrad Wisz | nowy | 03.03 (360 szt @ 9,00) | ~17.03 | 🟢 OK |
+| Malowisko/Ewelina | 10 dni | 10.03 (2pal ~720 szt @ 8,15) | ~20.03 | 🟢 OK |
+| Farboteka/Joanna | 13 dni | 25.02 (120 szt) | overdue ~10.03 | 🟡 draft 10.03 |
+| Konrad Wisz | ~14 dni | 03.03 (360 szt @ 9,00) | ~17.03 | 🟢 OK |
+| Ad Trade/Jedraszczyk | jednoraz. | 09.03 (300 zest. × 8 szt deski) | jeszcze 1x | 🟡 jednoraz. |
+| Color Up | nowy | III.2026 (1000 szt 30x40 z przech.) | ? | 🟢 OK |
 | Art Wine/Czernianin | ~21 dni | 02.03 (160 szt) | ~23.03 | 🟢 OK |
-| BATS/Mroczyk | 30-45 dni | 23.02 (720 szt) | overdue ~06.03 | 🔴 sprawdzic |
-| Winem malowane | 14-21 dni | 18.02 (120 szt) | overdue | 🔴 FU |
-| WATAHA/Blaut | 30-60 dni | 09.02 | overdue | 🔴 FU |
-| WINO-GRONO | nowy | 13.02 (2160 szt) | CALL PON 09.03 | 🟡 kluczowy |
+| BATS/Mroczyk | 30-45 dni | 23.02 (720 szt) | overdue ~09.03 | 🟡 draft 10.03 |
+| Winem malowane | 14-21 dni | 18.02 (120 szt) | overdue | 🟡 draft 10.03 |
+| WATAHA/Blaut | 30-60 dni | 09.02 | overdue | 🟡 draft 10.03 |
+| WINO-GRONO | powtorka! | 10.03 (1800 szt 5 pal) | Retencja D14: 24.03 | 🟢 ZAMKNIETE |
 | Kolorab | 30 dni | II.2026 (1000 szt) | ~III.2026 | 🟢 OK |
 | Odkryj Artyste | nowy | 19.02 (60 szt) | ~19.03 | 🟢 OK |
 | UNITRON | powrot | 03.03 (40 szt MPN) | ~III.2026 | 🟢 OK |
@@ -87,7 +89,7 @@ NOWI:       6 zam. = 26 073 PLN (45%)
 | Tydzien | Deali | Przychod | Prowizja | Uwagi |
 |---------|-------|----------|----------|-------|
 | W1 (03-07.03) | 7 | 7 491 | 758 | Wisz 3.2k + Czernianin 1.3k + Unitron + 3 nowe |
-| W2 (09-13.03) | — | — | — | |
+| W2 (09-13.03) | 3+ | ~19 724+ | ~2 966+ | WINO-GRONO 960szt/7.9k + ad-trade 2400szt/7k + HR Consulting 120szt/1.2k + Malowisko 350szt/3.6k + Malowisko 720szt/5.9k. Spotkanie Piotr: 2 kontenery, CE, koszty mag. CE update: fabryka MA certyfikaty |
 
 ---
 

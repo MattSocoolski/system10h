@@ -134,7 +134,7 @@ Dzien dobry, [imie]!
 
 Dziekuje — krotko i na temat:
 
-Podobrazia 40x50 od 9,00 PLN netto all-in z dostawa (przy palecie 360 szt). Kartony od 10,31 PLN. Event Grade 280g, potrojnie gruntowane.
+Podobrazia 40x50 od 9,00 PLN netto all-in z dostawa (przy palecie 320 szt). Kartony od 10,30 PLN. Event Grade 280g, potrojnie gruntowane.
 
 Mamy teraz 10 000 szt na stanie — wysylka 24h z magazynu pod Warszawa.
 
@@ -240,7 +240,7 @@ Dzien dobry!
 
 Dziekuje za zainteresowanie. Krotko:
 
-Podobrazia 40x50 (Adre Arto): od 7,31 PLN netto all-in z dostawa (przy 3 paletach). Paleta: 9,00 PLN. Kartony: 10,31 PLN.
+Podobrazia 40x50 (Adre Arto): od 7,30 PLN netto all-in z dostawa (przy 3 paletach). Paleta: 9,00 PLN. Kartony: 10,30 PLN.
 
 Zestawy PBN 40x50 na ramie: 21,13 PLN netto (MOQ 30 szt). 470 wzorow, swieże farby.
 

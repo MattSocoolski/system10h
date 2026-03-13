@@ -19,8 +19,11 @@ Skonfigurowany "mózg" AI spersonalizowany pod TWÓJ biznes:
 - **Twoje procedury** (reklamacje, windykacja, onboarding, follow-up)
 - **Twój workflow** (poranny rytuał, narzędzia, KPI)
 
-Plus **16 gotowych scenariuszy sprzedażowych** + inteligentny routing:
+Plus **16 gotowych scenariuszy sprzedażowych** + inteligentny routing + 3 nowe mechanizmy:
 - **Inteligentny routing** — AI sam rozpoznaje czego potrzebujesz, nie musisz wybierać z menu
+- **Protokół Wiarygodności** — AI nie halucynuje: cytuje źródła z DNA, nie wymyśla danych, mówi "nie wiem" gdy nie wie
+- **Głęboki Profil Stylu** — 3-warstwowa analiza z 3-5 maili: mechanika + DNA głosu + konteksty (nowy lead vs stały klient vs follow-up vs LinkedIn)
+- **Aktywna Pamięć** — system wykrywa momenty decyzji i lekcji w rozmowie, sam proponuje zapis
 
 Scenariusze:
 1. **Odpowiedź na maila** — odpisz w Twoim stylu
@@ -79,7 +82,7 @@ Scenariusze:
 ### ŚCIEŻKA DISCOVERY (dla szukających)
 > Jeszcze nie masz jasności kim jesteś biznesowo.
 
-1. **Self-Discovery** (12 pytań, ~30 min) — budujesz profil i personę
+1. **Self-Discovery** (18 pytań, ~40 min) — budujesz profil, personę i analizę systemu pracy
 2. **Wywiad z Architektem AI** (~30 min, bo import z SD) — uzupełniasz resztę
 3. **Instalacja** + **Szkolenie**
 
@@ -89,9 +92,9 @@ Scenariusze:
 
 | Element | Opis |
 |---------|------|
-| **dna.md v2.0** | Biznesowe DNA — 8 sekcji, ~240 pól wiedzy o Twoim biznesie |
-| **stan.md** | Pamięć operacyjna — system pamięta między sesjami (pipeline, fokus, decyzje) |
-| **Bliźniak Biznesowy v6.1** | AI z 16 workflow'ami + menu + Radar Szans + pamięć operacyjna |
+| **dna.md v2.1** | Biznesowe DNA — 8 sekcji, ~240 pól + głęboka stylometria (3 warstwy, 5 kontekstów) |
+| **stan.md v1.1** | Pamięć operacyjna z aktywnym wykrywaniem — system pamięta decyzje, lekcje, szanse |
+| **Bliźniak Biznesowy v7.0** | AI z 16 workflow'ami + Protokół Wiarygodności + Aktywna Pamięć + Radar Szans |
 | **Nagranie szkoleniowe** | Loom 15-20 min (3 demo: ofertowanie, bad cop, outreach) |
 | **Biblioteka 16 scenariuszy** | Gotowe przykłady dla każdego workflow'u |
 | **Quick Start** | Instrukcja instalacji (1 strona) |
@@ -108,16 +111,18 @@ Scenariusze:
 
 | Element | Wartość |
 |---------|---------|
-| dna.md v2.0 — Biznesowe DNA (8 sekcji, ~240 pól) | 1 200 PLN |
-| stan.md — Pamięć operacyjna (pipeline, fokus, decyzje między sesjami) | 400 PLN |
-| Bliźniak Biznesowy v6.1 — AI z 16 workflow'ami + Radar Szans + pamięć | 2 800 PLN |
+| dna.md v2.1 — Biznesowe DNA (8 sekcji, ~240 pól + głęboka stylometria) | 1 500 PLN |
+| stan.md v1.1 — Pamięć operacyjna z aktywnym wykrywaniem (decyzje, lekcje, szanse) | 600 PLN |
+| Bliźniak Biznesowy v7.0 — AI z 16 workflow'ami + Radar Szans + pamięć | 2 800 PLN |
+| Protokół Wiarygodności — AI nie halucynuje, cytuje źródła, weryfikuje dane | 500 PLN |
+| Głęboki Profil Stylu — 3-warstwowa analiza stylu z kontekstami komunikacji | 600 PLN |
 | Nagranie szkoleniowe Loom (3 demo na żywo) | 500 PLN |
 | Biblioteka 16 scenariuszy (gotowe przykłady) | 600 PLN |
 | Quick Start + instrukcja instalacji | 200 PLN |
 | Wsparcie mailowe 30 dni | 900 PLN |
 | Inteligentny routing (AI rozpoznaje intencje) | 800 PLN |
 | Gwarancja 30 dni zwrotu bez pytań | — |
-| **Łączna wartość** | **7 400 PLN** |
+| **Łączna wartość** | **9 000 PLN** |
 | **Twoja inwestycja** | **2 999 PLN** |
 
 - Zero abonamentu
@@ -126,6 +131,10 @@ Scenariusze:
 - Raty w rozmowie: 2× 1 499,50 PLN (tylko gdy klient chce, ale ma problem z cashflow)
 
 **ROI:** Zwraca się po 1 uratowanym dealu lub 10h zaoszczędzonego czasu.
+
+### Bliźniak PRO (addon)
+
+Dla tych którzy chcą żeby system SAM przychodził z informacjami — automatyczne briefy i alerty na Telegram. Szczegóły: dane/system10h/blizniakpro_architektura.md
 
 **Gwarancja:** 30 dni. Jeśli System nie oszczędza Ci czasu — pełny zwrot, zero pytań.
 
@@ -137,7 +146,7 @@ Scenariusze:
 | Instantly (outreach) | $37-97/msc | $444-1 164/rok |
 | Jasper (content AI) | $39-69/msc | $468-828/rok |
 | Copy.ai (sales copy) | $29/msc | $348/rok |
-| **Bliźniak Biznesowy** | **jednorazowo** | **2 999 PLN netto i koniec** |
+| **Bliźniak Biznesowy v7.0** | **jednorazowo** | **2 999 PLN netto i koniec** |
 
 ---
 
@@ -164,6 +173,16 @@ Scenariusze:
 
 ---
 
+## MATERIAŁY SPRZEDAŻOWE
+
+| Materiał | Ścieżka | Opis |
+|----------|---------|------|
+| **Prezentacja (szablon)** | `system10h/produkt/prezentacja_template.html` | 8-slajdowy deck HTML, brand System 10H. Kopiuj + zamień [FIRMA]. Drukuj Cmd+P → PDF landscape. |
+| **Prezentacja Modul Soft (PL)** | `materialy/prezentacja_blizniakv7_modul_soft.html` | Wersja dla Modul Soft (Faza 1 pilot + Faza 2 know-how) |
+| **Prezentacja Modul Soft (UA)** | `materialy/prezentacja_blizniakv7_modul_soft_UA.html` | Wersja ukraińska |
+
+---
+
 ## NASTĘPNY KROK
 
 **Napisz:** "Chcę Bliźniaka"
@@ -173,4 +192,4 @@ Scenariusze:
 ---
 
 *Bliźniak Biznesowy by Mateusz Sokólski | AI-Sales Inspirator*
-*Zaktualizowano: 25.02.2026 (v6.1: +stan.md pamięć operacyjna, +WF16 Radar Szans, 15→16 scenariuszy, value stacking 6400→7400 PLN)*
+*Zaktualizowano: 12.03.2026 (v7.0: +Protokół Wiarygodności, +Głęboki Profil Stylu, +Aktywna Pamięć, value stacking 7400→9000 PLN, Self-Discovery v2 z kwalifikacją BASE/PRO, architektura Bliźniak PRO, szablon prezentacji sprzedażowej)*
