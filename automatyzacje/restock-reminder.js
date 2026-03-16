@@ -16,7 +16,7 @@ import { fileURLToPath } from 'url';
 import {
   loadEnv, sendTelegram, queryCRM, parseNotionLead, today, formatDate, daysDiff,
   gmailGetAccessToken, gmailCreateDraft, loadState, saveState, escapeHtml,
-  isForeignLead
+  isForeignLead, wrapEmailHTML
 } from './lib.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -80,6 +80,8 @@ You are writing a restock reminder to an EXISTING client who has already purchas
 
 IMPORTANT: Write the ENTIRE email in English. Do NOT use any Polish.
 
+FORMAT: Write in HTML. Use <p> for paragraphs, <strong> for emphasis, <ul><li> for lists. Do NOT add <html>/<body> tags — only the inner content. Do NOT include a signature — it will be added automatically.
+
 STYLE:
 ${ghostB2BEN}
 
@@ -92,11 +94,11 @@ RESTOCK REMINDER RULES:
 • Tone: "checking on your stock", "time to reorder?", "warehouse is full, ready to ship"
 • NEVER be pushy — this is a happy client, nurture the relationship
 • Approach: caring key account manager, not a salesperson
-• Link the B2B calculator: "Current pricing and calculator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
+• Link the B2B calculator using <a href="...">: "Current pricing and calculator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
 • NEVER invent details about the client — write based on data only
 • Closing: proactive, suggest a concrete next step (e.g. prepare an offer, send samples of new products)
-• End with: Best regards,\n\nMateusz Sokolski\nkey account manager at artnapi.pl\nmail: mateusz.sokolski@artnapi.pl\nphone: +48 534 852 707\nB2B price calculator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-• Write ONLY the email body (no To:/Subject: headers)`;
+• Do NOT add a signature at the end — it is appended automatically
+• Write ONLY the email body in HTML (no To:/Subject: headers, no signature)`;
 
   const leadContext = [
     `Name: ${lead.name || 'unknown'}`,
@@ -129,6 +131,8 @@ function buildRestockPrompt(lead, daysOverdue, cyklDni, ghostB2B, ghostB2BEN, of
   const systemPrompt = `Jesteś ghostwriterem Mateusza Sokólskiego, key account managera w artnapi.pl.
 Piszesz przypomnienie o uzupełnieniu zapasów do ISTNIEJĄCEGO klienta który już kupił.
 
+FORMAT: Pisz w HTML. Używaj <p> dla akapitów, <strong> dla pogrubień, <ul><li> dla list. NIE dodawaj tagów <html>/<body> — tylko wewnętrzną treść. NIE dodawaj stopki/podpisu — zostanie dodana automatycznie.
+
 STYL:
 ${ghostB2B}
 
@@ -141,12 +145,12 @@ ZASADY RESTOCK REMINDER:
 • Ton: "sprawdzam jak z zapasem", "czas na uzupełnienie?", "magazyn pełny, wysyłka od ręki"
 • NIGDY nie bądź nachalny — to jest happy client, dbamy o relację
 • Podejście: opiekuńczy key account manager, nie handlowiec
-• Podlinkuj kalkulator B2B: "Aktualny cennik i kalkulator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
+• Podlinkuj kalkulator B2B używając tagu <a href="...">: "Aktualny cennik i kalkulator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
 • Jeśli lead CEE (kraj != PL) → pisz po angielsku
 • NIGDY nie wymyślaj szczegółów z życia klienta — pisz na podstawie danych
 • Zamknięcie: proaktywne, zaproponuj konkretny następny krok (np. przygotowanie oferty, wysyłka próbek nowych produktów)
-• Kończ: Pozdrawiam serdecznie,\n\nSokólski Mateusz\nkey account manager w artnapi.pl\nmail: mateusz.sokolski@artnapi.pl\ntelefon: +48 534 852 707\nkalkulator B2B: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-• Pisz TYLKO treść maila (bez nagłówków To:/Subject:)`;
+• NIE dodawaj stopki/podpisu na końcu — jest dodawana automatycznie
+• Pisz TYLKO treść maila w HTML (bez nagłówków To:/Subject:, bez podpisu)`;
 
   const leadContext = [
     `Nazwa: ${lead.name || 'brak'}`,
@@ -267,17 +271,19 @@ async function run() {
         const { systemPrompt, userPrompt } = buildRestockPrompt(lead, daysOverdue, cyklDni, ghostB2B, ghostB2BEN, ofertaCondensed);
 
         try {
-          const draftBody = await callClaude(systemPrompt, userPrompt);
+          const draftBodyRaw = await callClaude(systemPrompt, userPrompt);
+          const isEN = isForeignLead(lead);
+          const draftBody = wrapEmailHTML(draftBodyRaw, isEN);
           const subject = generateSubject(lead);
 
           if (DRY_RUN) {
             console.log(`[DRY-RUN] Would create draft for ${lead.name || lead.company} (${lead.email}):`);
             console.log(`  Subject: ${subject}`);
             console.log(`  Cykl: co ${cyklDni} dni, overdue ${daysOverdue} dni`);
-            console.log(`  Body: ${draftBody.slice(0, 100)}...`);
+            console.log(`  Body: ${draftBodyRaw.slice(0, 100)}...`);
           } else {
-            await gmailCreateDraft(accessToken, lead.email, subject, draftBody);
-            console.log(`[RESTOCK v1] Draft created: ${lead.name || lead.company} (${lead.email})`);
+            await gmailCreateDraft(accessToken, lead.email, subject, draftBody, null, { html: true });
+            console.log(`[RESTOCK v1] Draft created (HTML): ${lead.name || lead.company} (${lead.email})`);
           }
 
           draftsCreated++;

@@ -43,10 +43,10 @@
 
 ### Krok 6: Handoff
 - `projekty/stalton/dna-stalton.md` — DNA Natana (215 linii, sformatowane 17.02)
-- `system10h/produkt/system-10h-sales-twin/SKILL.md` — Bliźniak v5.0
+- `system10h/produkt/system-10h-sales-twin/SKILL.md` — Bliźniak v7.0
 - `system10h/produkt/CLAUDE.md` — plik systemowy
 - Link do Loom
-- `system10h/produkt/BIBLIOTEKA_SCENARIUSZY.md` — 15 scenariuszy
+- `system10h/produkt/BIBLIOTEKA_SCENARIUSZY.md` — 16 scenariuszy
 - `system10h/produkt/INSTRUKCJA_KLIENTA.md` — Quick Start
 
 ### Krok 7: Bonus (perspektywy)

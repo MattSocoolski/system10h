@@ -259,20 +259,35 @@ export async function gmailGetAccessToken() {
     throw new Error('Gmail OAuth not configured — run: node automatyzacje/gmail-auth.js');
   }
 
-  const res = await fetch('https://oauth2.googleapis.com/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      client_id: clientId,
-      client_secret: clientSecret,
-      refresh_token: refreshToken,
-      grant_type: 'refresh_token'
-    }).toString()
-  });
+  const MAX_RETRIES = 3;
+  const RETRY_DELAY_MS = 10000; // 10s between retries (network wake-up after sleep)
 
-  const data = await res.json();
-  if (data.error) throw new Error(`Gmail token refresh failed: ${data.error} — ${data.error_description || ''}`);
-  return data.access_token;
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      const res = await fetch('https://oauth2.googleapis.com/token', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          client_id: clientId,
+          client_secret: clientSecret,
+          refresh_token: refreshToken,
+          grant_type: 'refresh_token'
+        }).toString()
+      });
+
+      const data = await res.json();
+      if (data.error) throw new Error(`Gmail token refresh failed: ${data.error} — ${data.error_description || ''}`);
+      return data.access_token;
+    } catch (err) {
+      const isNetworkError = err.message === 'fetch failed' || err.message.includes('ENOTFOUND') || err.message.includes('ECONNREFUSED');
+      if (isNetworkError && attempt < MAX_RETRIES) {
+        console.log(`[OAuth] Network error (attempt ${attempt}/${MAX_RETRIES}), retrying in ${RETRY_DELAY_MS / 1000}s...`);
+        await new Promise(r => setTimeout(r, RETRY_DELAY_MS));
+        continue;
+      }
+      throw err; // non-network error or last attempt — propagate
+    }
+  }
 }
 
 export async function gmailFetch(accessToken, endpoint, params = {}) {
@@ -355,12 +370,40 @@ export function escapeHtml(text) {
   return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-export async function gmailCreateDraft(accessToken, to, subject, body, replyToMessageId = null) {
+// --- HTML Email Signatures ---
+export const HTML_SIGNATURE_PL = `<p style="margin-top: 16px; line-height: 1.6;">
+<strong>Sokólski Mateusz</strong><br>
+key account manager w <a href="https://artnapi.pl" style="color: #1a73e8; text-decoration: none;">artnapi.pl</a><br>
+<a href="mailto:mateusz.sokolski@artnapi.pl" style="color: #1a73e8; text-decoration: none;">mateusz.sokolski@artnapi.pl</a> | <a href="tel:+48534852707" style="color: #1a73e8; text-decoration: none;">+48 534 852 707</a>
+</p>`;
+
+export const HTML_SIGNATURE_EN = `<p style="margin-top: 16px; line-height: 1.6;">
+<strong>Mateusz Sokólski</strong><br>
+Key Account Manager at <a href="https://artnapi.pl" style="color: #1a73e8; text-decoration: none;">artnapi.pl</a><br>
+<a href="mailto:mateusz.sokolski@artnapi.pl" style="color: #1a73e8; text-decoration: none;">mateusz.sokolski@artnapi.pl</a> | <a href="tel:+48534852707" style="color: #1a73e8; text-decoration: none;">+48 534 852 707</a>
+</p>`;
+
+/**
+ * Wraps HTML email body content with consistent styling and the appropriate signature.
+ * @param {string} bodyContent - HTML body content (paragraphs, lists, etc.)
+ * @param {boolean} isEnglish - Use English signature if true, Polish otherwise
+ * @returns {string} Complete HTML email with signature
+ */
+export function wrapEmailHTML(bodyContent, isEnglish = false) {
+  const signature = isEnglish ? HTML_SIGNATURE_EN : HTML_SIGNATURE_PL;
+  return `<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6;">
+${bodyContent}
+${signature}
+</div>`;
+}
+
+export async function gmailCreateDraft(accessToken, to, subject, body, replyToMessageId = null, { html = false } = {}) {
   // Build RFC 2822 MIME message
+  const contentType = html ? 'text/html' : 'text/plain';
   const lines = [
     `To: ${to}`,
     `Subject: =?UTF-8?B?${Buffer.from(subject).toString('base64')}?=`,
-    'Content-Type: text/plain; charset="UTF-8"',
+    `Content-Type: ${contentType}; charset="UTF-8"`,
     'Content-Transfer-Encoding: base64',
     'MIME-Version: 1.0',
     '',

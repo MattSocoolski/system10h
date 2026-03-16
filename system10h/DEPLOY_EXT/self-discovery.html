@@ -1,46 +1,19 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl" class="scroll-smooth no-js">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Self-Discovery | Odkryj kim jesteś w biznesie — za darmo</title>
-    <meta name="description" content="Darmowe narzędzie AI które pomoże Ci zdefiniować kim jesteś jako przedsiębiorca i dla kogo pracujesz. 40 minut. 18 pytań. Gotowy profil biznesowy + analiza systemu pracy.">
+    <meta name="description" content="Darmowe narzędzie AI które pomoże Ci zdefiniować kim jesteś jako przedsiębiorca i dla kogo pracujesz. ~30 minut. 18 pytań. Gotowy profil biznesowy + analiza systemu pracy.">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>SD</text></svg>">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    colors: {
-                        brand: { 50: '#faf5ff', 100: '#f3e8ff', 400: '#c084fc', 500: '#a855f7', 600: '#9333ea', 900: '#0f172a' },
-                        accent: { 400: '#facc15', 500: '#eab308' }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body { background-color: #0f172a; color: #f8fafc; }
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-        .glow-bg {
-            position: absolute; width: 600px; height: 600px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%; z-index: -1; pointer-events: none;
-        }
-    </style>
+    <noscript><style>.no-js .fade-in,[style*="opacity: 0"],[style*="opacity:0"]{opacity:1!important;transform:none!important;transition:none!important;}</style></noscript>
 </head>
 <body class="antialiased overflow-x-hidden font-sans">
 
@@ -58,6 +31,7 @@
         </div>
     </nav>
 
+    <main>
     <!-- HERO -->
     <section class="pt-32 pb-16 px-4">
         <div class="max-w-2xl mx-auto text-center">
@@ -69,9 +43,9 @@
                 <span class="text-brand-400">AI Ci to powie.</span>
             </h1>
             <p class="text-lg text-slate-300 mb-4 max-w-xl mx-auto">
-                18 pytań. 40 minut. Na końcu dostajesz gotowy <strong>profil biznesowy</strong>, <strong>personę idealnego klienta</strong> i <strong>analizę systemu pracy</strong>.
+                18 pytań. ~30 minut. Na końcu dostajesz gotowy <strong>profil biznesowy</strong>, <strong>personę idealnego klienta</strong> i <strong>analizę systemu pracy</strong>.
             </p>
-            <p class="text-slate-500 text-sm mb-10">
+            <p class="text-slate-400 text-sm mb-10">
                 Działa w Claude, ChatGPT, Gemini — wklej prompt i odpowiadaj.
             </p>
         </div>
@@ -108,12 +82,14 @@
         <div class="max-w-lg mx-auto">
             <div class="glass-card rounded-2xl p-8 md:p-10">
                 <h2 class="text-2xl font-bold text-center mb-2">Pobierz Self-Discovery</h2>
-                <p class="text-slate-400 text-center text-sm mb-8">Wpisz email — dostaniesz prompt + instrukcję na maila.</p>
+                <p class="text-slate-400 text-center text-sm mb-8">Prompt wyląduje na Twojej skrzynce w 60 sekund.</p>
 
                 <form action="https://assets.mailerlite.com/jsonp/2106531/forms/179112570620216632/subscribe" method="POST" id="leadForm" class="ml-block-form space-y-4" data-code="" target="_blank">
                     <div>
+                        <label for="field-name" class="sr-only">Imię</label>
                         <input
                             type="text"
+                            id="field-name"
                             name="fields[name]"
                             placeholder="Imię"
                             required
@@ -121,15 +97,17 @@
                         >
                     </div>
                     <div>
+                        <label for="field-email" class="sr-only">Adres email</label>
                         <input
                             type="email"
+                            id="field-email"
                             name="fields[email]"
                             placeholder="Twój email"
                             required
                             class="w-full px-4 py-3 rounded-xl bg-slate-800/60 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition"
                         >
                     </div>
-                    <div class="flex items-start gap-3">
+                    <div class="flex items-start gap-3 consent-wrapper">
                         <input
                             type="checkbox"
                             id="consent"
@@ -137,11 +115,14 @@
                             required
                             class="mt-1 w-4 h-4 rounded border-slate-600 bg-slate-800 text-brand-600 focus:ring-brand-500 shrink-0"
                         >
-                        <label for="consent" class="text-slate-500 text-xs leading-relaxed">
-                            Chcę otrzymywać newsletter &mdash; informacje o produktywności, AI w sprzedaży i ofertach usług &mdash; drogą elektroniczną na podany adres e-mail od Mateusz Sokólski Account Management (NIP: 8952117558). Mogę wycofać zgodę w dowolnym momencie klikając &bdquo;wypisz się&rdquo; w każdym emailu. Szczegóły w <a href="polityka-prywatnosci.html" class="text-brand-400 underline hover:text-brand-300" target="_blank">Polityce Prywatności</a>.
-                        </label>
+                        <div>
+                            <label for="consent" class="text-slate-400 text-xs leading-relaxed">
+                                Chcę otrzymywać newsletter &mdash; informacje o produktywności, AI w sprzedaży i ofertach usług &mdash; drogą elektroniczną na podany adres e-mail od Mateusz Sokólski Account Management (NIP: 8952117558). Mogę wycofać zgodę w dowolnym momencie klikając &bdquo;wypisz się&rdquo; w każdym emailu. Szczegóły w <a href="polityka-prywatnosci.html" class="text-brand-400 underline hover:text-brand-300" target="_blank">Polityce Prywatności</a>.
+                            </label>
+                            <p class="consent-warning">Zaznacz zgodę, aby kontynuować.</p>
+                        </div>
                     </div>
-                    <p class="text-slate-600 text-[10px] leading-relaxed">
+                    <p class="text-slate-400 text-xs leading-relaxed">
                         Admin: Mateusz Sokólski Account Management, NIP: 8952117558. Dane (e-mail, imię) przetwarzam w celu wysyłki newslettera i informacji handlowych. Masz prawo dostępu, sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia danych, sprzeciwu oraz skargi do Prezesa UODO. Podanie danych jest dobrowolne, ale konieczne do otrzymania newslettera.
                     </p>
                     <input type="hidden" name="ml-submit" value="1">
@@ -152,7 +133,7 @@
                     >
                         Wyślij mi prompt <i class="fa-solid fa-arrow-right ml-2"></i>
                     </button>
-                    <p class="text-slate-600 text-xs text-center">Zero spamu. Dostajesz prompt i tyle.</p>
+                    <p class="text-slate-400 text-xs text-center">Zero spamu. Dostajesz prompt i tyle.</p>
                 </form>
 
                 <!-- SUCCESS MESSAGE (hidden by default) -->
@@ -160,6 +141,7 @@
                     <div class="text-4xl mb-4"><i class="fa-solid fa-check-circle text-green-400"></i></div>
                     <h3 class="text-xl font-bold mb-2">Sprawdź maila!</h3>
                     <p class="text-slate-400">Prompt Self-Discovery jest w drodze.</p>
+                    <p class="text-slate-400 text-sm mt-3">Sprawdź skrzynkę (też SPAM) — jeśli nie dotarło w ciągu 2 minut, spróbuj ponownie.</p>
                 </div>
             </div>
         </div>
@@ -181,7 +163,7 @@
                     <div class="bg-brand-600 text-white font-bold w-10 h-10 rounded-full flex items-center justify-center shrink-0">2</div>
                     <div>
                         <h3 class="font-bold mb-1">Odpowiadasz na 18 pytań</h3>
-                        <p class="text-slate-400 text-sm">AI pyta jedno po drugim. Bez pośpiechu. ~40 minut.</p>
+                        <p class="text-slate-400 text-sm">AI pyta jedno po drugim. Bez pośpiechu. ~30 minut.</p>
                     </div>
                 </div>
                 <div class="flex gap-4 items-start">
@@ -209,10 +191,12 @@
         </div>
     </section>
 
+    </main>
+
     <!-- FOOTER -->
     <footer class="border-t border-slate-800 py-8 px-4">
-        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
-            <span>Mateusz Sokolski | system10h.com</span>
+        <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-sm">
+            <span>Mateusz Sokólski | system10h.com</span>
             <a href="polityka-prywatnosci.html" class="hover:text-white transition">Polityka prywatności</a>
         </div>
     </footer>
@@ -224,6 +208,28 @@
     </script>
 
     <script>
+        // Remove no-js class — enables CSS animations
+        document.documentElement.classList.remove('no-js');
+
+        // RODO checkbox validation feedback
+        (function() {
+            var form = document.getElementById('leadForm');
+            var consent = document.getElementById('consent');
+            var wrapper = consent.closest('.consent-wrapper');
+
+            form.addEventListener('submit', function() {
+                if (!consent.checked) {
+                    wrapper.classList.add('show-warning');
+                }
+            }, true);
+
+            consent.addEventListener('change', function() {
+                if (consent.checked) {
+                    wrapper.classList.remove('show-warning');
+                }
+            });
+        })();
+
         // MailerLite success callback
         function ml_webform_success_37001793() {
             document.getElementById('leadForm').classList.add('hidden');
@@ -248,9 +254,15 @@
                 form.classList.add('hidden');
                 document.getElementById('successMsg').classList.remove('hidden');
             }).catch(function() {
-                // Fallback — submit normally
-                form.removeEventListener('submit', arguments.callee);
-                form.submit();
+                btn.innerHTML = origText;
+                btn.disabled = false;
+                var errMsg = document.createElement('p');
+                errMsg.className = 'text-red-400 text-sm mt-2';
+                errMsg.textContent = 'Coś poszło nie tak. Spróbuj ponownie.';
+                // Remove existing error messages first
+                var existing = form.querySelector('.text-red-400');
+                if (existing) existing.remove();
+                form.appendChild(errMsg);
             });
         });
     </script>

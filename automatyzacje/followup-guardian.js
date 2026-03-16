@@ -14,8 +14,9 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import {
   loadEnv, sendTelegram, queryCRM, parseNotionLead, today, formatDate, daysDiff,
-  gmailGetAccessToken, gmailCreateDraft, loadState, saveState, escapeHtml,
-  isForeignLead
+  gmailGetAccessToken, gmailCreateDraft, gmailListDrafts, extractEmail,
+  loadState, saveState, escapeHtml,
+  isForeignLead, wrapEmailHTML
 } from './lib.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -38,6 +39,14 @@ const ACTIVE_STATUSES = [
 // --- CLI args ---
 const ALERT_ONLY = process.argv.includes('--alert-only');
 const DRY_RUN = process.argv.includes('--dry-run');
+
+// --- Guard: check if lead is paused/parking/frozen (Bug 2 fix) ---
+function isLeadPaused(lead) {
+  if (lead.status === 'Baza') return true;
+  const notes = (lead.notes || '').toUpperCase();
+  if (/PAUZA|PARKING|ZAMROŻONY|ZAMROZONY/.test(notes)) return true;
+  return false;
+}
 
 // --- Claude API ---
 async function callClaude(systemPrompt, userPrompt) {
@@ -75,6 +84,8 @@ You are writing a follow-up to a lead who hasn't responded to previous contact.
 
 IMPORTANT: Write the ENTIRE email in English. Do NOT use any Polish.
 
+FORMAT: Write in HTML. Use <p> for paragraphs, <strong> for emphasis, <ul><li> for lists. Do NOT add <html>/<body> tags — only the inner content. Do NOT include a signature — it will be added automatically.
+
 STYLE:
 ${ghostB2BEN}
 
@@ -87,11 +98,11 @@ FOLLOW-UP RULES:
 • Approach: add value or ask a question, don't rush
 • If 3-7 days: gentle reminder ("I wanted to follow up on our conversation")
 • If 8-14 days: value + question ("I've prepared something for you / is this still on your radar?")
-• VALUE ADD: Link the price calculator: "I've set up a price calculator for your country: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
+• VALUE ADD: Link the price calculator: "I've set up a price calculator for your country: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html" — use <a href="..."> tag
 • NEVER invent details about the lead — write based on data only
 • Closing: proactive, offer next step
-• End with: Best regards,\n\nMateusz Sokolski\nkey account manager at artnapi.pl\nmail: mateusz.sokolski@artnapi.pl\nphone: +48 534 852 707\nB2B price calculator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-• Write ONLY the email body (no To:/Subject: headers)`;
+• Do NOT add a signature at the end — it is appended automatically
+• Write ONLY the email body in HTML (no To:/Subject: headers, no signature)`;
 
   const leadContext = [
     `Name: ${lead.name || 'unknown'}`,
@@ -125,6 +136,8 @@ function buildFollowUpPrompt(lead, daysOverdue, ghostB2B, ghostB2BEN, ofertaCond
   const systemPrompt = `Jesteś ghostwriterem Mateusza Sokólskiego, key account managera w artnapi.pl.
 Piszesz follow-up do leada który nie odpowiedział na poprzedni kontakt.
 
+FORMAT: Pisz w HTML. Używaj <p> dla akapitów, <strong> dla pogrubień, <ul><li> dla list. NIE dodawaj tagów <html>/<body> — tylko wewnętrzną treść. NIE dodawaj stopki/podpisu — zostanie dodana automatycznie.
+
 STYL:
 ${ghostB2B}
 
@@ -137,12 +150,12 @@ ZASADY FOLLOW-UP:
 • Podejście: daj wartość lub zadaj pytanie, nie ponaglaj
 • Jeśli 3-7 dni: delikatny przypominacz ("chciałem wrócić do naszej rozmowy")
 • Jeśli 8-14 dni: wartość + pytanie ("przygotowałem dla Was / czy temat jest aktualny?")
-• VALUE ADD: Jeśli lead nie zna cen → podlinkuj kalkulator: "Przygotowaliśmy interaktywny kalkulator cen: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
+• VALUE ADD: Jeśli lead nie zna cen → podlinkuj kalkulator: "Przygotowaliśmy interaktywny kalkulator cen: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html" — użyj tagu <a href="...">
 • Jeśli lead CEE → pisz po angielsku, link: "I've prepared a price calculator for your country: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
 • NIGDY nie wymyślaj szczegółów z życia leada — pisz na podstawie danych
 • Zamknięcie: proaktywne, oferuj następny krok
-• Kończ: Pozdrawiam serdecznie,\n\nSokólski Mateusz\nkey account manager w artnapi.pl\nmail: mateusz.sokolski@artnapi.pl\ntelefon: +48 534 852 707\nkalkulator B2B: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-• Pisz TYLKO treść maila (bez nagłówków To:/Subject:)`;
+• NIE dodawaj stopki/podpisu na końcu — jest dodawana automatycznie
+• Pisz TYLKO treść maila w HTML (bez nagłówków To:/Subject:, bez podpisu)`;
 
   const leadContext = [
     `Nazwa: ${lead.name || 'brak'}`,
@@ -196,7 +209,14 @@ async function run() {
 
   const pages = await queryCRM();
   const allLeads = pages.map(parseNotionLead);
-  const active = allLeads.filter(l => ACTIVE_STATUSES.includes(l.status) && l.due);
+  const active = allLeads.filter(l => {
+    if (!ACTIVE_STATUSES.includes(l.status) || !l.due) return false;
+    if (isLeadPaused(l)) {
+      console.log(`[FU-GUARD v2] Skipping ${l.name || l.company} — paused/parking`);
+      return false;
+    }
+    return true;
+  });
 
   // Categorize by urgency
   const tomorrow = active.filter(l => daysDiff(l.due, now) === 1);
@@ -244,21 +264,45 @@ async function run() {
         accessToken = await gmailGetAccessToken();
       }
 
+      // Bug 1 fix: fetch existing Gmail drafts and build set of recipient emails
+      const existingDraftEmails = new Set();
+      if (!DRY_RUN && accessToken) {
+        try {
+          const existingDrafts = await gmailListDrafts(accessToken, 50);
+          for (const draft of existingDrafts) {
+            if (draft.to) {
+              existingDraftEmails.add(extractEmail(draft.to));
+            }
+          }
+          console.log(`[FU-GUARD v2] Found ${existingDraftEmails.size} existing draft recipients in Gmail`);
+        } catch (err) {
+          console.error(`[FU-GUARD v2] Warning: could not list Gmail drafts: ${err.message}`);
+        }
+      }
+
       for (const lead of draftCandidates) {
+        // Bug 1 fix: skip if draft to this email already exists in Gmail
+        if (existingDraftEmails.has(lead.email.toLowerCase())) {
+          console.log(`[FU-GUARD v2] Draft already exists for ${lead.email}, skipping`);
+          continue;
+        }
+
         const daysOver = daysDiff(now, lead.due);
         const { systemPrompt, userPrompt } = buildFollowUpPrompt(lead, daysOver, ghostB2B, ghostB2BEN, ofertaCondensed);
 
         try {
-          const draftBody = await callClaude(systemPrompt, userPrompt);
+          const draftBodyRaw = await callClaude(systemPrompt, userPrompt);
+          const isEN = isForeignLead(lead);
+          const draftBody = wrapEmailHTML(draftBodyRaw, isEN);
           const subject = generateSubject(lead);
 
           if (DRY_RUN) {
             console.log(`[DRY-RUN] Would create draft for ${lead.name} (${lead.email}):`);
             console.log(`  Subject: ${subject}`);
-            console.log(`  Body: ${draftBody.slice(0, 100)}...`);
+            console.log(`  Body: ${draftBodyRaw.slice(0, 100)}...`);
           } else {
-            await gmailCreateDraft(accessToken, lead.email, subject, draftBody);
-            console.log(`[FU-GUARD v2] Draft created: ${lead.name} (${lead.email})`);
+            await gmailCreateDraft(accessToken, lead.email, subject, draftBody, null, { html: true });
+            console.log(`[FU-GUARD v2] Draft created (HTML): ${lead.name} (${lead.email})`);
           }
 
           draftsCreated++;

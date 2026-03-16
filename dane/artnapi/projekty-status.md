@@ -1,6 +1,6 @@
 # PROJEKTY — STATUS
 
-> Aktualizacja: 06.03.2026
+> Aktualizacja: 15.03.2026
 > Zasada: max 5-6 linii per projekt. Szczegoly w README.md w folderze projektu.
 > Kampanie jednorazowe (Dzien Kobiet, Phoenix Down) — to nie projekty, to akcje w ramach Artnapi B2B PL.
 
@@ -12,6 +12,7 @@
 - Cel: 8 000 szt/mies (1/2 kontenera) w 3 mies. Nowy model prowizji: marza handlowca - 6 666 base.
 - Metryki: II.2026 REKORD: 18 zam./58 140 PLN/5 585 PLN prowizji (239%). III.2026: 7 zam./7 491 PLN po W1.
 - Recurring base: ~3 980 szt/msc. Gap: 4 020 szt z nowych + upselli. WINO-GRONO (2 160 szt) = key.
+- Retail: Certyfikaty FSC+BSCI+EN71-3 w reku — gotowe do pitch retail.
 - Nastepny krok: W2 (09-13.03): WINO-GRONO call PON, RestArt FU, cennik do Piotra PT, raport #1 PT.
 - Folder: projekty-artnapi/artnapi-b2b-pl/
 
@@ -28,6 +29,16 @@
 
 ---
 
+## EU DISTRIBUTORS (Dystrybucja hurtowa — partnerzy europejscy)
+
+- Status: AKTYWNY
+- Cel: Tier 1 outreach W3-W4
+- Metryki: Lista targetow: HobbySet, NEOART, Kippers, MPK Toys, Dagros
+- Nastepny krok: Outreach W3-W4 marzec. Przygotowac oferty + probki.
+- Folder: projekty-artnapi/artnapi-cee/
+
+---
+
 ## WTZ/DPS (Kampania do Warsztatow Terapii Zajęciowej i Domow Pomocy Spolecznej)
 
 - Status: AKTYWNY (slow burn)
@@ -40,10 +51,10 @@
 
 ## DOMY KULTURY (Outreach do ~2 500 DK w PL — PBN + podobrazia na warsztaty)
 
-- Status: W BUDOWIE
+- Status: AKTYWNY
 - Cel: 5-10 DK do VI.2026
-- Metryki: brak — start marzec W2
-- Nastepny krok: Batch 50 maili PKE (pytanie o zgode) czw 12.03. Nowy dwuetapowy model.
+- Metryki: Batch 1 wyslany (12 maili), 1 odmowa (MOK Olkusz)
+- Nastepny krok: Batch 2 + FU na Batch 1. Analiza response rate.
 - Folder: projekty-artnapi/domy-kultury/
 
 ---
@@ -70,10 +81,10 @@
 
 ## SYSTEM 10h+ (w kontekscie ArtNapi — sprzedaz Kamil/CQRE/Napi)
 
-- Status: UMOWA W TOKU
+- Status: UMOWA PODPISANA ✅ (12.03)
 - Cel: 30% netto od kontraktu Kamila (Faza 1+2) = 22 500-30 000 PLN
-- Metryki: Umowa drafted 04.03. Deadline oferty Kamila ~27.03.
-- Nastepny krok: Podpisac umowe z Kamilem. Czekac na oferte.
+- Metryki: Umowa podpisana 12.03. Deadline oferty Kamila ~27.03.
+- Nastepny krok: Czekac na oferte Kamila dla Napi.
 - Folder: projekty-artnapi/system-10h/
 
 ---

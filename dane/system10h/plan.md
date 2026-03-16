@@ -115,7 +115,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 | **Kamil Andrusz / CQRE / Napi** | **UMOWA PODPISANA** ✅ | **~27 000 PLN** (30% prowizji) | 12.03 (spotkanie z Piotrem/Unizo/Napi) | Umowa podpisana ✅. Spotkanie z Piotrem 12.03 — omawianie wdrożenia. **Faza 1: 15 000 PLN** (prowizja ~4 500 PLN). **Faza 2: ~75 000 PLN** (prowizja ~22 500 PLN). Mateusz aktywnie pracuje w obu fazach. |
 | **Natan / Stalton** (CNC) | **INSTALLED** ✅ | 1 220 PLN (zamknięty) | 17.02 | Feedback za 2-3 tyg → case study + pytania referencyjne (projekty/stalton/). |
 | **Michał Wielgosz** | LINK WYSŁANY (brak SD) | 2 999 PLN | 23.02 | Nudge z bezpośrednią ofertą demo. |
-| **Modul Soft** (via Lena) | **DISCOVERY** | **18 500-21 500 PLN** (Faza 1+2) | 12.03 (intel od Leny) | Ola (kuma Leny, dyr. sprzedaży, analityk). 200+ klientów. **Spotkanie z Olą: prawdopodobnie WT 18.03.** Prezentacja PL+UA gotowa. Strategia: materialy/2026-03-11_modul_soft_strategy.md |
+| **Modul Soft** (via Lena) | **DISCOVERY** | **18 500-21 500 PLN** (Faza 1+2) | 12.03 (intel od Leny) | Ola (kuma Leny, dyr. sprzedaży, analityk). 200+ klientów, jedyny 1C Solution Partner w PL. **Spotkanie z Olą: prawdopodobnie WT 18.03.** 3 ścieżki: A (Bliźniak 2 999), B (AI Service Desk 10-15k), C (partnerstwo 18-21k). **Meeting prep:** materialy/2026-03-15_modulsoft_meeting_prep.md + materialy/2026-03-11_modul_soft_strategy.md |
 
 **WĄTKI NETWORKINGOWE:**
 - **Małgorzata "Gosia" Jary** (AI Biznes Lab) — FSI (szkolenia AI/IT dla korpo: Accenture, Capgemini, Nordea) + Integrivo (automatyzacje). Potencjał: polecanie Bliźniaka po szkoleniach, prowizja, wspólny produkt szkolenie+wdrożenie. Prompt do eksploracji współpracy przygotowany 06.03. Czekamy na spotkanie.
@@ -168,6 +168,22 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 4. **FULL PRICE OD TERAZ** — 2 999 PLN netto. Pilot 990/1990 wygasł.
 5. **CONTENT = LEAD MACHINE** — 2-3 posty LI/tyg z CTA do SD.
 
+### COMPETITIVE BATTLECARD (DR 15.03)
+> Plik: `materialy/2026-03-15_competitive_battlecard.md`
+> Tagline: "Gotowy system. Twój styl. Od dnia 1."
+> **Pozycja:** Jedyny DFY AI asystent sprzedażowy w Polsce. Brak bezpośredniej konkurencji.
+> **5 filarów:** DFY>DIY (3h vs 6 tyg), jednorazowo 2 999>SaaS $444+/rok, kalibracja DNA handlowca, 16 scenariuszy, human-in-the-loop.
+> **vs Negacz AI_Sales (1990 PLN):** kurs (uczy) vs DFY (buduje). "Rybak vs wędka gotowa do łowienia."
+> **vs SaaS (Clay/Apollo/AiSDR):** $444-60 000/rok vs 2 999 PLN jednorazowo. SaaS = volume, Bliźniak = quality.
+> **UWAGA:** Okno first-mover zamyka się — jeśli Negacz/Burnejko uruchomią DFY → przewaga znika.
+> **15 statystyk do LinkedIn/rozmów** → battlecard plik.
+
+### RYNEK URZĘDÓW — ZAMROŻONY (DR 15.03)
+> Plik: `materialy/2026-03-15_ocena_rynek_urzedy.md`
+> **Verdict: ZAMROZIĆ NA Q4 2026.** KPO 35+ mld PLN, AI Act wymóg AI literacy, 6.8% JST wdrożyło AI — szansa OGROMNA, ale cykl 6-18 msc, wymaga compliance, brak produktu.
+> **Lead Krystian:** Discovery TAK, ale gate check — musi dostarczyć pipeline (urzędy, budżety, timeline). Bez tego zamknąć.
+> **Quick wins bez pivotu:** post LI o AI Act, pytanie o sektor publiczny w SD.
+
 ---
 
 ## 💡 KONCEPT DO ZBADANIA: EKOSYSTEM SYSTEM 10H (06.03.2026)
@@ -217,7 +233,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 - [ ] Vertical Pack CNC/Produkcja (po case study Stalton)
 
 ### FAZA 3: SKALA (maj–lipiec)
-- [ ] Partner program (trenerzy, konsultanci B2B, 30-40% prowizji)
+- [ ] Partner program — **ZAMROŻONY do Q3 2026** (decyzja 15.03, DR: activation <20%, ROI 9-12 msc). Warunek: 5+ klientów, przychód ≥12k/msc, dług <5k. Modul Soft Faza 2 = naturalny test modelu.
 - [ ] Recurring: setup + 197-297 PLN/msc
 - [ ] Free tier launch (Lite jako top-of-funnel)
 - [ ] 3 vertical packs + 1 event/speaking

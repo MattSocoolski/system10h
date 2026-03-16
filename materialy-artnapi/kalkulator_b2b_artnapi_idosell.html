@@ -33,30 +33,30 @@
 
 #artnapiCalc {
   /* CSS VARIABLES — scoped, nie koliduja z :root IdoSell */
-  --purple: #653C91;
-  --purple-deep: #4A2B6B;
-  --purple-light: #8B6BAF;
+  --purple: #6B5C91;
+  --purple-deep: #5a4d7a;
+  --purple-light: #8A7DAB;
   --gold: #FFC157;
-  --gold-soft: #FFD68A;
-  --gold-glow: rgba(255, 193, 87, 0.15);
+  --gold-soft: #F5D295;
+  --gold-glow: rgba(245, 210, 149, 0.18);
   --green: #22C55E;
   --green-soft: #DCFCE7;
   --green-deep: #16A34A;
   --red: #EF4444;
   --red-soft: #FEE2E2;
-  --bg: #0F0B15;
-  --bg-card: #1A1424;
-  --bg-card-hover: #221C2E;
-  --bg-input: #2A2236;
-  --text: #F1ECF5;
-  --text-dim: #9B8FB0;
-  --text-muted: #6B5F7E;
-  --border: #2E2640;
-  --border-active: #653C91;
+  --bg: #FFFFFF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #f9f6f0;
+  --bg-input: #f5f2ed;
+  --text: #333333;
+  --text-dim: #666666;
+  --text-muted: #999999;
+  --border: #e0d4c0;
+  --border-active: #6B5C91;
   --radius: 12px;
   --radius-sm: 8px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.3);
-  --shadow-glow: 0 0 40px rgba(101, 60, 145, 0.2);
+  --shadow: 0 4px 24px rgba(107, 92, 145, 0.1);
+  --shadow-glow: 0 0 40px rgba(107, 92, 145, 0.08);
 
   /* CONTAINER — zastepuje body + .calc-wrap */
   font-family: 'DM Sans', sans-serif;
@@ -96,7 +96,7 @@
   transform: translateX(-50%);
   width: 400px;
   height: 200px;
-  background: radial-gradient(ellipse, rgba(101,60,145,0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(107,92,145,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -105,7 +105,7 @@
   font-weight: 500;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--purple);
   margin-bottom: 8px;
 }
 
@@ -114,7 +114,7 @@
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 8px;
-  background: linear-gradient(135deg, var(--text) 0%, var(--purple-light) 100%);
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -158,7 +158,7 @@
 #artnapiCalc .lang-btn.active {
   background: var(--purple);
   color: #fff;
-  box-shadow: 0 2px 12px rgba(101,60,145,0.4);
+  box-shadow: 0 2px 12px rgba(107,92,145,0.25);
 }
 
 #artnapiCalc .lang-btn:hover:not(.active) { color: var(--text); }
@@ -184,7 +184,8 @@
 }
 #artnapiCalc .country-select.active {
   border-color: var(--purple);
-  background: var(--purple-deep);
+  background: var(--purple);
+  color: #FFFFFF;
 }
 
 /* ─── PRODUCT TABS ─── */
@@ -218,7 +219,7 @@
 #artnapiCalc .product-tab:hover { border-color: var(--purple-light); color: var(--text); }
 
 #artnapiCalc .product-tab.active {
-  background: var(--purple-deep);
+  background: var(--purple);
   border-color: var(--purple);
   color: #fff;
 }
@@ -230,6 +231,7 @@
   border-radius: var(--radius);
   padding: 24px;
   margin-bottom: 20px;
+  box-shadow: var(--shadow);
   animation: ancFadeUp 0.5s ease-out 0.1s both;
 }
 
@@ -258,7 +260,7 @@
   font-family: 'DM Mono', monospace;
   font-size: 22px;
   font-weight: 500;
-  color: var(--gold);
+  color: var(--purple);
   text-align: center;
   outline: none;
   transition: border-color 0.2s;
@@ -296,7 +298,7 @@
   color: var(--text-muted);
   margin-bottom: 20px;
   padding: 8px 12px;
-  background: rgba(255,255,255,0.02);
+  background: #f9f6f0;
   border-radius: var(--radius-sm);
   border-left: 3px solid var(--purple);
 }
@@ -311,8 +313,8 @@
   border-radius: var(--radius-sm);
   font-size: 13px;
   font-weight: 600;
-  background: linear-gradient(135deg, rgba(34,197,94,0.1) 0%, rgba(34,197,94,0.05) 100%);
-  border: 1px solid rgba(34,197,94,0.2);
+  background: linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(34,197,94,0.03) 100%);
+  border: 1px solid rgba(34,197,94,0.15);
   color: var(--green);
 }
 
@@ -361,8 +363,8 @@
   transition: color 0.2s;
   padding: 2px 4px;
 }
-#artnapiCalc .tier-mark:hover { color: var(--gold); }
-#artnapiCalc .tier-mark.active { color: var(--gold); font-weight: 500; }
+#artnapiCalc .tier-mark:hover { color: var(--purple); }
+#artnapiCalc .tier-mark.active { color: var(--purple); font-weight: 500; }
 
 /* ─── PRICING DISPLAY ─── */
 #artnapiCalc .price-hero {
@@ -373,6 +375,7 @@
   margin-bottom: 20px;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow);
   animation: ancFadeUp 0.5s ease-out 0.15s both;
 }
 
@@ -399,13 +402,13 @@
   font-family: 'DM Mono', monospace;
   font-size: clamp(36px, 8vw, 52px);
   font-weight: 500;
-  color: var(--gold);
+  color: var(--purple);
   line-height: 1;
 }
 
 #artnapiCalc .price-currency {
   font-size: 20px;
-  color: var(--gold-soft);
+  color: var(--purple-light);
   font-weight: 400;
 }
 
@@ -447,7 +450,7 @@
 }
 
 #artnapiCalc .stat-box {
-  background: rgba(255,255,255,0.03);
+  background: #f9f6f0;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 14px;
@@ -469,7 +472,7 @@
 }
 
 #artnapiCalc .stat-value.green { color: var(--green); }
-#artnapiCalc .stat-value.gold { color: var(--gold); }
+#artnapiCalc .stat-value.gold { color: var(--purple); }
 
 #artnapiCalc .stat-sub {
   font-size: 12px;
@@ -501,8 +504,8 @@
 
 #artnapiCalc .tier-card.active {
   border-color: var(--gold);
-  background: linear-gradient(180deg, rgba(255,193,87,0.08) 0%, var(--bg-card) 100%);
-  box-shadow: 0 0 24px rgba(255,193,87,0.12);
+  background: linear-gradient(180deg, rgba(255,193,87,0.15) 0%, #FFFFFF 100%);
+  box-shadow: 0 0 20px rgba(255,193,87,0.2);
 }
 
 #artnapiCalc .tier-card.best {
@@ -551,7 +554,7 @@
   margin-bottom: 2px;
 }
 
-#artnapiCalc .tier-card.active .tier-price { color: var(--gold); }
+#artnapiCalc .tier-card.active .tier-price { color: var(--purple); }
 
 #artnapiCalc .tier-discount {
   font-size: 12px;
@@ -580,7 +583,7 @@
 
 /* ─── NUDGE BAR ─── */
 #artnapiCalc .nudge {
-  background: linear-gradient(135deg, rgba(101,60,145,0.15) 0%, rgba(255,193,87,0.08) 100%);
+  background: linear-gradient(135deg, rgba(107,92,145,0.06) 0%, rgba(245,210,149,0.12) 100%);
   border: 1px solid var(--purple);
   border-radius: var(--radius);
   padding: 16px 20px;
@@ -602,7 +605,7 @@
 }
 
 #artnapiCalc .nudge-highlight {
-  color: var(--gold);
+  color: var(--purple);
   font-weight: 600;
 }
 
@@ -709,7 +712,7 @@
   margin-bottom: 12px;
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239B8FB0' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999999' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
 }
@@ -721,7 +724,7 @@
 }
 
 #artnapiCalc .transport-stat {
-  background: rgba(255,255,255,0.03);
+  background: #f9f6f0;
   border-radius: var(--radius-sm);
   padding: 10px;
 }
@@ -749,8 +752,8 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--gold);
-  color: var(--purple-deep);
+  background: var(--purple);
+  color: #FFFFFF;
   font-family: inherit;
   font-size: 16px;
   font-weight: 700;
@@ -760,12 +763,13 @@
   cursor: pointer;
   transition: all 0.25s;
   text-decoration: none;
-  box-shadow: 0 4px 20px rgba(255,193,87,0.3);
+  box-shadow: 0 4px 20px rgba(107,92,145,0.3);
 }
 
 #artnapiCalc .cta-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255,193,87,0.4);
+  background: var(--purple-deep);
+  box-shadow: 0 8px 30px rgba(107,92,145,0.4);
 }
 
 #artnapiCalc .cta-secondary {
@@ -837,7 +841,7 @@
 
 /* ─── PRINT ─── */
 @media print {
-  #artnapiCalc { background: #fff; color: #111; padding: 0; }
+  #artnapiCalc { background: #fff; color: #333; padding: 0; }
   #artnapiCalc .qty-slider-wrap,
   #artnapiCalc .lang-toggle,
   #artnapiCalc .cta-section,
@@ -847,8 +851,9 @@
   #artnapiCalc .qty-section,
   #artnapiCalc .stat-box,
   #artnapiCalc .annual {
-    border-color: #ddd;
+    border-color: #e0d4c0;
     background: #fff;
+    box-shadow: none;
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
@@ -1018,7 +1023,7 @@ var PRODUCT_DEFS = [
     id: 'canvas-40x50',
     name: { pl: 'Podobrazia 40\u00d750', en: '40\u00d750 cm Canvas' },
     spec: { pl: 'Bawe\u0142na 280g \u00b7 krosna sosnowe \u00b7 potr\u00f3jny grunt', en: 'Cotton 280g \u00b7 pine stretcher bars \u00b7 triple primed' },
-    baseCost: 3.95, storage: 0.375, picking: 0.08,
+    baseCost: 5.00, storage: 0.375, picking: 0.08,
     palletQty: 320, cartonQty: 40,
     marketPrice: 11.00,
     tiers: [

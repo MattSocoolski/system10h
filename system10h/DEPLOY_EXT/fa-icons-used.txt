@@ -1,0 +1,93 @@
+Font Awesome Icons Audit — System 10h+ Website
+================================================
+Generated: 2026-03-15
+Source: All HTML files in DEPLOY_EXT/
+
+SUMMARY
+-------
+Total icon instances: 190 (across 12 HTML files)
+Unique icon names: 46
+FA styles used: fa-solid (majority), fa-regular (3 instances: fa-copy, fa-calendar)
+Full FA 6.4.0 CSS loaded from CDN: ~60 KB minified+gzipped
+
+RECOMMENDATION: With only 46 icons used, subsetting would reduce the CSS payload
+significantly. Consider using a FA Kit or IcoMoon subset build.
+
+ICONS PER FILE
+--------------
+index.html:                   99 icons
+solo_ua.html:                 40 icons
+preview/index.html:           17 icons
+self-discovery.html:           8 icons
+blog/rabaty-marza.html:        7 icons
+blog/ai-dla-handlowca.html:   5 icons
+blog/follow-upy.html:         5 icons
+style-match/index.html:        4 icons
+404.html:                      2 icons
+blog/index.html:               1 icon
+polityka-prywatnosci.html:     1 icon
+polityka-prywatnosci-ua.html:  1 icon
+
+UNIQUE FA ICON CLASSES (46 icons)
+---------------------------------
+fa-solid fa-arrow-left
+fa-solid fa-arrow-right
+fa-solid fa-arrow-up
+fa-solid fa-bars
+fa-solid fa-bell
+fa-solid fa-bolt
+fa-solid fa-brain
+fa-solid fa-broom
+fa-solid fa-bullseye
+fa-solid fa-certificate
+fa-solid fa-chart-line
+fa-solid fa-chart-pie
+fa-solid fa-check
+fa-solid fa-check-circle
+fa-solid fa-circle-check
+fa-solid fa-circle-xmark
+fa-solid fa-clock
+fa-solid fa-comments
+fa-solid fa-compass
+fa-solid fa-copy
+fa-solid fa-envelope
+fa-solid fa-envelope-open-text
+fa-solid fa-face-smile
+fa-solid fa-file-contract
+fa-solid fa-file-invoice-dollar
+fa-solid fa-fingerprint
+fa-solid fa-folder-open
+fa-solid fa-gears
+fa-solid fa-globe
+fa-solid fa-handshake
+fa-solid fa-hard-drive
+fa-solid fa-headset
+fa-solid fa-industry
+fa-solid fa-key
+fa-solid fa-lightbulb
+fa-solid fa-lock
+fa-solid fa-magnifying-glass
+fa-solid fa-magnifying-glass-chart
+fa-solid fa-paper-plane
+fa-solid fa-pen
+fa-solid fa-pen-nib
+fa-solid fa-play
+fa-solid fa-quote-right
+fa-solid fa-robot
+fa-solid fa-rocket
+fa-solid fa-rotate
+fa-solid fa-route
+fa-solid fa-satellite-dish
+fa-solid fa-scale-balanced
+fa-solid fa-shield-halved
+fa-solid fa-ship
+fa-solid fa-spinner (with fa-spin animation)
+fa-solid fa-times
+fa-solid fa-toggle-on
+fa-solid fa-triangle-exclamation
+fa-solid fa-user
+fa-solid fa-user-check
+fa-solid fa-wand-magic-sparkles
+fa-solid fa-xmark
+fa-regular fa-calendar
+fa-regular fa-copy

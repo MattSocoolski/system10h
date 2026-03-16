@@ -6,8 +6,8 @@
     <title>System 10h+ | AI-асистент, який ЗНАЄ твій бізнес</title>
     <meta name="description" content="Налаштований AI-асистент, який пам'ятає хто ти, що продаєш і кому. Кінець пояснень контексту заново. Система, яка ЗНАЄ.">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (production build) -->
+    <link rel="stylesheet" href="styles.min.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,105 +20,6 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#faf5ff',
-                            100: '#f3e8ff',
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                            900: '#0f172a',
-                        },
-                        accent: {
-                            400: '#facc15',
-                            500: '#eab308',
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .glass-card:hover {
-            border-color: rgba(168, 85, 247, 0.3);
-            transform: translateY(-4px);
-            transition: all 0.3s ease;
-        }
-
-        .light-section {
-            background-color: #f8fafc;
-            color: #0f172a;
-        }
-        .light-section .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-        }
-        .light-section h2, .light-section h3 {
-            color: #0f172a;
-        }
-        .light-section p, .light-section li {
-            color: #475569;
-        }
-
-        .mockup-container {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            background: #1e293b;
-        }
-
-        .glow-bg {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 

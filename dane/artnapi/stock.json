@@ -1,0 +1,37 @@
+{
+  "last_updated": "2026-03-13",
+  "products": [
+    {
+      "sku": "canvas_40x50",
+      "name": "Płótno malarskie 40×50",
+      "stock_current": 7900,
+      "unit": "szt",
+      "burn_rate_monthly": 5000,
+      "burn_trend": "growing",
+      "alert_weeks": 4,
+      "incoming": [
+        {
+          "qty": 3300,
+          "eta": "2026-03-27",
+          "note": "Dostawa bieżąca (w drodze)"
+        },
+        {
+          "qty": 13000,
+          "eta": "2026-06-01",
+          "transport": "morze",
+          "note": "Nowy kontener — morze ~VI, pociąg ~V (decyzja w toku)"
+        }
+      ]
+    },
+    {
+      "sku": "canvas_30x40",
+      "name": "Płótno malarskie 30×40",
+      "stock_current": 0,
+      "unit": "szt",
+      "burn_rate_monthly": 0,
+      "burn_trend": "stable",
+      "alert_weeks": 4,
+      "incoming": []
+    }
+  ]
+}

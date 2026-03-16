@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Політика конфіденційності | System 10h+</title>
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
+    <!-- Tailwind CSS (production build) -->
+    <link rel="stylesheet" href="styles-blog.min.css">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,40 +19,6 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%233b82f6%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2270%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            900: '#0f172a',
-                        },
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-        .prose h2 { color: #f8fafc; margin-top: 2em; margin-bottom: 1em; font-weight: 700; font-size: 1.5rem; }
-        .prose h3 { color: #e2e8f0; margin-top: 1.5em; margin-bottom: 0.75em; font-weight: 600; font-size: 1.25rem; }
-        .prose p { color: #94a3b8; margin-bottom: 1em; line-height: 1.7; }
-        .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; color: #94a3b8; }
-        .prose li { margin-bottom: 0.5em; }
-        .prose strong { color: #f8fafc; font-weight: 600; }
-        .prose a { color: #3b82f6; text-decoration: underline; }
-    </style>
 </head>
 <body class="antialiased overflow-x-hidden">
 
@@ -142,17 +108,15 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-12 border-t border-slate-800 text-slate-500 text-sm">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-left">
-                <p class="font-bold text-white mb-1">Mateusz Sokólski Account Management</p>
-                <p>NIP: 8952117558</p>
-                <p class="mt-2">&copy; 2026. Всі права захищені.</p>
-            </div>
-            <div class="flex gap-6 items-center">
-                <a href="solo_ua.html" class="hover:text-white transition">Головна</a>
-                <a href="mailto:hello@system10h.com" class="hover:text-white transition">Контакти</a>
-            </div>
+    <footer class="py-8 border-t border-slate-800 text-center text-slate-400 text-sm">
+        <div class="mb-4">
+            <p class="font-bold text-slate-400">Mateusz Sokólski Account Management</p>
+            <p>NIP: 8952117558</p>
+        </div>
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+            <span>&copy; 2026 System 10h+</span>
+            <a href="polityka-prywatnosci-ua.html" class="hover:text-white transition">Політика конфіденційності</a>
+            <a href="mailto:hello@system10h.com" class="hover:text-white transition">Контакти</a>
         </div>
     </footer>
 

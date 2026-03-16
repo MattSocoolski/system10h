@@ -24,9 +24,9 @@ Ten dokument opisuje krok po kroku, co robisz od momentu, gdy klient umówi się
 > Dzięki za konkretną rozmowę. Cieszę się, że ruszamy z tematem. Tak jak ustaliliśmy – cel to odzyskanie Twoich wieczorów i uszczelnienie sprzedaży.
 >
 > **Plan działania:**
-> 1. Poniżej przesyłam Proformę na 2 500 PLN netto.
+> 1. Poniżej przesyłam Proformę na 2 999 PLN netto.
 > 2. Po opłaceniu uruchamiamy Architekta AI — głęboki wywiad (~45-60 min) który stworzy DNA Twojego biznesu.
-> 3. Na podstawie DNA konfiguruję Twojego Bliźniaka Biznesowego (15 scenariuszy).
+> 3. Na podstawie DNA konfiguruję Twojego Bliźniaka Biznesowego (16 scenariuszy).
 > 4. Dostajesz nagranie szkoleniowe + 30 dni wsparcia.
 >
 > **Dane do przelewu:**
@@ -77,9 +77,9 @@ Ten dokument opisuje krok po kroku, co robisz od momentu, gdy klient umówi się
 > **Oto co dostajesz:**
 >
 > 1. **Twoje dna.md** — Biznesowe DNA (8 sekcji, pełna konfiguracja)
-> 2. **Bliźniak Biznesowy** — AI z 15 workflow'ami (mail, oferta, bad cop, outreach, research, content, pipeline...)
+> 2. **Bliźniak Biznesowy** — AI z 16 workflow'ami (mail, oferta, bad cop, outreach, research, content, pipeline...)
 > 3. **Nagranie szkoleniowe (Loom, ~15-20 min):** [LINK DO LOOM]
-> 4. **Biblioteka 15 scenariuszy** z przykładowymi promptami
+> 4. **Biblioteka 16 scenariuszy** z przykładowymi promptami
 > 5. **Quick Start** — instrukcja instalacji (1 strona)
 >
 > Obejrzyj nagranie i zacznij używać. Przez 30 dni masz moje wsparcie mailowe.
@@ -104,9 +104,9 @@ Ten dokument opisuje krok po kroku, co robisz od momentu, gdy klient umówi się
 >
 > **Deliverables:**
 > - dna.md v2.0 (8 sekcji Biznesowego DNA)
-> - Bliźniak Biznesowy v5.0 (15 workflow'ów)
+> - Bliźniak Biznesowy v7.0 (16 workflow'ów)
 > - Nagranie szkoleniowe Loom (15-20 min)
-> - Biblioteka 15 scenariuszy z przykładami
+> - Biblioteka 16 scenariuszy z przykładami
 > - Quick Start (instrukcja instalacji)
 > - 30 dni wsparcie mailowe
 >
@@ -120,7 +120,7 @@ Ten dokument opisuje krok po kroku, co robisz od momentu, gdy klient umówi się
 
 ## CHECKLISTA PRZED PIERWSZĄ SPRZEDAŻĄ
 
-- [ ] **System do faktur** (gotowy szablon proformy na 2 500 PLN netto)
+- [ ] **System do faktur** (gotowy szablon proformy na 2 999 PLN netto)
 - [ ] **Calendly:** Typ spotkania: "Rozmowa Bliźniak Biznesowy (30 min)"
 - [ ] **Architekt AI gotowy:** Skill `dna-interviewer` przetestowany
 - [ ] **Bliźniak gotowy:** Skill `sales-twin` przetestowany z Twoim dna.md
@@ -130,4 +130,4 @@ Ten dokument opisuje krok po kroku, co robisz od momentu, gdy klient umówi się
 
 ---
 
-*Wersja: 3.0 | Data: 2026-02-11 (v5.0: 15 workflow'ów)*
+*Wersja: 3.0 | Data: 2026-02-11 (v7.0: 16 workflow'ów)*

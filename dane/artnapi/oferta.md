@@ -25,6 +25,51 @@ Sklepy i Sprzedawcy, którzy chcą importowych cen, ale polskiej obsługi, ręko
 
 ---
 
+## 📦 CENNIK PALETOWY B2B (aktualny 16.03.2026)
+> Źródło: PALETOWE LICZENIE CENNIK.xlsx. Ceny netto PLN, all-in z dostawą.
+
+### PODOBRAZIA (płótna malarskie)
+
+| Rozmiar | Min szt | Kartony | 1 paleta | 2 palety | 3 palety |
+|---------|---------|---------|----------|----------|----------|
+| **40x50** | 120 | 10,30 (120-319) | 9,00 (320) | 8,15 (640) | 7,30 (960) |
+| **30x40** | 120 | 7,46 (120-479) | 6,75 (480) | 6,11 (960) | 5,00 (1440) |
+| **20x30** | 120 | 6,70 (120-359) | 5,49 (720) | 4,54 (1440) | 3,68 (2160) |
+| **20x20** | 120 | 5,96 (120-359) | 4,75 (1200) | 3,80 (2400) | 2,94 (3600) |
+
+### PBN (Paint By Numbers)
+
+| Produkt | Min szt | Kartony | 1 paleta | 2 palety | 3 palety |
+|---------|---------|---------|----------|----------|----------|
+| **PBN rama 40x50** | 30 | 27,64 (30-180) | 22,37 (180) | 20,40 (360) | 17,37 (720) |
+| **PBN bez ramy** | 75 | 20,24 (75-449) | 16,25 (450) | 14,75 (900) | 11,72 (1350) |
+
+### DESKI (PBN na desce)
+
+| Produkt | Min | Kartony | 1 paleta | 2 palety | 3 palety |
+|---------|-----|---------|----------|----------|----------|
+| **30x40 deska (zestaw 8szt)** | 18 zest | 24,27 (18-299) | 23,33 (300) | 20,41 (600) | 19,27 (1200) |
+| **40x50 deska (3szt)** | 18 | 7,88 (18-335) | 6,84 (336) | 6,24 (960) | 5,10 (1440) |
+| **24x30 deska** | 45 | 16,84 (45-720) | 15,20 (720) | 14,58 (960) | 13,44 (1440) |
+
+### SZTALUGI
+
+| Produkt (kod) | Min | Kartony | 1 paleta | 2 palety | 3 palety |
+|---------------|-----|---------|----------|----------|----------|
+| **Stołowa 52-64cm (3354)** | 40 | 36,49 (40-140) | 26,49 (156) | 22,63 (312) | 21,49 (468) |
+| **Mała L 46cm (3357)** | 48 | 15,32 (48-384) | 10,32 (432) | 8,82 (864) | 7,32 (1296) |
+| **Mała M 36cm (3498)** | 40 | 9,48 (40-560) | 7,98 (576) | 7,12 (1152) | 5,98 (1728) |
+| **Stołowa 42cm (3355)** | 40 | 16,12 (40-140) | 14,62 (252) | 13,76 (504) | 12,62 (756) |
+
+### INNE
+
+| Produkt | Min | Kartony | 1 paleta | 2 palety | 3 palety |
+|---------|-----|---------|----------|----------|----------|
+| **Haft diamentowy** | 100 | 14,08 (100-1199) | 12,58 (1200) | 11,08 (2400) | 9,58 (3600) |
+| **Ramka A4** | 60 | 21,94 (60-319) | 19,44 (320) | 18,44 (640) | 17,44 (960) |
+
+---
+
 ## 📦 KATEGORIA 1: PODOBRAZIA (Marka: Adré Artó)
 
 ### CO KLIENT DOSTAJE?
@@ -32,24 +77,6 @@ Sklepy i Sprzedawcy, którzy chcą importowych cen, ale polskiej obsługi, ręko
 * **Specyfikacja:** Drewno iglaste (sosnowe), krosno standard, gramatura ~280g/m².
 * **Sztalugi:** Import "economy" (szary karton) - idealny tani upsell.
 * **Logistyka:** Magazyn Sokołów (Polska). Wysyłka 24h. Dostawa WLICZONA w cenę.
-
-### CENNIK PODOBRAZIA 40x50 (320 szt./paleta) — netto, all-in z dostawą
-
-| Próg | Ilość | Cena netto | Marża handlowca/szt |
-|------|-------|-----------|---------------------|
-| KARTONY | 120–319 szt | **10,30 PLN** | 1,37 PLN |
-| 1 PALETA | 320 szt | **9,00 PLN** | 1,28 PLN |
-| 2 PALETY | 640 szt | **8,15 PLN** | 1,46 PLN |
-| 3 PALETY | 960 szt | **7,30 PLN** | 1,08 PLN |
-
-### CENNIK PODOBRAZIA 30x40 (480 szt./paleta) — netto, all-in z dostawą
-
-| Próg | Ilość | Cena netto | Marża handlowca/szt |
-|------|-------|-----------|---------------------|
-| KARTONY | 120–479 szt | **7,46 PLN** | 0,70 PLN |
-| 1 PALETA | 480 szt | **6,75 PLN** | 0,96 PLN |
-| 2 PALETY | 960 szt | **6,11 PLN** | 1,07 PLN |
-| 3 PALETY | 1440 szt | **4,97 PLN** | 0,50 PLN |
 
 **Zasada dla Klienta:**
 "Chcesz najlepszą cenę? Zamów pełne palety. Przy zamówieniu 500 szt: 320 × 9,00 + 180 × 10,30. Lepiej dobierz do 640 — cena spada do 8,15 all-in."
@@ -63,28 +90,7 @@ Sklepy i Sprzedawcy, którzy chcą importowych cen, ale polskiej obsługi, ręko
 * **W Pudełku:** Płótno/deska, świeże farby akrylowe (próżniowe pakowanie), 3 pędzle, haczyki.
 * **Wzory:** Mix bestsellerów (470 wzorów w rotacji).
 
-### CENNIK PBN 30x40 (6 szt./karton, 336 szt./paleta) — netto, all-in z dostawą
-
-| Próg | Ilość | Cena netto | Marża handlowca/szt |
-|------|-------|-----------|---------------------|
-| KARTONY | 18–335 szt | **23,74 PLN** | 1,39 PLN |
-| 1 PALETA | 336 szt | **22,70 PLN** | 2,97 PLN |
-
-### CENNIK PBN 24x30 (15 szt./karton, 720 szt./paleta) — netto, all-in z dostawą
-
-| Próg | Ilość | Cena netto | Marża handlowca/szt |
-|------|-------|-----------|---------------------|
-| KARTONY | 45–720 szt | **14,14 PLN** | 1,11 PLN |
-| 1 PALETA | 720 szt | **12,50 PLN** | 1,95 PLN |
-
 * *Atut:* Marża dla sklepu >100% (Sugerowana cena detaliczna 49-69 zł).
-
-### CENNIK PBN 40x50 na ramie (Artnapi) — netto
-
-| Próg | Cena netto | MOQ |
-|------|-----------|-----|
-| FIXED | **21,13 PLN** | 30 szt |
-
 * Eleganckie opakowanie, 470 wzorów do wyboru, farby świeże (próżniowe pakowanie)
 * Flagowy produkt Artnapi — najwyższa marża w portfolio
 

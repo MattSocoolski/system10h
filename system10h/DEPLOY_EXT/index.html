@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="pl" class="scroll-smooth">
+<html lang="pl" class="scroll-smooth no-js">
+<script>document.documentElement.classList.remove('no-js');</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>System 10h+ | Gotowy system sprzedażowy AI — skonfigurowany pod Ciebie</title>
     <meta name="description" content="Gotowy system sprzedażowy AI skonfigurowany pod Twój biznes. Nie kurs do przerabiania — działający asystent od dnia 1. 2 999 PLN jednorazowo, zero abonamentu.">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (production build) -->
+    <link rel="stylesheet" href="styles.min.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,107 +21,20 @@
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#faf5ff',
-                            100: '#f3e8ff',
-                            400: '#c084fc',
-                            500: '#a855f7',
-                            600: '#9333ea',
-                            900: '#0f172a',
-                        },
-                        accent: {
-                            400: '#facc15',
-                            500: '#eab308',
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        }
-                    }
-                }
-            }
-        }
+    <!-- Open Graph -->
+    <meta property="og:title" content="System 10h+ | Gotowy system sprzedażowy AI">
+    <meta property="og:description" content="Skonfigurowany pod Twój biznes. Nie kurs — gotowy system od dnia 1. 16 scenariuszy, stylometria, gwarancja 30 dni.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://system10h.com">
+    <meta property="og:image" content="https://system10h.com/assets/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Product","name":"System 10h+","description":"Gotowy system sprzedażowy AI — skonfigurowany pod Twój biznes. 16 scenariuszy, stylometria, gwarancja 30 dni.","brand":{"@type":"Brand","name":"System 10h+"},"offers":{"@type":"Offer","price":"2999","priceCurrency":"PLN","availability":"https://schema.org/InStock"},"creator":{"@type":"Person","name":"Mateusz Sokólski"}}
     </script>
 
-    <style>
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-
-        .glass-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .glass-card:hover {
-            border-color: rgba(168, 85, 247, 0.3);
-            transform: translateY(-4px);
-            transition: all 0.3s ease;
-        }
-
-        .light-section {
-            background-color: #f8fafc;
-            color: #0f172a;
-        }
-        .light-section .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
-        }
-        .light-section h2, .light-section h3 {
-            color: #0f172a;
-        }
-        .light-section p, .light-section li {
-            color: #475569;
-        }
-
-        .mockup-container {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(255,255,255,0.1);
-            background: #1e293b;
-        }
-
-        .glow-bg {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
 </head>
 <body class="antialiased overflow-x-hidden">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:bg-brand-600 focus:text-white focus:px-4 focus:py-2 focus:rounded">Przejdź do treści</a>
 
     <!-- Background Elements -->
     <div class="glow-bg top-[-200px] left-[-200px]"></div>
@@ -129,7 +43,7 @@
     <!-- NAVBAR -->
     <nav class="fixed w-full z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-20">
+            <div class="flex justify-between items-center h-16 md:h-20">
                 <div class="flex items-center gap-2">
                     <a href="#" class="flex items-center gap-2 hover:opacity-80 transition">
                         <div class="bg-brand-600 text-white font-bold p-2 rounded-lg">10h+</div>
@@ -138,13 +52,14 @@
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#problem" class="text-slate-300 hover:text-white transition">Problem</a>
-                    <a href="#rozwiazanie" class="text-slate-300 hover:text-white transition">Rozwiązanie</a>
+                    <a href="#problem" class="nav-section-link text-slate-300 hover:text-white transition">Problem</a>
+                    <a href="#rozwiazanie" class="nav-section-link text-slate-300 hover:text-white transition">Rozwiązanie</a>
                     <a href="preview/" class="text-brand-400 hover:text-brand-300 transition font-semibold">Demo</a>
-                    <a href="#jak-dziala" class="text-slate-300 hover:text-white transition">Jak to działa</a>
-                    <a href="#bezpieczenstwo" class="text-emerald-400 hover:text-emerald-300 transition text-sm"><i class="fa-solid fa-shield-halved mr-1"></i>Bezpieczeństwo</a>
-                    <a href="#cena" class="text-slate-300 hover:text-white transition">Cennik</a>
-                    <a href="#faq" class="text-slate-300 hover:text-white transition">FAQ</a>
+                    <a href="#jak-dziala" class="nav-section-link text-slate-300 hover:text-white transition">Jak to działa</a>
+                    <a href="#bezpieczenstwo" class="nav-section-link text-emerald-400 hover:text-emerald-300 transition text-sm"><i class="fa-solid fa-shield-halved mr-1"></i>Bezpieczeństwo</a>
+                    <a href="#opinie" class="nav-section-link text-slate-300 hover:text-white transition">Opinie</a>
+                    <a href="#cena" class="nav-section-link text-slate-300 hover:text-white transition">Cennik</a>
+                    <a href="#faq" class="nav-section-link text-slate-300 hover:text-white transition">FAQ</a>
                     <a href="blog/" class="text-slate-300 hover:text-white transition">Blog</a>
                     <div class="flex gap-2 ml-4 border-l border-slate-700 pl-4 text-xs font-bold">
                         <span class="text-white">PL</span>
@@ -154,7 +69,7 @@
 
                 <div class="flex items-center gap-4">
                     <!-- Hamburger menu mobile -->
-                    <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white transition text-xl" aria-label="Menu">
+                    <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white transition text-xl min-w-[44px] min-h-[44px] p-3 flex items-center justify-center" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
                         <i class="fa-solid fa-bars"></i>
                     </button>
                     <a href="#cena" class="bg-brand-600 hover:bg-brand-500 text-white px-6 py-2 rounded-full font-semibold transition shadow-lg shadow-brand-500/20">
@@ -169,14 +84,15 @@
     <div id="mobile-menu" class="fixed inset-0 z-40 hidden">
         <div class="absolute inset-0 bg-slate-900/95 backdrop-blur-md" id="mobile-menu-overlay"></div>
         <div class="relative pt-24 px-6 flex flex-col gap-4 text-lg">
-            <a href="#problem" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Problem</a>
-            <a href="#rozwiazanie" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Rozwiązanie</a>
-            <a href="preview/" class="text-brand-400 hover:text-brand-300 py-2 border-b border-slate-800 font-semibold mobile-menu-link">Demo</a>
-            <a href="#jak-dziala" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Jak to działa</a>
-            <a href="#bezpieczenstwo" class="text-emerald-400 hover:text-emerald-300 py-2 border-b border-slate-800 mobile-menu-link"><i class="fa-solid fa-shield-halved mr-2"></i>Bezpieczeństwo</a>
-            <a href="#cena" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Cennik</a>
-            <a href="#faq" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">FAQ</a>
-            <a href="blog/" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link">Blog</a>
+            <a href="#problem" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">Problem</a>
+            <a href="#rozwiazanie" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">Rozwiązanie</a>
+            <a href="preview/" class="text-brand-400 hover:text-brand-300 py-2 border-b border-slate-800 font-semibold mobile-menu-link min-h-[44px] flex items-center">Demo</a>
+            <a href="#jak-dziala" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">Jak to działa</a>
+            <a href="#bezpieczenstwo" class="text-emerald-400 hover:text-emerald-300 py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center"><i class="fa-solid fa-shield-halved mr-2"></i>Bezpieczeństwo</a>
+            <a href="#opinie" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">Opinie</a>
+            <a href="#cena" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">Cennik</a>
+            <a href="#faq" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">FAQ</a>
+            <a href="blog/" class="text-slate-300 hover:text-white py-2 border-b border-slate-800 mobile-menu-link min-h-[44px] flex items-center">Blog</a>
             <div class="flex gap-4 pt-4 text-sm font-bold">
                 <span class="text-white">PL</span>
                 <a href="solo_ua.html" class="text-slate-500 hover:text-white transition mobile-menu-link">UA</a>
@@ -184,6 +100,7 @@
         </div>
     </div>
 
+    <main id="main-content">
     <!-- HERO SECTION -->
     <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-4 relative">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
@@ -207,7 +124,7 @@
                     </a>
                 </div>
 
-                <div class="border-t border-slate-800 pt-6 flex items-center gap-6 text-sm text-slate-500">
+                <div class="border-t border-slate-800 pt-6 flex items-center gap-6 text-sm text-slate-400">
                     <span><i class="fa-solid fa-check text-green-500 mr-2"></i> Jednorazowa opłata</span>
                     <span><i class="fa-solid fa-check text-green-500 mr-2"></i> Zero abonamentu</span>
                     <span><i class="fa-solid fa-check text-green-500 mr-2"></i> 30 dni gwarancji</span>
@@ -217,7 +134,7 @@
             <!-- Right: Hero Visual — Animated Mesh -->
             <div class="relative fade-in-up animate-float" style="animation-delay: 0.5s;">
                 <div class="mockup-container aspect-[4/3] bg-gradient-to-br from-slate-800 to-slate-900 border border-brand-500/20 shadow-2xl shadow-brand-500/10 relative overflow-hidden">
-                    <canvas id="mesh-canvas" class="absolute inset-0 w-full h-full"></canvas>
+                    <canvas id="mesh-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
                     <div class="relative z-10 flex items-center justify-center h-full text-center p-8">
                         <div>
                             <div class="inline-flex items-center justify-center w-20 h-20 bg-brand-500/20 rounded-full mb-6 text-brand-400 text-4xl backdrop-blur-sm">
@@ -501,7 +418,7 @@
                     <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-globe text-sky-400"></i><span class="text-slate-300">Deep Research</span></div>
                     <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-broom text-lime-400"></i><span class="text-slate-300">Higiena folderu</span></div>
                     <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2"><i class="fa-solid fa-chart-pie text-rose-400"></i><span class="text-slate-300">Rozwój biznesu</span></div>
-                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2 border border-brand-500/30"><i class="fa-solid fa-radar text-yellow-400"></i><span class="text-slate-300">Radar szans</span></div>
+                    <div class="glass-card px-4 py-3 rounded-xl text-sm flex items-center gap-2 border border-brand-500/30"><i class="fa-solid fa-satellite-dish text-yellow-400"></i><span class="text-slate-300">Radar szans</span></div>
                 </div>
             </div>
 
@@ -519,22 +436,22 @@
                                     <div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
                                     <div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
                                     <div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
-                                    <span class="ml-3 text-xs text-slate-500 font-mono">Live Preview</span>
+                                    <span class="ml-3 text-xs text-slate-400 font-mono">Live Preview</span>
                                 </div>
                                 <div class="p-5 font-mono text-xs space-y-3">
                                     <div class="flex gap-3">
-                                        <span class="text-slate-500 shrink-0">Branża:</span>
+                                        <span class="text-slate-400 shrink-0">Branża:</span>
                                         <span class="text-brand-400">CNC / Obróbka metali</span>
                                     </div>
                                     <div class="flex gap-3">
-                                        <span class="text-slate-500 shrink-0">Produkt:</span>
+                                        <span class="text-slate-400 shrink-0">Produkt:</span>
                                         <span class="text-brand-400">Frezowanie precyzyjne</span>
                                     </div>
                                     <div class="border-t border-slate-800 pt-3">
                                         <div class="flex gap-2 mb-3">
                                             <span class="px-2 py-0.5 bg-brand-600/30 text-brand-300 rounded text-[10px] font-semibold">Email</span>
-                                            <span class="px-2 py-0.5 bg-slate-800 text-slate-500 rounded text-[10px]">Obrona ceny</span>
-                                            <span class="px-2 py-0.5 bg-slate-800 text-slate-500 rounded text-[10px]">Follow-up</span>
+                                            <span class="px-2 py-0.5 bg-slate-800 text-slate-400 rounded text-[10px]">Obrona ceny</span>
+                                            <span class="px-2 py-0.5 bg-slate-800 text-slate-400 rounded text-[10px]">Follow-up</span>
                                         </div>
                                         <p class="text-green-400/80 leading-relaxed">Dzień dobry Panie Marku,<br><br>Widzę że produkujecie elementy ze stali nierdzewnej dla automotive. Frezowanie 5-osiowe to Wasza specjalność — ale ile czasu Wasz handlowiec spędza na pisaniu ofert zamiast...</p>
                                         <span class="inline-block w-2 h-4 bg-brand-500 animate-pulse ml-0.5"></span>
@@ -551,13 +468,13 @@
                             <a href="preview/" class="inline-block bg-brand-600 hover:bg-brand-500 text-white font-bold py-4 px-8 rounded-xl transition transform hover:-translate-y-1 shadow-xl shadow-brand-600/20">
                                 Wypróbuj za darmo <i class="fa-solid fa-arrow-right ml-2"></i>
                             </a>
-                            <p class="text-slate-600 text-xs mt-4">Zero rejestracji. Zero zobowiązań. 30 sekund.</p>
+                            <p class="text-slate-400 text-xs mt-4">Zero rejestracji. Zero zobowiązań. 30 sekund.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <p class="text-center text-slate-500 text-sm mt-6 fade-in-up">
+            <p class="text-center text-slate-400 text-sm mt-6 fade-in-up">
                 AI wie KIM jesteś, CO sprzedajesz i KOMU. Wypróbuj na żywo — wpisz swoją branżę i zobacz.
             </p>
         </div>
@@ -775,31 +692,31 @@
                 <div class="bg-slate-800/40 rounded-xl p-4 text-center border border-slate-700/50">
                     <div class="text-emerald-400 text-xl mb-2"><i class="fa-solid fa-shield-halved"></i></div>
                     <p class="text-white text-xs font-bold">SOC 2 Type II</p>
-                    <p class="text-slate-500 text-[10px]">Audyt niezależny</p>
+                    <p class="text-slate-400 text-xs">Audyt niezależny</p>
                 </div>
                 <div class="bg-slate-800/40 rounded-xl p-4 text-center border border-slate-700/50">
                     <div class="text-emerald-400 text-xl mb-2"><i class="fa-solid fa-certificate"></i></div>
                     <p class="text-white text-xs font-bold">ISO 27001</p>
-                    <p class="text-slate-500 text-[10px]">Bezpieczeństwo informacji</p>
+                    <p class="text-slate-400 text-xs">Bezpieczeństwo informacji</p>
                 </div>
                 <div class="bg-slate-800/40 rounded-xl p-4 text-center border border-slate-700/50">
                     <div class="text-emerald-400 text-xl mb-2"><i class="fa-solid fa-robot"></i></div>
                     <p class="text-white text-xs font-bold">ISO 42001</p>
-                    <p class="text-slate-500 text-[10px]">Zarządzanie AI</p>
+                    <p class="text-slate-400 text-xs">Zarządzanie AI</p>
                 </div>
                 <div class="bg-slate-800/40 rounded-xl p-4 text-center border border-slate-700/50">
                     <div class="text-emerald-400 text-xl mb-2"><i class="fa-solid fa-toggle-on"></i></div>
                     <p class="text-white text-xs font-bold">Opt-out treningu</p>
-                    <p class="text-slate-500 text-[10px]">1 kliknięcie w ustawieniach</p>
+                    <p class="text-slate-400 text-xs">1 kliknięcie w ustawieniach</p>
                 </div>
                 <div class="bg-slate-800/40 rounded-xl p-4 text-center border border-slate-700/50 col-span-2 md:col-span-1">
                     <div class="text-emerald-400 text-xl mb-2"><i class="fa-solid fa-key"></i></div>
                     <p class="text-white text-xs font-bold">AES-256</p>
-                    <p class="text-slate-500 text-[10px]">Szyfrowanie bankowe</p>
+                    <p class="text-slate-400 text-xs">Szyfrowanie bankowe</p>
                 </div>
             </div>
 
-            <p class="text-center text-slate-500 text-sm fade-in-up">To nie jest darmowy czat który płacisz swoimi danymi. To płatne narzędzie z opcją wyłączenia trenowania i lokalną architekturą plików.</p>
+            <p class="text-center text-slate-400 text-sm fade-in-up">To nie jest darmowy czat który płacisz swoimi danymi. To płatne narzędzie z opcją wyłączenia trenowania i lokalną architekturą plików.</p>
 
         </div>
     </section>
@@ -820,7 +737,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-white">Style Match Test</h4>
-                            <p class="text-slate-500 text-xs">Masz maila do poprawy</p>
+                            <p class="text-slate-400 text-xs">Masz maila do poprawy</p>
                         </div>
                     </div>
                     <p class="text-slate-400 text-sm mb-4">Wklej swojego najsłabszego maila sprzedażowego. AI przepisze go w Twoim stylu, ale lepiej. Wynik na email w 5 minut.</p>
@@ -836,7 +753,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-white">Live Preview</h4>
-                            <p class="text-slate-500 text-xs">Wiesz co sprzedajesz</p>
+                            <p class="text-slate-400 text-xs">Wiesz co sprzedajesz</p>
                         </div>
                     </div>
                     <p class="text-slate-400 text-sm mb-4">Wpisz branżę i produkt → AI generuje email, obronę ceny i follow-up DLA CIEBIE w 30 sekund.</p>
@@ -852,7 +769,7 @@
                         </div>
                         <div>
                             <h4 class="font-bold text-white">Self-Discovery</h4>
-                            <p class="text-slate-500 text-xs">Nie wiesz jeszcze co sprzedajesz</p>
+                            <p class="text-slate-400 text-xs">Nie wiesz jeszcze co sprzedajesz</p>
                         </div>
                     </div>
                     <p class="text-slate-400 text-sm mb-4">18 pytań, 30 minut. AI pomoże Ci zdefiniować kim jesteś w biznesie i kto jest Twoim idealnym klientem.</p>
@@ -861,6 +778,90 @@
                     </a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS / SOCIAL PROOF -->
+    <section id="opinie" class="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+        <div class="glow-bg left-[-200px] top-[-100px] opacity-20"></div>
+        <div class="max-w-5xl mx-auto px-4">
+
+            <div class="text-center mb-16 fade-in-up">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-900/50 border border-brand-500/30 text-brand-300 text-sm font-semibold mb-4">OPINIE</span>
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Co mówią ci, którzy już korzystają</h2>
+                <p class="text-xl text-slate-400">Prawdziwe opinie. Prawdziwe firmy. Zero wymyślonych historii.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+
+                <!-- Testimonial 1 — Natan B. -->
+                <div class="glass-card rounded-2xl p-8 fade-in-up relative">
+                    <div class="absolute top-6 right-8 text-brand-500/20 text-6xl leading-none">
+                        <i class="fa-solid fa-quote-right"></i>
+                    </div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-brand-500/20 text-brand-400 rounded-full flex items-center justify-center text-xl font-bold shrink-0">
+                            NB
+                        </div>
+                        <div>
+                            <p class="font-bold text-white text-lg">Natan B.</p>
+                            <p class="text-slate-400 text-sm">Stalton — firma CNC, Wrocław</p>
+                            <p class="text-brand-400 text-xs font-semibold mt-1">Pierwszy klient Systemu 10h+</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-slate-300 leading-relaxed mb-6">
+                        <p class="text-lg mb-4">"To jest <strong class="text-white">korytarz nieskończonych możliwości.</strong>"</p>
+                        <p class="text-sm text-slate-400">Natan używa Systemu 10h+ do tworzenia dokumentacji technicznej CNC, kart technologicznych i ofertowania — nie tylko do sprzedaży. System dostosował się do specyfiki branży produkcyjnej i pisze w jego stylu od dnia 1.</p>
+                    </blockquote>
+                    <div class="flex items-center gap-3 text-xs text-slate-400 border-t border-slate-700/50 pt-4">
+                        <i class="fa-solid fa-circle-check text-green-500"></i>
+                        <span>Zainstalowany 17.02.2026 — aktywnie używa</span>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 — Karolina D. -->
+                <div class="glass-card rounded-2xl p-8 fade-in-up relative" style="transition-delay: 100ms;">
+                    <div class="absolute top-6 right-8 text-brand-500/20 text-6xl leading-none">
+                        <i class="fa-solid fa-quote-right"></i>
+                    </div>
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-amber-500/20 text-amber-400 rounded-full flex items-center justify-center text-xl font-bold shrink-0">
+                            KD
+                        </div>
+                        <div>
+                            <p class="font-bold text-white text-lg">Karolina D.</p>
+                            <p class="text-slate-400 text-sm">KAM w firmie importowej, Poznań</p>
+                            <p class="text-amber-400 text-xs font-semibold mt-1">Po live demo</p>
+                        </div>
+                    </div>
+                    <blockquote class="text-slate-300 leading-relaxed mb-6">
+                        <p class="text-lg mb-4">"<strong class="text-white">Cena nie wygórowana</strong> — widać ile za tym stoi."</p>
+                        <p class="text-sm text-slate-400">Karolina pracuje w imporcie z Chin do polskich sieci handlowych. Po zobaczeniu demo na żywo od razu rozpoznała wartość — system pisze maile handlowe i oferty w stylu konkretnej osoby, nie generyczne szablony.</p>
+                    </blockquote>
+                    <div class="flex items-center gap-3 text-xs text-slate-400 border-t border-slate-700/50 pt-4">
+                        <i class="fa-solid fa-circle-check text-green-500"></i>
+                        <span>Opinia po rozmowie 05.03.2026</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Social proof stats -->
+            <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto fade-in-up">
+                <div class="text-center p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
+                    <p class="text-2xl font-bold text-white">24 maile</p>
+                    <p class="text-xs text-slate-400 mt-1">w 20 minut zamiast 2 godzin</p>
+                </div>
+                <div class="text-center p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
+                    <p class="text-2xl font-bold text-white">2-3 dni</p>
+                    <p class="text-xs text-slate-400 mt-1">od startu do działającego systemu</p>
+                </div>
+                <div class="text-center p-4 bg-slate-800/40 rounded-xl border border-slate-700/50">
+                    <p class="text-2xl font-bold text-white">30 dni</p>
+                    <p class="text-xs text-slate-400 mt-1">gwarancja — nie działa = zwrot</p>
+                </div>
+            </div>
+
         </div>
     </section>
 
@@ -874,8 +875,8 @@
                 <h2 class="text-4xl font-bold text-white mb-4">Jedna cena. Bez niespodzianek.</h2>
                 <p class="text-slate-400 mb-8">Płacisz raz. Korzystasz zawsze. Zero abonamentu.</p>
 
-                <div class="text-6xl font-extrabold text-white mb-2">2 999 <span class="text-2xl text-slate-500 font-normal">PLN netto</span></div>
-                <p class="text-sm text-slate-500 mb-1">Faktura VAT 23%</p>
+                <div class="text-6xl font-extrabold text-white mb-2">2 999 <span class="text-2xl text-slate-400 font-normal">PLN netto</span></div>
+                <p class="text-sm text-slate-400 mb-1">Faktura VAT 23%</p>
                 <p class="text-sm text-slate-400 mb-8">Raty: 2&times; 1 499,50 PLN</p>
 
                 <div class="bg-slate-800/50 rounded-xl p-6 mb-8 text-left">
@@ -884,43 +885,43 @@
                         <tbody class="divide-y divide-slate-700/50">
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> System 10h+ v7.0 — AI z 16 scenariuszami + Radar Szans + Deep Research</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">2 800 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">2 800 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Protokół Wiarygodności — AI nie halucynuje, cytuje źródła z DNA</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">500 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">500 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Głęboki Profil Stylu — 3-warstwowa analiza z 5 kontekstami</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">600 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">600 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Inteligentny routing — AI sam wie czego potrzebujesz</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">800 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">800 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Biznesowe DNA v2.1 — 8 sekcji, ~240 pól + głęboka stylometria</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">1 500 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">1 500 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Pamięć operacyjna v1.1 — aktywne wykrywanie decyzji i lekcji</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">600 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">600 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Szkolenie Loom + biblioteka 16 scenariuszy</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">1 100 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">1 100 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Quick Start + instrukcja instalacji</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">200 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">200 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> 30 dni wsparcia mailowego</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">900 PLN</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">900 PLN</td>
                             </tr>
                             <tr>
                                 <td class="py-2 text-slate-300"><i class="fa-solid fa-check text-brand-400 mr-2"></i> Gwarancja 30 dni — nie działa = zwrot kasy</td>
-                                <td class="py-2 text-right text-slate-500 whitespace-nowrap">—</td>
+                                <td class="py-2 text-right text-slate-400 whitespace-nowrap">—</td>
                             </tr>
                         </tbody>
                         <tfoot>
@@ -936,8 +937,10 @@
                     </table>
                 </div>
 
-                <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="block w-full bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
+                <a href="https://calendly.com/mt-sokolski/30min" target="_blank" rel="noopener" class="block w-full bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
                     Chcę System 10h+
+                    <span class="text-xs font-normal opacity-70 block mt-1">Bezpłatna rozmowa, 15 min</span>
+                    <span class="sr-only">(otwiera się w nowej karcie)</span>
                 </a>
 
                 <div class="mt-8 pt-8 border-t border-slate-700/50">
@@ -974,7 +977,7 @@
                             </tr>
                             <tr>
                                 <td class="py-3 text-slate-300 font-medium">Co dostajesz</td>
-                                <td class="py-3 text-center text-slate-400">Wiedze (6 tyg. nauki)</td>
+                                <td class="py-3 text-center text-slate-400">Wiedzę (6 tyg. nauki)</td>
                                 <td class="py-3 text-center text-brand-400 font-semibold">Gotowy system (od dnia 1)</td>
                             </tr>
                             <tr>
@@ -983,19 +986,19 @@
                                 <td class="py-3 text-center text-brand-400 font-semibold">2-3 dni</td>
                             </tr>
                             <tr>
-                                <td class="py-3 text-slate-300 font-medium">Musisz budowac sam?</td>
+                                <td class="py-3 text-slate-300 font-medium">Musisz budować sam?</td>
                                 <td class="py-3 text-center text-red-400">TAK</td>
                                 <td class="py-3 text-center text-green-400 font-semibold">NIE — buduje za Ciebie</td>
                             </tr>
                             <tr>
-                                <td class="py-3 text-slate-300 font-medium">Prywatnosc / NDA</td>
-                                <td class="py-3 text-center text-slate-500">Nie adresowane</td>
+                                <td class="py-3 text-slate-300 font-medium">Prywatność / NDA</td>
+                                <td class="py-3 text-center text-slate-400">Nie adresowane</td>
                                 <td class="py-3 text-center text-brand-400 font-semibold">Pliki lokalne, opt-out treningu</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <p class="text-center text-xs text-slate-500 mt-4">DFY (Done For You) — gotowy system, nie DIY (Do It Yourself).</p>
+                <p class="text-center text-xs text-slate-400 mt-4">DFY (Done For You) — gotowy system, nie DIY (Do It Yourself).</p>
             </div>
         </div>
     </section>
@@ -1057,14 +1060,14 @@
     <section class="py-20 border-t border-slate-800">
         <div class="max-w-4xl mx-auto px-4 flex flex-col md:flex-row items-center gap-8 fade-in-up">
             <div class="w-32 h-32 rounded-full overflow-hidden shrink-0 border-2 border-slate-700">
-                <img src="assets/mateusz-photo.jpg" alt="Mateusz Sokólski" class="w-full h-full object-cover grayscale">
+                <img src="assets/mateusz-photo.jpg" alt="Mateusz Sokólski" class="w-full h-full object-cover grayscale" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=\'w-full h-full flex items-center justify-center bg-slate-800 text-slate-400 text-4xl\'><i class=\'fa-solid fa-user\'></i></div>';">
             </div>
             <div>
                 <h3 class="text-2xl font-bold text-white mb-2">Kto za tym stoi?</h3>
                 <p class="text-slate-400 leading-relaxed">
                     Nazywam się <strong>Mateusz Sokólski</strong>. Nie jestem "guru AI" ani influencerem. Jestem handlowcem który przez lata pisał setki maili, ofert i follow-upów. Zbudowałem ten system dla siebie - żeby AI wreszcie ROZUMIAŁO mój biznes. Zadziałał. Teraz wdrażam go u innych.
                 </p>
-                <p class="text-slate-500 text-sm mt-4 flex items-center gap-2">
+                <p class="text-slate-400 text-sm mt-4 flex items-center gap-2">
                     <i class="fa-solid fa-circle-check text-green-500"></i>
                     <span>Pierwszy klient wdrożony: <strong class="text-slate-300">Stalton</strong> — firma CNC z Wrocławia</span>
                 </p>
@@ -1081,36 +1084,77 @@
             <p class="text-slate-400 mb-8 text-lg">
                 Napisz "Chcę System" - ustalimy ścieżkę i zaczynamy.
             </p>
-            <a href="https://calendly.com/mt-sokolski/30min" target="_blank" class="inline-block bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 px-12 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
+            <a href="https://calendly.com/mt-sokolski/30min" target="_blank" rel="noopener" class="inline-block bg-brand-600 hover:bg-brand-500 text-white text-xl font-bold py-5 px-12 rounded-xl transition transform hover:scale-105 shadow-xl shadow-brand-600/30">
                 Chcę System 10h+
+                <span class="text-xs font-normal opacity-70 block mt-1">Bezpłatna rozmowa, 15 min</span>
+                <span class="sr-only">(otwiera się w nowej karcie)</span>
             </a>
-            <p class="text-slate-500 text-sm mt-8 max-w-xl mx-auto">
+            <p class="text-slate-400 text-sm mt-8 max-w-xl mx-auto">
                 <strong class="text-slate-400">P.S.</strong> Każdy tydzień bez systemu to kolejne 3-4 godziny adminów zamiast sprzedaży — i kolejny deal który przepadł przez ciszę. Jeden zamknięty deal z&nbsp;Systemem zwraca całą inwestycję.
             </p>
         </div>
     </section>
 
+    </main>
+
     <!-- Footer -->
-    <footer class="py-8 border-t border-slate-800 text-center text-slate-600 text-sm">
+    <footer class="py-8 border-t border-slate-800 text-center text-slate-400 text-sm">
         <div class="mb-4">
             <p class="font-bold text-slate-400">Mateusz Sokólski Account Management</p>
             <p>NIP: 8952117558</p>
         </div>
-        <div class="space-x-4">
+        <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
             <span>&copy; 2026 System 10h+</span>
-            <a href="polityka-prywatnosci.html" class="hover:text-slate-400">Polityka prywatności</a>
-            <a href="mailto:hello@system10h.com" class="hover:text-slate-400">Kontakt</a>
+            <a href="polityka-prywatnosci.html" class="hover:text-white transition">Polityka prywatności</a>
+            <a href="mailto:hello@system10h.com" class="hover:text-white transition">Kontakt</a>
         </div>
     </footer>
 
     <!-- EXIT INTENT POPUP — Smart: Pilot do 28.02, Dickens Pattern po -->
-    <div id="exit-popup" class="fixed inset-0 z-[10001] hidden flex items-center justify-center p-4">
+    <div id="exit-popup" class="fixed inset-0 z-[10001] hidden flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="exit-popup-title">
         <div class="absolute inset-0 bg-slate-900/90 backdrop-blur-sm" id="exit-overlay"></div>
         <div class="relative bg-slate-800 border border-slate-600 rounded-2xl p-8 max-w-lg w-full shadow-2xl">
             <button id="close-exit" class="absolute top-4 right-4 text-slate-400 hover:text-white transition"><i class="fa-solid fa-times text-xl"></i></button>
             <div class="text-center" id="exit-popup-content"></div>
         </div>
     </div>
+
+    <button id="back-to-top" class="fixed bottom-20 right-4 z-40 bg-brand-600 text-white w-12 h-12 rounded-full shadow-lg hidden hover:bg-brand-500 transition-all" aria-label="Wróć na górę">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <script>
+    const btt = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => { btt.classList.toggle('hidden', window.scrollY < 600); });
+    btt.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+    </script>
+
+    <!-- Active Nav State -->
+    <script>
+    (function() {
+        const navLinks = document.querySelectorAll('.nav-section-link');
+        const sections = [];
+        navLinks.forEach(function(link) {
+            const id = link.getAttribute('href').replace('#', '');
+            const section = document.getElementById(id);
+            if (section) sections.push({ id: id, el: section, link: link });
+        });
+        if (!sections.length) return;
+        var activeLink = null;
+        var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    if (activeLink) activeLink.classList.remove('text-brand-400', 'border-b-2', 'border-brand-400', 'pb-1');
+                    var match = sections.find(function(s) { return s.id === entry.target.id; });
+                    if (match) {
+                        match.link.classList.add('text-brand-400', 'border-b-2', 'border-brand-400', 'pb-1');
+                        activeLink = match.link;
+                    }
+                }
+            });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+        sections.forEach(function(s) { observer.observe(s.el); });
+    })();
+    </script>
 
     <!-- Mesh Canvas Animation -->
     <script>
@@ -1210,14 +1254,17 @@
                     const icon = mobileMenuBtn.querySelector('i');
                     icon.classList.toggle('fa-bars');
                     icon.classList.toggle('fa-times');
+                    mobileMenuBtn.setAttribute('aria-expanded', !mobileMenu.classList.contains('hidden'));
                 });
                 if (mobileOverlay) mobileOverlay.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
                     mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 });
                 mobileLinks.forEach(link => link.addEventListener('click', () => {
                     mobileMenu.classList.add('hidden');
                     mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
                 }));
             }
 
@@ -1233,21 +1280,43 @@
                     <div class="inline-flex items-center justify-center w-16 h-16 bg-brand-500/10 rounded-full mb-6 text-brand-500 text-3xl">
                         <i class="fa-solid fa-bolt"></i>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-2">Kurs AI = 3 000 PLN i 6 tygodni nauki.</h3>
-                    <p class="text-slate-400 mb-6">System 10h+ = <strong class="text-white">2 999 PLN i dziala od dnia 1.</strong> Zero nauki, zero budowania. Gotowy system skonfigurowany pod Twoj biznes. Gwarancja 30 dni.</p>
-                    <a href="https://calendly.com/mt-sokolski/30min" target="_blank" onclick="document.getElementById('exit-popup').classList.add('hidden')" class="block w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition shadow-lg mb-4">
-                        Umow 15-min rozmowe
+                    <h3 id="exit-popup-title" class="text-2xl font-bold text-white mb-2">Kurs AI = 3 000 PLN i 6 tygodni nauki.</h3>
+                    <p class="text-slate-400 mb-6">System 10h+ = <strong class="text-white">2 999 PLN i działa od dnia 1.</strong> Zero nauki, zero budowania. Gotowy system skonfigurowany pod Twój biznes. Gwarancja 30 dni.</p>
+                    <a href="https://calendly.com/mt-sokolski/30min" target="_blank" rel="noopener" onclick="document.getElementById('exit-popup').classList.add('hidden')" class="block w-full bg-brand-600 hover:bg-brand-500 text-white font-bold py-3 rounded-xl transition shadow-lg mb-4">
+                        Umów 15-min rozmowę <span class="sr-only">(otwiera się w nowej karcie)</span>
                     </a>
-                    <p class="text-xs text-slate-500 cursor-pointer hover:text-slate-300" id="close-exit-text">Nie, wole sam budowac przez 6 tygodni.</p>
+                    <p class="text-xs text-slate-500 cursor-pointer hover:text-slate-300" id="close-exit-text">Nie teraz, dziękuję</p>
                 `;
             }
 
             if (!localStorage.getItem('exitPopupShown10h')) {
                 document.addEventListener('mouseleave', (e) => { if (e.clientY < 0 && !localStorage.getItem('exitPopupShown10h')) showPopup(); });
-                setTimeout(() => { if (!localStorage.getItem('exitPopupShown10h')) showPopup(); }, 25000);
+                setTimeout(() => {
+                    const cenaSection = document.getElementById('cena');
+                    if (!localStorage.getItem('exitPopupShown10h') && cenaSection && window.scrollY < cenaSection.offsetTop) {
+                        showPopup();
+                    }
+                }, 45000);
             }
 
-            function showPopup() { exitPopup.classList.remove('hidden'); localStorage.setItem('exitPopupShown10h', 'true'); }
+            function showPopup() {
+                exitPopup.classList.remove('hidden');
+                localStorage.setItem('exitPopupShown10h', 'true');
+                if(closeBtn) closeBtn.focus();
+                const focusableElements = exitPopup.querySelectorAll('a, button, [tabindex]');
+                const firstFocusable = focusableElements[0];
+                const lastFocusable = focusableElements[focusableElements.length - 1];
+                exitPopup.addEventListener('keydown', function(e) {
+                    if (e.key === 'Tab') {
+                        if (e.shiftKey && document.activeElement === firstFocusable) {
+                            e.preventDefault(); lastFocusable.focus();
+                        } else if (!e.shiftKey && document.activeElement === lastFocusable) {
+                            e.preventDefault(); firstFocusable.focus();
+                        }
+                    }
+                    if (e.key === 'Escape') { exitPopup.classList.add('hidden'); }
+                });
+            }
             function hidePopup() { exitPopup.classList.add('hidden'); }
 
             if(closeBtn) closeBtn.addEventListener('click', hidePopup);

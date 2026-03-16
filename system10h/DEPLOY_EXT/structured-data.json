@@ -1,0 +1,20 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "System 10h+",
+  "description": "Gotowy system sprzedażowy AI — skonfigurowany pod Twój biznes. 16 scenariuszy, stylometria, gwarancja 30 dni.",
+  "brand": {
+    "@type": "Brand",
+    "name": "System 10h+"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "2999",
+    "priceCurrency": "PLN",
+    "availability": "https://schema.org/InStock"
+  },
+  "creator": {
+    "@type": "Person",
+    "name": "Mateusz Sokólski"
+  }
+}

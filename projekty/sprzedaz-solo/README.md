@@ -11,14 +11,9 @@
 | Sprzedaże (zamknięte) | 2 | 1 (Stalton/Natan — 1 220 PLN netto, friends price) |
 | Pipeline value | 10 000+ PLN | 13 490 PLN |
 | Leady aktywne (SD wysłany+) | 5+ | 8 (Tomek, Arkadiusz, Michał, Michał W., Zbigniew, Piotr, Karolina, Lena) |
-| Pilot Deal zamknięty | 1+ do 28.02 | 0 (w toku) |
 | Konwersja demo→close | 40% | — (brak demo jeszcze) |
 
 **Zamknięte:** Stalton/Natan (CNC, Wrocław) — INSTALLED 17.02. Feedback za 2-3 tyg → case study.
-
-## PILOT DEAL (do 28.02)
-**1 990 PLN** (zamiast 2 500) + osobisty monitoring 30 dni.
-W zamian: feedback + 15-min testimonial. Raty: 2 × 995 PLN. **Limit: 2 miejsca.**
 
 ## TARGET: LONE WOLVES
 Niezależni handlowcy, freelancerzy, one-man-army.
@@ -26,10 +21,9 @@ Niezależni handlowcy, freelancerzy, one-man-army.
 - Pragnienie: "sklonowanie siebie", AI które zna ich biznes
 
 ## CENA
-**2 500 PLN netto** (jednorazowo, bez abonamentu)
-- Raty: 2× 1 250 PLN
-- Pilot: 1 990 PLN (limit 2, do 28.02)
-- Gwarancja: 30 dni, pełny zwrot bez pytań
+**2 999 PLN netto** (jednorazowo, bez abonamentu)
+- Raty: 2× 1 500 PLN
+- Gwarancja: 14 dni, pełny zwrot bez pytań
 
 ## LEJEK
 Outreach/LinkedIn → Self-Discovery / Live Preview → Calendly → 15 min call → Close

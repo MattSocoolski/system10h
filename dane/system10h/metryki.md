@@ -28,14 +28,16 @@
 |---------|-----|-----------|---|
 | Sprzedaze zamkniete | 2+ | 0 (Stalton 1 220 PLN zamknięty w lutym) | 0% |
 | Przychod | 5 000+ PLN | 0 PLN (nowe w marcu) | 0% |
-| Pipeline value aktywny | 10 000+ PLN | **7 500 PLN** (Gawlik 1k + Glinka 2.5k + Krystian 2.5k + Wielgosz 2.5k) | 75% |
-| Pipeline NURTURE | — | **5 000 PLN** (Zbigniew 2.5k maj + Karolina 2.5k koniec marca) | — |
-| Pipeline pasywny | — | **~22 500-30 000 PLN** (Kamil/CQRE 30% prowizji) | — |
-| Aktywne leady Bliźniak | 5+ | **4** (Gawlik, Glinka, Krystian, Wielgosz) | 80% |
+| Pipeline value aktywny | 10 000+ PLN | **27 497 PLN** (Gawlik 1k + Glinka 3k + Krystian 3k + Wielgosz 3k + Modul Soft 18.5k) | 275% |
+| Pipeline NURTURE | — | **6 000 PLN** (Zbigniew 3k maj + Karolina 3k koniec marca) | — |
+| Pipeline pasywny | — | **~27 000 PLN** (Kamil/CQRE umowa podpisana ✅, prowizja 30% z F1 15k + F2 75k) | — |
+| Aktywne leady Bliźniak | 5+ | **5** (Gawlik, Glinka, Krystian, Wielgosz, Modul Soft) | 100% |
 | Live demo odbyte | 2+ | **2** (Zbigniew 05.03, Karolina 05.03) | 100% |
+| LinkedIn posty marzec | 3/tyg | **6+** (avg 470 views, top 985, 32 komentarzy) | ✅ |
 
 **Cel Q1-Q2:** 7 000 PLN netto do 31.05.2026. Zamknięte: 1 220 PLN. Luka: 5 780 PLN.
-**Dni do konca miesiaca:** 23
+**Pipeline total:** 60 497 PLN (aktywny 27.5k + nurture 6k + pasywny 27k).
+**Dni do konca miesiaca:** 16
 
 ---
 

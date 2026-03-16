@@ -505,7 +505,25 @@ function truncate(str, len) {
   return str.length > len ? str.slice(0, len) + '...' : str;
 }
 
-run().catch(err => {
-  console.error('[SCAN] ERROR:', err.message);
-  process.exit(1);
-});
+async function runWithRetry() {
+  const MAX_RETRIES = 2;
+  const RETRY_DELAY = 30000; // 30s — give network time to stabilize after wake
+
+  for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      await run();
+      return; // success
+    } catch (err) {
+      const isNetworkError = err.message === 'fetch failed' || err.message.includes('ENOTFOUND');
+      if (isNetworkError && attempt < MAX_RETRIES) {
+        console.log(`[SCAN] Network error (attempt ${attempt}/${MAX_RETRIES}), retrying in ${RETRY_DELAY / 1000}s...`);
+        await new Promise(r => setTimeout(r, RETRY_DELAY));
+        continue;
+      }
+      console.error('[SCAN] ERROR:', err.message);
+      process.exit(1);
+    }
+  }
+}
+
+runWithRetry();

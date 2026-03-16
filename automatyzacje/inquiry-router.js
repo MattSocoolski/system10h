@@ -10,7 +10,8 @@ import { fileURLToPath } from 'url';
 import {
   loadEnv, sendTelegram, queryCRM, parseNotionLead,
   gmailGetAccessToken, gmailSearchMessages, gmailGetMessage, gmailCreateDraft,
-  loadState, saveState, extractEmail, extractName, escapeHtml
+  loadState, saveState, extractEmail, extractName, escapeHtml,
+  wrapEmailHTML
 } from './lib.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -200,6 +201,8 @@ async function run() {
         ? `Jesteś ghostwriterem Mateusza Sokólskiego, key account managera w artnapi.pl.
 Odpowiadasz na zapytanie ofertowe z kalkulatora B2B na stronie.
 
+FORMAT: Pisz w HTML. Używaj <p> dla akapitów, <strong> dla pogrubień, <ul><li> dla list. NIE dodawaj tagów <html>/<body> — tylko wewnętrzną treść. NIE dodawaj stopki/podpisu — zostanie dodana automatycznie.
+
 STYL:
 ${b2bContext}
 
@@ -214,10 +217,12 @@ ZASADY:
 • Zaproponuj darmową próbkę (2 szt 40x50) jeśli nowy klient
 • Podaj dostępność (24h wysyłka z PL)
 • Zamknięcie: proaktywne, oferuj następny krok (próbka / zamówienie testowe)
-• Kończ: Pozdrawiam serdecznie,\\nSokólski Mateusz\\nkey account manager w artnapi.pl\\nmail: mateusz.sokolski@artnapi.pl\\ntelefon: +48 534 852 707\\nkalkulator B2B: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-• Pisz TYLKO treść maila (bez nagłówków)`
+• NIE dodawaj stopki/podpisu na końcu — jest dodawana automatycznie
+• Pisz TYLKO treść maila w HTML (bez nagłówków, bez podpisu)`
         : `You are a ghostwriter for Mateusz Sokolski, key account manager at artnapi.pl.
 You're replying to a B2B calculator inquiry from the website.
+
+FORMAT: Write in HTML. Use <p> for paragraphs, <strong> for emphasis, <ul><li> for lists. Do NOT add <html>/<body> tags — only the inner content. Do NOT include a signature — it will be added automatically.
 
 STYLE:
 ${b2bContext}
@@ -233,8 +238,8 @@ RULES:
 • Offer free samples (2 pcs 40x50) if new client
 • Mention availability (24h shipping from PL warehouse)
 • Close: proactive, offer next step (sample / test order)
-• Sign off: Best regards,\\nMateusz Sokolski\\nkey account manager at artnapi.pl\\nmail: mateusz.sokolski@artnapi.pl\\nphone: +48 534 852 707\\nB2B calculator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-• Write ONLY the email body (no headers)`;
+• Do NOT add a signature at the end — it is appended automatically
+• Write ONLY the email body in HTML (no headers, no signature)`;
 
       const userPrompt = lang === 'pl'
         ? `Odpowiedz na to zapytanie z kalkulatora B2B:
@@ -265,10 +270,12 @@ ${leadContext}
 
 Write a short, warm reply confirming the inquiry.`;
 
-      const draftBody = await callClaude(systemPrompt, userPrompt);
+      const draftBodyRaw = await callClaude(systemPrompt, userPrompt);
+      const isEN = lang === 'en';
+      const draftBody = wrapEmailHTML(draftBodyRaw, isEN);
       const reSubject = `Re: ${detail.subject.replace(/^Re:\s*/i, '')}`;
 
-      await gmailCreateDraft(token, senderEmail, reSubject, draftBody, detail.threadId);
+      await gmailCreateDraft(token, senderEmail, reSubject, draftBody, detail.threadId, { html: true });
       draftsCreated++;
 
       const icon = lead ? '🔥' : '🆕';

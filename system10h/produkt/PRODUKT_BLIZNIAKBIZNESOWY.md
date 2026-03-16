@@ -58,7 +58,7 @@ Autonomiczny asystent AI z **15 workflow'ami** + menu startowe: odpowiadanie na 
 
 ---
 
-## 5. 15 SCENARIUSZY (co Bliźniak potrafi)
+## 5. 16 SCENARIUSZY (co Bliźniak potrafi)
 
 | # | Scenariusz | Trigger |
 |---|-----------|---------|
@@ -82,7 +82,7 @@ Autonomiczny asystent AI z **15 workflow'ami** + menu startowe: odpowiadanie na 
 
 ## 6. CENA
 
-**2 500 PLN netto** (jednorazowo)
+**2 999 PLN netto** (jednorazowo)
 
 - Zero abonamentu
 - Zero ukrytych kosztów

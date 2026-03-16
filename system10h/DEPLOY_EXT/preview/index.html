@@ -6,8 +6,8 @@
     <title>Live Preview | Zobacz co AI napisze dla TWOJEJ branży</title>
     <meta name="description" content="Wpisz branżę i produkt. Otrzymaj email sprzedażowy, obronę ceny i follow-up wygenerowane przez AI w 30 sekund. Za darmo.">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS (production build) -->
+    <link rel="stylesheet" href="../styles.min.css">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,20 +22,6 @@
 
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%23a855f7%22/><text y=%22.9em%22 x=%2250%25%22 font-size=%2260%22 font-family=%22sans-serif%22 font-weight=%22bold%22 text-anchor=%22middle%22 fill=%22white%22 dy=%22.1em%22>10</text></svg>">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
-                    colors: {
-                        brand: { 50: '#faf5ff', 100: '#f3e8ff', 400: '#c084fc', 500: '#a855f7', 600: '#9333ea', 900: '#0f172a' },
-                        accent: { 400: '#facc15', 500: '#eab308' }
-                    }
-                }
-            }
-        }
-    </script>
 
     <link rel="stylesheet" href="style.css">
 </head>

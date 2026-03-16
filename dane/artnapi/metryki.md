@@ -1,5 +1,5 @@
 # METRYKI SPRZEDAZY — DASHBOARD
-> Ostatnia aktualizacja: 10.03.2026
+> Ostatnia aktualizacja: 15.03.2026
 > Zrodlo danych: arkusz prowizji + CRM Notion + pliki lokalne
 > ZASADA: Aktualizuj CO TYDZIEN (piatek) lub przy @cso/@coo fetch.
 > NOWY MODEL PROWIZJI (od 12.02): marza firmy / marza handlowca jawnie w cenie. Prowizja = suma marzy handlowca - 6 666 base.
