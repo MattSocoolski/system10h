@@ -1,0 +1,70 @@
+name: Sync Email Processor
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'dane/artnapi/oferta.md'
+      - 'dane/ghost_styl.md'
+      - 'automatyzacje/aws-email-processor/**'
+
+jobs:
+  sync-kb:
+    name: Sync knowledge base to S3
+    runs-on: ubuntu-latest
+    if: >-
+      contains(github.event.head_commit.modified, 'dane/artnapi/oferta.md') ||
+      contains(github.event.head_commit.modified, 'dane/ghost_styl.md') ||
+      contains(github.event.head_commit.added, 'dane/artnapi/oferta.md') ||
+      contains(github.event.head_commit.added, 'dane/ghost_styl.md')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      - name: Sync oferta.md to S3
+        run: aws s3 cp dane/artnapi/oferta.md s3://artnapi-email-processor-kb/oferta.md
+
+      - name: Sync ghost_styl.md to S3
+        run: aws s3 cp dane/ghost_styl.md s3://artnapi-email-processor-kb/ghost_styl.md
+
+  deploy-code:
+    name: Deploy Lambda code
+    runs-on: ubuntu-latest
+    if: >-
+      contains(join(github.event.commits.*.modified, ','), 'automatyzacje/aws-email-processor/') ||
+      contains(join(github.event.commits.*.added, ','), 'automatyzacje/aws-email-processor/')
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for .mjs changes
+        id: check
+        run: |
+          changed=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} -- 'automatyzacje/aws-email-processor/*.mjs' || true)
+          if [ -n "$changed" ]; then
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Configure AWS credentials
+        if: steps.check.outputs.has_changes == 'true'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+
+      - name: Deploy Lambda via deploy.sh
+        if: steps.check.outputs.has_changes == 'true'
+        run: |
+          cd automatyzacje/aws-email-processor
+          chmod +x deploy.sh
+          ./deploy.sh update-code

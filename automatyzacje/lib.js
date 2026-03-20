@@ -390,9 +390,11 @@ Key Account Manager at <a href="https://artnapi.pl" style="color: #1a73e8; text-
  * @returns {string} Complete HTML email with signature
  */
 export function wrapEmailHTML(bodyContent, isEnglish = false) {
+  // Strip markdown code fences if Claude wrapped the response in ```html ... ```
+  const cleaned = bodyContent.replace(/^```html?\s*\n?/i, '').replace(/\n?```\s*$/g, '');
   const signature = isEnglish ? HTML_SIGNATURE_EN : HTML_SIGNATURE_PL;
   return `<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6;">
-${bodyContent}
+${cleaned}
 ${signature}
 </div>`;
 }
@@ -440,4 +442,56 @@ export function extractEmail(headerValue) {
 export function extractName(headerValue) {
   const match = headerValue.match(/^"?([^"<]+)"?\s*</);
   return match ? match[1].trim() : headerValue.split('@')[0];
+}
+
+// --- Notion CRM update helpers ---
+
+export async function updateNotionPage(pageId, properties) {
+  return notionFetch(`/pages/${pageId}`, {
+    method: 'PATCH',
+    body: { properties }
+  });
+}
+
+export function addBusinessDays(date, days) {
+  const result = new Date(date);
+  let added = 0;
+  while (added < days) {
+    result.setDate(result.getDate() + 1);
+    const dow = result.getDay();
+    if (dow !== 0 && dow !== 6) added++;
+  }
+  return result;
+}
+
+// Format date as YYYY-MM-DD using LOCAL timezone (not UTC)
+export function toLocalISO(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+export async function updateCRMDue(pageId, newDueDate) {
+  return updateNotionPage(pageId, {
+    'Due': { date: { start: newDueDate } }
+  });
+}
+
+export async function updateCRMLastContact(pageId, contactDate) {
+  return updateNotionPage(pageId, {
+    'ostatni kontakt': { date: { start: contactDate } }
+  });
+}
+
+export async function appendCRMNote(pageId, noteText, existingNotes = '') {
+  const stamp = toLocalISO(new Date());
+  const prefix = `[${stamp}] ${noteText}`;
+  const updated = existingNotes ? `${prefix}\n${existingNotes}` : prefix;
+  if (updated.length > 2000) {
+    console.warn(`[LIB] Note truncated for page ${pageId}: ${updated.length} → 2000 chars`);
+  }
+  return updateNotionPage(pageId, {
+    'notatki': { rich_text: [{ text: { content: updated.slice(0, 2000) } }] }
+  });
 }

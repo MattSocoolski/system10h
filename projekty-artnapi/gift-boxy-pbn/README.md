@@ -9,7 +9,7 @@ PBN 40x50 na ramie jako komponent gift boxow firmowych. Planowany start outreach
 ## Powiazane pliki (poza folderem)
 
 - `dane/plan.md` — segment 6 (Gift-Boxy PBN, PLANOWANY od X.2026)
-- `dane/oferta.md` — cena PBN 40x50 na ramie: 21,13 PLN
+- `dane/oferta.md` — cena PBN 40x50 na ramie: 27,64 PLN (kartony, MOQ 30 szt)
 
 ## Jak aktualizowac
 

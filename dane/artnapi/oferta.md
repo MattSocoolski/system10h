@@ -170,8 +170,8 @@ Mateusz broni WARTOŚCI, nie ceny. Przyznaje rację, tłumaczy logicznie, kładz
 | Dostawca | Cena netto | Z dostawą? | Realna cena all-in | Status |
 |----------|-----------|-----------|-------------------|--------|
 | ??? (dostawca Pstro) | ~6,30 | ✅ tak | ~6,30 | Nieznany gracz PL |
-| **ARTNAPI 3 pal** | **7,31** | **✅ tak** | **7,31** | ✅ |
-| **ARTNAPI 2 pal** | **8,20** | **✅ tak** | **8,20** | ✅ |
+| **ARTNAPI 3 pal** | **7,30** | **✅ tak** | **7,30** | ✅ |
+| **ARTNAPI 2 pal** | **8,15** | **✅ tak** | **8,15** | ✅ |
 | Phoenix 1000 szt | 8,85 | ❌ + transport | ~9,40-9,95 | ⚠️ Problemy z dostępnością |
 | Phoenix flat | 9,00 | ❌ + transport | ~9,55-10,10 | ⚠️ Braki towaru (CNY luka) |
 | **ARTNAPI 1 pal** | **9,00** | **✅ tak** | **9,00** | ✅ |
@@ -215,16 +215,18 @@ Gdy klient porównuje z Phoenix:
 **Delivery:** Palety = palletCost / palletQty | KARTONY 40x50/30x40 = boxCost / 40 (realne koszty paczek od 10.03.2026)
 
 ### PODOBRAZIA 40x50 — per country (EUR/szt, ALL-IN z dostawą)
+> Zaktualizowano 17.03.2026 — sync z Excel PALETOWE LICZENIE CENNIK.xlsx (baseCost 4.00 PLN)
+> Wszędzie 320 szt/paleta. Progi: Kartony 120-319, 1 Pal 320, 2 Pal 640, 3+ Pal 960.
 
-| Kraj | Kartony | 1 Paleta | 2 Palety | 3+ Palety |
-|------|---------|----------|----------|-----------|
-| 🇨🇿 CZ (Prague) | **€2.33** | **€2.03** | **€1.87** | **€1.62** |
-| 🇸🇰 SK (Bratislava) | **€2.36** | **€2.25** | **€2.07** | **€1.80** |
-| 🇭🇺 HU (Budapest) | **€2.36** | **€2.16** | **€1.99** | **€1.73** |
-| 🇱🇹 LT (Vilnius) | **€2.31** | **€2.04** | **€1.88** | **€1.63** |
-| 🇱🇻 LV (Riga) | **€2.32** | **€2.11** | **€1.95** | **€1.69** |
-| 🇪🇪 EE (Tallinn) | **€2.35** | **€2.21** | **€2.03** | **€1.76** |
-| 🇷🇴 RO (Bucharest) | **€2.70** | **€2.41** | **€2.21** | **€1.92** |
+| Kraj | Kartony (120-319) | 1 Paleta (320) | 2 Palety (640) | 3+ Palety (960) |
+|------|-------------------|----------------|----------------|-----------------|
+| 🇨🇿 CZ (Prague) | **€2.40** | **€2.19** | **€2.03** | **€1.75** |
+| 🇸🇰 SK (Bratislava) | **€2.58** | **€2.35** | **€2.16** | **€1.88** |
+| 🇭🇺 HU (Budapest) | **€2.50** | **€2.25** | **€2.07** | **€1.80** |
+| 🇱🇹 LT (Vilnius) | **€2.44** | **€2.20** | **€2.04** | **€1.76** |
+| 🇱🇻 LV (Riga) | **€2.46** | **€2.20** | **€2.02** | **€1.76** |
+| 🇪🇪 EE (Tallinn) | **€2.54** | **€2.20** | **€2.11** | **€1.84** |
+| 🇷🇴 RO (Bucharest) | **€2.72** | **€2.52** | **€2.32** | **€2.02** |
 
 ### PODOBRAZIA 30x40 — per country (EUR/szt, ALL-IN z dostawą)
 

@@ -10,7 +10,7 @@ Kampania sprzedazowa do Warsztatow Terapii Zajęciowej (733) i Domow Pomocy Spol
 
 - `dane/plan.md` — Lejek 2 (instytucje publiczne), metryki kampanii
 - `projekty/wtz-dps/instrukcja_pbn.md` — instrukcja produktu PBN
-- `dane/oferta.md` — ceny PBN (24x30 deska: 14,14 PLN kartony, 30x40: 23,74 PLN kartony)
+- `dane/oferta.md` — ceny PBN (24x30 deska: 16,84 PLN kartony MOQ 45, PBN bez ramy: 20,24 PLN kartony MOQ 75)
 
 ## Jak aktualizowac
 

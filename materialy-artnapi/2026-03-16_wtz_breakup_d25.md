@@ -16,7 +16,7 @@ Dzień dobry,
 
 Wracam krótko do tematu zestawów PBN na zajęcia terapeutyczne. Rozumiem, że teraz mogą być inne priorytety i nie chcę zabierać czasu.
 
-Gdyby temat wrócił, chętnie wyślę bezpłatną próbkę do przetestowania na zajęciach. Mamy 470 wzorów, zestawy od 14,14 PLN netto, z dostawą w 2-3 dni robocze.
+Gdyby temat wrócił, chętnie wyślę bezpłatną próbkę do przetestowania na zajęciach. Mamy 470 wzorów, zestawy od 16,84 PLN netto, z dostawą w 2-3 dni robocze.
 
 Jestem dostępny pod tym mailem lub telefonicznie. Życzę udanych zajęć!
 

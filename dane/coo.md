@@ -589,6 +589,15 @@ PODSUMOWANIE:
 [X] alertów do rozwiązania
 ```
 
+**KROK 1b: AUTOMATYZACJE HEALTH CHECK**
+```
+Uruchom: node automatyzacje/verify-all.js
+Sprawdza: syntax, importy, .env, state files, LaunchAgents
+Jeśli FAIL → pokaż userowi błędy i zaproponuj naprawę
+Jeśli WARN → poinformuj (np. stary state file = skrypt może nie działać)
+Jeśli ALL PASS → "Automatyzacje OK ([X] testów passed)"
+```
+
 **STATUSY:**
 - OK (w limicie)
 - UWAGA (>80% limitu) - warto przejrzeć

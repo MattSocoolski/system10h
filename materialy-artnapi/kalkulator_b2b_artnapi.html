@@ -314,13 +314,14 @@ body {
 }
 
 .tier-marks {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
   position: relative;
+  margin-top: 8px;
+  height: 20px;
 }
 
 .tier-mark {
+  position: absolute;
+  transform: translateX(-50%);
   font-size: 11px;
   color: var(--text-muted);
   font-family: 'DM Mono', monospace;
@@ -981,7 +982,7 @@ const PRODUCT_DEFS = [
     id: 'canvas-40x50',
     name: { pl: 'Podobrazia 40×50', en: '40×50 cm Canvas' },
     spec: { pl: 'Bawełna 280g · krosna sosnowe · potrójny grunt', en: 'Cotton 280g · pine stretcher bars · triple primed' },
-    baseCost: 5.00, storage: 0.375, picking: 0.08,
+    baseCost: 4.00, storage: 0.375, picking: 0.08,
     palletQty: 320, cartonQty: 40,
     marketPrice: 11.00,
     tiers: [
@@ -1065,7 +1066,7 @@ const PRODUCT_DEFS = [
     baseCost: 11.0, storage: 0.375, picking: 0.06,
     palletQty: 180, cartonQty: 30,
     tiers: [
-      { name: { pl: 'Kartony', en: 'Cartons' }, min: 30, max: 179, type: 'add', val: 10 },
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 30, max: 179, type: 'add', val: 12.27 },
       { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 180, max: 359, type: 'add', val: 7 },
       { name: { pl: '2 Palety', en: '2 Pallets' }, min: 360, max: 539, type: 'add', val: 5.03 },
       { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 540, max: 99999, type: 'add', val: 2 },
@@ -1075,23 +1076,23 @@ const PRODUCT_DEFS = [
     id: 'pbn-noframe',
     name: { pl: 'PBN 40×50 (bez ramy)', en: 'PBN 40×50 (unframed)' },
     spec: { pl: 'Malowanie po numerach · płótno + farby + pędzle · bez ramy', en: 'Paint by numbers · canvas + paints + brushes · unframed' },
-    baseCost: 7.8, storage: 0.375, picking: 0.06,
+    baseCost: 7.0, storage: 0.375, picking: 0.06,
     palletQty: 450, cartonQty: 75,
     tiers: [
-      { name: { pl: 'Kartony', en: 'Cartons' }, min: 75, max: 449, type: 'add', val: 10 },
-      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 450, max: 899, type: 'add', val: 7 },
-      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 900, max: 1349, type: 'add', val: 5.03 },
-      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1350, max: 99999, type: 'add', val: 2 },
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 75, max: 449, type: 'add', val: 9.52 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 450, max: 899, type: 'add', val: 5.53 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 900, max: 1349, type: 'add', val: 4.03 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1350, max: 99999, type: 'add', val: 1.0 },
     ]
   },
   {
     id: 'diamond',
     name: { pl: 'Haft diamentowy', en: 'Diamond painting' },
     spec: { pl: 'Zestaw haft diamentowy · pełen komplet materiałów', en: 'Diamond painting kit · complete set' },
-    baseCost: 7.8, storage: 0.375, picking: 0.06,
+    baseCost: 5.5, storage: 0.375, picking: 0.06,
     palletQty: 1200, cartonQty: 50,
     tiers: [
-      { name: { pl: 'Kartony', en: 'Cartons' }, min: 50, max: 1199, type: 'add', val: 10 },
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 100, max: 1199, type: 'add', val: 10 },
       { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 1200, max: 2399, type: 'add', val: 7 },
       { name: { pl: '2 Palety', en: '2 Pallets' }, min: 2400, max: 3599, type: 'add', val: 5.03 },
       { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 3600, max: 99999, type: 'add', val: 2 },
@@ -1099,18 +1100,32 @@ const PRODUCT_DEFS = [
   },
 ];
 
+// EU prices for canvas-40x50 are MANUALLY SET from Excel (PALETOWE LICZENIE CENNIK.xlsx, 17.03.2026)
+// baseCost 4.00 PLN, palletQty 320 for all countries
+// EU prices for canvas-40x50 — from Excel (PALETOWE LICZENIE CENNIK.xlsx, 17.03.2026)
+// All countries: palletQty=320, baseCost=4.00, picking=0.06
+const EU_40x50_OVERRIDES = {
+  cz: [2.40, 2.19, 2.03, 1.75],
+  sk: [2.58, 2.35, 2.16, 1.88],
+  hu: [2.50, 2.25, 2.07, 1.80],
+  lt: [2.44, 2.20, 2.04, 1.76],
+  lv: [2.46, 2.20, 2.02, 1.76],
+  ee: [2.54, 2.20, 2.11, 1.84],
+  ro: [2.72, 2.52, 2.32, 2.02],
+};
+
 // PL prices are MANUALLY SET (approved selling prices, different from formula)
 // These override the formula-calculated prices for PL only
 const PL_PRICE_OVERRIDES = {
-  'canvas-40x50': [10.30, 9.00, 8.15, 7.30],
+  'canvas-40x50': [10.31, 9.00, 8.15, 7.30],
   'canvas-30x40': [7.46, 6.75, 6.11, 5.00],
   'canvas-20x30': [6.70, 5.49, 4.54, 3.68],
   'canvas-20x20': [5.96, 4.75, 3.80, 2.94],
   'panel-30x40':  [24.27, 23.33, 20.41, 19.27],
   'panel-40x50':  [7.88, 6.84, 6.24, 5.10],
-  'pbn-frame':    [25.37, 22.37, 20.40, 17.37],
-  'pbn-noframe':  [20.72, 17.72, 15.75, 12.72],
-  'diamond':      [20.46, 17.46, 15.49, 12.46],
+  'pbn-frame':    [27.64, 22.37, 20.40, 17.37],
+  'pbn-noframe':  [20.24, 16.25, 14.75, 11.72],
+  'diamond':      [14.08, 12.58, 11.08, 9.58],
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -1147,7 +1162,9 @@ function getProducts() {
   const ispl = country === 'pl';
 
   return PRODUCT_DEFS.map(def => {
-    const overrides = ispl ? PL_PRICE_OVERRIDES[def.id] : null;
+    const plOverrides = ispl ? PL_PRICE_OVERRIDES[def.id] : null;
+    const euOverrides = (!ispl && def.id === 'canvas-40x50' && EU_40x50_OVERRIDES[country]) ? EU_40x50_OVERRIDES[country] : null;
+    const overrides = plOverrides || euOverrides;
 
     return {
       id: def.id,
@@ -1277,16 +1294,23 @@ function initProduct() {
 
 function renderTierMarks() {
   const p = getProduct();
+  const slider = document.getElementById('qtySlider');
+  const sMin = parseInt(slider.min);
+  const sMax = parseInt(slider.max);
   const marks = document.getElementById('tierMarks');
   marks.innerHTML = '';
   p.tiers.forEach((t, i) => {
     const mark = document.createElement('span');
     mark.className = 'tier-mark' + (getTier(p, qty) === i ? ' active' : '');
     mark.textContent = t.min >= 1000 ? (t.min / 1000) + 'k' : t.min;
+    // Position proportionally to slider scale
+    const pct = ((t.min - sMin) / (sMax - sMin)) * 100;
+    mark.style.left = pct + '%';
     mark.onclick = () => {
       qty = t.min;
       document.getElementById('qtyInput').value = qty;
       document.getElementById('qtySlider').value = qty;
+      updateSliderFill();
       updateCalc();
     };
     marks.appendChild(mark);

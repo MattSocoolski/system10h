@@ -85,7 +85,7 @@ Terapeuta zajęciowy w Warsztacie Terapii Zajęciowej (WTZ) lub Domu Pomocy Spo�
 | Pain | Gain |
 |:---|:---|
 | Ciągłe wymyślanie zajęć plastycznych | PBN = gotowy zestaw na zajęcia (470 wzorów w rotacji) |
-| Drogie materiały w sklepach plastycznych | 14,14 PLN netto (24x30) — marża 100%+ vs detal |
+| Drogie materiały w sklepach plastycznych | 16,84 PLN netto (deska 24x30) — marża 100%+ vs detal |
 | Brak dostawcy B2B na fakturę | Faktura PL, wysyłka 24h, zero zamrożonej kasy |
 | Podopieczni szybko się nudzą | 470 wzorów — nowy zestaw co zajęcia |
 

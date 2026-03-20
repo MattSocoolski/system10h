@@ -47,7 +47,7 @@ Dziekuje za odpowiedz — ciesze sie, ze jest zainteresowanie.
 
 Przygotowuje krotka oferte:
 
-Zestawy PBN (malowanie po numerach) — gotowy zestaw na zajecia: plotno, farby, pedzle. 470 wzorow w rotacji. Cena od 14,14 PLN netto/szt (24x30) na fakture PL.
+Zestawy PBN (malowanie po numerach) — gotowy zestaw na zajecia: plotno, farby, pedzle. 470 wzorow w rotacji. Cena od 16,84 PLN netto/szt (deska 24x30) na fakture PL.
 
 Moge wyslac 2 zestawy gratis do przetestowania na zajeciach — opinia po tygodniu wystarczy.
 
@@ -242,7 +242,7 @@ Dziekuje za zainteresowanie. Krotko:
 
 Podobrazia 40x50 (Adre Arto): od 7,30 PLN netto all-in z dostawa (przy 3 paletach). Paleta: 9,00 PLN. Kartony: 10,30 PLN.
 
-Zestawy PBN 40x50 na ramie: 21,13 PLN netto (MOQ 30 szt). 470 wzorow, swieże farby.
+Zestawy PBN 40x50 na ramie: 27,64 PLN netto (MOQ 30 szt). 470 wzorow, swieże farby.
 
 Towar na stanie w Polsce, wysylka 24h. Faktura PL, reklamacje bezproblemowe.
 

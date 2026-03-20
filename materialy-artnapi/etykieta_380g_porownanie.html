@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtNapi 380g Premium — Warianty Kolorystyczne Etykiety</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#08080C; --surface:#111116; --surface2:#1A1A22;
+  --border:rgba(255,255,255,0.06); --text:#EAEAE8; --dim:#7A7870;
+  --gold:#C9A84C; --gold-bg:rgba(201,168,76,0.08);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;min-height:100vh;-webkit-font-smoothing:antialiased}
+body::after{content:'';position:fixed;inset:0;background:repeating-conic-gradient(rgba(255,255,255,.007) 0% 25%,transparent 0% 50%) 0 0/2px 2px;pointer-events:none;z-index:9999}
+.w{max-width:1380px;margin:0 auto;padding:52px 36px 96px}
+
+/* Hero */
+.hero{text-align:center;margin-bottom:68px;animation:rise .6s ease both}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.5rem);font-weight:700;letter-spacing:-.03em;line-height:1.15}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .sub{margin-top:12px;font-size:1rem;color:var(--dim)}
+.hero .date{margin-top:6px;font-size:.75rem;color:var(--dim);opacity:.45}
+
+/* Section tags */
+.tag{font-size:.66rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.tag::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Current color system */
+.sys{display:flex;gap:16px;margin-bottom:60px;animation:rise .6s .12s ease both}
+.chip{flex:1;padding:18px 20px;border-radius:12px;border:1px solid var(--border);background:var(--surface)}
+.chip .sw{width:100%;height:44px;border-radius:7px;margin-bottom:12px}
+.chip .nm{font-weight:500;font-size:.88rem;margin-bottom:3px}
+.chip .hx{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--dim)}
+.chip .pr{font-size:.74rem;color:var(--dim);margin-top:7px;padding-top:7px;border-top:1px solid var(--border)}
+
+/* Grid */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;position:relative;transition:transform .35s cubic-bezier(.2,0,0,1),box-shadow .35s ease;animation:rise .6s ease both}
+.card:nth-child(1){animation-delay:.2s}.card:nth-child(2){animation-delay:.3s}.card:nth-child(3){animation-delay:.4s}
+.card:hover{transform:translateY(-5px);box-shadow:0 20px 56px rgba(0,0,0,.5)}
+.card.pick{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 12px 44px rgba(201,168,76,.08)}
+.badge{position:absolute;top:14px;right:14px;background:var(--gold);color:#08080C;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:99px;z-index:2}
+.card-svg{padding:20px 20px 0}
+.card-svg svg{width:100%;display:block;border-radius:6px}
+.card-body{padding:18px 22px 22px}
+.card-body .opt{font-family:'Cormorant Garamond',serif;font-size:.8rem;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.card-body h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;margin-bottom:4px}
+.card-body .hx{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--dim);margin-bottom:12px}
+.card-body .rat{font-size:.82rem;line-height:1.6;color:var(--dim);padding-top:12px;border-top:1px solid var(--border)}
+.card-body .rat b{color:var(--text);font-weight:500}
+
+/* Comparison table */
+.cmp{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px 32px;animation:rise .6s .5s ease both;margin-bottom:60px}
+.cmp h2{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:20px}
+table{width:100%;border-collapse:collapse}
+th{font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);text-align:left;padding:8px 14px;border-bottom:1px solid var(--border)}
+td{padding:11px 14px;font-size:.85rem;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.stars{color:var(--gold);letter-spacing:2px}
+
+/* Shelf preview */
+.shelf-wrap{display:flex;gap:12px;align-items:end;justify-content:center;padding:40px 24px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.015));border-radius:16px;border:1px solid var(--border);margin-top:24px}
+.shelf{text-align:center}
+.shelf .block{width:88px;height:110px;border-radius:9px;margin:0 auto 10px;position:relative;box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.shelf .block::after{content:attr(data-g);position:absolute;bottom:-5px;left:50%;transform:translateX(-50%);background:var(--surface);border:1px solid var(--border);font-size:.55rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px;white-space:nowrap;color:var(--dim)}
+.shelf .lbl{font-size:.72rem;color:var(--dim);margin-top:8px}
+.shelf .lbl b{color:var(--text);font-weight:500;display:block}
+.arr{font-size:1.4rem;color:var(--dim);opacity:.2;align-self:center;margin:0 6px 36px}
+
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:960px){.g3{grid-template-columns:1fr}.sys{flex-direction:column}.shelf-wrap{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="w">
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <h1>Etykieta <em>380g Premium</em></h1>
+  <p class="sub">Warianty kolorystyczne — ArtNapi Adré Artó Stretched Canvas</p>
+  <p class="date">Przygotowano 18.03.2026 &middot; @ceo + @cmo</p>
+</header>
+
+<!-- ═══ AKTUALNY SYSTEM ═══ -->
+<div class="tag">Aktualny system kolorów etykiet</div>
+<div class="sys">
+  <div class="chip">
+    <div class="sw" style="background:#1A1A1A"></div>
+    <div class="nm">Czarny</div>
+    <div class="hx">#1A1A1A</div>
+    <div class="pr">Podobrazie na desce (MDF)</div>
+  </div>
+  <div class="chip">
+    <div class="sw" style="background:#165050"></div>
+    <div class="nm">Ciemny Teal</div>
+    <div class="hx">#165050</div>
+    <div class="pr">Podobrazie na ramie — standard (280g)</div>
+  </div>
+  <div class="chip" style="border-color:var(--gold);background:var(--gold-bg)">
+    <div class="sw" style="background:linear-gradient(135deg,#333 25%,#555 50%,#333 75%);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.6rem;font-weight:700">?</div>
+    <div class="nm" style="color:var(--gold)">Nowy kolor</div>
+    <div class="hx">Do wyboru</div>
+    <div class="pr">Podobrazie na ramie — <b>PREMIUM 380g</b></div>
+  </div>
+</div>
+
+<!-- ═══ 3 WARIANTY ═══ -->
+<div class="tag">Proponowane warianty</div>
+<div class="g3" id="grid"></div>
+
+<!-- ═══ TABELA PORÓWNAWCZA ═══ -->
+<div class="cmp">
+  <h2>Porównanie wariantów</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Kryterium</th>
+        <th><span class="dot" style="background:#371660"></span>Deep Purple</th>
+        <th><span class="dot" style="background:#6B5820"></span>Deep Gold</th>
+        <th><span class="dot" style="background:#5C1C30"></span>Burgundy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Spójność z brandingiem ArtNapi</td>
+        <td class="stars">★★★★★</td>
+        <td class="stars">★★★★☆</td>
+        <td class="stars">★★☆☆☆</td>
+      </tr>
+      <tr>
+        <td>Percepcja „premium" na półce</td>
+        <td class="stars">★★★★★</td>
+        <td class="stars">★★★★★</td>
+        <td class="stars">★★★★☆</td>
+      </tr>
+      <tr>
+        <td>Kontrast vs teal (standard)</td>
+        <td class="stars">★★★★★</td>
+        <td class="stars">★★★★☆</td>
+        <td class="stars">★★★★☆</td>
+      </tr>
+      <tr>
+        <td>Czytelność białego tekstu</td>
+        <td class="stars">★★★★★</td>
+        <td class="stars">★★★☆☆</td>
+        <td class="stars">★★★★★</td>
+      </tr>
+      <tr>
+        <td>Psychologia koloru (luksus)</td>
+        <td>Fiolet = kreatywność, luksus</td>
+        <td>Złoto = prestiż, jakość</td>
+        <td>Bordo = tradycja, elegancja</td>
+      </tr>
+      <tr>
+        <td>Unikalność w kategorii art/hobby</td>
+        <td class="stars">★★★★★</td>
+        <td class="stars">★★★☆☆</td>
+        <td class="stars">★★★★☆</td>
+      </tr>
+      <tr>
+        <td style="font-weight:500;color:var(--gold)">Rekomendacja CEO</td>
+        <td style="font-weight:600;color:var(--gold)">✦ WYBÓR #1</td>
+        <td style="color:var(--dim)">Opcja zapasowa</td>
+        <td style="color:var(--dim)">Opcja alternatywna</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ═══ NOWY SYSTEM NA PÓŁCE ═══ -->
+<div class="tag">Docelowy system kolorów — wizualizacja półki</div>
+<div class="shelf-wrap">
+  <div class="shelf">
+    <div class="block" style="background:#1A1A1A" data-g="MDF"></div>
+    <div class="lbl"><b>Czarny</b>Na desce</div>
+  </div>
+  <div class="arr">→</div>
+  <div class="shelf">
+    <div class="block" style="background:#165050" data-g="280g"></div>
+    <div class="lbl"><b>Teal</b>Standard rama</div>
+  </div>
+  <div class="arr">→</div>
+  <div class="shelf">
+    <div class="block" style="background:#371660;box-shadow:0 4px 24px rgba(55,22,96,.5)" data-g="380g"></div>
+    <div class="lbl"><b style="color:var(--gold)">Deep Purple</b>Premium rama</div>
+  </div>
+  <div style="width:40px"></div>
+  <div class="shelf" style="opacity:.4">
+    <div class="block" style="background:#6B5820" data-g="380g"></div>
+    <div class="lbl"><b>Gold</b>Alternatywa</div>
+  </div>
+  <div class="shelf" style="opacity:.4">
+    <div class="block" style="background:#5C1C30" data-g="380g"></div>
+    <div class="lbl"><b>Burgundy</b>Alternatywa</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const variants = [
+  {
+    id:'purple', pick:true,
+    color:'#371660', dark:'#261048', light:'#5B2D8E',
+    name:'Deep Purple', hex:'#371660',
+    rationale:'<b>Idealnie wpasowuje się w branding ArtNapi</b> — fiolet to Wasz kolor primary z prezentacji Strategia Delta. Psychologia: fiolet = luksus, kreatywność, premium. Na półce: natychmiast odróżnia się od teal (standard) i czarnego (deska). Klient widzi fiolet → kojarzy z marką ArtNapi wellbeing.'
+  },
+  {
+    id:'gold', pick:false,
+    color:'#6B5820', dark:'#4F4015', light:'#A08830',
+    name:'Deep Gold', hex:'#6B5820',
+    rationale:'<b>Uniwersalny sygnał premium.</b> Złoto = jakość, ekskluzywność, prestiż. Żółty jest w palecie ArtNapi (secondary color). Ryzyko: ciemne złoto może mieć <b>gorszy kontrast</b> z białym tekstem. Wymaga precyzyjnego doboru odcienia.'
+  },
+  {
+    id:'burgundy', pick:false,
+    color:'#5C1C30', dark:'#421420', light:'#8A2A45',
+    name:'Burgundy', hex:'#5C1C30',
+    rationale:'<b>Elegancja i tradycja.</b> Bordo = premium, ciepło, artystyczny charakter. Odróżnia się od teal. Ryzyko: <b>nie jest w obecnym brand palette</b> ArtNapi — może osłabiać spójność marki. Dobry jako alternatywa jeśli fiolet nie przekona.'
+  }
+];
+
+function makeSVG(c, dk) {
+  return `<svg viewBox="0 0 800 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g-${c.replace('#','')}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="${c}"/>
+      <stop offset="100%" stop-color="${dk}"/>
+    </linearGradient>
+  </defs>
+  <!-- Triangle body -->
+  <polygon points="0,360 178,0 520,0 520,360" fill="url(#g-${c.replace('#','')})" />
+  <!-- Right panel -->
+  <rect x="520" y="0" width="280" height="260" fill="${c}" />
+  <!-- Bottom strip right -->
+  <rect x="520" y="268" width="280" height="92" fill="${dk}" />
+  <!-- Dividers -->
+  <line x1="520" y1="0" x2="520" y2="260" stroke="rgba(255,255,255,.1)" stroke-width=".8"/>
+  <line x1="520" y1="260" x2="800" y2="260" stroke="rgba(255,255,255,.1)" stroke-width=".8"/>
+  <!-- White window -->
+  <rect x="385" y="185" width="88" height="88" rx="2" fill="white" opacity=".92"/>
+
+  <!-- LEFT — multilang text -->
+  <text x="220" y="58" fill="rgba(255,255,255,.4)" font-size="10" font-family="Outfit,sans-serif">EN</text>
+  <text x="220" y="78" fill="white" font-size="14.5" font-weight="600" font-family="Outfit,sans-serif">Stretched canvas</text>
+  <text x="220" y="94" fill="rgba(255,255,255,.55)" font-size="10" font-family="Outfit,sans-serif">Triple primed</text>
+  <text x="220" y="120" fill="rgba(255,255,255,.4)" font-size="10" font-family="Outfit,sans-serif">PL</text>
+  <text x="220" y="140" fill="white" font-size="14.5" font-weight="600" font-family="Outfit,sans-serif">Podobrazie klasyczne</text>
+  <text x="220" y="156" fill="rgba(255,255,255,.55)" font-size="10" font-family="Outfit,sans-serif">Potrójnie zagruntowane</text>
+  <text x="220" y="182" fill="rgba(255,255,255,.4)" font-size="10" font-family="Outfit,sans-serif">DE</text>
+  <text x="220" y="202" fill="white" font-size="14.5" font-weight="600" font-family="Outfit,sans-serif">Leinwand Keilrahmen</text>
+  <text x="220" y="218" fill="rgba(255,255,255,.55)" font-size="10" font-family="Outfit,sans-serif">Dreifach grundiert</text>
+
+  <!-- Importer -->
+  <text x="220" y="262" fill="rgba(255,255,255,.35)" font-size="8.5" font-family="Outfit,sans-serif">IMPORTER</text>
+  <text x="220" y="276" fill="rgba(255,255,255,.3)" font-size="8" font-family="Outfit,sans-serif">NAPI sp. z o.o., ul. Sąsiedzka D11–D12, 05-806 Sokołów, Poland</text>
+  <text x="220" y="288" fill="rgba(255,255,255,.3)" font-size="8" font-family="Outfit,sans-serif">Made in PRC</text>
+
+  <!-- LEFT bottom specs -->
+  <text x="200" y="326" fill="white" font-size="14" font-weight="700" font-family="Outfit,sans-serif">1 PCS</text>
+  <text x="200" y="340" fill="rgba(255,255,255,.45)" font-size="8" font-family="Outfit,sans-serif">Quantity</text>
+  <text x="300" y="326" fill="white" font-size="14" font-weight="700" font-family="Outfit,sans-serif">40x50</text>
+  <text x="300" y="340" fill="rgba(255,255,255,.45)" font-size="8" font-family="Outfit,sans-serif">100% Cotton</text>
+  <text x="410" y="326" fill="white" font-size="14" font-weight="700" font-family="Outfit,sans-serif">380 g/m²</text>
+  <text x="410" y="340" fill="rgba(255,255,255,.45)" font-size="8" font-family="Outfit,sans-serif">Triple primed</text>
+
+  <!-- RIGHT — Logo text -->
+  <text x="660" y="48" fill="rgba(255,255,255,.7)" font-size="10.5" font-family="Outfit,sans-serif" text-anchor="middle" letter-spacing="4.5" font-weight="300">A D R É   A R T Ó</text>
+
+  <!-- Simplified face logo -->
+  <g transform="translate(618,58)" stroke="white" stroke-width="2.2" fill="none" stroke-linecap="round">
+    <line x1="18" y1="0" x2="18" y2="48"/>
+    <path d="M38,0 L38,32 Q38,52 56,52"/>
+    <line x1="56" y1="0" x2="56" y2="28"/>
+    <line x1="72" y1="0" x2="72" y2="48"/>
+    <path d="M28,18 Q28,26 38,26" stroke-width="1.5"/>
+  </g>
+
+  <!-- STRETCHED CANVAS -->
+  <text x="660" y="142" fill="white" font-size="16" font-weight="700" font-family="Outfit,sans-serif" text-anchor="middle" letter-spacing="1.2">STRETCHED CANVAS</text>
+
+  <!-- RIGHT specs (large) -->
+  <text x="556" y="188" fill="white" font-size="14" font-weight="700" font-family="Outfit,sans-serif">1 PCS</text>
+  <text x="556" y="203" fill="rgba(255,255,255,.45)" font-size="8" font-family="Outfit,sans-serif">Quantity</text>
+  <text x="650" y="188" fill="white" font-size="14" font-weight="700" font-family="Outfit,sans-serif">40x50</text>
+  <text x="650" y="203" fill="rgba(255,255,255,.45)" font-size="8" font-family="Outfit,sans-serif">100% Cotton</text>
+  <text x="730" y="188" fill="white" font-size="14" font-weight="700" font-family="Outfit,sans-serif">380 g/m²</text>
+  <text x="730" y="203" fill="rgba(255,255,255,.45)" font-size="8" font-family="Outfit,sans-serif">Triple primed</text>
+
+  <!-- RIGHT bottom strip specs (small) -->
+  <text x="556" y="306" fill="rgba(255,255,255,.5)" font-size="10" font-family="Outfit,sans-serif">1 PCS</text>
+  <text x="556" y="319" fill="rgba(255,255,255,.3)" font-size="7" font-family="Outfit,sans-serif">Quantity</text>
+  <text x="660" y="306" fill="rgba(255,255,255,.5)" font-size="10" font-family="Outfit,sans-serif">40x50</text>
+  <text x="660" y="319" fill="rgba(255,255,255,.3)" font-size="7" font-family="Outfit,sans-serif">100% Cotton</text>
+  <text x="750" y="306" fill="rgba(255,255,255,.5)" font-size="10" font-family="Outfit,sans-serif">380 g/m²</text>
+  <text x="750" y="319" fill="rgba(255,255,255,.3)" font-size="7" font-family="Outfit,sans-serif">Triple primed</text>
+</svg>`;
+}
+
+const grid = document.getElementById('grid');
+variants.forEach((v,i) => {
+  const card = document.createElement('div');
+  card.className = 'card' + (v.pick ? ' pick' : '');
+  card.innerHTML = `
+    ${v.pick ? '<div class="badge">Rekomendacja CEO</div>' : ''}
+    <div class="card-svg">${makeSVG(v.color, v.dark)}</div>
+    <div class="card-body">
+      <div class="opt">Opcja ${String.fromCharCode(65+i)}</div>
+      <h3>${v.name}</h3>
+      <div class="hx">${v.hex}</div>
+      <div class="rat">${v.rationale}</div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>

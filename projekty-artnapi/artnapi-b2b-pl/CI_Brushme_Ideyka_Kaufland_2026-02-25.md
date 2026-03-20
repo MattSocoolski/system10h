@@ -216,7 +216,7 @@
 | **Sklep wlasny PL** | BRAK (tylko B2B) | brushme.pl (Shopify) | ideyka.pl |
 | **Sklep DE** | BRAK | brushmestore.de | ideyka.de |
 | **SRP 40x50 (detal)** | 49-69 PLN (sugerowana) | 29-49 PLN (Allegro), 49-79 PLN (retail) | 35-54 PLN (wlasny), 39-68 PLN (Allegro/retail) |
-| **Cena B2B netto** | 21,13 PLN (40x50 na ramie) | BRAK DANYCH (przez PBS Connect) | BRAK DANYCH (przez PBS Connect) |
+| **Cena B2B netto** | 27,64 PLN (40x50 na ramie, aktualna oferta.md) | BRAK DANYCH (przez PBS Connect) | BRAK DANYCH (przez PBS Connect) |
 | **Magazyn PL** | TAK (Sokolow, 24h wysylka) | Prawdopodobnie przez PBS Connect | Prawdopodobnie przez PBS Connect |
 | **Logistyka PL** | 24h kurier z PL | Przez dystrybutora (PBS) lub z UA | Przez dystrybutora (PBS) lub z UA |
 | **Eksport** | CEE (start) | 32 kraje | 25 krajow |
@@ -292,7 +292,7 @@ Na bazie benchmarku:
 | Podobrazie 40x50 (Adre Arto) | 24,99 PLN | 50% | ~12,50 PLN netto |
 | Podobrazie 30x40 (Adre Arto) | 17,99 PLN | 50% | ~9 PLN netto |
 
-**UWAGA:** Ceny B2B Artnapi z oferta.md: PBN 40x50 na ramie = 21,13 PLN netto. Jesli Kaufland chce 50% marzy → SRP = ~42 PLN. Jesli 40% → SRP = ~35 PLN. Trzeba policzyc czy to sie zbiega z cena polkowa konkurencji (29-54 PLN).
+**UWAGA:** Ceny B2B Artnapi z oferta.md: PBN 40x50 na ramie = 27,64 PLN netto (aktualna). Jesli Kaufland chce 50% marzy → SRP = ~55 PLN. Jesli 40% → SRP = ~46 PLN. Trzeba policzyc czy to sie zbiega z cena polkowa konkurencji (29-54 PLN).
 
 ---
 

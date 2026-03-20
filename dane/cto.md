@@ -732,23 +732,49 @@ CO TO JEST:
 Plik z instrukcjami który Twój komputer wykonuje o określonej porze.
 Jak budzik - ustawiasz godzinę, a komputer robi resztę.
 
-AKTYWNE AUTOMATYZACJE (stan 03.2026):
-┌──────────────────────────────────────────────────────────────────┐
-│ morning-scan.js     │ 8:00 pn-pt │ Gmail+CRM → morning-feed.md  │
-│ email-radar.js      │ co 30 min  │ Gmail+CRM+Claude → auto-draft│
-│ pipeline-brief.js   │ 8:15 pn-pt │ CRM → Telegram pipeline      │
-│ speed-to-lead.js    │ co 4h      │ CRM → Telegram nowe leady    │
-│ followup-guardian.js │ 17:00 pn-pt│ CRM → Telegram zaleglosci    │
-│ notion-archive.js   │ on-demand  │ Archiwizacja strony Notion    │
-└──────────────────────────────────────────────────────────────────┘
+AKTYWNE AUTOMATYZACJE (stan 20.03.2026):
+┌──────────────────────────────────────────────────────────────────────┐
+│ morning-chain.js     │ 8:00 pn-pt  │ ORCHESTRATOR: scan→sync→guard  │
+│ morning-scan.js      │ via chain   │ Gmail+CRM → morning-feed.md    │
+│ crm-auto-sync.js     │ via chain   │ Gmail↔CRM mismatche → auto-fix │
+│ followup-guardian.js │ via chain + │ CRM → auto-draft + Telegram    │
+│                      │ 17:00 pn-pt │ (chain: --include-due-today)   │
+│ email-radar.js       │ co 30 min   │ Gmail+CRM → Telegram alert-only│
+│ pipeline-brief.js    │ 8:15 pn-pt  │ CRM → Telegram pipeline        │
+│ speed-to-lead.js     │ co 4h       │ MailerLite → Telegram nowe sub │
+│ inquiry-router.js    │ co 15 min   │ Gmail B2B calc → auto-draft    │
+│ restock-reminder.js  │ on-demand   │ CRM Klient/AM → draft restock  │
+│ stock-monitor.js     │ pon 9:00    │ stock.json → Telegram forecast │
+│ notion-archive.js    │ on-demand   │ Archiwizacja strony Notion     │
+│ verify-all.js        │ 7:55 pn-pt  │ Health check 14 skryptów → TG  │
+├──────────────────────────────────────────────────────────────────────┤
+│ OCHRONA:                                                            │
+│ .claude/hooks/safety-guard.sh │ PreToolUse │ Blokuje rm/reset na dane/ │
+└──────────────────────────────────────────────────────────────────────┘
+
+MORNING CHAIN (orchestrator — NOWY 20.03.2026):
+- Skrypt: automatyzacje/morning-chain.js
+- Flow: morning-scan → crm-auto-sync → followup-guardian --include-due-today
+- Każdy krok niezależny (jeśli jeden padnie, reszta działa)
+- Telegram: podsumowanie chain (3/3 OK, timing)
+- LaunchAgent: com.asystent.morning-chain.plist (ZASTĘPUJE morning-scan.plist)
+- Flagi: --force (weekend override), --dry-run (symulacja)
+
+CRM AUTO-SYNC (NOWY 20.03.2026):
+- Skrypt: automatyzacje/crm-auto-sync.js
+- Co robi: naprawia mismatche Gmail↔CRM automatycznie
+- crm_stale_sent → update: ostatni kontakt + Due +3 dni robocze
+- crm_stale_reply → update: ostatni kontakt + nota "lead odpowiedział"
+- Safety: max 10 updates/run, dry-run domyślny, --live do update
+- State: automatyzacje/state/crm-auto-sync.json
 
 MORNING FEED (strategiczny raport poranny):
-- Skrypt: automatyzacje/morning-scan.js
+- Skrypt: automatyzacje/morning-scan.js (wywoływany przez morning-chain)
 - Output: dane/artnapi/morning-feed.md (structured MD)
 - Źródła: Gmail OAuth + Notion CRM API
 - Zawiera: inbox, sent, drafty, mismatche Gmail↔CRM, overdue, pipeline
 - Czyta go: @ceo (Protocol Zero) → deleguje do @ghost
-- LaunchAgent: com.asystent.morning-scan.plist
+- LaunchAgent: via morning-chain.plist (nie osobny)
 - Telegram: opcjonalny (TELEGRAM_MORNING=true w .env)
 
 EMAIL RADAR (alert-only, bez draftów):

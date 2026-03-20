@@ -50,7 +50,7 @@
   --bg-input: #f5f2ed;
   --text: #333333;
   --text-dim: #666666;
-  --text-muted: #999999;
+  --text-muted: #636363;
   --border: #e0d4c0;
   --border-active: #6B5C91;
   --radius: 12px;
@@ -114,6 +114,7 @@
   font-weight: 700;
   line-height: 1.15;
   margin-bottom: 8px;
+  color: var(--purple);
   background: linear-gradient(135deg, var(--purple) 0%, var(--purple-deep) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -263,12 +264,21 @@
   color: var(--purple);
   text-align: center;
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color 0.2s, outline-color 0.2s;
   -moz-appearance: textfield;
 }
 #artnapiCalc .qty-number::-webkit-outer-spin-button,
 #artnapiCalc .qty-number::-webkit-inner-spin-button { -webkit-appearance: none; }
-#artnapiCalc .qty-number:focus { border-color: var(--purple); }
+#artnapiCalc .qty-number:focus {
+  border-color: var(--purple);
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+#artnapiCalc .qty-number.input-error {
+  border-color: var(--red);
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
 
 #artnapiCalc .qty-unit {
   font-size: 14px;
@@ -329,8 +339,8 @@
 
 #artnapiCalc .qty-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--gold);
   cursor: pointer;
@@ -339,8 +349,8 @@
 }
 #artnapiCalc .qty-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
 #artnapiCalc .qty-slider::-moz-range-thumb {
-  width: 24px;
-  height: 24px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: var(--gold);
   cursor: pointer;
@@ -348,13 +358,14 @@
 }
 
 #artnapiCalc .tier-marks {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
   position: relative;
+  margin-top: 8px;
+  height: 44px;
 }
 
 #artnapiCalc .tier-mark {
+  position: absolute;
+  transform: translateX(-50%);
   font-size: 11px;
   color: var(--text-muted);
   font-family: 'DM Mono', monospace;
@@ -362,6 +373,11 @@
   cursor: pointer;
   transition: color 0.2s;
   padding: 2px 4px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #artnapiCalc .tier-mark:hover { color: var(--purple); }
 #artnapiCalc .tier-mark.active { color: var(--purple); font-weight: 500; }
@@ -559,7 +575,7 @@
 #artnapiCalc .tier-discount {
   font-size: 12px;
   font-weight: 600;
-  color: var(--green);
+  color: #15803D;
 }
 
 #artnapiCalc .tier-discount.none { color: var(--text-muted); }
@@ -817,7 +833,7 @@
 }
 
 #artnapiCalc .footer-note {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
   margin-top: 12px;
   line-height: 1.5;
@@ -835,8 +851,23 @@
 }
 
 /* ─── RESPONSIVE ─── */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   #artnapiCalc .tiers-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  #artnapiCalc .price-stats { grid-template-columns: 1fr; }
+  #artnapiCalc .annual { flex-direction: column; text-align: center; gap: 8px; }
+  #artnapiCalc .transport-info { grid-template-columns: 1fr; }
+  #artnapiCalc .qty-input-row { flex-wrap: wrap; }
+}
+
+@media (max-width: 380px) {
+  #artnapiCalc { padding: 16px 12px 32px; }
+  #artnapiCalc .qty-section { padding: 16px; }
+  #artnapiCalc .price-hero { padding: 20px 16px; }
+  #artnapiCalc .lang-toggle { flex-direction: column; align-items: stretch; border-radius: var(--radius-sm); }
+  #artnapiCalc .lang-btn { justify-content: center; }
 }
 
 /* ─── PRINT ─── */
@@ -859,8 +890,87 @@
   }
   #artnapiCalc .tier-card:hover { transform: none; }
 }
-</style>
 
+/* ─── PRICE FLASH ANIMATION ─── */
+#artnapiCalc .price-main {
+  transition: color 0.2s, transform 0.15s;
+}
+#artnapiCalc .price-main.flash {
+  animation: ancPriceFlash 0.3s ease-out;
+}
+@keyframes ancPriceFlash {
+  0% { transform: scale(1.08); color: var(--gold); }
+  100% { transform: scale(1); color: var(--purple); }
+}
+
+/* ─── TRUST BAR ─── */
+#artnapiCalc .trust-bar {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding: 16px 0;
+  font-size: 12px;
+  color: var(--text-dim);
+  flex-wrap: wrap;
+}
+
+/* ─── FOCUS VISIBLE ─── */
+#artnapiCalc .product-tab:focus-visible,
+#artnapiCalc .lang-btn:focus-visible,
+#artnapiCalc .country-select:focus-visible,
+#artnapiCalc .cta-btn:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+}
+
+#artnapiCalc .tier-card:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 2px;
+  border-color: var(--purple-light);
+}
+
+/* ─── TABS SCROLL INDICATOR ─── */
+#artnapiCalc .product-tabs {
+  position: relative;
+  -webkit-mask-image: linear-gradient(to right, black 88%, transparent 100%);
+  mask-image: linear-gradient(to right, black 88%, transparent 100%);
+}
+#artnapiCalc .product-tabs::after {
+  content: '\2192';
+  position: sticky;
+  right: 0;
+  flex-shrink: 0;
+  color: var(--purple-light);
+  font-size: 16px;
+  padding: 10px 4px 10px 12px;
+  background: linear-gradient(to right, transparent, white 40%);
+}
+
+/* ─── QTY HINT & ERROR ─── */
+#artnapiCalc .qty-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+#artnapiCalc .qty-error {
+  font-size: 12px;
+  color: var(--red);
+  margin-left: 8px;
+}
+
+
+/* ─── PREFERS REDUCED MOTION ─── */
+@media (prefers-reduced-motion: reduce) {
+  #artnapiCalc *,
+  #artnapiCalc *::before,
+  #artnapiCalc *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
 <div id="artnapiCalc">
 
   <!-- HEADER -->
@@ -873,7 +983,7 @@
         <span class="lang-flag">&#127477;&#127473;</span> PLN
       </button>
       <select class="country-select" id="countrySelect">
-        <option value="" disabled selected>&#127758; EUR — select country</option>
+        <option value="" disabled selected>&#127758; EUR — wybierz kraj</option>
         <option value="cz">&#127464;&#127487; Czech Republic</option>
         <option value="sk">&#127480;&#127472; Slovakia</option>
         <option value="hu">&#127469;&#127482; Hungary</option>
@@ -886,7 +996,7 @@
   </div>
 
   <!-- PRODUCT TABS -->
-  <div class="product-tabs" id="productTabs"></div>
+  <div class="product-tabs" id="productTabs" role="tablist" aria-label="Wybierz produkt"></div>
 
   <!-- PRODUCT SPEC -->
   <div class="product-spec" id="productSpec">Bawelna 280g · krosna sosnowe · potrojny grunt</div>
@@ -898,14 +1008,16 @@
 
   <!-- QUANTITY INPUT -->
   <div class="qty-section">
-    <div class="qty-label" id="qtyLabel">Ilosc zamowienia</div>
+    <label class="qty-label" id="qtyLabel" for="qtyInput">Ilosc zamowienia</label>
     <div class="qty-input-row">
-      <input type="number" class="qty-number" id="qtyInput" value="360" min="1">
+      <input type="number" class="qty-number" id="qtyInput" value="360" min="1" aria-label="Ilość zamówienia" aria-describedby="qtyError qtyHint">
       <span class="qty-unit" id="qtyUnit">szt.</span>
       <span class="qty-carton-info" id="qtyCartonInfo"></span>
+      <span class="qty-error" id="qtyError" role="alert" style="display:none;">Wpisz liczbę większą od 0</span>
     </div>
+    <div class="qty-hint" id="qtyHint" style="display:none;">Ilość zaokrąglona do pełnych kartonów</div>
     <div class="qty-slider-wrap">
-      <input type="range" class="qty-slider" id="qtySlider" min="120" max="1300" value="360" step="10">
+      <input type="range" class="qty-slider" id="qtySlider" min="120" max="1300" value="360" step="10" aria-label="Ilość zamówienia" aria-valuetext="360 sztuk">
       <div class="tier-marks" id="tierMarks"></div>
     </div>
   </div>
@@ -918,9 +1030,9 @@
       <span class="price-market-label" id="marketBadge">-18% taniej</span>
     </div>
     <div class="price-row">
-      <span class="price-main" id="priceMain">9,00</span>
+      <span class="price-main" id="priceMain" aria-live="polite" aria-atomic="true">9,00</span>
       <span class="price-currency" id="priceCurrency">PLN</span>
-      <span class="price-unit" id="priceUnitLabel">/ szt. netto</span>
+      <span class="price-unit" id="priceUnitLabel">/ szt. (bez VAT)</span>
     </div>
     <div class="price-stats">
       <div class="stat-box">
@@ -929,8 +1041,8 @@
       </div>
       <div class="stat-box">
         <div class="stat-label" id="savingsLabel">Oszczedzasz</div>
-        <div class="stat-value green" id="savingsValue">468 PLN</div>
-        <div class="stat-sub" id="savingsSub">vs cena kartonowa</div>
+        <div class="stat-value green" id="savingsValue" aria-live="polite">468 PLN</div>
+        <div class="stat-sub" id="savingsSub">vs zamówienie mniejszych ilości</div>
       </div>
     </div>
   </div>
@@ -952,7 +1064,7 @@
   <!-- NUDGE -->
   <div class="nudge anc-hidden" id="nudge">
     <span class="nudge-icon">&#128161;</span>
-    <span class="nudge-text" id="nudgeText"></span>
+    <span class="nudge-text" id="nudgeText" aria-live="polite"></span>
   </div>
 
   <!-- ANNUAL PROJECTION -->
@@ -967,13 +1079,20 @@
   <div class="cta-section">
     <a class="cta-btn" id="ctaBtn" href="#">
       <span id="ctaIcon">&#128230;</span>
-      <span id="ctaText">Wyslij zapytanie ofertowe</span>
+      <span id="ctaText">Chcę tę cenę →</span>
     </a>
     <div class="cta-sub" id="ctaSub">Odpowiadamy w 2h · darmowe probki na start</div>
     <div class="cta-secondary">
       <span id="ctaContact">Mateusz Sokolski — </span>
       <a href="tel:+48534852707">+48 534 852 707</a>
     </div>
+  </div>
+
+  <!-- TRUST BAR -->
+  <div class="trust-bar" id="trustBar">
+    <span>&#10003; 200+ hurtowni w Polsce</span>
+    <span>&#10003; Wysyłka w 24h</span>
+    <span>&#10003; Producent od 2015</span>
   </div>
 
   <!-- FOOTER -->
@@ -1023,7 +1142,7 @@ var PRODUCT_DEFS = [
     id: 'canvas-40x50',
     name: { pl: 'Podobrazia 40\u00d750', en: '40\u00d750 cm Canvas' },
     spec: { pl: 'Bawe\u0142na 280g \u00b7 krosna sosnowe \u00b7 potr\u00f3jny grunt', en: 'Cotton 280g \u00b7 pine stretcher bars \u00b7 triple primed' },
-    baseCost: 5.00, storage: 0.375, picking: 0.08,
+    baseCost: 4.00, storage: 0.375, picking: 0.08,
     palletQty: 320, cartonQty: 40,
     marketPrice: 11.00,
     tiers: [
@@ -1107,7 +1226,7 @@ var PRODUCT_DEFS = [
     baseCost: 11.0, storage: 0.375, picking: 0.06,
     palletQty: 180, cartonQty: 30,
     tiers: [
-      { name: { pl: 'Kartony', en: 'Cartons' }, min: 30, max: 179, type: 'add', val: 10 },
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 30, max: 179, type: 'add', val: 12.27 },
       { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 180, max: 359, type: 'add', val: 7 },
       { name: { pl: '2 Palety', en: '2 Pallets' }, min: 360, max: 539, type: 'add', val: 5.03 },
       { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 540, max: 99999, type: 'add', val: 2 },
@@ -1117,23 +1236,23 @@ var PRODUCT_DEFS = [
     id: 'pbn-noframe',
     name: { pl: 'PBN 40\u00d750 (bez ramy)', en: 'PBN 40\u00d750 (unframed)' },
     spec: { pl: 'Malowanie po numerach \u00b7 p\u0142\u00f3tno + farby + p\u0119dzle \u00b7 bez ramy', en: 'Paint by numbers \u00b7 canvas + paints + brushes \u00b7 unframed' },
-    baseCost: 7.8, storage: 0.375, picking: 0.06,
+    baseCost: 7.0, storage: 0.375, picking: 0.06,
     palletQty: 450, cartonQty: 75,
     tiers: [
-      { name: { pl: 'Kartony', en: 'Cartons' }, min: 75, max: 449, type: 'add', val: 10 },
-      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 450, max: 899, type: 'add', val: 7 },
-      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 900, max: 1349, type: 'add', val: 5.03 },
-      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1350, max: 99999, type: 'add', val: 2 },
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 75, max: 449, type: 'add', val: 9.52 },
+      { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 450, max: 899, type: 'add', val: 5.53 },
+      { name: { pl: '2 Palety', en: '2 Pallets' }, min: 900, max: 1349, type: 'add', val: 4.03 },
+      { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 1350, max: 99999, type: 'add', val: 1.0 },
     ]
   },
   {
     id: 'diamond',
     name: { pl: 'Haft diamentowy', en: 'Diamond painting' },
     spec: { pl: 'Zestaw haft diamentowy \u00b7 pe\u0142en komplet materia\u0142\u00f3w', en: 'Diamond painting kit \u00b7 complete set' },
-    baseCost: 7.8, storage: 0.375, picking: 0.06,
+    baseCost: 5.5, storage: 0.375, picking: 0.06,
     palletQty: 1200, cartonQty: 50,
     tiers: [
-      { name: { pl: 'Kartony', en: 'Cartons' }, min: 50, max: 1199, type: 'add', val: 10 },
+      { name: { pl: 'Kartony', en: 'Cartons' }, min: 100, max: 1199, type: 'add', val: 10 },
       { name: { pl: '1 Paleta', en: '1 Pallet' }, min: 1200, max: 2399, type: 'add', val: 7 },
       { name: { pl: '2 Palety', en: '2 Pallets' }, min: 2400, max: 3599, type: 'add', val: 5.03 },
       { name: { pl: '3 Palety', en: '3+ Pallets' }, min: 3600, max: 99999, type: 'add', val: 2 },
@@ -1141,16 +1260,29 @@ var PRODUCT_DEFS = [
   },
 ];
 
+// EU prices for canvas-40x50 — from Excel (PALETOWE LICZENIE CENNIK.xlsx, 17.03.2026)
+// EU prices for canvas-40x50 — from Excel (PALETOWE LICZENIE CENNIK.xlsx, 17.03.2026)
+// All countries: palletQty=320, baseCost=4.00, picking=0.06
+var EU_40x50_OVERRIDES = {
+  cz: [2.40, 2.19, 2.03, 1.75],
+  sk: [2.58, 2.35, 2.16, 1.88],
+  hu: [2.50, 2.25, 2.07, 1.80],
+  lt: [2.44, 2.20, 2.04, 1.76],
+  lv: [2.46, 2.20, 2.02, 1.76],
+  ee: [2.54, 2.20, 2.11, 1.84],
+  ro: [2.72, 2.52, 2.32, 2.02],
+};
+
 var PL_PRICE_OVERRIDES = {
-  'canvas-40x50': [10.30, 9.00, 8.15, 7.30],
+  'canvas-40x50': [10.31, 9.00, 8.15, 7.30],
   'canvas-30x40': [7.46, 6.75, 6.11, 5.00],
   'canvas-20x30': [6.70, 5.49, 4.54, 3.68],
   'canvas-20x20': [5.96, 4.75, 3.80, 2.94],
   'panel-30x40':  [24.27, 23.33, 20.41, 19.27],
   'panel-40x50':  [7.88, 6.84, 6.24, 5.10],
-  'pbn-frame':    [25.37, 22.37, 20.40, 17.37],
-  'pbn-noframe':  [20.72, 17.72, 15.75, 12.72],
-  'diamond':      [20.46, 17.46, 15.49, 12.46],
+  'pbn-frame':    [27.64, 22.37, 20.40, 17.37],
+  'pbn-noframe':  [20.24, 16.25, 14.75, 11.72],
+  'diamond':      [14.08, 12.58, 11.08, 9.58],
 };
 
 // ═══════════════════════════════════════
@@ -1187,7 +1319,9 @@ function getProducts() {
   var ispl = country === 'pl';
 
   return PRODUCT_DEFS.map(function(def) {
-    var overrides = ispl ? PL_PRICE_OVERRIDES[def.id] : null;
+    var plOverrides = ispl ? PL_PRICE_OVERRIDES[def.id] : null;
+    var euOverrides = (!ispl && def.id === 'canvas-40x50' && EU_40x50_OVERRIDES[country]) ? EU_40x50_OVERRIDES[country] : null;
+    var overrides = plOverrides || euOverrides;
 
     return {
       id: def.id,
@@ -1269,6 +1403,8 @@ function renderTabs() {
     var btn = document.createElement('button');
     btn.className = 'product-tab' + (i === selectedProduct ? ' active' : '');
     btn.textContent = p.name;
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', i === selectedProduct ? 'true' : 'false');
     btn.addEventListener('click', function() { selectedProduct = i; initProduct(); });
     tabs.appendChild(btn);
   });
@@ -1317,16 +1453,23 @@ function initProduct() {
 
 function renderTierMarks() {
   var p = getProduct();
+  var slider = $('qtySlider');
+  var sMin = parseInt(slider.min);
+  var sMax = parseInt(slider.max);
   var marks = $('tierMarks');
   marks.innerHTML = '';
   p.tiers.forEach(function(t, i) {
     var mark = document.createElement('span');
     mark.className = 'tier-mark' + (getTier(p, qty) === i ? ' active' : '');
     mark.textContent = t.min >= 1000 ? (t.min / 1000) + 'k' : t.min;
+    // Position proportionally to slider scale
+    var pct = ((t.min - sMin) / (sMax - sMin)) * 100;
+    mark.style.left = pct + '%';
     mark.addEventListener('click', function() {
       qty = t.min;
       $('qtyInput').value = qty;
       $('qtySlider').value = qty;
+      updateSliderFill();
       updateCalc();
     });
     marks.appendChild(mark);
@@ -1342,15 +1485,21 @@ function renderTierCards() {
   grid.innerHTML = '';
 
   var labels = lang === 'pl'
-    ? { popular: 'Najpopularniejszy', best: 'Najlepsza cena', free: '\u2713 Darmowa dostawa' }
-    : { popular: 'Most popular', best: 'Best price', free: '\u2713 Free delivery' };
+    ? { popular: 'Wybiera 60% klient\u00f3w', best: 'Najlepsza cena', free: '\u2713 Darmowa dostawa' }
+    : { popular: 'Chosen by 60% of clients', best: 'Best price', free: '\u2713 Free delivery' };
 
   var deliveryLabel = lang === 'pl' ? labels.free
     : '\u2713 Incl. delivery to ' + COUNTRIES[country].city;
 
+  var unitLabel = p.isSet ? (p.setUnit || (lang === 'pl' ? 'zest.' : 'sets')) : (lang === 'pl' ? 'szt.' : 'pcs');
+
   p.tiers.forEach(function(t, i) {
     var card = document.createElement('div');
     card.className = 'tier-card' + (i === currentTier ? ' active' : '') + (i === 3 ? ' best' : '');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', t.name + ' \u2014 ' + fmt(t.price) + ' ' + (cur === 'EUR' ? 'EUR' : 'PLN') + ' / ' + unitLabel);
+    card.addEventListener('keydown', function(e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
     card.addEventListener('click', function() {
       qty = t.min;
       $('qtyInput').value = qty;
@@ -1367,8 +1516,6 @@ function renderTierCards() {
     var discountText = t.discount > 0
       ? '<div class="tier-discount">\u2212' + t.discount + '%</div>'
       : '<div class="tier-discount none">\u2014</div>';
-
-    var unitLabel = p.isSet ? (p.setUnit || (lang === 'pl' ? 'zest.' : 'sets')) : (lang === 'pl' ? 'szt.' : 'pcs');
 
     card.innerHTML =
       badge +
@@ -1397,9 +1544,16 @@ function updateCalc() {
     $('qtyCartonInfo').textContent = '= ' + cartonCount + ' ' + (cartonCount === 1 ? 'carton' : 'cartons');
   }
 
-  $('priceMain').textContent = fmt(tier.price);
+  var priceEl = $('priceMain');
+  var oldPrice = priceEl.textContent;
+  priceEl.textContent = fmt(tier.price);
+  if (oldPrice !== fmt(tier.price)) {
+    priceEl.classList.remove('flash');
+    void priceEl.offsetWidth;
+    priceEl.classList.add('flash');
+  }
   $('priceCurrency').textContent = cur === 'EUR' ? '\u20ac' : 'PLN';
-  $('priceUnitLabel').textContent = '/ ' + unitLabel + ' netto';
+  $('priceUnitLabel').textContent = '/ ' + unitLabel + ' (bez VAT)';
 
   var marketRow = $('marketRow');
   if (p.marketPrice && tier.price < p.marketPrice) {
@@ -1420,10 +1574,10 @@ function updateCalc() {
   $('savingsValue').textContent = savings > 0 ? fmtMoney(savings) : '\u2014';
   $('savingsSub').textContent =
     savings > 0
-      ? (lang === 'pl' ? 'vs cena kartonowa' : 'vs carton price')
+      ? (lang === 'pl' ? 'vs zam\u00f3wienie mniejszych ilo\u015bci' : 'vs smaller order')
       : (lang === 'pl' ? 'zam\u00f3w wi\u0119cej i oszcz\u0119d\u017a' : 'order more to save');
 
-  $('totalLabel').textContent = lang === 'pl' ? 'Warto\u015b\u0107 zam\u00f3wienia' : 'Order value';
+  $('totalLabel').textContent = lang === 'pl' ? 'Zap\u0142acisz za ' + fmtInt(qty) + ' ' + unitLabel : 'Total for ' + fmtInt(qty) + ' ' + unitLabel;
   $('savingsLabel').textContent = lang === 'pl' ? 'Oszcz\u0119dzasz' : 'You save';
 
   var savingsPct = 0;
@@ -1456,10 +1610,14 @@ function updateCalc() {
 
   var annualSavings = savings * 12;
   $('annualVal').textContent = annualSavings > 0 ? fmtMoney(annualSavings) : '\u2014';
-  $q('.annual').style.opacity = annualSavings > 0 ? '1' : '0.4';
+  $q('.annual').style.display = annualSavings > 0 ? 'flex' : 'none';
   $('annualText').innerHTML = lang === 'pl'
     ? 'Przy zam\u00f3wieniach<br><strong>co miesi\u0105c</strong> oszcz\u0119dzasz rocznie:'
     : 'With <strong>monthly</strong> orders<br>your annual savings:';
+
+  // ARIA update
+  var unitName = p.isSet ? (p.setUnit || (lang === 'pl' ? 'zestaw\u00f3w' : 'sets')) : (lang === 'pl' ? 'sztuk' : 'pieces');
+  $('qtySlider').setAttribute('aria-valuetext', qty + ' ' + unitName);
 
   renderTierCards();
   renderTierMarks();
@@ -1473,7 +1631,7 @@ function updateCalc() {
 
   $('ctaBtn').href = 'mailto:mateusz.sokolski@artnapi.pl?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
 
-  $('ctaText').textContent = lang === 'pl' ? 'Wy\u015blij zapytanie ofertowe' : 'Send inquiry';
+  $('ctaText').textContent = lang === 'pl' ? 'Chc\u0119 t\u0119 cen\u0119 \u2192' : 'Get this price \u2192';
   $('ctaSub').textContent = lang === 'pl' ? 'Odpowiadamy w 2h \u00b7 darmowe pr\u00f3bki na start' : 'We reply within 2h \u00b7 free samples available';
   $('ctaIcon').textContent = lang === 'pl' ? '\ud83d\udce6' : '\ud83d\udce7';
 }
@@ -1519,6 +1677,20 @@ function setCountry(newCountry) {
     ? 'NAPI Sp. z o.o. \u00b7 ul. S\u0105siedzka 3 / D11-D12, 05-806 Soko\u0142\u00f3w \u00b7 NIP: 5342622747'
     : 'NAPI Sp. z o.o. \u00b7 ul. S\u0105siedzka 3 / D11-D12, 05-806 Soko\u0142\u00f3w, Poland \u00b7 VAT: PL5342622747';
 
+  // Trust bar i18n
+  var tb = $('trustBar');
+  if (tb) {
+    tb.innerHTML = lang === 'pl'
+      ? '<span>&#10003; 200+ hurtowni w Polsce</span><span>&#10003; Wysy\u0142ka w 24h</span><span>&#10003; Producent od 2015</span>'
+      : '<span>&#10003; 200+ wholesalers in Poland</span><span>&#10003; Shipping within 24h</span><span>&#10003; Manufacturer since 2015</span>';
+  }
+
+  // Country select placeholder i18n
+  var cs = $('countrySelect');
+  if (cs && cs.options[0]) {
+    cs.options[0].textContent = lang === 'pl' ? '\ud83c\udf0e EUR \u2014 wybierz kraj' : '\ud83c\udf0e EUR \u2014 select country';
+  }
+
   qty = getProduct().tiers[1].min;
   initProduct();
 }
@@ -1537,27 +1709,43 @@ $('qtySlider').addEventListener('input', function() {
 
 $('qtyInput').addEventListener('input', function() {
   var val = parseInt(this.value);
-  if (!isNaN(val) && val > 0) {
-    qty = val;
-    var slider = $('qtySlider');
-    slider.value = Math.min(Math.max(val, parseInt(slider.min)), parseInt(slider.max));
-    updateSliderFill();
-    updateCalc();
+  var errEl = $('qtyError');
+  if (isNaN(val) || val <= 0) {
+    this.classList.add('input-error');
+    errEl.style.display = 'inline';
+    return;
   }
+  this.classList.remove('input-error');
+  errEl.style.display = 'none';
+  qty = val;
+  var slider = $('qtySlider');
+  slider.value = Math.min(Math.max(val, parseInt(slider.min)), parseInt(slider.max));
+  updateSliderFill();
+  updateCalc();
 });
 
 $('qtyInput').addEventListener('blur', function() {
   var p = getProduct();
   var val = parseInt(this.value);
-  if (!isNaN(val) && val > 0) {
-    qty = Math.max(Math.round(val / p.cartonQty) * p.cartonQty, p.cartonQty);
-    if (qty < p.tiers[0].min) qty = p.tiers[0].min;
+  var hintEl = $('qtyHint');
+  var errEl = $('qtyError');
+  errEl.style.display = 'none';
+  this.classList.remove('input-error');
+  if (isNaN(val) || val <= 0) {
+    qty = p.tiers[0].min;
     this.value = qty;
-    var slider = $('qtySlider');
-    slider.value = Math.min(Math.max(qty, parseInt(slider.min)), parseInt(slider.max));
-    updateSliderFill();
-    updateCalc();
+    hintEl.style.display = 'none';
+  } else {
+    var rounded = Math.max(Math.round(val / p.cartonQty) * p.cartonQty, p.cartonQty);
+    if (rounded < p.tiers[0].min) rounded = p.tiers[0].min;
+    hintEl.style.display = (rounded !== val) ? 'block' : 'none';
+    qty = rounded;
+    this.value = qty;
   }
+  var slider = $('qtySlider');
+  slider.value = Math.min(Math.max(qty, parseInt(slider.min)), parseInt(slider.max));
+  updateSliderFill();
+  updateCalc();
 });
 
 $('ancPlBtn').addEventListener('click', function() { setCountry('pl'); });

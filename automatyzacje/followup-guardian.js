@@ -14,7 +14,7 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import {
   loadEnv, sendTelegram, queryCRM, parseNotionLead, today, formatDate, daysDiff,
-  gmailGetAccessToken, gmailCreateDraft, gmailListDrafts, extractEmail,
+  gmailGetAccessToken, gmailCreateDraft, gmailListDrafts, gmailSearchMessages, extractEmail,
   loadState, saveState, escapeHtml,
   isForeignLead, wrapEmailHTML
 } from './lib.js';
@@ -25,7 +25,7 @@ const ROOT = join(__dirname, '..');
 loadEnv();
 
 // --- Config ---
-const CLAUDE_MODEL = 'claude-haiku-4-5-20251001';
+const CLAUDE_MODEL = 'claude-sonnet-4-20250514';
 const MAX_DRAFTS_PER_RUN = 5; // Safety cap — max 5 drafts per run
 const MY_EMAIL = 'mateusz.sokolski@artnapi.pl';
 
@@ -39,6 +39,7 @@ const ACTIVE_STATUSES = [
 // --- CLI args ---
 const ALERT_ONLY = process.argv.includes('--alert-only');
 const DRY_RUN = process.argv.includes('--dry-run');
+const INCLUDE_DUE_TODAY = process.argv.includes('--include-due-today');
 
 // --- Guard: check if lead is paused/parking/frozen (Bug 2 fix) ---
 function isLeadPaused(lead) {
@@ -138,24 +139,30 @@ Piszesz follow-up do leada który nie odpowiedział na poprzedni kontakt.
 
 FORMAT: Pisz w HTML. Używaj <p> dla akapitów, <strong> dla pogrubień, <ul><li> dla list. NIE dodawaj tagów <html>/<body> — tylko wewnętrzną treść. NIE dodawaj stopki/podpisu — zostanie dodana automatycznie.
 
-STYL:
+STYL MATEUSZA (OBOWIĄZKOWY):
 ${ghostB2B}
 
-OFERTA (skrót):
+PRZYKŁADY JAK MATEUSZ PISZE (NAŚLADUJ):
+Przykład 1 (FU do leada PL):
+"Dzień dobry! Pisałem kilka dni temu ws. podobrazi 40x50 na warsztaty. Przygotowałem interaktywny kalkulator cen — zerknijcie, ile wychodzi na Wasze potrzeby: [link]. Mamy 8 000 szt na stanie, wysyłka 24h. Daj znać czy temat żyje."
+
+Przykład 2 (FU wartościowy):
+"Dzień dobry! Wracam do tematu podobrazi. Przy 120 szt cena to 10,31 zł netto all-in z dostawą. Przy 320 szt spada do 9,00. Mogę przygotować wycenę od ręki — wystarczy znać ilość i rozmiar."
+
+OFERTA (source of truth — TYLKO te ceny):
 ${ofertaCondensed}
 
-ZASADY FOLLOW-UP:
-• Max 3-5 zdań — krótko, nie nachalnie
-• Ton: ciepły, bezpośredni, Good Cop — NIGDY nie ciśnij
-• Podejście: daj wartość lub zadaj pytanie, nie ponaglaj
-• Jeśli 3-7 dni: delikatny przypominacz ("chciałem wrócić do naszej rozmowy")
-• Jeśli 8-14 dni: wartość + pytanie ("przygotowałem dla Was / czy temat jest aktualny?")
-• VALUE ADD: Jeśli lead nie zna cen → podlinkuj kalkulator: "Przygotowaliśmy interaktywny kalkulator cen: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html" — użyj tagu <a href="...">
-• Jeśli lead CEE → pisz po angielsku, link: "I've prepared a price calculator for your country: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html"
-• NIGDY nie wymyślaj szczegółów z życia leada — pisz na podstawie danych
-• Zamknięcie: proaktywne, oferuj następny krok
-• NIE dodawaj stopki/podpisu na końcu — jest dodawana automatycznie
-• Pisz TYLKO treść maila w HTML (bez nagłówków To:/Subject:, bez podpisu)`;
+ZASADY (ŻELAZNE):
+• Max 3-5 zdań — krótko, konkretnie
+• ZAWSZE pisz w 1. osobie: "Przygotowałem", "Mogę" — NIGDY "zdecydowaliśmy", "przygotowaliśmy", "jesteśmy"
+• Ton: bezpośredni, ciepły, Good Cop — NIGDY corpo-mowa
+• KONKRET: podaj cenę, ilość na stanie, link do kalkulatora — nie pisz ogólników
+• VALUE ADD: kalkulator cen: "Zerknij na kalkulator: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html" — użyj <a href="...">
+• ZAKAZ: "Chciałem wrócić do naszej rozmowy", "Czy temat jest wciąż aktualny?", "Zdecydowaliśmy się", "Pozwolę sobie"
+• Zamknięcie: proaktywne ("Mogę przygotować wycenę od ręki", "Daj znać")
+• NIE wymyślaj historii — pisz na podstawie danych
+• NIE dodawaj stopki/podpisu — jest automatyczna
+• Pisz TYLKO treść maila w HTML (bez nagłówków, bez podpisu)`;
 
   const leadContext = [
     `Nazwa: ${lead.name || 'brak'}`,
@@ -229,103 +236,148 @@ async function run() {
     .filter(l => daysDiff(now, l.due) >= 14)
     .sort((a, b) => a.due - b.due);
 
-  if (tomorrow.length === 0 && overdue3.length === 0 && overdue14.length === 0) {
+  // Leads due today or 1-2 days overdue (only when triggered from morning chain)
+  const dueToday = INCLUDE_DUE_TODAY ? active
+    .filter(l => { const d = daysDiff(now, l.due); return d >= 0 && d < 3; })
+    .sort((a, b) => a.due - b.due) : [];
+
+  if (tomorrow.length === 0 && overdue3.length === 0 && overdue14.length === 0 && dueToday.length === 0) {
     console.log('[FU-GUARD v2] Nothing to report — all clean');
     return;
   }
 
-  // --- AUTO-DRAFT: Generate follow-up emails for overdue 3-14d leads ---
+  // --- AUTO-DRAFT: shared context for all draft generation ---
   let draftsCreated = 0;
   const draftResults = [];
 
-  if (!ALERT_ONLY && overdue3.length > 0) {
-    // Filter: only leads with email, not drafted in last 7 days, not PAUSED tag
-    const draftCandidates = overdue3.filter(l =>
-      l.email &&
-      !state.draftedRecent[l.id] &&
-      l.tag !== 'PAUSED'
-    ).slice(0, MAX_DRAFTS_PER_RUN);
+  // Determine which lead pools need drafts
+  const overdue3Candidates = (!ALERT_ONLY && overdue3.length > 0)
+    ? overdue3.filter(l => l.email && !state.draftedRecent[l.id] && l.tag !== 'PAUSED')
+    : [];
 
-    if (draftCandidates.length > 0) {
-      console.log(`[FU-GUARD v2] Generating drafts for ${draftCandidates.length} leads...`);
+  const dueTodayCandidates = (!ALERT_ONLY && dueToday.length > 0)
+    ? dueToday.filter(l => l.email && !state.draftedRecent[l.id] && l.tag !== 'PAUSED')
+    : [];
 
-      // Load context files (once)
-      const ghostStyl = readFileSync(join(ROOT, 'dane', 'ghost_styl.md'), 'utf-8');
-      const b2bMatch = ghostStyl.match(/## B2B SPRZEDAŻ[\s\S]*?(?=\n## B2B ENGLISH|\n## WSPÓLNE|$)/);
-      const ghostB2B = b2bMatch ? b2bMatch[0] : '';
-      const b2bENMatch = ghostStyl.match(/## B2B ENGLISH[\s\S]*?(?=\n## WSPÓLNE|$)/);
-      const ghostB2BEN = b2bENMatch ? b2bENMatch[0] : '';
+  const totalCandidates = overdue3Candidates.length + dueTodayCandidates.length;
 
-      const oferta = readFileSync(join(ROOT, 'dane', 'artnapi', 'oferta.md'), 'utf-8');
-      const ofertaCondensed = oferta.slice(0, 2500);
+  // Load shared context once if any drafts to generate
+  let ghostB2B = '', ghostB2BEN = '', ofertaCondensed = '';
+  let accessToken;
+  let existingDraftEmails = new Set();
 
-      let accessToken;
+  if (totalCandidates > 0) {
+    console.log(`[FU-GUARD v2] ${totalCandidates} draft candidates (${overdue3Candidates.length} overdue, ${dueTodayCandidates.length} due-today)`);
+
+    // Load context files (once)
+    const ghostStyl = readFileSync(join(ROOT, 'dane', 'ghost_styl.md'), 'utf-8');
+    const b2bMatch = ghostStyl.match(/## B2B SPRZEDAŻ[\s\S]*?(?=\n## B2B ENGLISH|\n## WSPÓLNE|$)/);
+    ghostB2B = b2bMatch ? b2bMatch[0] : '';
+    const b2bENMatch = ghostStyl.match(/## B2B ENGLISH[\s\S]*?(?=\n## WSPÓLNE|$)/);
+    ghostB2BEN = b2bENMatch ? b2bENMatch[0] : '';
+
+    const oferta = readFileSync(join(ROOT, 'dane', 'artnapi', 'oferta.md'), 'utf-8');
+    ofertaCondensed = oferta.slice(0, 2500);
+
+    if (!DRY_RUN) {
+      accessToken = await gmailGetAccessToken();
+    }
+
+    // Bug 1 fix: fetch existing Gmail drafts and build set of recipient emails
+    if (!DRY_RUN && accessToken) {
+      try {
+        const existingDrafts = await gmailListDrafts(accessToken, 50);
+        for (const draft of existingDrafts) {
+          if (draft.to) {
+            existingDraftEmails.add(extractEmail(draft.to));
+          }
+        }
+        console.log(`[FU-GUARD v2] Found ${existingDraftEmails.size} existing draft recipients in Gmail`);
+      } catch (err) {
+        console.error(`[FU-GUARD v2] Warning: could not list Gmail drafts: ${err.message}`);
+      }
+    }
+  }
+
+  // SENT check helper: returns true if we emailed this address in last 7 days
+  async function wasSentRecently(email) {
+    if (DRY_RUN || !accessToken) return false;
+    try {
+      const results = await gmailSearchMessages(accessToken, `from:${MY_EMAIL} to:${email} newer_than:7d`, 1);
+      return results.length > 0;
+    } catch (err) {
+      console.error(`[FU-GUARD v2] Warning: SENT check failed for ${email}: ${err.message}`);
+      return false; // fail-open: don't block on API error
+    }
+  }
+
+  // Draft generation helper (shared by overdue3 and dueToday)
+  async function generateDraft(lead, category) {
+    if (existingDraftEmails.has(lead.email.toLowerCase())) {
+      console.log(`[FU-GUARD v2] Draft already exists for ${lead.email}, skipping (${category})`);
+      return;
+    }
+
+    if (await wasSentRecently(lead.email)) {
+      console.log(`[FU-GUARD v2] Already sent to ${lead.email} in last 7d, skipping (${category})`);
+      return;
+    }
+
+    const daysOver = daysDiff(now, lead.due);
+    const { systemPrompt, userPrompt } = buildFollowUpPrompt(lead, daysOver, ghostB2B, ghostB2BEN, ofertaCondensed);
+
+    try {
+      const draftBodyRaw = await callClaude(systemPrompt, userPrompt);
+      const isEN = isForeignLead(lead);
+      const draftBody = wrapEmailHTML(draftBodyRaw, isEN);
+      const subject = generateSubject(lead);
+
+      if (DRY_RUN) {
+        console.log(`[DRY-RUN] Would create draft for ${lead.name} (${lead.email}) [${category}]:`);
+        console.log(`  Subject: ${subject}`);
+        console.log(`  Body: ${draftBodyRaw.slice(0, 100)}...`);
+      } else {
+        await gmailCreateDraft(accessToken, lead.email, subject, draftBody, null, { html: true });
+        console.log(`[FU-GUARD v2] Draft created (HTML, ${category}): ${lead.name} (${lead.email})`);
+      }
+
+      draftsCreated++;
+      // Only persist to state in live mode — dry-run must not pollute state
       if (!DRY_RUN) {
-        accessToken = await gmailGetAccessToken();
+        state.draftedRecent[lead.id] = todayStr;
       }
 
-      // Bug 1 fix: fetch existing Gmail drafts and build set of recipient emails
-      const existingDraftEmails = new Set();
-      if (!DRY_RUN && accessToken) {
-        try {
-          const existingDrafts = await gmailListDrafts(accessToken, 50);
-          for (const draft of existingDrafts) {
-            if (draft.to) {
-              existingDraftEmails.add(extractEmail(draft.to));
-            }
-          }
-          console.log(`[FU-GUARD v2] Found ${existingDraftEmails.size} existing draft recipients in Gmail`);
-        } catch (err) {
-          console.error(`[FU-GUARD v2] Warning: could not list Gmail drafts: ${err.message}`);
-        }
-      }
+      draftResults.push({
+        name: lead.name || lead.company,
+        email: lead.email,
+        days: daysOver,
+        value: lead.value,
+        status: 'OK',
+        category
+      });
+    } catch (err) {
+      console.error(`[FU-GUARD v2] Draft error for ${lead.name} (${category}): ${err.message}`);
+      draftResults.push({
+        name: lead.name || lead.company,
+        email: lead.email,
+        days: daysOver,
+        value: lead.value,
+        status: `FAIL: ${err.message.slice(0, 60)}`,
+        category
+      });
+    }
+  }
 
-      for (const lead of draftCandidates) {
-        // Bug 1 fix: skip if draft to this email already exists in Gmail
-        if (existingDraftEmails.has(lead.email.toLowerCase())) {
-          console.log(`[FU-GUARD v2] Draft already exists for ${lead.email}, skipping`);
-          continue;
-        }
+  // --- AUTO-DRAFT: Process overdue 3-14d leads ---
+  for (const lead of overdue3Candidates.slice(0, MAX_DRAFTS_PER_RUN)) {
+    await generateDraft(lead, 'overdue');
+  }
 
-        const daysOver = daysDiff(now, lead.due);
-        const { systemPrompt, userPrompt } = buildFollowUpPrompt(lead, daysOver, ghostB2B, ghostB2BEN, ofertaCondensed);
-
-        try {
-          const draftBodyRaw = await callClaude(systemPrompt, userPrompt);
-          const isEN = isForeignLead(lead);
-          const draftBody = wrapEmailHTML(draftBodyRaw, isEN);
-          const subject = generateSubject(lead);
-
-          if (DRY_RUN) {
-            console.log(`[DRY-RUN] Would create draft for ${lead.name} (${lead.email}):`);
-            console.log(`  Subject: ${subject}`);
-            console.log(`  Body: ${draftBodyRaw.slice(0, 100)}...`);
-          } else {
-            await gmailCreateDraft(accessToken, lead.email, subject, draftBody, null, { html: true });
-            console.log(`[FU-GUARD v2] Draft created (HTML): ${lead.name} (${lead.email})`);
-          }
-
-          draftsCreated++;
-          state.draftedRecent[lead.id] = todayStr;
-
-          draftResults.push({
-            name: lead.name || lead.company,
-            email: lead.email,
-            days: daysOver,
-            value: lead.value,
-            status: 'OK'
-          });
-        } catch (err) {
-          console.error(`[FU-GUARD v2] Draft error for ${lead.name}: ${err.message}`);
-          draftResults.push({
-            name: lead.name || lead.company,
-            email: lead.email,
-            days: daysOver,
-            value: lead.value,
-            status: `FAIL: ${err.message.slice(0, 60)}`
-          });
-        }
-      }
+  // --- AUTO-DRAFT: Process due-today / 0-2 days overdue (morning chain mode) ---
+  if (dueTodayCandidates.length > 0) {
+    const remainingCap = MAX_DRAFTS_PER_RUN - draftsCreated;
+    for (const lead of dueTodayCandidates.slice(0, remainingCap)) {
+      await generateDraft(lead, 'due-today');
     }
   }
 
@@ -375,6 +427,24 @@ async function run() {
     if (overdue3NoDraft.length > 8) s.push(`  ...i ${overdue3NoDraft.length - 8} wiecej`);
   }
 
+  // Due today / 0-2 days overdue without drafts (morning chain mode)
+  if (dueToday.length > 0) {
+    const dueTodayNoDraft = dueToday.filter(l =>
+      !draftResults.some(r => r.name === (l.name || l.company))
+    );
+    if (dueTodayNoDraft.length > 0) {
+      s.push('');
+      s.push('<b>NA DZIS (0-2 dni, bez draftu):</b>');
+      for (const l of dueTodayNoDraft.slice(0, 8)) {
+        const days = daysDiff(now, l.due);
+        const val = l.value ? `, ${l.value} PLN` : '';
+        const reason = !l.email ? ' (brak email)' : l.tag === 'PAUSED' ? ' (PAUSED)' : '';
+        s.push(`  ${escapeHtml(l.name || l.company)} — ${days} dni${val}${reason}`);
+      }
+      if (dueTodayNoDraft.length > 8) s.push(`  ...i ${dueTodayNoDraft.length - 8} wiecej`);
+    }
+  }
+
   if (tomorrow.length > 0) {
     s.push('');
     s.push('<b>JUTRO — przygotuj:</b>');
@@ -385,7 +455,8 @@ async function run() {
   }
 
   const totalOverdue = overdue3.length + overdue14.length;
-  s.push(`\nPipeline: ${active.length} aktywnych, ${totalOverdue} wymaga akcji`);
+  const totalActionable = totalOverdue + dueToday.length;
+  s.push(`\nPipeline: ${active.length} aktywnych, ${totalActionable} wymaga akcji`);
   if (draftsCreated > 0) s.push(`${draftsCreated} draftow w Gmail — sprawdz i wyslij`);
 
   if (overdue14.length > 0) {
@@ -393,11 +464,13 @@ async function run() {
   }
 
   await sendTelegram(s.join('\n'));
-  console.log(`[FU-GUARD v2] Sent — ${tomorrow.length} tomorrow, ${overdue3.length} overdue 3-14d (${draftsCreated} drafts), ${overdue14.length} overdue >14d`);
+  console.log(`[FU-GUARD v2] Sent — ${tomorrow.length} tomorrow, ${overdue3.length} overdue 3-14d (${draftsCreated} drafts), ${overdue14.length} overdue >14d, ${dueToday.length} due-today`);
 
-  // Save state
-  state.lastRun = now.toISOString();
-  saveState('followup-guardian', state);
+  // Save state (only in live mode — dry-run must not modify state)
+  if (!DRY_RUN) {
+    state.lastRun = now.toISOString();
+    saveState('followup-guardian', state);
+  }
 }
 
 run().catch(err => {

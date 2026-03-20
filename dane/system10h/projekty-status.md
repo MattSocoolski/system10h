@@ -7,7 +7,7 @@
 ## System 10h+ / Bliznak Biznesowy (Produkt AI done-for-you dla handlowcow B2B)
 
 - **Status:** AKTYWNY
-- **Cel:** 2x close/msc po 2 999 PLN. Splata dlugu 22k do XI.2026.
+- **Cel:** 2x close/msc po 2 999 PLN. Splata dlugu 17.5k do XI.2026.
 - **Metryki:** 1 sprzedaz (Stalton 1 220 PLN). Pipeline aktywny 7 500 PLN. NURTURE 5 000 PLN.
 - **Nastepny krok:** Zamknac Gawlika (1k) + Glinka/Krystian demo. Posty LI 2-3/tyg.
 - **Folder:** system10h/ (kod produktu) + projekty/sprzedaz-solo/ (proces sprzedazy)

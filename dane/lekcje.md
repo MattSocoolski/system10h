@@ -57,7 +57,30 @@ Kursanci AI Biznes Lab (Mirek Burnejko) maja SWOJEGO asystenta AI — taki sam s
 
 ## MARKETING
 
-*(brak wpisów)*
+### [ARTNAPI] 20.03 | MATERIAŁY WIZUALNE — 7 REGUŁ Z BUDOWY KATALOGU B2B v3
+
+**1. ZAWSZE GENERUJ PDF PRZED POKAZANIEM**
+Edycja HTML "na ślepo" = 3-4 iteracje na stronę. Headless Chrome (`--print-to-pdf --no-margins --print-background`) pozwala weryfikować układ ZANIM user zobaczy. Na przyszłość: po KAŻDEJ edycji → generuj PDF → sprawdź stronę → dopiero pokaż.
+
+**2. ZWIĘKSZENIE FONTU ≠ PROSTA ZMIANA**
+Font 10.5pt → 14pt (+33%) powoduje kaskadę: paddingi, hero images, spacing, gridy — WSZYSTKO musi być przebudowane. Nie da się "po prostu zwiększyć". Przy projektowaniu: zacznij od DUŻEGO fontu (14pt+), potem dopasuj content.
+
+**3. CENY W KATALOGU PRODUKTOWYM = BŁĄD**
+Katalog = prezentacja produktów i marki. Cennik = osobny dokument wysyłany PO zainteresowaniu. Buyer nie chce widzieć cen w katalogu — chce widzieć co kupuje. Ceny w katalogu dezaktualizują się i blokują negocjacje.
+
+**4. NIE WSPOMINAJ KONKURENCJI W SWOIM KATALOGU**
+Feedback Piotra: "Po co w ogóle o konkurencji wspominać?" Tabela ArtNapi vs Brushme vs Ideyka w katalogu = darmowa reklama dla nich. USP prezentuj BEZ porównania. Buyer sam wie kto jest na rynku.
+
+**5. DWA LOGA = DWA ODDZIELNE PLIKI**
+Hue-rotate/brightness filter na logo to "hack" który wygląda tanio i nieprofesjonalnie. Jeśli masz dwie marki (ArtNapi + Adré Artó) → osobne czyste pliki logo, osobne strony. Logo z tłem (amber square) → wyciągnij na przezroczyste tło (Python PIL, 5 linii kodu).
+
+**6. A4 297mm = TWARDA GRANICA**
+`height: 297mm` + `overflow: hidden` + `@page { size: 210mm 297mm; margin: 0 }`. NIE `min-height`. Footer absolutnie pozycjonowany na `bottom: 5mm`. Content MUSI zostawić 15mm na footer. Testuj KAŻDĄ stronę w PDF.
+
+**7. NAUKOWE CYTATY I "WELLNESS" = CRINGE W B2B**
+Drexel University / kortyzol / wellness positioning — buyer sieci tego nie kupuje. Katalog B2B to fakty: EAN, paleta, dispatch, certyfikaty. Zero storytellingu naukowego. "Nr 1 w ecommerce w Polsce" > "Top 3 na Allegro".
+
+> Źródło: budowa katalogu ArtNapi v3, feedback Piotr, sesja 19-20.03.2026
 
 ---
 
@@ -98,6 +121,11 @@ Przy szukaniu leada w Notion CRM — szukaj GLOBALNIE (bez data_source_url), a n
 ### [ARTNAPI] 25.02 | WTZ MASS MAIL: 2.4% RESPONSE = NORMA DLA INSTYTUCJI
 41 maili → 1 odpowiedź ("nie"). To NIE porażka — to baseline dla instytucji publicznych. FU D+7 obowiązkowy, D+14 snajperski. Budżety kwartalne = okno zakupowe. Cierpliwość.
 > Źródło: plan.md + decyzje.md (WTZ kampania)
+
+### [ARTNAPI] 17.03.2026 — Draft Quality Guard
+- **Lekcja:** Agenci generujący drafty MUSZĄ czytać oferta.md (aktualne ceny) i sprawdzać sent mail (czy już nie odpowiedziano). Bez tego powstają drafty z błędnymi cenami i duplikaty.
+- **Akcja:** Dodano DRAFT QUALITY GUARD do CLAUDE.md. Zaktualizowano stare ceny w plan.md, oferta.md (benchmarking), playbooku WTZ/DPS/DK, szablonach cold email, persona.md, projektach (gift-boxy, wtz-dps, shein, CI Kaufland), mailingu HTML i audycie LTV.
+- **Źródło:** 3 błędne drafty: ArtisValory (zły MOQ + cena 10,31 zamiast 10,30), formelda (stara cena PBN 21,13 zamiast 27,64), Wisz (duplikat odpowiedzi).
 
 ---
 

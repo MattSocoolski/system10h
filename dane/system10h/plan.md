@@ -12,7 +12,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 ## 📅 CEL ROCZNY (2026)
 • Przychód: 150 000 PLN+
 • Klienci: 30 wdrożeń Systemu Premium
-• Dług: 0 PLN (całkowita spłata 22k)
+• Dług: 0 PLN (całkowita spłata 17.5k)
 
 ---
 
@@ -40,7 +40,7 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 - [ ] Follow-up Michał Gawlik — WhatsApp 04.03. **PON 09.03: 2. nudge.**
 - [ ] Nudge Michał Wielgosz — link wysłany 23.02, brak SD. **WT 10.03: DM z ofertą demo.**
 - [ ] Case study Stalton — czeka na feedback Natana. **W3: ping jeśli brak odpowiedzi.**
-- [ ] LinkedIn 2-3 posty/tyg — **0 opublikowanych w marcu!** 12 gotowych + 2 nowe v7.0: materialy/2026-03-12_linkedin_blizniakv7_posty.md. **PUBLIKUJ ASAP.**
+- [x] LinkedIn 2-3 posty/tyg — **7 opublikowanych w marcu** (5 wcześniej + "3 poziomy AI" 19.03 + "Czy Twoje AI działa?" zaplanowany SO 22.03). Deep Research Gemini → value-first posty z danymi (Gartner, Salesforce, MarketBetter). Kontynuuj 2-3/tyg W4.
 - [ ] Gosia Jary / FSI — ping "Kiedy spotkanie?" Potencjał: polecanie Bliźniaka po szkoleniach.
 - [ ] Referral ask Zbigniew — 3 intro z sieci (180k, VP Mówców). Do końca marca.
 

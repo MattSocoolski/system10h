@@ -162,7 +162,7 @@ Powtorzyl sie w:
 - Potencjal: 3-5 klientow kartonowych → paletowych = +5 000-8 000 PLN/msc
 
 **DZWIGNIA 2: CROSS-SELL PBN + SZTALUGI**
-- Klienci kupuja TYLKO podobrazia. PBN 40x50 na ramie (21,13 PLN) i PBN 24x30 (14,14 PLN) = dodatkowe SKU
+- Klienci kupuja TYLKO podobrazia. PBN 40x50 na ramie (27,64 PLN) i PBN deska 24x30 (16,84 PLN) = dodatkowe SKU
 - NIKT ze stalych klientow (poza WINO-GRONO i kilkoma) nie kupuje PBN
 - Potencjal: 5 klientow x 1 karton PBN/msc x 500 PLN = 2 500 PLN/msc
 

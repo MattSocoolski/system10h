@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-03-13",
+  "last_updated": "2026-03-16",
   "products": [
     {
       "sku": "canvas_40x50",
       "name": "Płótno malarskie 40×50",
-      "stock_current": 7900,
+      "stock_current": 7800,
       "unit": "szt",
       "burn_rate_monthly": 5000,
       "burn_trend": "growing",
@@ -17,9 +17,9 @@
         },
         {
           "qty": 13000,
-          "eta": "2026-06-01",
-          "transport": "morze",
-          "note": "Nowy kontener — morze ~VI, pociąg ~V (decyzja w toku)"
+          "eta": "2026-05-15",
+          "transport": "pociąg",
+          "note": "Zamówienie 16.03 — pociąg ~maj, droższa dostawa"
         }
       ]
     },
@@ -31,7 +31,19 @@
       "burn_rate_monthly": 0,
       "burn_trend": "stable",
       "alert_weeks": 4,
-      "incoming": []
+      "incoming": [
+        {
+          "qty": 3000,
+          "eta": "2026-05-15",
+          "transport": "pociąg",
+          "note": "Zamówienie 16.03 — 3000 szt 30x40 w kontenerze"
+        }
+      ]
     }
-  ]
+  ],
+  "reorder_calc": {
+    "lead_time_sea_days": 90,
+    "lead_time_train_days": 60,
+    "note": "90 dni = realizacja fabryka (~20 dni) + załadunek (~5 dni) + transport morski (~65 dni). Pociąg ~60 dni total."
+  }
 }

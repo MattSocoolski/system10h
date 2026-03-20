@@ -42,14 +42,15 @@
 ### GOTOWOŚĆ RETAIL (12.03) — **~3.7/5**
 **Marketplace = GOTOWE** (FSC+BSCI = bonus). **Sieci stacjonarne = 3-5 mies.** (potrzebne: pełne EN 71 + DoC).
 ✅ 5/5: EAN, cennik/marża. ✅ 4/5: USP (jedyni z podobraziami), portfolio (470 PBN + 6 podobrazi).
-⚠️ 3-3.5/5: certyfikaty (FSC+BSCI OK, brak EN 71-1/2+DoC), materiały (brak karta+katalog), opakowania (brak hang-tag).
+⚠️ 3-3.5/5: certyfikaty (FSC+BSCI OK, brak EN 71-1/2+DoC), opakowania (brak hang-tag).
+✅ 4/5: materiały B2B — katalog PL+EN (10 stron, PDF gotowy), sell sheet PL (1-pager). Lokalizacja: `Desktop/ARTNAPI/FINAL_B2B_2026/PDF/`.
 🔴 2/5: social proof (brak recenzje/influencerzy), logistyka (brak EDI/GS1). Szczegóły → `materialy-artnapi/CERTYFIKATY/`
 
 ### ROADMAP RETAIL
 
 | Faza | Okres | Co robimy |
 |------|-------|-----------|
-| **FAZA 0: Fundamenty** | III-VI 2026 | ✅ FSC+BSCI+EN71-3 PDFy w ręku. DO ZROBIENIA: pełne EN 71-1/2 + DoC, opakowania podobrazi (hang-tag+sleeve), karta produktowa Excel, katalog B2B PDF |
+| **FAZA 0: Fundamenty** | III-VI 2026 | ✅ FSC+BSCI+EN71-3 PDFy w ręku. ✅ Katalog B2B PL+EN gotowy (20.03). ✅ Sell sheet PL gotowy. DO ZROBIENIA: pełne EN 71-1/2 + DoC, opakowania podobrazi (hang-tag+sleeve), karta produktowa Excel, sell sheet EN |
 | **FAZA 1: Marketplace** | VI-VIII 2026 | Wzmocnienie EmpikPlace + Amazon + Allegro. Kaufland MP (jeśli Piotr OK) |
 | **FAZA 2: Sieci stacjonarne** | IX-XII 2026 | Oferty do Empik stacjonarnie, Smyk, Leroy Merlin. PBS Connect partnerstwo? |
 | **FAZA 3: Targi + ekspansja** | I-VI 2027 | Kids' Time Kielce (luty), Creativeworld Frankfurt (luty). Negocjacje BTS+BN 2027 |
@@ -58,16 +59,23 @@
 **ŁĄCZNIE:** ~67 000 PLN (min) — ~198 000 PLN (komfort). FSC+BSCI = ~15k oszczędzone.
 **Zaoszczędzone:** ✅ FSC (0 PLN), ✅ BSCI (0 PLN). **Do wydania:** CE/EN 71 (8-25k), opakowania (8-20k), EDI (5-15k), POS (5-25k), Kids' Time (8-25k), rezerwa płynność (30-80k).
 
-### CERTYFIKATY W POSIADANIU (12.03.2026)
+### CERTYFIKATY W POSIADANIU (18.03.2026)
 
-| Certyfikat | Plik | Wystawca | Fabryka | Produkt | Ważny do |
-|------------|------|---------|---------|---------|----------|
-| **FSC 100%** CoC | `CERTYFIKATY/EUDR-FSC.pdf` | Bureau Veritas | Heze City Asia Combined Record Panel | MDF/HDF (płyty → podobrazia) | **10.2027** |
-| **BSCI** C rating | `CERTYFIKATY/BSCI.pdf` | Eurofins CPA / amfori | Dongyang O-chance Arts & Crafts | Fabryka PBN (cały zakład) | **03.2027** |
-| **EN 71-3** PASS | `CERTYFIKATY/acrylic CE.PDF` | SGS | Xiamen Huacai / Yalida Art Paint | Farby akrylowe (40 kolorów) | Raport 11.2016 ⚠️ |
+| Certyfikat | Plik | Wystawca | Fabryka/Applicant | Produkt | Data | Status |
+|------------|------|---------|-------------------|---------|------|--------|
+| **FSC 100%** CoC | `CERTYFIKATY/EUDR-FSC.pdf` | Bureau Veritas | Heze City Asia Combined Record Panel | MDF/HDF (podobrazia) | do 10.2027 | ✅ |
+| **BSCI** C rating | `CERTYFIKATY/BSCI.pdf` | Eurofins CPA / amfori | Dongyang O-chance Arts & Crafts | Fabryka PBN | do 03.2027 | ✅ |
+| **EN 71-3** PASS | `acrylic EN71.pdf` | MEIOU (Shenzhen) | **Jiangxi Painting Color New Materials** | Farby akrylowe | **01.2026 FRESH** | ✅ NOWY |
+| **REACH** 10/10 PASS | `REACH+POPs+PCP.pdf` | EMTEK (Dongguan) | **Yiwu O-choice Import & Export** | PBN (PBN01-01 do 04) | 06.2024 | ✅ NOWY |
 
-**STATUS CERTYFIKATÓW OD RITY:** REACH+EN71-3 gesso+EUDR+formaldehyd wyślą w tygodniach. FSC O-chance nowy IV.2026. ⏳ Draft PBN (Gmail) — NIEWYSŁANY.
-**DO WYJAŚNIENIA (po wysłaniu draftu PBN):** Łańcuch dostawców farb? DoC na zestaw PBN? EN 71-1/2 robione? Nowszy EN 71-3 niż 2016?
+**NOWE CERTY (18.03) — SZCZEGÓŁY:**
+- **EN 71-3 (01.2026):** Cert M2601121ZW-C0153. EN 71-3:2019+A1:2021. CE marking eligible. Dyrektywa 2009/48/EC (zabawki).
+  ⚠️ **UWAGA:** Applicant = Jiangxi Painting Color (nie Xiamen Huacai z old SGS). PYTANIE DO RITY: czy to ta sama fabryka farb co w naszych PBN?
+- **REACH (06.2024):** Raport EDG2405310194C00101R. 10 testów ALL PASS (ND): SCCPs, PCP, Kadm, Ołów, Ftalany, TEPA, TDBPP, Nikiel, Azobarviva, PAH. Applicant = O-choice (nasz dostawca).
+
+**STATUS CERTYFIKATÓW OD RITY:** REACH ✅ MAMY. EN 71-3 ✅ MAMY (nowy). EUDR+formaldehyd wyślą w tygodniach. FSC O-chance nowy IV.2026.
+**STILL MISSING (dla sieci stacjonarnych):** EN 71-1 (mechaniczne) + EN 71-2 (palność) + DoC (Declaration of Conformity — wystawia importer).
+**DO WYJAŚNIENIA Z RITĄ:** (1) Jiangxi Painting Color = dostawca farb do naszych PBN? (2) EN 71-1/2 robione? (3) DoC — kto wystawia?
 
 ### PRIORYTETY 30 DNI (od 12.03)
 DONE: ✅ GS1/EAN, FSC, BSCI, Katalog B2B EU, Deep Research dystrybutorzy, PBS Connect mail
@@ -102,13 +110,12 @@ Ideyka (PBS Connect, 39-44 PLN) | Brushme (PBS Connect, 49,99 PLN) | iPicasso (w
    - wine&paint: segment ~zamknięty (14/16), AM istniejących
    - **AGENCJE EVENTOWE (NOWY):** 200-500 firm z malowaniem w portfolio. SOIT (30), KAE SAR (10). Target: Integracyjne.pl, Malowaniezwinem.pl, Zmalowani.com, Grupa OK, Prosta Kreska
 2. CEE EXPORT (LT/LV/EE/HU) — 25% czasu → 6-8 targetów/tydzień
-3. WTZ/DPS + DOMY KULTURY + PBN — **25% czasu** → 8-10 targetów/tydzień
-   - **WTZ/DPS:** 1 557 placówek (PFRON). Start: Śląskie + Małopolskie. Szczegóły → LEJEK 2.
-   - **DOMY KULTURY:** ~2 500 DK (budżety gminne). Batch 50 DK w1-w2 marca. Design: `docs/plans/2026-02-24-domy-kultury-design.md`. Szczegóły → LEJEK 2.
-4. HURT (sklepy plastyczne + hurtownie) — **10% czasu** → 3 targetów/tydzień
+3. WTZ/DPS + DOMY KULTURY — **0% czasu (segment zamknięty 17.03, 102 leady zarchiwizowane z CRM)**
+4. **AGENCJE EVENTOWE (NOWY OD 17.03)** — **30% czasu** → Recon batch: 17 firm z malowaniem w ofercie. 6 maili batch 1 wysłanych 17.03. Research: materialy-artnapi/2026-03-17_recon_batch_eventowe_hurt.md
+5. HURT (sklepy plastyczne + hurtownie) — **10% czasu** → 3 targetów/tydzień
    - Hurtownie z researchu: Textiledeco, PaperConcept, AlphaDan, Office Hurt (marzec)
-5. HOTELE SPA / RESORTY (NOWY, od III.2026) — 5% czasu → test 5 hoteli w marcu. Hotele 4-5⭐ z warsztatami. 50-100 szt/zam (kartony @ 10,30). Google Maps research → cold mail → próbka.
-6. GIFT-BOXY PBN (PLANOWANY, od X.2026) — 0% czasu teraz. PBN @ 21,13 jako komponent gift boxa. Outreach: X.2026 na sezon BN.
+6. HOTELE SPA / RESORTY (NOWY, od III.2026) — 5% czasu → test 5 hoteli w marcu. Hotele 4-5⭐ z warsztatami. 50-100 szt/zam (kartony @ 10,30). Google Maps research → cold mail → próbka.
+7. GIFT-BOXY PBN (PLANOWANY, od X.2026) — 0% czasu teraz. PBN rama 40x50 @ 27,64 jako komponent gift boxa (cena aktualna z oferta.md). Outreach: X.2026 na sezon BN.
 
 **KPI tygodniowe:** 20-25 nowych targetów | 15-20 kontaktów | 3-5 odpowiedzi
 
@@ -119,8 +126,8 @@ Ideyka (PBS Connect, 39-44 PLN) | Brushme (PBS Connect, 49,99 PLN) | iPicasso (w
 
 ## 📆 AKTUALNY MIESIĄC: MARZEC 2026 — 🔥 PUSH MONTH
 **Cel:** 30-45k PLN zamówień | 3 000-4 500 PLN prowizji
-**Zamówienia marzec (arkusz 11.03):** 4 950 szt | 29 688 PLN | marża handl. 4 948 PLN (WINO-GRONO 960 szt/3pal + ad-trade 2 400 szt + Malowisko 350+720 szt + Wisz 360 szt + HR Consulting 120 szt + Unitron 40 szt)
-**GAP do prowizji:** próg 6 666 PLN → brakuje 1 718 PLN marży handl. (~1 245 szt). **TRZEBA DOCISNĄĆ! Target: 10-12 palet jeszcze.**
+**Zamówienia marzec (20.03):** 10 zamówień | 5 590 szt | 36 082 PLN | marża handl. 5 406 PLN (GAP do prowizji: 1 260 PLN, ~914 szt)
+**GAP do prowizji:** próg 6 666 PLN → brakuje 1 260 PLN marży handl. (~914 szt). **DOCISNĄĆ — blisko progu!**
 **FAKTURA LUTY:** 11 500 PLN net (wynegocjowane).
 **CERTYFIKATY (12.03):** ✅ PDF w ręku: FSC 100% (MDF/HDF, do 10.2027) + BSCI C (audyt 06.03.2026) + EN 71-3 farby (SGS 2016, PASS). Brakuje: EN 71-1/2 + DoC + potwierdzenie łańcucha dostawców farb. Retail marketplace = GOTOWE. Sieci stacjonarne = wymagają pełne EN 71.
 **7 draftów @ghost** → WYSŁANE 04.03 ✅
@@ -128,8 +135,13 @@ Ideyka (PBS Connect, 39-44 PLN) | Brushme (PBS Connect, 49,99 PLN) | iPicasso (w
 **CENNIK PIOTRA:** ✅ DONE — [Google Sheets](https://docs.google.com/spreadsheets/d/14PRQzwY0cvg3DQHcGELRBuQNL9HKBj7m3fCNRmIvKUw/edit?gid=98740183#gid=98740183) + kalkulator B2B online
 **Do zrobienia:**
 - [ ] Codzienny blok 30 min prospecting
-- [ ] Dodać 36 nowych WTZ do Notion CRM (**nadal nie zrobione! Tylko 9 WTZ w CRM**)
-- [ ] DK Research do 50 z BIP — **24 DK w CRM, wysłano 12 maili. Brakuje ~26 do celu 50.**
+- [x] Dodać 36+ WTZ do Notion CRM (DONE 17.03 — 47 dodanych, potem wszystkie zarchiwizowane)
+- [x] WTZ/DK segment zamknięty (102 leady zarchiwizowane 17.03)
+- [x] 2-miesięczny audit wysłanych maili (877 maili, 12 luk naprawionych)
+- [x] Nowe szablony EU (soft intro)
+- [x] Raport W3 (piątek 20.03) ✅
+- [ ] **NOWY:** AM restock check (BATS, WATAHA, Winem, Farboteka)
+- [ ] **NOWY:** PaperConcept próbki fizyczne (Svitlana wysyła W3)
 
 ---
 
@@ -147,66 +159,54 @@ Ideyka (PBS Connect, 39-44 PLN) | Brushme (PBS Connect, 49,99 PLN) | iPicasso (w
 **2. PIPELINE DOMYKANIE (~15-20k):** Splatter (1-3k), POLBAR (1-2k ramy), Knihy (8k), Wisz upsell (4k), Kołakowska (8k). Szczegóły → STATUS LEJKA.
 **3. "PHOENIX DOWN" — NOWI (5-10k):** Monitoring phoenix-arts.pl (PON). 5-10 nowych firm/tyg. "10 000 szt na stanie, wysyłka 24h."
 
-**4. WTZ KAMPANIA 2.0 (target 3-5k):**
-- ⚠️ **FU D+21 NIE WYSŁANE!** 41 maili z 18.02, D+7 wysłany 24.02, D+21 (~11.03) pominięty. URGENT.
-- **36 nowych WTZ NIE dodane do CRM.** Tylko 9 WTZ w Notion. TODO.
-- Nowe budżety Q1 → okno zakupowe otwarte
+**4. CEE KONTYNUACJA:** Statusy → sekcja STATUS LEJKA. Due 17.03: K28, FessNeki, Paintbar, Splatter, Flowe.sk. Due 24.03: Dvi Taurės. Knihy Dobrovský — bez zmian.
 
-**5. CEE KONTYNUACJA:** Statusy → sekcja STATUS LEJKA. Due 17.03: K28, FessNeki, Paintbar, Splatter, Flowe.sk. Due 24.03: Dvi Taurės. Knihy Dobrovský — bez zmian.
-
-**6. HOTELE + WINE&PAINT NOWE FIRMY (target 3-5k):**
-- ✅ Batch 1 (8 maili 23.02) done. RestArt → PARKING (status → PAUZA).
-- ⚠️ **Batch 2 NIE wysłane!** TeamFormacja, Art&Wine Friends, WinoMalowanie + nowe targety → W3.
-- Cel: 2-3 nowe firmy wine&paint zamknięte do końca marca.
-
-**7. DOMY KULTURY — BATCH 1 (target 1-4k):**
-- ✅ Batch 1: 12 maili wysłane (09-10.03). Odmowy: MOK Olkusz.
-- W3: Kontynuacja do 50 maili + FU D+7 batch 1. W4: FU D+14 + domykanie.
-- Pitch: PBN 40x50 na ramie + podobrazia. Design: `docs/plans/2026-02-24-domy-kultury-design.md`
-
-**8. SHEIN EUROPE — TEST DROP-SHIP (LOW PRIORITY):**
+**5. SHEIN EUROPE — TEST DROP-SHIP (LOW PRIORITY):**
 - GO na test (24.02). COGS = 29 PLN brutto. WCF/LOW PBN na ramie.
 - W3 (17-21.03): Setup Baselinker + 1 ID test (jeśli Patrycja odpowie). W4: 1 ID live.
 - Max 2h/tyg. Pliki: `projekty/shein-europe/`
 
-### PLAN TYGODNIA 3 (16-20.03) — EU EXPANSION + PUSH FINISH
+### W3 (16-20.03) — DONE
+> ✅ 40+ maili wysłanych 17.03 (EU Tier 1 + reactivation + agencje eventowe). CRM +22 leady, WTZ/DK 102 zarchiwizowane. Raport W3 done. Katalog B2B v3 gotowy.
 
-**PRIORYTET #1: DOMKNĄĆ PUSH MONTH (70% czasu)**
-| Dzień | Kto | Akcja |
-|-------|-----|-------|
-| pon 16.03 | **Raport W2** | Jeśli nie zrobiony w pt 13.03 → URGENT rano |
-| pon 16.03 | **WTZ FU D+21** | 41 maili z 18.02 — breakup/reactivation |
-| pon 16.03 | **DK batch 2** | Kolejne ~26 maili do 50 total |
-| wt 17.03 | **CEE FU** | K28 (EE), FessNeki (HU), Paintbar (EE), Splatter (LT), Flowe (SK) — wszystkie Due: 17.03 |
-| wt 17.03 | **HobbySet (LV)** | ✉️ Reactivation email gotowy → wyślij! Draft: `materialy-artnapi/2026-03-12_eu_cold_intro_templates.md` |
-| śr 18.03 | **Wine&paint batch 2** | TeamFormacja, Art&Wine Friends, WinoMalowanie + nowe targety |
-| czw 19.03 | **Recurring AM** | Check BATS, WATAHA, Winem, Farboteka cykl |
-| pt 20.03 | **Pipeline Pulse** | Review KPI W3 + wartość pipeline |
+### STOCK & REORDER — RAPORT W3 (16.03.2026)
 
-**PRIORYTET #2: EU DISTRIBUTORS — TIER 1 OUTREACH (30% czasu, max 3h)**
-| Dzień | Firma | Akcja |
-|-------|-------|-------|
-| wt 17.03 | **HobbySet (LV)** | Wysłać reactivation email (draft gotowy w EN) |
-| śr-czw 18-19.03 | **Kippers Hobby (NL)** | Spersonalizować Template A + wysłać (info@kippershobby.nl) |
-| śr-czw 18-19.03 | **MPK Toys CZ** | Spersonalizować Template A + wysłać (info@mpktoys.cz) |
-| śr-czw 18-19.03 | **Dagros-Brunsting (NL)** | Spersonalizować Template A + wysłać (info@dagros.nl) |
-| pt 20.03 | **NEOART Kft (HU)** | Spersonalizować Template A + wysłać (rendeles@neoart.hu) |
+**Zamówienie złożone 16.03:** 13 000 szt 40×50 + 3 000 szt 30×40 (+ inne). Transport: pociąg. ETA: ~15.05.
 
-**MATERIAŁY DO UŻYCIA:**
-- Szablony EN: `materialy-artnapi/2026-03-12_eu_cold_intro_templates.md`
-- Katalog B2B PDF: wyeksportowany 12.03 (załącznik do maili)
-- Kalkulator online: https://artnapi.pl/B2B-Price-Calculator-cabout-pol-31.html
-- Weryfikacja emaili: `materialy-artnapi/2026-03-12_weryfikacja_emaili_top10_dystrybutorzy.md`
+**Stan magazynu 40×50 (16.03):**
+```
+Obecny stock:        7 800 szt
+W drodze:           +3 300 szt (ETA ~27.03)
+Po dostawie:        11 100 szt
+Kontener pociąg:   +13 000 szt (ETA ~15.05)
+Burn rate:           ~5 000 szt/mies (trend rosnący)
+```
 
-**DO OMÓWIENIA Z PIOTREM (przed 21.03):**
-- Cennik dystrybutorski EUR (EXW) — jaka minimalna cena per PBN kit przy wolumenie paletowym?
-- PITF Prague (26-28.05) — idziemy jako visitor? Koszty?
-- Rita: status certyfikatów (EN 71, DoC) — kiedy?
+**Prognoza zużycia 40×50:**
+
+| Data | Stock | Event |
+|------|-------|-------|
+| 27.03 | ~9 400 | +3 300 dostawa bieżąca |
+| 15.04 | ~4 400 | |
+| 15.05 | ~0 + 13 000 = **13 000** | Kontener pociąg |
+| 15.06 | ~8 000 | |
+| 15.07 | ~3 000 | |
+| ~01.08 | **0 ⚠️ STOCKOUT** | |
+
+**Kiedy zamawiać kolejny kontener (MORZEM):**
+```
+Lead time morze:      90 dni (realizacja ~20d + załadunek ~5d + transport ~65d)
+Stockout:             ~01.08 (przy 5k/mies)
+DEADLINE ZAMÓWIENIA:  ~03.05.2026 (POCZĄTEK MAJA)
+Przy burn 6k/mies:    stockout ~10.07 → deadline ~10.04 (!)
+```
+
+**DECYZJA WYMAGANA:** Omówić z Piotrem W3 — morze vs pociąg, timing, wielkość kontenera. Jeśli EU expansion (dystrybutorzy) ruszy → burn wzrośnie → zamawiać w KWIETNIU.
 
 ---
 
 ### PLAN TYGODNIA 2 (09-13.03) — ZAMKNIĘTY
-W2: WINO-GRONO 7 884 PLN, CEE FU ×7, DK 12 maili, raport W2 ✅. Przeniesione → W3: Wine&paint batch 2, WTZ FU D+21, DK 12/50.
+W2 (09-13.03): ZAMKNIĘTY. WINO-GRONO 7884, CEE FU ×7, DK 12 maili. Przeniesione → W3.
 
 ---
 
@@ -218,7 +218,7 @@ W2: WINO-GRONO 7 884 PLN, CEE FU ×7, DK 12 maili, raport W2 ✅. Przeniesione �
 1. **RESEARCH** — Google Maps/IG, 3-5 studiów/dzień, zapisz w CRM (segment=eventy)
 2. **OUTREACH** — Telefon > email > DM. Pytaj "skąd podobrazia?", proponuj próbkę
 3. **STARTER KIT** — 10 podobrazi + cennik (~100 PLN). FU: d3 SMS, d7 tel, d14 mail, d21 break-up
-4. **ZAMÓWIENIE** — Cennik all-in: kartony 10,31 | paleta 9,00 (darmowa dostawa) | 2 pal 8,20 | 3 pal 7,31
+4. **ZAMÓWIENIE** — Cennik all-in: kartony 10,30 | paleta 9,00 (darmowa dostawa) | 2 pal 8,15 | 3 pal 7,30
 5. **RETENCJA D14** — Po 1. zamówieniu nowego klienta → FU D14 "jak się sprawdziło?" Cel: retencja, nie sprzedaż. 90-dniowe okno (deep research).
 6. **AUTO-RESTOCK** — Po 2-3 zam.: stała dostawa co 2-4 tyg. + cross-sell PBN/sztalugi
 
@@ -229,36 +229,9 @@ W2: WINO-GRONO 7 884 PLN, CEE FU ×7, DK 12 maili, raport W2 ✅. Przeniesione �
 
 ---
 
-## 🚀 LEJEK 2: INSTYTUCJE PUBLICZNE → WTZ/DPS + DOMY KULTURY (od 17.02.2026)
-> Segment: WTZ (730) + DPS (kilka tys) + **DK (4 000+)** = ~5 700+ placówek. Finansowanie: PFRON (WTZ) + budżety powiatowe (DPS) + budżety gminne (DK).
-> Cykl zamknięcia: 14-30 dni. Champion = terapeuta (WTZ) / instruktor kultury (DK). Decydent = dyrektor/kierownik.
-> Playbook z DR: `materialy-artnapi/2026-03-15_wtz_dps_dk_playbook.md`
-> Design DK: `docs/plans/2026-02-24-domy-kultury-design.md`
-> **KLUCZOWE OKNO (DR 15.03):** IX-X = planowanie budżetów na kolejny rok (WTZ preliminarz do 15.10). Duży batch outreach wrzesień!
-> **BUDŻETY:** WTZ avg 4 000 PLN/rok na plastykę, DPS avg 2 500 PLN, DK avg 4 000 PLN. Przy 5% penetracji = ~1.17M PLN/rok.
-> **PLATFORMY:** Rejestracja na platformazakupowa.pl (OpenNexus, 3 200 JST, darmowa) + e-Zamówienia → pasywne leady. Kody CPV: 37820000-2, 44812000-5, 30190000-7.
-> **PFRON 2025:** 35 196 PLN/uczestnik/rok. Projekt 2026: 38 496 PLN (+3 300). Materiały = koszt kwalifikowany (§19 rozp. MGPiPS).
-> **GRANTY DK:** NCK Kultura-Interwencje (10-150k PLN, nabór do V), Dom Kultury+ (do 50k PLN), KPO granty DK (20-200k PLN).
-
-### ETAPY
-1. **RESEARCH** — Rejestr WTZ/DPS z BIP (publiczny). Start: Śląskie + Małopolskie (10 placówek).
-2. **OUTREACH** — Mail do terapeuty zajęciowego. Pitch: "Zestawy PBN na zajęcia — gotowe, 470 wzorów, farby świeże. 14,14 PLN netto FV PL."
-3. **PRÓBKA** — 2 zestawy PBN gratis (koszt ~28 PLN). "Przetestujcie na zajęciach, opinia po tygodniu."
-4. **ZAMÓWIENIE** — PBN 24x30 karton (45 szt) = 636 PLN lub PBN 30x40 karton (18 szt) = 427 PLN.
-5. **RESTOCK** — Cykl miesięczny. Cross-sell podobrazia 30x40 na zajęcia malarskie.
-
-### METRYKI (WTZ/DPS)
-| Research 5/tyg. | Outreach 5/tyg. | Próbki 1-2/tyg. | Zamówienia 2-3/mies. | Cel: 10 placówek do VI.2026 |
-
-### ETAPY DK (od III.2026)
-1. **RESEARCH** — BIP rejestr instytucji kultury + Google Maps. Batch 50 DK.
-2. **OUTREACH** — Mass mail do instruktora/sekretariatu. Pitch: "PBN 40x50 na ramie — gotowy workshop. 21 PLN netto. Próbka gratis."
-3. **PRÓBKA** — 1 PBN 40x50 gratis (~40 PLN). "Przetestujcie na zajęciach."
-4. **ZAMÓWIENIE** — PBN 40x50 na ramie (MOQ 30 szt) = 634 PLN lub podobrazia 40x50 kartony = 1 237 PLN.
-5. **RESTOCK** — Cykl kwartalny (budżety gminne). FU co 90 dni.
-
-### METRYKI DK
-| Research 50/batch | Outreach 50/batch | Odpowiedzi 5-8 | Próbki 3-5 | Zamówienia 1-2/batch | Cel: 5-10 DK do VI.2026 |
+## 🚀 LEJEK 2: WTZ/DPS + DOMY KULTURY — ZAMKNIĘTY 17.03.2026
+> **SEGMENT ZAMKNIĘTY.** 102 leady zarchiwizowane. 0% alokacji czasu. Playbook: `materialy-artnapi/2026-03-15_wtz_dps_dk_playbook.md`
+> Jeśli ktoś odpowie → lead dodawany od nowa. Następne okno: IX-X 2026 (planowanie budżetów).
 
 ---
 
@@ -266,14 +239,14 @@ W2: WINO-GRONO 7 884 PLN, CEE FU ×7, DK 12 maili, raport W2 ✅. Przeniesione �
 
 ### 🔥🔥🔥 GORĄCE (domykanie)
 * **Studio K28 / Kirsti (Tallinn, EE):** ✅ Cennik wysłany 10.03 (pełna oferta EE + kalkulator). Czekamy decyzję. Wine&paint "Art&Bubbles". Wartość: 1 500-3 000 PLN. Due: 17.03.
-* **Dvi Taurės Meno / Indrė (Vilnius, LT):** ✅ Próbki zamówione 10.03! Adres: S. Konarskio 35A, Vilnius LT-03123. DPD. 2 lokalizacje Wilno. Wartość: 1 500-3 000 PLN. Due: 24.03.
+* **Dvi Taurės Meno / Indrė (Vilnius, LT):** ✅ FV potwierdzona 20.03. 320 szt (1 paleta) po 15.04. Recurring 150-250/mies.
 * **WINO-GRONO:** ✅ ZAMKNIĘTE 10.03! 3 palety (960 szt 40x50 @ 320/pal) = 7 884 PLN. Faktura wysłana. Retencja D14: 24.03.
 
 ### 🔥🔥 CIEPŁE (aktywne)
 * **Splatter Studio (LT/Rimgailė):** FU z kalkulatorem wysłany 10.03 (min 120 szt kartony, bieżące zużycie). Planuje studio Warszawa — w tle. Due: 17.03. Wartość: 1 000-3 000 PLN.
-* **Leo Creative:** Klient/AM. ⚠️ **COLD 20 dni** — obiekcja cennik 20.02 ("cenię stałość"), brak odpowiedzi po wyjaśnieniu. Due: 15.03. Wartość: 4 000 PLN. Breakup lub reconciliation needed.
+* **Leo Creative:** ✅ Zamówienie 200 szt opłacone 17.03 (wrócił po reconciliation). Klient/AM. Retencja D14: 31.03.
 * **UNITRON:** ✅ Zamówienie zrealizowane 03.03 (40 szt MPN). Klient/AM — czekamy na restock.
-* **Paintbar (EE):** ✅ Anni odp. 13.03: "samples are great, will definitely order soon." Kalkulator zaakceptowany. Draft odpowiedzi w Gmail. Due: 20.03. Wartość: 1 500-3 000 PLN.
+* **Paintbar Stuudio (EE):** ✅ FV wysłana 18.03 (120 szt kartony do Tartu). MT Partners OÜ. Czekamy płatność.
 * **Katarzyna Kołakowska:** ✅ FU wysłany 10.03 "czy płótna dotarły?" Czekamy potwierdzenie. Due: 13.03. Wartość: 8 000 PLN.
 * **Konrad Wisz:** Upsell paleta — czekamy aż wróci sam. Bez FU. Wartość: 4 000 PLN.
 
@@ -300,6 +273,8 @@ W2: WINO-GRONO 7 884 PLN, CEE FU ×7, DK 12 maili, raport W2 ✅. Przeniesione �
 | Arte.ee (EE) | IV.2026 | Cisza od 19.02, FU bez odpowiedzi |
 | Pstro/Maciej Budzisz | IV.2026 | Import CN ~6 PLN, reframe wysłany |
 | PaintPeople/Sara (SK) | parking | "will keep in mind" |
+| Faber Castell | V.2026 | Brak emaila, 21d overdue |
+| JK Style | V.2026 | Brak emaila, 14d overdue |
 
 Odmowy III.2026: Paleta Art / Zyśk ("nie planujemy").
 
@@ -324,7 +299,7 @@ Odmowy III.2026: Paleta Art / Zyśk ("nie planujemy").
 | Kolorab | 30 dni | **II.2026** (1000 szt 30x40, 6 790 PLN) | ~III.2026 | 🟢 OK |
 | Odkryj Artystę | nowy | **19.02** (60 szt 40x50, 680 PLN) | ~19.03 | 🟢 OK |
 | UNITRON | powrót! | **03.03** (40 szt MPN) | ~III.2026 | 🟢 OK |
-| Leo Creative | pauza | I.2026 | obiekcja cennik, Due: ~15.03 | 🟡 delikatnie |
+| Leo Creative | powrót! | **17.03** (200 szt opłacone) | Retencja D14: 31.03 | 🟢 OK |
 
 ---
 
@@ -353,7 +328,7 @@ Odmowy III.2026: Paleta Art / Zyśk ("nie planujemy").
 
 | Faza | Okres | Cel | Status |
 |------|-------|-----|--------|
-| **1. Seed Planting** | III W3-W4 | Outreach Tier 1 (5 firm), szablony EN, katalog B2B | 🔥 W TOKU |
+| **1. Seed Planting** | III W3-W4 | Outreach Tier 1 (5 firm), szablony EN, katalog B2B. **Outreach W3 (17.03): 5 maili soft intro z katalogiem (nowe podejście — bez cen). Stare szablony zarchiwizowane.** | 🔥 W TOKU |
 | **2. Follow-up + Tier 2** | IV.2026 | Outreach Tier 2 (5 firm), cennik dystryb., próbki | Planowane |
 | **3. PITF Prague** | V.2026 (26-28.05) | Targi CZ/SK — spotkania z MPK Toys, SMT Creatoys | Decyzja IV |
 | **4. Scale** | VI-IX.2026 | 3-5 aktywnych dystrybutorów, regularne zamówienia | Cel |
@@ -367,6 +342,9 @@ Odmowy III.2026: Paleta Art / Zyśk ("nie planujemy").
 * **Kippers Hobby (NL)** — Już ma R&L PBN. Pitch: szerszy asortyment, lepsza cena. Cold intro EN. Due: 21.03.
 * **MPK Toys CZ** — Największy CZ/SK toy wholesaler, ma Ravensburger. Cold intro EN. Due: 21.03.
 * **Dagros-Brunsting (NL)** — 50 lat, #1 non-food wholesale NL. Ma Ravensburger PBN. Cold intro EN. Due: 21.03.
+
+**ZAMKNIĘTE EU:**
+* **Art-Distribution** — ROZMOWA TEL 17.03 — produkcja w Chinach = NO. Lead zamknięty.
 
 **TIER 2 — Outreach kwiecień:**
 * **Vaessen Creative (NL)** — 100k produktów, private label. Największy hobby wholesaler EU.
@@ -411,19 +389,17 @@ Tier 2 kontakty (IV.2026) → `materialy-artnapi/2026-03-12_weryfikacja_emaili_t
 • Piątek: Review pipeline + wartości + KPI tygodniowe.
 • Piątek: Sync arkusz prowizji ↔ CRM (nowe zamówienia → baza klientów).
 
-## 🤖 SAMOGRAJ — AUTOMATYZACJE (12.03.2026)
+## 🤖 SAMOGRAJ — AUTOMATYZACJE (20.03.2026)
+> Pełna lista i architektura → dane/cto.md sekcja AKTYWNE AUTOMATYZACJE.
 
-| Skrypt | Cron | Co robi | Status |
-|--------|------|---------|--------|
-| `email-radar.js` | Co 30 min (8-18 pn-pt) | Auto-drafty na maile od leadów CRM | ✅ Działa |
-| `morning-scan.js` | 8:00 pn-pt | Generuje morning-feed.md (Gmail+CRM) | ✅ Działa |
-| `followup-guardian.js` | 17:00 pn-pt | FU overdue pipeline → auto-draft + Telegram. **EN dla foreign leads (fix 12.03)** | ✅ Działa |
-| `inquiry-router.js` | Event-driven | Routuje zapytania z kalkulatora B2B | ✅ Działa |
-| `generate-weekly-report.js` | Manual/cron | Raport tygodniowy MD+TSV | ✅ Działa |
-| `weekly-report-reminder.js` | Czw 8:30 | Telegram reminder o raporcie | ✅ Działa |
-| **`restock-reminder.js`** | **Pon 9:00** | **AM klienci: restock auto-draft jeśli cykl minął. EN dla foreign leads (fix 12.03)** | **✅ Deployed 12.03** |
-
-**Notion CRM nowe pola:** `tag_klienta` (select: REPEAT/CHURN_RISK/ONE_TIME/SEASONAL/PAUSED) + `cykl_dni` (number) — dodane 12.03.
+| Skrypt | Cron | Status |
+|--------|------|--------|
+| `morning-chain.js` | 8:00 pn-pt | ✅ Orchestrator: scan→sync→guardian |
+| `crm-auto-sync.js` | via chain | ✅ Auto-fix mismatchów Gmail↔CRM |
+| `followup-guardian.js` | via chain + 17:00 | ✅ Auto-draft + --include-due-today |
+| `email-radar.js` | co 30 min | ✅ Alert-only |
+| `inquiry-router.js` | co 15 min | ✅ B2B calc → auto-draft |
+| `restock-reminder.js` | on-demand | ✅ AM restock drafts |
 
 ## 🔧 MAINTENANCE
 • **Gmail:** Managed connection (Anthropic) + własny OAuth (lib.js) → zero maintenance. Local MCP usunięty 03.03.2026.

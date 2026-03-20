@@ -134,39 +134,39 @@ Nie składamy sami grantów. **Pomagamy klientowi kupić z grantu:**
 > Gotowy zestaw materiałów plastycznych na 1 kwartał zajęć terapeutycznych.
 > Dedykowany dla WTZ — ale modyfikowalny dla DPS/DK.
 
-### PAKIET "START" — 690 PLN netto
+### PAKIET "START" — ~1 023 PLN netto
 
 | Produkt | Ilość | Cena netto/szt | Wartość |
 |---------|-------|----------------|---------|
-| PBN 24x30 (zestaw z farbami i pędzlami) | 30 szt | 14,14 PLN | 424 PLN |
+| PBN 24x30 deska (zestaw z farbami i pędzlami) | 45 szt (MOQ) | 16,84 PLN | 758 PLN |
 | Podobrazia 30x40 (białe, do samodzielnego malowania) | 20 szt | 7,46 PLN | 149 PLN |
 | Sztaluga studyjna economy | 2 szt | ~58 PLN | 116 PLN |
-| **RAZEM** | | | **~690 PLN** |
+| **RAZEM** | | | **~1 023 PLN** |
 
 Wystarczy na: ~15 uczestników × 2 zajęcia tygodniowo × 1 kwartał (PBN indywidualnie, podobrazia rotacyjnie).
 
-### PAKIET "STANDARD" — 1 380 PLN netto
+### PAKIET "STANDARD" — ~2 115 PLN netto
 
 | Produkt | Ilość | Cena netto/szt | Wartość |
 |---------|-------|----------------|---------|
-| PBN 24x30 (zestaw) | 45 szt (1 karton) | 14,14 PLN | 636 PLN |
-| PBN 40x50 na ramie (flagowy) | 10 szt | 21,13 PLN | 211 PLN |
+| PBN 24x30 deska (zestaw) | 45 szt (1 karton) | 16,84 PLN | 758 PLN |
+| PBN 40x50 na ramie (flagowy) | 30 szt (MOQ) | 27,64 PLN | 829 PLN |
 | Podobrazia 40x50 | 40 szt (1 box) | 10,30 PLN | 412 PLN |
 | Sztaluga studyjna economy | 2 szt | ~58 PLN | 116 PLN |
-| **RAZEM** | | | **~1 375 PLN** |
+| **RAZEM** | | | **~2 115 PLN** |
 
 Wystarczy na: ~20 uczestników × 2 zajęcia tygodniowo × 1 kwartał.
 
-### PAKIET "ROCZNY" — 4 800 PLN netto
+### PAKIET "ROCZNY" — ~5 328 PLN netto
 
 | Produkt | Ilość | Cena netto/szt | Wartość |
 |---------|-------|----------------|---------|
-| PBN 24x30 (zestaw) | 180 szt (4 kartony) | 14,14 PLN | 2 545 PLN |
-| PBN 40x50 na ramie (flagowy) | 30 szt (MOQ) | 21,13 PLN | 634 PLN |
+| PBN 24x30 deska (zestaw) | 180 szt (4 kartony) | 16,84 PLN | 3 031 PLN |
+| PBN 40x50 na ramie (flagowy) | 30 szt (MOQ) | 27,64 PLN | 829 PLN |
 | Podobrazia 40x50 | 120 szt (kartony) | 10,30 PLN | 1 236 PLN |
 | Sztaluga studyjna economy | 4 szt | ~58 PLN | 232 PLN |
 | Dostawa | wliczona | — | 0 PLN |
-| **RAZEM** | | | **~4 647 PLN** |
+| **RAZEM** | | | **~5 328 PLN** |
 
 Wystarczy na: ~20 uczestników × cały rok (4 kwartały). Dostawa kwartalna (4 × ~1 160 PLN).
 
@@ -191,7 +191,7 @@ Dzień dobry [Pani/Panu imię],
 
 Piszę do [nazwa WTZ] z propozycją materiałów na zajęcia plastyczne. Dostarczamy gotowe zestawy do malowania po numerach (PBN) — 470 wzorów, farby + pędzle w zestawie, gotowe do użycia od razu.
 
-Cena od 14,14 PLN netto/zestaw z fakturą PL. Wysyłka 24h z polskiego magazynu, dostawa wliczona.
+Cena od 16,84 PLN netto/zestaw (deska 24x30) z fakturą PL. Wysyłka 24h z polskiego magazynu, dostawa wliczona.
 
 Nasi klienci to m.in. warsztaty terapii zajęciowej i domy kultury — zestawy sprawdzają się na zajęciach grupowych, bo każdy uczestnik maluje samodzielnie bez potrzeby przygotowania materiałów przez instruktora.
 
@@ -215,7 +215,7 @@ Dzień dobry,
 
 Piszę do [nazwa DK] z propozycją materiałów na warsztaty plastyczne. Dostarczamy gotowe zestawy do malowania po numerach — 470 wzorów, farby + pędzle w pudełku. Prowadzący nie musi nic przygotowywać.
 
-Cena od 14,14 PLN netto/zestaw (24x30) lub 21,13 PLN/zestaw (40x50 na ramie — uczestnik zabiera gotowy obraz). Faktura PL, dostawa 24h wliczona.
+Cena od 16,84 PLN netto/zestaw (deska 24x30) lub 27,64 PLN/zestaw (40x50 na ramie — uczestnik zabiera gotowy obraz). Faktura PL, dostawa 24h wliczona.
 
 Mamy też podobrazia malarskie od 7,46 PLN netto — idealne na zajęcia z malowania akrylami lub olejami.
 

@@ -9,7 +9,7 @@
 | Produkt | COGS | Dostawa SHEIN | LANDED | B2B cena |
 |---------|------|---------------|--------|----------|
 | PBN bez ramy (24x30/30x40) | 6,58 PLN | ~2-3 PLN | **~9 PLN** | 14,00 PLN |
-| PBN na ramie (40x50) | 13,00 PLN | ~2-3 PLN | **~16 PLN** | 21,13 PLN |
+| PBN na ramie (40x50) | 13,00 PLN | ~2-3 PLN | **~16 PLN** | 27,64 PLN (aktualna cena oferta.md) |
 
 ---
 

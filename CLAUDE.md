@@ -44,6 +44,29 @@ PRZED draftowaniem JAKIEJKOLWIEK wiadomości do leada:
 **BLOKADA:** Jeśli draft już istnieje w Gmail → NIE twórz duplikatu. Powiedz: "Draft już istnieje w Gmail. Chcesz go edytować?"
 **WYJĄTEK:** User jawnie mówi "pisz mimo to" → OK ale ostrzeż: "Ostatni kontakt był [data]."
 
+## DRAFT QUALITY GUARD (OBOWIĄZUJE WSZYSTKICH ASYSTENTÓW I AGENTÓW)
+
+PRZED stworzeniem JAKIEGOKOLWIEK draftu maila, KAŻDY asystent/agent MUSI wykonać 3 kroki:
+
+### KROK 1: SPRAWDŹ SENT (czy już nie odpowiedziałeś)
+- Wyszukaj w Gmail: `from:mateusz.sokolski@artnapi.pl to:[email_leada]`
+- Przeczytaj WSZYSTKIE wiadomości w wątku (threadId)
+- Jeśli Mateusz JUŻ odpowiedział na ostatnią wiadomość leada → NIE twórz draftu. Powiedz: "Odpowiedź już wysłana [data]. Nie tworzę draftu."
+
+### KROK 2: SPRAWDŹ AKTUALNE CENY I MOQ (dane/artnapi/oferta.md)
+- Przeczytaj dane/artnapi/oferta.md PRZED wstawieniem JAKIEJKOLWIEK ceny
+- Użyj WYŁĄCZNIE cen z oferta.md — NIGDY z pamięci, plan.md, ani starych wiadomości
+- Sprawdź kolumnę "Min szt" — to jest MOQ. Nie proponuj ilości poniżej MOQ.
+- Jeśli lead chce mniej niż MOQ → powiedz wprost, odeślij do sklepu lub zaproponuj MOQ
+
+### KROK 3: WERYFIKACJA PRZED WYSŁANIEM
+- Czy cena w drafcie = cena w oferta.md? (dokładnie, co do grosza)
+- Czy ilość ≥ MOQ z oferta.md?
+- Czy Mateusz NIE odpowiedział już w tym wątku?
+- Czy draft nie jest duplikatem istniejącego draftu w Gmail?
+
+**BLOKADA:** Jeśli którykolwiek krok nie przejdzie → NIE twórz draftu. Zgłoś problem.
+
 ## EMAIL VERIFICATION GUARD (COLD OUTREACH)
 
 PRZED stworzeniem draftu do NOWEGO leada (którego NIE MA w CRM/Gmail):

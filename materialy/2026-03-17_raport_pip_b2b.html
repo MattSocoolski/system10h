@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAPORT: Nowelizacja ustawy o PIP 2026 — Wpływ na współpracę B2B</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --color-primary: #1a1a2e;
+            --color-secondary: #16213e;
+            --color-accent: #0f3460;
+            --color-highlight: #e94560;
+            --color-bg: #ffffff;
+            --color-text: #2d2d2d;
+            --color-muted: #6b7280;
+            --color-border: #e5e7eb;
+            --color-row-alt: #f8f9fa;
+            --color-green-bg: #ecfdf5;
+            --color-green-border: #10b981;
+            --color-red-bg: #fef2f2;
+            --color-red-border: #ef4444;
+            --color-blue-bg: #eff6ff;
+            --color-blue-border: #3b82f6;
+            --color-amber-bg: #fffbeb;
+            --color-amber-border: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* ── TITLE PAGE ── */
+        .title-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 40px;
+            page-break-after: always;
+        }
+
+        .title-page .label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 30px;
+        }
+
+        .title-page h1 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.25;
+            max-width: 700px;
+            margin-bottom: 16px;
+        }
+
+        .title-page .subtitle {
+            font-size: 18px;
+            font-weight: 300;
+            color: rgba(255,255,255,0.75);
+            max-width: 600px;
+            margin-bottom: 60px;
+        }
+
+        .title-page .meta {
+            font-size: 14px;
+            color: rgba(255,255,255,0.55);
+            line-height: 2;
+        }
+
+        .title-page .meta strong {
+            color: rgba(255,255,255,0.85);
+            font-weight: 600;
+        }
+
+        .title-page .divider-line {
+            width: 60px;
+            height: 3px;
+            background: var(--color-highlight);
+            margin: 30px auto;
+            border-radius: 2px;
+        }
+
+        /* ── CONTENT ── */
+        .content {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 50px 40px;
+        }
+
+        /* ── KEY FINDINGS BOX ── */
+        .key-findings {
+            background: var(--color-blue-bg);
+            border-left: 4px solid var(--color-blue-border);
+            border-radius: 0 8px 8px 0;
+            padding: 24px 28px;
+            margin-bottom: 40px;
+        }
+
+        .key-findings h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-accent);
+            margin-bottom: 14px;
+        }
+
+        .key-findings ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .key-findings li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+            font-size: 13.5px;
+        }
+
+        .key-findings li::before {
+            content: "►";
+            position: absolute;
+            left: 0;
+            color: var(--color-blue-border);
+            font-size: 10px;
+            top: 9px;
+        }
+
+        .key-findings li strong {
+            color: var(--color-primary);
+        }
+
+        .intro-text {
+            font-size: 15px;
+            color: var(--color-muted);
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        /* ── HEADINGS ── */
+        h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--color-primary);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--color-primary);
+            page-break-after: avoid;
+        }
+
+        h2 .section-num {
+            color: var(--color-highlight);
+            margin-right: 6px;
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--color-secondary);
+            margin-top: 28px;
+            margin-bottom: 12px;
+            page-break-after: avoid;
+        }
+
+        /* ── PARAGRAPHS & LISTS ── */
+        p {
+            margin-bottom: 14px;
+        }
+
+        ol, ul {
+            margin-bottom: 14px;
+            padding-left: 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+
+        /* ── TABLES ── */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 20px 0 30px;
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        thead th {
+            background: var(--color-primary);
+            color: #ffffff;
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: top;
+        }
+
+        tbody tr:nth-child(even) {
+            background: var(--color-row-alt);
+        }
+
+        tbody tr:hover {
+            background: #eef2ff;
+        }
+
+        td:first-child {
+            font-weight: 600;
+            color: var(--color-secondary);
+            white-space: nowrap;
+            min-width: 140px;
+        }
+
+        .risk-col {
+            color: #b91c1c;
+        }
+
+        .safe-col {
+            color: #047857;
+        }
+
+        /* ── CLAUSE BOXES ── */
+        .clause-box {
+            background: #fafafa;
+            border: 1px solid var(--color-border);
+            border-left: 4px solid var(--color-accent);
+            border-radius: 0 8px 8px 0;
+            padding: 20px 24px;
+            margin: 16px 0 24px;
+            font-size: 13.5px;
+            line-height: 1.8;
+            color: #374151;
+            font-style: italic;
+            page-break-inside: avoid;
+        }
+
+        .clause-box p {
+            margin-bottom: 10px;
+        }
+
+        .clause-box p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ── ALERT BOXES ── */
+        .alert {
+            border-radius: 0 8px 8px 0;
+            padding: 16px 20px;
+            margin: 16px 0;
+            font-size: 13.5px;
+        }
+
+        .alert-red {
+            background: var(--color-red-bg);
+            border-left: 4px solid var(--color-red-border);
+        }
+
+        .alert-green {
+            background: var(--color-green-bg);
+            border-left: 4px solid var(--color-green-border);
+        }
+
+        .alert-amber {
+            background: var(--color-amber-bg);
+            border-left: 4px solid var(--color-amber-border);
+        }
+
+        /* ── RESOLUTION BLOCKS ── */
+        .resolution {
+            background: #f0fdf4;
+            border-left: 3px solid #22c55e;
+            padding: 10px 16px;
+            margin: 8px 0 16px 20px;
+            font-size: 13px;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .resolution em {
+            font-style: italic;
+        }
+
+        /* ── PRIORITY LEVELS ── */
+        .priority-header {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .priority-1 {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+        }
+
+        .priority-2 {
+            background: var(--color-amber-bg);
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .priority-3 {
+            background: var(--color-green-bg);
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+
+        /* ── BRIEF BOX ── */
+        .brief-box {
+            background: #f5f3ff;
+            border: 2px solid #8b5cf6;
+            border-radius: 8px;
+            padding: 28px;
+            margin: 20px 0;
+        }
+
+        .brief-box p {
+            font-style: italic;
+            color: #4c1d95;
+        }
+
+        /* ── NEXT STEPS ── */
+        .next-steps {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-radius: 8px;
+            padding: 32px;
+            margin: 40px 0;
+        }
+
+        .next-steps h2 {
+            color: #ffffff;
+            border-bottom-color: var(--color-highlight);
+            margin-top: 0;
+        }
+
+        .next-steps ol {
+            padding-left: 24px;
+        }
+
+        .next-steps li {
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 10px;
+        }
+
+        .next-steps .deadline {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            color: var(--color-highlight);
+            font-size: 15px;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center;
+            padding: 30px 40px;
+            color: var(--color-muted);
+            font-size: 12px;
+            border-top: 1px solid var(--color-border);
+            margin-top: 40px;
+        }
+
+        /* ── HORIZONTAL RULE ── */
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--color-border);
+            margin: 40px 0;
+        }
+
+        /* ── PRINT STYLES ── */
+        @media print {
+            body {
+                font-size: 12px;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .title-page {
+                min-height: 100vh;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            h2 {
+                page-break-after: avoid;
+                margin-top: 30px;
+            }
+
+            h3 {
+                page-break-after: avoid;
+            }
+
+            .clause-box, .alert, .key-findings, .next-steps, .brief-box, .table-wrapper {
+                page-break-inside: avoid;
+            }
+
+            .next-steps {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+            }
+        }
+
+        @page {
+            margin: 2cm;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════ STRONA TYTUŁOWA ═══════════ -->
+<div class="title-page">
+    <div class="label">Raport prawno-biznesowy</div>
+    <h1>Nowelizacja ustawy o PIP 2026</h1>
+    <p class="subtitle">Wpływ na współpracę B2B w modelu doradztwa handlowego. Analiza legislacyjna, orzecznictwo, checklist umowy i rekomendacje wdrożeniowe.</p>
+    <div class="divider-line"></div>
+    <div class="meta">
+        <strong>Data:</strong> 17 marca 2026<br>
+        <strong>Przygotowany dla:</strong> Piotr Ruzow / Nazar<br>
+        <strong>Opracowanie:</strong> Deep Research / Mateusz Sokolski<br>
+        <strong>Klasyfikacja:</strong> Dokument roboczy — wymaga weryfikacji prawnej
+    </div>
+</div>
+
+<!-- ═══════════ TREŚĆ RAPORTU ═══════════ -->
+<div class="content">
+
+    <!-- KLUCZOWE WNIOSKI -->
+    <div class="key-findings">
+        <h3>Kluczowe wnioski</h3>
+        <ul>
+            <li><strong>Status legislacyjny:</strong> Senat RP przyjął nowelizację bez poprawek 12 marca 2026 r. Ustawa oczekuje na podpis Prezydenta.</li>
+            <li><strong>Tryb decyzyjny:</strong> PIP zyskuje uprawnienie do wydawania decyzji administracyjnych o przekształceniu umowy B2B w stosunek pracy.</li>
+            <li><strong>Wykonalność:</strong> W toku prac parlamentarnych złagodzono przepisy &mdash; złożenie odwołania do sądu w terminie 30 dni wstrzymuje wykonanie decyzji inspektora do czasu prawomocnego wyroku (z wyjątkiem osób podlegających szczególnej ochronie).</li>
+            <li><strong>Ryzyko dla JDG z jednym klientem:</strong> Posiadanie jednego klienta, choć legalne, jest jedną z głównych przesłanek (tzw. czerwonych flag) w nowym &bdquo;Teście Przedsiębiorcy&rdquo; PIP. Wymaga to perfekcyjnego zabezpieczenia umowy (klauzula zastępstwa) i praktyki (brak podporządkowania).</li>
+            <li><strong>RODO jako tarcza:</strong> Brak umowy powierzenia przetwarzania danych osobowych (DPA) przy dostępie do firmowego CRM to dowód na pracownicze włączenie w strukturę firmy. DPA jest niezbędne dla prawdziwego B2B.</li>
+        </ul>
+    </div>
+
+    <p class="intro-text">Badania wskazują, że nowelizacja ustawy o Państwowej Inspekcji Pracy (PIP) wprowadza fundamentalne zmiany w polskim systemie prawa pracy, odchodząc od sądowego trybu ustalania stosunku pracy na rzecz trybu administracyjnego. Wydaje się wysoce prawdopodobne, że przepisy te wymuszą na przedsiębiorcach natychmiastową rewizję modeli współpracy cywilnoprawnej.</p>
+
+    <p class="intro-text">Poniższy raport stanowi wyczerpującą, akademicko-praktyczną analizę stanu prawnego, orzecznictwa oraz rekomendacji wdrożeniowych dla Jednoosobowej Działalności Gospodarczej (JDG) świadczącej usługi doradztwa handlowego.</p>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 1 ═══ -->
+    <h2><span class="section-num">1.</span> Stan prawny: Status nowelizacji i uprawnienia PIP</h2>
+
+    <h3>1.1. Status procesu legislacyjnego i wejście w życie</h3>
+    <p>Zgodnie z najnowszymi danymi z marca 2026 r., nowelizacja ustawy o Państwowej Inspekcji Pracy (stanowiąca realizację tzw. kamieni milowych KPO A71G i A72G) przeszła przez parlament. 12 marca 2026 r. Senat przyjął ustawę bez poprawek. Obecnie dokument oczekuje na podpis Prezydenta.</p>
+    <p>Ustawa wchodzi w życie, co do zasady, po upływie <strong>3 miesięcy od dnia jej ogłoszenia w Dzienniku Ustaw</strong>. Oznacza to, że realny początek obowiązywania nowych przepisów i pierwszych kontroli w nowym reżimie to <strong>połowa 2026 roku</strong>.</p>
+
+    <h3>1.2. Nowe kompetencje PIP i procedura przekształcenia B2B</h3>
+    <p>Do tej pory inspektor PIP, podejrzewając pozorne samozatrudnienie, musiał wystąpić z powództwem do sądu pracy (na podstawie art. 189 k.p.c.), co było procesem długotrwałym, a ciężar dowodu spoczywał na organie. Nowelizacja odwraca ten mechanizm:</p>
+    <ol>
+        <li><strong>Wysłuchanie i Polecenie:</strong> Inspektor, po stwierdzeniu, że w relacji B2B dominują cechy stosunku pracy (zgodnie z art. 22 Kodeksu pracy), najpierw wydaje <em>polecenie</em> usunięcia naruszeń prawa (np. zawarcia umowy o pracę).</li>
+        <li><strong>Decyzja administracyjna:</strong> W przypadku niewykonania polecenia przez strony, sprawa trafia do okręgowego inspektora pracy, który wszczyna postępowanie administracyjne kończące się wydaniem <strong>decyzji administracyjnej o ustaleniu istnienia stosunku pracy</strong>.</li>
+        <li><strong>Odwołanie i wykonalność:</strong> Od decyzji przysługuje odwołanie do sądu pracy w terminie 30 dni. Co kluczowe &mdash; ostateczna wersja ustawy, w przeciwieństwie do radykalnych projektów z 2025 r., <strong>nie nadaje rygoru natychmiastowej wykonalności</strong> dla standardowych przypadków. Wniesienie odwołania wstrzymuje wykonanie decyzji do czasu prawomocnego wyroku sądu.</li>
+        <li><strong>Prekluzja dowodowa:</strong> Nowe przepisy wprowadzają tzw. prekluzję dowodową &mdash; pracodawca i JDG muszą przedstawić wszystkie dowody na obronę B2B już na etapie odwołania, późniejsze ich dodanie będzie niemal niemożliwe.</li>
+    </ol>
+
+    <h3>1.3. Przepisy przejściowe i &bdquo;Abolicja&rdquo;</h3>
+    <p>Zarówno dla pracodawców, jak i współpracowników B2B, przewidziano swoisty &bdquo;okres ochronny&rdquo; (abolicję). Firmy, które w ciągu 12 miesięcy od wejścia w życie przepisów dobrowolnie przekształcą wadliwe umowy cywilnoprawne w etaty, nie poniosą odpowiedzialności karno-wykroczeniowej z Kodeksu pracy za uprzednie łamanie przepisów.</p>
+
+    <h3>1.4. Konsekwencje ZUS wstecz</h3>
+    <p>Jeśli decyzja PIP uprawomocni się w sądzie (lub nie zostanie zaskarżona), umowa B2B zostaje uznana za umowę o pracę <em>ex tunc</em> (od momentu jej zawarcia lub wskazanego w decyzji), a nie tylko na przyszłość.</p>
+
+    <div class="alert alert-red">
+        <strong>Konsekwencje finansowe są drastyczne:</strong>
+        <ul style="margin-top: 8px;">
+            <li><strong>ZUS:</strong> Zakład Ubezpieczeń Społecznych ma prawo upomnieć się o zaległe składki na ubezpieczenia społeczne i zdrowotne za okres do <strong>5 lat wstecz</strong> (zgodnie z art. 24 ust. 4 ustawy o systemie ubezpieczeń społecznych). Obowiązek ich zapłaty spoczywa w pierwszej kolejności na podmiocie zatrudniającym (jako płatniku), wraz z ustawowymi odsetkami za zwłokę.</li>
+            <li><strong>PIT i VAT:</strong> Przeklasyfikowanie przychodów z pozarolniczej działalności gospodarczej na przychody ze stosunku pracy. JDG traci prawo do odliczania kosztów uzyskania przychodu (np. leasingu samochodu) od kwot zarobionych u tego kontrahenta, co wiąże się z koniecznością korekty zeznań podatkowych i podatku VAT.</li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 2 ═══ -->
+    <h2><span class="section-num">2.</span> Orzecznictwo: Jak sądy odróżniają B2B od etatu?</h2>
+
+    <p>Zgodnie z art. 22 &sect; 1&sup2; Kodeksu pracy, &bdquo;nie jest dopuszczalne zastąpienie umowy o pracę umową cywilnoprawną przy zachowaniu warunków wykonywania pracy&rdquo;. Sąd Najwyższy wielokrotnie orzekał, że <strong>o charakterze umowy decyduje sposób jej faktycznego wykonywania, a nie jej nazwa</strong>. Sąd Najwyższy (np. wyrok z 25 listopada 2005 r., I UK 68/05 oraz wyroki z 2024 r.) wypracował jasne kryteria odróżniające.</p>
+
+    <h3>2.1. Co przesądza na niekorzyść B2B (Cechy stosunku pracy)?</h3>
+    <ol>
+        <li><strong>Podporządkowanie kierownictwu (Subordynacja):</strong> Jest to absolutnie najważniejsza cecha. Jeśli JDG wykonuje bieżące, codzienne polecenia &bdquo;przełożonego&rdquo;, musi pytać o zgodę na wyjście w trakcie dnia, lub jest poddawany ocenie pracowniczej &mdash; sąd uzna to za etat.</li>
+        <li><strong>Wyznaczone miejsce i czas pracy:</strong> Narzucenie pracy w biurze klienta w stałych godzinach (np. 8:00&ndash;16:00), ewidencjonowanie obecności (odbijanie karty).</li>
+        <li><strong>Brak ryzyka gospodarczego:</strong> Wykonawca ma zagwarantowaną wysoką, stałą pensję bazową, niezależnie od wyniku finansowego swoich działań, a koszty jego błędów pokrywa zleceniodawca.</li>
+        <li><strong>Włączenie w strukturę organizacyjną:</strong> JDG figuruje na schemacie organizacyjnym firmy (np. jako &bdquo;Dyrektor ds. Sprzedaży&rdquo;), uczestniczy w firmowych spotkaniach integracyjnych na tych samych zasadach co pracownicy, ma przypisane stałe biurko.</li>
+        <li><strong>Osobiste świadczenie pracy (brak zastępstwa):</strong> Zleceniobiorca nie może powierzyć wykonania zadań osobie trzeciej pod żadnym pozorem.</li>
+    </ol>
+
+    <h3>2.2. Co przesądza na korzyść B2B (Autentyczne samozatrudnienie)?</h3>
+    <ol>
+        <li><strong>Zależność od rezultatu, nie od czasu:</strong> Wynagrodzenie (zwłaszcza w doradztwie i handlu) opiera się na prowizji. Wynagrodzenie prowizyjne to silny argument za ryzykiem gospodarczym przedsiębiorcy.</li>
+        <li><strong>Swoboda organizacyjna:</strong> JDG sam decyduje, <em>kiedy</em> i <em>gdzie</em> wykonuje telefony do klientów, jak planuje swój dzień, nie musi zgłaszać &bdquo;urlopu&rdquo;, a jedynie &bdquo;przerwy w świadczeniu usług&rdquo;.</li>
+        <li><strong>Prawo do zastępstwa (Klauzula podwykonawstwa):</strong> Zgodnie z orzecznictwem, możliwość scedowania pracy na podwykonawcę (nawet za zgodą klienta) wyklucza osobiste świadczenie pracy, które jest dogmatem prawa pracy.</li>
+        <li><strong>Wielość klientów:</strong> Świadczenie usług na rzecz kilku podmiotów równolegle mocno oddala ryzyko przekwalifikowania.</li>
+    </ol>
+
+    <div class="alert alert-green">
+        <strong>Precedens SN (sygn. akt III PSKP 3/21):</strong> Handlowiec (wcześniej pracujący na etacie u tego samego pracodawcy!), który przeszedł na umowę cywilnoprawną, sam układał grafik, wybierał klientów, nie miał stałych godzin i rzadko raportował, <strong>nie świadczył pracy na etacie</strong>. Sąd stwierdził, że jeśli umowa ma cechy mieszane, decyduje cecha przeważająca.
+    </div>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 3 ═══ -->
+    <h2><span class="section-num">3.</span> Checklist bezpiecznej umowy B2B</h2>
+
+    <p>Poniższa tabela przedstawia krytyczne punkty umowy B2B (Dystrybucja B2B / Doradztwo Handlowe). Umowa nie może zawierać słownictwa zaczerpniętego z Kodeksu pracy.</p>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Kategoria</th>
+                    <th>Zapis ryzykowny (cechy UoP)</th>
+                    <th>Zapis bezpieczny (prawdziwe B2B)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Nazwa umowy i stron</td>
+                    <td class="risk-col">&bdquo;Umowa o współpracę/o pracę&rdquo;, Strony: &bdquo;Pracodawca&rdquo; i &bdquo;Pracownik/Handlowiec&rdquo;</td>
+                    <td class="safe-col">&bdquo;Umowa o świadczenie usług doradczych i pośrednictwa handlowego&rdquo;, Strony: &bdquo;Zleceniodawca/Klient&rdquo; i &bdquo;Usługodawca&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Zarządzanie czasem</td>
+                    <td class="risk-col">&bdquo;Usługodawca świadczy usługi w godzinach pracy biura Zleceniodawcy (8:00&ndash;16:00).&rdquo;</td>
+                    <td class="safe-col">&bdquo;Usługodawca samodzielnie decyduje o czasie i harmonogramie wykonywania usług, mając na uwadze dobro projektu oraz terminy ustalone z Klientami końcowymi.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Miejsce pracy</td>
+                    <td class="risk-col">&bdquo;Miejscem świadczenia pracy jest siedziba firmy X.&rdquo;</td>
+                    <td class="safe-col">&bdquo;Miejscem świadczenia usług jest siedziba Usługodawcy lub dowolne inne miejsce przez niego wybrane.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Kierownictwo</td>
+                    <td class="risk-col">&bdquo;Usługodawca podlega bezpośrednio Dyrektorowi Handlowemu i wykonuje jego polecenia.&rdquo;</td>
+                    <td class="safe-col">&bdquo;Usługodawca świadczy usługi z najwyższą starannością zawodową, samodzielnie organizując swój proces pracy, współpracując z przedstawicielami Klienta wyłącznie w zakresie koordynacji działań.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Zastępstwo <span style="color: var(--color-highlight); font-weight: 700;">(kluczowe!)</span></td>
+                    <td class="risk-col">&bdquo;Usługodawca zobowiązuje się do <strong>osobistego</strong> świadczenia usług.&rdquo;</td>
+                    <td class="safe-col">&bdquo;Usługodawca ma prawo powierzyć wykonanie całości lub części Usług osobom trzecim lub podwykonawcom, po uprzedniej akceptacji Zleceniodawcy. Usługodawca ponosi za nich pełną odpowiedzialność.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Wynagrodzenie i ryzyko</td>
+                    <td class="risk-col">&bdquo;Usługodawca otrzymuje stałe wynagrodzenie miesięczne w kwocie 15 000 PLN.&rdquo; (niezależnie od wyników)</td>
+                    <td class="safe-col">&bdquo;Wynagrodzenie składa się z opłaty ryczałtowej za gotowość i bieżące analizy rynku (Base) oraz success fee (prowizji) obliczanej jako X% od zrealizowanej marży, płatne na podstawie prawidłowo wystawionej faktury VAT.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Narzędzia pracy</td>
+                    <td class="risk-col">&bdquo;Zleceniodawca udostępnia laptop, telefon i samochód.&rdquo;</td>
+                    <td class="safe-col">&bdquo;Usługodawca korzysta z własnych narzędzi pracy. W przypadku konieczności skorzystania z infrastruktury Klienta (np. system CRM), udostępnienie następuje na podstawie odrębnej umowy/protokołu odpłatnego użyczenia.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Urlopy</td>
+                    <td class="risk-col">&bdquo;Usługodawcy przysługuje 26 dni płatnego urlopu w roku kalendarzowym.&rdquo;</td>
+                    <td class="safe-col">&bdquo;Usługodawca ma prawo do przerw w świadczeniu usług w wymiarze do 26 dni w roku, co nie powoduje obniżenia opłaty ryczałtowej.&rdquo; LUB brak zapisów &mdash; rozliczanie wyłącznie za wynik.</td>
+                </tr>
+                <tr>
+                    <td>Wyłączność</td>
+                    <td class="risk-col">&bdquo;Usługodawca nie może świadczyć usług na rzecz żadnych innych podmiotów bez zgody Zleceniodawcy.&rdquo;</td>
+                    <td class="safe-col">&bdquo;Usługodawca ma prawo do świadczenia usług na rzecz innych podmiotów. Ograniczeniu podlega jedynie działalność konkurencyjna określona w Załączniku/Umowie NDA.&rdquo;</td>
+                </tr>
+                <tr>
+                    <td>Rozliczenia / odpowiedzialność</td>
+                    <td class="risk-col">Brak odpowiedzialności finansowej, ewentualnie do 3-krotności wynagrodzenia (jak w K.P.).</td>
+                    <td class="safe-col">&bdquo;Usługodawca ponosi pełną odpowiedzialność odszkodowawczą (w tym za utracone korzyści &mdash; <em>lucrum cessans</em>) za szkody wyrządzone nienależytym wykonaniem usług.&rdquo; (Należy mieć polisę OC JDG).</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 4 ═══ -->
+    <h2><span class="section-num">4.</span> Praktyka: Rzeczywistość poza umową</h2>
+
+    <p>Inspektorzy PIP podczas nowej fali kontroli będą weryfikować nie tylko dokumenty, ale przede wszystkim <strong>praktykę</strong>. W orzecznictwie Sądu Najwyższego (np. I PK 142/18) wielokrotnie podkreślano, że &bdquo;to sposób wykonywania pracy, a nie treść oświadczeń woli stron, decyduje o kwalifikacji umowy&rdquo;.</p>
+
+    <p>Nawet idealnie zredagowana umowa B2B polegnie, jeśli wystąpią następujące &bdquo;czerwone flagi&rdquo; w środowisku pracy (tzw. &bdquo;Test Przedsiębiorcy&rdquo; PIP):</p>
+
+    <h3>4.1. Jak wyeliminować ryzykowne praktyki?</h3>
+
+    <p><strong>Firmowy email (<code>jan.kowalski@klient.pl</code>):</strong> Posługiwanie się imiennym mailem w domenie firmy klienta bez odpowiedniej sygnatury sugeruje pełną integrację.</p>
+    <div class="resolution">
+        <em>Rozwiązanie:</em> W stopce maila musi widnieć: <code>Jan Kowalski | Zewnętrzny Doradca Handlowy / External Sales Partner | Nazwa Twojej JDG świadcząca usługi dla [Nazwa Klienta]</code>. Optymalnie: przekierowanie korespondencji na własną domenę.
+    </div>
+
+    <p><strong>Jedno źródło przychodu (100% obrotu od jednego klienta):</strong> To potężny sygnał ostrzegawczy. Dane wskazują, że setki tysięcy kontraktów B2B działa w modelu &bdquo;na wyłączność&rdquo;. Jeśli współpracujesz z jednym podmiotem, musisz to skompensować ogromną niezależnością w innych aspektach.</p>
+    <div class="resolution">
+        <em>Rozwiązanie:</em> Postaraj się o chociażby jedną, symboliczną fakturę kwartalnie dla innego klienta (np. za konsultacje sprzedażowe). Upewnij się, że opłacasz własny sprzęt.
+    </div>
+
+    <p><strong>Sposób komunikacji (Slack / Teams / Raportowanie):</strong> Jeżeli członek zarządu pisze do Ciebie: &bdquo;Jutro na 9:00 rano zrób raport marżowy&rdquo;, jest to typowe polecenie pracownicze.</p>
+    <div class="resolution">
+        <em>Rozwiązanie:</em> Zmiana języka. Komunikacja powinna opierać się na zarządzaniu projektem. Klient powinien pisać: &bdquo;Zgodnie z umową potrzebujemy danych marżowych na jutro, czy potwierdzasz termin?&rdquo; Używajcie terminologii &bdquo;Zlecenie&rdquo;, &bdquo;Projekt&rdquo;, &bdquo;Etap&rdquo;, a nie &bdquo;zadanie&rdquo;, &bdquo;nadgodziny&rdquo;, &bdquo;obecność&rdquo;.
+    </div>
+
+    <p><strong>Firmowy laptop/telefon:</strong> Jeśli klient nakazuje korzystanie wyłącznie z jego sprzętu ze względów bezpieczeństwa.</p>
+    <div class="resolution">
+        <em>Rozwiązanie:</em> Sformalizowanie tego faktu. Wystaw klientowi fakturę za swoje usługi, a klient niech wystawi Ci fakturę (lub potrąci z wynagrodzenia) kwotę za dzierżawę sprzętu. Alternatywnie &mdash; &bdquo;BYOD&rdquo; (Bring Your Own Device).
+    </div>
+
+    <p><strong>Wnioski urlopowe:</strong> Absolutnie nie wysyłaj do działu kadr w systemie zgłoszeń typu &bdquo;Wniosek o urlop wypoczynkowy&rdquo;.</p>
+    <div class="resolution">
+        <em>Rozwiązanie:</em> Zgłaszaj &bdquo;Informację o planowanej przerwie w świadczeniu usług&rdquo; i wysyłaj ją wyłącznie do partnerów biznesowych w celu utrzymania ciągłości działania.
+    </div>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 5 ═══ -->
+    <h2><span class="section-num">5.</span> Wzór klauzul B2B (do natychmiastowego wykorzystania)</h2>
+
+    <p>Poniżej przygotowano gotowe do wklejenia klauzule maksymalizujące ochronę przed zarzutem stosunku pracy, dedykowane doradztwu handlowemu:</p>
+
+    <h3>5.1. Klauzula Samodzielności i Braku Podporządkowania</h3>
+    <div class="clause-box">
+        <p>&bdquo;Strony zgodnie oświadczają, że niniejsza Umowa nie kreuje stosunku pracy w rozumieniu art. 22 Kodeksu pracy. Usługodawca jako niezależny przedsiębiorca oświadcza, że nie jest podporządkowany organizacyjnie ani służbowo Zleceniodawcy, a wszelkie wytyczne Zleceniodawcy ograniczają się wyłącznie do określenia merytorycznego zakresu zapotrzebowania i docelowego rezultatu świadczonych usług. Usługodawca samodzielnie decyduje o doborze metod, czasu oraz miejsca realizacji usług, kierując się dobrą praktyką kupiecką i skutecznością rynkową.&rdquo;</p>
+    </div>
+
+    <h3>5.2. Klauzula Zastępstwa (absolutny priorytet)</h3>
+    <div class="clause-box">
+        <p>&bdquo;Usługodawca, w celu zapewnienia ciągłości realizacji przedmiotu Umowy, zastrzega sobie prawo powierzenia wykonania określonych czynności objętych niniejszą Umową osobom trzecim, w szczególności swoim podwykonawcom lub współpracownikom. Zleceniodawca ma prawo w terminie 3 dni roboczych zgłosić umotywowany sprzeciw wobec wybranego podwykonawcy, jeśli jego kwalifikacje nie gwarantują należytego wykonania usług. Za działania i zaniechania podwykonawców Usługodawca ponosi odpowiedzialność jak za własne.&rdquo;</p>
+    </div>
+
+    <h3>5.3. Klauzula Wielości Klientów</h3>
+    <div class="clause-box">
+        <p>&bdquo;Zleceniodawca przyjmuje do wiadomości i wyraża zgodę na to, iż Usługodawca w ramach prowadzonej przez siebie działalności gospodarczej ma prawo świadczyć usługi o podobnym lub innym charakterze na rzecz podmiotów trzecich, pod warunkiem, że nie narusza to postanowień o zachowaniu poufności oraz zakazie konkurencji (jeśli został odrębnie zastrzeżony).&rdquo;</p>
+    </div>
+
+    <h3>5.4. Klauzula Wynagrodzenia (Baza + Prowizja)</h3>
+    <div class="clause-box">
+        <p>&bdquo;Z tytułu należytego wykonania Usług, Usługodawcy przysługuje wynagrodzenie ryczałtowe (Base) w wysokości [Kwota] PLN netto miesięcznie, stanowiące zapłatę za utrzymywanie w gotowości infrastruktury własnej, przeprowadzanie cyklicznych analiz dystrybucyjnych oraz dostępność doradczą.</p>
+        <p>Niezależnie od wynagrodzenia ryczałtowego, z tytułu wygenerowania sprzedaży materiałów plastycznych u klientów pozyskanych lub obsługiwanych przez Usługodawcę, Usługodawcy przysługuje Wynagrodzenie Prowizyjne (Success Fee). Będzie ono każdorazowo obliczane jako [X]% od zrealizowanej i opłaconej marży netto Zleceniodawcy z transakcji przypisanych do Usługodawcy. Brak zrealizowanych marż w danym okresie nie rodzi roszczeń Usługodawcy o wyrównanie do kwot minimalnych.&rdquo;</p>
+    </div>
+
+    <h3>5.5. Klauzula Narzędziowa</h3>
+    <div class="clause-box">
+        <p>&bdquo;Do realizacji usług Usługodawca wykorzystuje własne wyposażenie, w tym sprzęt komputerowy oraz oprogramowanie biurowe. W przypadku, gdy ze względów bezpieczeństwa teleinformatycznego Zleceniodawcy, niezbędne będzie wykorzystanie sprzętu Zleceniodawcy, dostęp ten zostanie uregulowany w odrębnej odpłatnej umowie najmu infrastruktury IT.&rdquo;</p>
+    </div>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 6 ═══ -->
+    <h2><span class="section-num">6.</span> RODO / Dane: Korzystanie z systemu CRM klienta</h2>
+
+    <p>Zarządzanie bazą klientów sp. z o.o. wiąże się z przetwarzaniem danych osobowych. W ujęciu prawa pracy, jeśli pracownik (na etacie) działa w CRM, przetwarza dane z tzw. &bdquo;upoważnienia&rdquo; (art. 29 RODO).</p>
+
+    <div class="alert alert-amber">
+        <strong>Uwaga:</strong> Jeśli JDG jako &bdquo;zewnętrzny kontrahent&rdquo; po prostu loguje się do CRM na podstawie &bdquo;upoważnienia&rdquo;, a nie ma własnej umowy RODO, to <strong>PIP oraz UODO (Urząd Ochrony Danych Osobowych) traktują go de facto jak pracownika</strong>. Prawdziwy, zewnętrzny partner B2B jest osobnym administratorem lub &bdquo;Procesorem&rdquo; i musi mieć podpisaną formalną <strong>Umowę Powierzenia Przetwarzania Danych Osobowych (DPA)</strong>.
+    </div>
+
+    <h3>Jak to zabezpieczyć?</h3>
+    <ol>
+        <li><strong>Audyt logowania:</strong> Twoje konto w CRM (np. Salesforce, HubSpot, Livespace) powinno być oznaczone jako konto zewnętrznego wykonawcy (External Contractor), a nie zwykłego pracownika.</li>
+        <li><strong>Umowa DPA (Data Processing Agreement):</strong> Z klientem (sp. z o.o.) musisz zawrzeć umowę DPA (art. 28 RODO), w której sp. z o.o. powierza Twojej JDG przetwarzanie danych klientów dystrybucyjnych w celu realizacji umowy handlowej.</li>
+        <li><strong>Odpowiedzialność RODO:</strong> W umowie powierzenia Twoja odpowiedzialność jako Procesora powinna być racjonalnie ograniczona (np. do 12-krotności miesięcznego wynagrodzenia bazowego), co chroni Twój majątek prywatny, ale jednocześnie dowodzi rynkowego, biznesowego ryzyka, nieobecnego na etacie.</li>
+    </ol>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 7 ═══ -->
+    <h2><span class="section-num">7.</span> Rekomendacje natychmiastowe (Priorytetyzowany Plan Działania)</h2>
+
+    <p>W kontekście wchodzących w połowie 2026 roku kompetencji administracyjnych PIP, konieczne jest podjęcie działań obronnych <em>zanim</em> kontrola zapuka do drzwi klienta (lub przeprowadzi ją zdalnie).</p>
+
+    <h3><span class="priority-header priority-1">POZIOM 1: NATYCHMIAST</span> &mdash; W ciągu 7 dni (Koszt: 0 PLN)</h3>
+    <ul>
+        <li><strong>Zmiana Stopki Email:</strong> Zaktualizuj stopkę mailową, dopisując, że świadczysz usługi jako zewnętrzny podmiot (JDG).</li>
+        <li><strong>Komunikacja:</strong> Przestań używać na Slack/Teams i w mailach słów: <em>urlop, szef, nadgodziny, obecność, L4</em>. Zastąp je słowami: <em>przerwa w świadczeniu usług, klient/zarząd, dodatkowy zakres prac, gotowość operacyjna, niedostępność</em>.</li>
+        <li><strong>Zgłoszenie RODO:</strong> Upewnij się, że masz podpisaną odrębną Umowę Powierzenia Przetwarzania Danych Osobowych (DPA) na korzystanie z CRM i baz mailingowych Klienta.</li>
+    </ul>
+
+    <h3><span class="priority-header priority-2">POZIOM 2: W CIĄGU 30 DNI</span> &mdash; Formalno-prawne</h3>
+    <ul>
+        <li><strong>Aneks do Umowy B2B:</strong> Przeprowadź z Klientem proces aneksowania umowy, wprowadzając zaktualizowane klauzule z Sekcji 5. Szczególny nacisk połóż na <strong>Klauzulę Zastępstwa</strong> i Klauzulę Samodzielności. Klient (sp. z o.o.) powinien być tym wysoce zainteresowany, gdyż to on ryzykuje zapłatę potężnych składek ZUS w razie decyzji PIP.</li>
+        <li><strong>Zarządzanie &bdquo;Urlopami&rdquo;:</strong> Zlikwiduj w umowie wszelkie tabele i limity dni bezpłatnych odzwierciedlające 26 dni urlopu Kodeksowego. Przejdź na wycenę usług w systemie, gdzie bierzesz wolne kiedy chcesz, informując klienta z odpowiednim wyprzedzeniem.</li>
+        <li><strong>Fakturowanie &bdquo;Zadaniowe&rdquo;:</strong> Na fakturach nie pisz &bdquo;Usługi doradcze za miesiąc Maj&rdquo;. Pisz: &bdquo;Doradztwo handlowe i generowanie leadów &mdash; etap V 2026, zgodnie z raportem prac&rdquo;.</li>
+    </ul>
+
+    <h3><span class="priority-header priority-3">POZIOM 3: W CIĄGU 90 DNI</span> &mdash; Biznesowe</h3>
+    <ul>
+        <li><strong>Dywersyfikacja przychodów (Złoty Graal ochrony B2B):</strong> Spróbuj pozyskać choćby jednego, niewielkiego klienta pobocznego (np. konsultacje handlowe na godziny, szkolenia sprzedażowe), aby w JPK i CEIDG nie widniała fakturyzacja 100% obrotu do jednego NIP-u.</li>
+        <li><strong>Narzędzia pracy:</strong> Jeśli używasz firmowego telefonu/laptopa &mdash; zaproponuj odkupienie ich od firmy lub poproś o comiesięczną fakturę kosztową z tytułu &bdquo;najmu sprzętu IT&rdquo;.</li>
+    </ul>
+
+    <hr>
+
+    <!-- ═══ SEKCJA 8 ═══ -->
+    <h2><span class="section-num">8.</span> Podsumowanie dla prawnika (Brief do weryfikacji)</h2>
+
+    <div class="brief-box">
+        <p><em>Drogi Mecenasie / Radco Prawny,</em></p>
+        <p>Proszę o weryfikację załączonej umowy B2B (doradztwo handlowe dla sp. z o.o.) w świetle nowelizacji ustawy o PIP (kamienie milowe KPO A71G/A72G) z marca 2026 r., przyznającej PIP uprawnienia do wydawania decyzji administracyjnych kształtujących stosunek prawny (z uwzględnieniem faktu, że rygor natychmiastowej wykonalności został zablokowany poprawkami senackimi, lecz ryzyko re-klasyfikacji i obciążeń ZUS do 5 lat wstecz pozostaje ogromne).</p>
+        <p><strong>Krytyczne wektory ryzyka do zniwelowania w umowie:</strong></p>
+        <ol>
+            <li><strong>Wyłączność ekonomiczna:</strong> Pracuję dla 1 klienta. Proszę o zredagowanie agresywnej <em>klauzuli zastępstwa</em> oraz zabezpieczenie formalnego prawa do obsługi innych podmiotów.</li>
+            <li><strong>Model Wynagrodzenia:</strong> Posiadam element stały i prowizyjny. Proszę o weryfikację, czy kwota stała nie nosi znamion &bdquo;pensji&rdquo;, lecz stanowi wynagrodzenie ryczałtowe za gotowość/analizy, tak aby nie naruszało to zasady ponoszenia ryzyka gospodarczego.</li>
+            <li><strong>Powierzenie Danych:</strong> Proszę o przygotowanie projektu DPA (Umowy Powierzenia Przetwarzania Danych Osobowych) na bazie art. 28 RODO, legalizującej mój zewnętrzny dostęp do ich bazy CRM, by odciąć się od statusu pracowniczego &bdquo;upoważnienia&rdquo;.</li>
+            <li><strong>Raportowanie:</strong> Usunięcie z umowy jakichkolwiek elementów &bdquo;ewidencji czasu pracy&rdquo; na rzecz raportowania postępu wykonania dzieła/usługi (tzw. defence-file na wypadek Testu Przedsiębiorcy PIP).</li>
+        </ol>
+    </div>
+
+    <hr>
+
+    <!-- ═══ NASTĘPNE KROKI ═══ -->
+    <div class="next-steps">
+        <h2><span class="section-num">///</span> Następne kroki</h2>
+        <ol>
+            <li>Przejrzyj raport i klauzule</li>
+            <li>Omów z Mateuszem zakres zmian w obecnej umowie</li>
+            <li>Przekaż do weryfikacji prawnej (kancelaria)</li>
+            <li>Wdrożenie zmian + podpisanie aneksu/nowej umowy</li>
+        </ol>
+        <div class="deadline">Termin: przed wejściem w życie ustawy (~połowa 2026)</div>
+    </div>
+
+</div>
+
+<!-- ═══ STOPKA ═══ -->
+<div class="footer">
+    Dokument roboczy &mdash; wymaga weryfikacji prawnej &nbsp;|&nbsp; Opracowanie: Deep Research &nbsp;|&nbsp; 17.03.2026
+</div>
+
+</body>
+</html>

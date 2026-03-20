@@ -1,0 +1,12 @@
+{
+  "name": "artnapi-email-processor",
+  "version": "1.0.0",
+  "description": "AWS Lambda email processor for ArtNapi B2B — auto-draft replies using Bedrock Claude Sonnet",
+  "type": "module",
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "author": "Mateusz Sokolski",
+  "license": "UNLICENSED",
+  "private": true
+}
