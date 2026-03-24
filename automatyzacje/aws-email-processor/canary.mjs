@@ -3,16 +3,16 @@
 // On failure: continues checking remaining services, sends alert with details.
 
 import { DynamoDBClient, GetItemCommand } from '@aws-sdk/client-dynamodb';
-import { BedrockRuntimeClient, InvokeModelCommand } from '@aws-sdk/client-bedrock-runtime';
 import { getSecrets } from './secrets.mjs';
 import { gmailGetAccessToken, gmailSearchMessages } from './gmail.mjs';
 import { loadS3File, checkStaleness } from './s3.mjs';
 import { queryCRM } from './notion.mjs';
+import { getHeartbeat } from './dynamo.mjs';
 import { sendTelegram } from './telegram.mjs';
 
 const DYNAMO_TABLE = process.env.DYNAMO_TABLE || 'email-processor-state';
-const BEDROCK_MODEL_ID = process.env.BEDROCK_MODEL_ID || 'anthropic.claude-sonnet-4-6-20250514-v1:0';
-const BEDROCK_REGION = process.env.BEDROCK_REGION || 'us-east-1';
+const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
+const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL_ID || 'claude-sonnet-4-6';
 const MY_EMAIL = process.env.MY_EMAIL || 'mateusz.sokolski@artnapi.pl';
 
 /**
@@ -85,6 +85,26 @@ export async function handler(event) {
   });
   results.push(dynamoResult);
 
+  // 5b. Webhook Heartbeat — check if Gmail Push is alive
+  const heartbeatResult = await runCheck('Webhook Heartbeat', async () => {
+    const hb = await getHeartbeat();
+    if (!hb.lastWebhookAt) throw new Error('No webhook heartbeat found — Gmail Push may never have been active');
+    if (hb.ageHours > 2) throw new Error(`Webhook heartbeat is ${hb.ageHours}h old — Gmail Push may be dead (running on 15min fallback only)`);
+    return `last: ${hb.lastWebhookAt} (${hb.ageHours}h ago)`;
+  });
+  results.push(heartbeatResult);
+
+  // 5c. S3 ghost_styl.md staleness
+  const ghostResult = await runCheck('S3 ghost_styl.md', async () => {
+    const text = await loadS3File('ghost_styl.md');
+    if (!text || text.length < 50) throw new Error(`File too small: ${text?.length || 0} chars`);
+    const staleness = await checkStaleness('ghost_styl.md', 168);
+    const ageLabel = staleness.ageHours < 24 ? `${staleness.ageHours}h` : `${Math.floor(staleness.ageHours / 24)}d`;
+    if (staleness.ageHours > 168) throw new Error(`Stale: ${ageLabel} old (>7d)`);
+    return `age: ${ageLabel}`;
+  });
+  results.push(ghostResult);
+
   // 6. Notion CRM
   const notionResult = await runCheck('Notion CRM', async () => {
     if (!secrets) throw new Error('Skipped: Secrets Manager failed');
@@ -94,25 +114,28 @@ export async function handler(event) {
   });
   results.push(notionResult);
 
-  // 7. Bedrock
-  const bedrockResult = await runCheck('Bedrock', async () => {
-    const client = new BedrockRuntimeClient({ region: BEDROCK_REGION });
-    const payload = {
-      anthropic_version: 'bedrock-2023-05-31',
-      max_tokens: 10,
-      temperature: 0,
-      messages: [{ role: 'user', content: 'Say OK' }],
-    };
-    const res = await client.send(new InvokeModelCommand({
-      modelId: BEDROCK_MODEL_ID,
-      contentType: 'application/json',
-      accept: 'application/json',
-      body: JSON.stringify(payload),
-    }));
-    const body = JSON.parse(new TextDecoder().decode(res.body));
+  // 7. Anthropic API
+  const anthropicResult = await runCheck('Anthropic API', async () => {
+    if (!secrets) throw new Error('Skipped: Secrets Manager failed');
+    const res = await fetch(ANTHROPIC_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': secrets.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+      },
+      body: JSON.stringify({
+        model: ANTHROPIC_MODEL,
+        max_tokens: 10,
+        temperature: 0,
+        messages: [{ role: 'user', content: 'Say OK' }],
+      }),
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text().catch(() => 'unknown')}`);
+    const body = await res.json();
     if (!body.content?.[0]?.text) throw new Error('Empty response');
   });
-  results.push(bedrockResult);
+  results.push(anthropicResult);
 
   // --- Build report ---
   const okCount = results.filter(r => r.status === 'OK').length;

@@ -21,8 +21,8 @@
 set -euo pipefail
 
 # --- Configuration ---
-REGION="eu-west-1"
-BEDROCK_REGION="us-east-1"
+REGION="eu-north-1"
+BEDROCK_REGION="eu-north-1"
 FUNCTION_NAME="artnapi-email-processor"
 ROLE_NAME="artnapi-email-processor-role"
 S3_BUCKET="artnapi-email-processor-kb"
@@ -39,13 +39,14 @@ WEEKLY_STATS_FUNCTION_NAME="artnapi-email-processor-stats"
 SNS_TOPIC_NAME="artnapi-email-processor-alerts"
 DASHBOARD_NAME="artnapi-email-processor"
 RUNTIME="nodejs20.x"
+ARCHITECTURE="arm64"
 HANDLER="index.handler"
 MEMORY=512
-TIMEOUT=120
+TIMEOUT=180
 MY_EMAIL="mateusz.sokolski@artnapi.pl"
 TELEGRAM_CHAT_ID="1304598782"
 NOTION_CRM_DATASOURCE_ID="26f862e1-4a0c-808f-a249-000b2cee31df"
-BEDROCK_MODEL_ID="anthropic.claude-sonnet-4-6-20250514-v1:0"
+BEDROCK_MODEL_ID="eu.anthropic.claude-sonnet-4-6"
 
 # Repo root (for S3 KB sync)
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
@@ -217,7 +218,7 @@ create_iam_role() {
         "Sid": "BedrockInvoke",
         "Effect": "Allow",
         "Action": ["bedrock:InvokeModel"],
-        "Resource": "arn:aws:bedrock:'"${BEDROCK_REGION}"'::foundation-model/anthropic.claude-sonnet-4-6*"
+        "Resource": ["arn:aws:bedrock:*::foundation-model/anthropic.claude-sonnet-4-6*", "arn:aws:bedrock:*:'"${ACCOUNT_ID}"':inference-profile/eu.anthropic.claude-sonnet-4-6*"]
       },
       {
         "Sid": "CloudWatchLogs",
@@ -262,11 +263,10 @@ create_lambda() {
       "DYNAMO_TABLE": "'"${DYNAMO_TABLE}"'",
       "TELEGRAM_CHAT_ID": "'"${TELEGRAM_CHAT_ID}"'",
       "NOTION_CRM_DATASOURCE_ID": "'"${NOTION_CRM_DATASOURCE_ID}"'",
-      "BEDROCK_MODEL_ID": "'"${BEDROCK_MODEL_ID}"'",
-      "BEDROCK_REGION": "'"${BEDROCK_REGION}"'",
+      "ANTHROPIC_MODEL_ID": "claude-sonnet-4-6",
       "MY_EMAIL": "'"${MY_EMAIL}"'",
       "SECRET_NAME": "'"${SECRET_NAME}"'",
-      "DAILY_BEDROCK_CAP": "50",
+      "DAILY_AI_CAP": "50",
       "DRAFT_FREQUENCY_CAP_24H": "3"
     }
   }'
@@ -301,6 +301,7 @@ create_lambda() {
     while ! aws lambda create-function \
       --function-name "${FUNCTION_NAME}" \
       --runtime "${RUNTIME}" \
+      --architectures "${ARCHITECTURE}" \
       --handler "${HANDLER}" \
       --memory-size "${MEMORY}" \
       --timeout "${TIMEOUT}" \
@@ -463,7 +464,7 @@ create_eventbridge_rule() {
   # Add Lambda as target
   aws events put-targets \
     --rule "${EVENTBRIDGE_RULE}" \
-    --targets "Id=email-processor-lambda,Arn=${LAMBDA_ARN},Input={\"source\":\"eventbridge-fallback\"}" \
+    --targets '[{"Id":"email-processor-lambda","Arn":"'"${LAMBDA_ARN}"'","Input":"{\"source\":\"eventbridge-fallback\"}"}]' \
     --region "${REGION}"
 
   # Grant EventBridge permission to invoke Lambda
@@ -492,7 +493,7 @@ create_secret() {
 
   # Try to load values from .env file
   local ENV_FILE="${REPO_ROOT}/.env"
-  local GMAIL_CLIENT_ID="" GMAIL_CLIENT_SECRET="" GMAIL_REFRESH_TOKEN="" NOTION_API_KEY="" TELEGRAM_BOT_TOKEN=""
+  local GMAIL_CLIENT_ID="" GMAIL_CLIENT_SECRET="" GMAIL_REFRESH_TOKEN="" NOTION_API_KEY="" TELEGRAM_BOT_TOKEN="" ANTHROPIC_API_KEY=""
 
   if [[ -f "${ENV_FILE}" ]]; then
     log "Loading credentials from .env file..."
@@ -501,29 +502,30 @@ create_secret() {
     GMAIL_REFRESH_TOKEN=$(grep '^GMAIL_REFRESH_TOKEN=' "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || true)
     NOTION_API_KEY=$(grep '^NOTION_API_KEY=' "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || true)
     TELEGRAM_BOT_TOKEN=$(grep '^TELEGRAM_BOT_TOKEN=' "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || true)
+    ANTHROPIC_API_KEY=$(grep '^ANTHROPIC_API_KEY=' "${ENV_FILE}" | cut -d'=' -f2- | tr -d '"' || true)
   fi
 
-  if [[ -z "${GMAIL_CLIENT_ID}" || -z "${GMAIL_CLIENT_SECRET}" || -z "${GMAIL_REFRESH_TOKEN}" || -z "${NOTION_API_KEY}" || -z "${TELEGRAM_BOT_TOKEN}" ]]; then
+  if [[ -z "${GMAIL_CLIENT_ID}" || -z "${GMAIL_CLIENT_SECRET}" || -z "${GMAIL_REFRESH_TOKEN}" || -z "${NOTION_API_KEY}" || -z "${TELEGRAM_BOT_TOKEN}" || -z "${ANTHROPIC_API_KEY}" ]]; then
     error "Could not find all required credentials in .env file."
     echo ""
     echo "Please create the secret manually:"
     echo ""
     echo "  aws secretsmanager create-secret \\"
     echo "    --name '${SECRET_NAME}' \\"
-    echo "    --secret-string '{\"GMAIL_CLIENT_ID\":\"...\",\"GMAIL_CLIENT_SECRET\":\"...\",\"GMAIL_REFRESH_TOKEN\":\"...\",\"NOTION_API_KEY\":\"...\",\"TELEGRAM_BOT_TOKEN\":\"...\"}' \\"
+    echo "    --secret-string '{\"GMAIL_CLIENT_ID\":\"...\",\"GMAIL_CLIENT_SECRET\":\"...\",\"GMAIL_REFRESH_TOKEN\":\"...\",\"NOTION_API_KEY\":\"...\",\"TELEGRAM_BOT_TOKEN\":\"...\",\"ANTHROPIC_API_KEY\":\"...\"}' \\"
     echo "    --region '${REGION}'"
     echo ""
     return 1
   fi
 
   local SECRET_JSON
-  SECRET_JSON=$(printf '{"GMAIL_CLIENT_ID":"%s","GMAIL_CLIENT_SECRET":"%s","GMAIL_REFRESH_TOKEN":"%s","NOTION_API_KEY":"%s","TELEGRAM_BOT_TOKEN":"%s"}' \
-    "${GMAIL_CLIENT_ID}" "${GMAIL_CLIENT_SECRET}" "${GMAIL_REFRESH_TOKEN}" "${NOTION_API_KEY}" "${TELEGRAM_BOT_TOKEN}")
+  SECRET_JSON=$(printf '{"GMAIL_CLIENT_ID":"%s","GMAIL_CLIENT_SECRET":"%s","GMAIL_REFRESH_TOKEN":"%s","NOTION_API_KEY":"%s","TELEGRAM_BOT_TOKEN":"%s","ANTHROPIC_API_KEY":"%s"}' \
+    "${GMAIL_CLIENT_ID}" "${GMAIL_CLIENT_SECRET}" "${GMAIL_REFRESH_TOKEN}" "${NOTION_API_KEY}" "${TELEGRAM_BOT_TOKEN}" "${ANTHROPIC_API_KEY}")
 
   aws secretsmanager create-secret \
     --name "${SECRET_NAME}" \
     --secret-string "${SECRET_JSON}" \
-    --description "Gmail OAuth + Notion API + Telegram Bot credentials for email processor" \
+    --description "Gmail OAuth + Notion API + Telegram Bot + Anthropic API credentials for email processor" \
     --region "${REGION}"
 
   log "Secret created successfully."
@@ -730,7 +732,7 @@ deploy_canary() {
 
   local ZIP_FILE="/tmp/${CANARY_FUNCTION_NAME}.zip"
   # Include canary entry point + shared modules it may need
-  (cd "${SCRIPT_DIR}" && zip -j "${ZIP_FILE}" canary.mjs secrets.mjs gmail.mjs telegram.mjs dynamo.mjs utils.mjs package.json)
+  (cd "${SCRIPT_DIR}" && zip -j "${ZIP_FILE}" canary.mjs secrets.mjs gmail.mjs telegram.mjs dynamo.mjs utils.mjs s3.mjs notion.mjs package.json)
 
   log "Deploying canary Lambda..."
 
@@ -771,6 +773,7 @@ deploy_canary() {
     while ! aws lambda create-function \
       --function-name "${CANARY_FUNCTION_NAME}" \
       --runtime "${RUNTIME}" \
+      --architectures "${ARCHITECTURE}" \
       --handler "${CANARY_HANDLER}" \
       --memory-size "${CANARY_MEMORY}" \
       --timeout "${CANARY_TIMEOUT}" \
@@ -817,7 +820,7 @@ deploy_canary() {
 
   aws events put-targets \
     --rule "${CANARY_RULE}" \
-    --targets "Id=canary-lambda,Arn=${CANARY_ARN},Input={\"source\":\"eventbridge-canary\"}" \
+    --targets '[{"Id":"canary-lambda","Arn":"'"${CANARY_ARN}"'","Input":"{\"source\":\"eventbridge-canary\"}"}]' \
     --region "${REGION}"
 
   aws lambda add-permission \
@@ -892,6 +895,7 @@ deploy_watch_renewal() {
     while ! aws lambda create-function \
       --function-name "${WATCH_RENEWAL_FUNCTION_NAME}" \
       --runtime "${RUNTIME}" \
+      --architectures "${ARCHITECTURE}" \
       --handler "${WATCH_HANDLER}" \
       --memory-size "${WATCH_MEMORY}" \
       --timeout "${WATCH_TIMEOUT}" \
@@ -938,7 +942,7 @@ deploy_watch_renewal() {
 
   aws events put-targets \
     --rule "${WATCH_RULE}" \
-    --targets "Id=watch-renewal-lambda,Arn=${WATCH_ARN},Input={\"source\":\"eventbridge-watch-renewal\"}" \
+    --targets '[{"Id":"watch-renewal-lambda","Arn":"'"${WATCH_ARN}"'","Input":"{\"source\":\"eventbridge-watch-renewal\"}"}]' \
     --region "${REGION}"
 
   aws lambda add-permission \
@@ -1019,6 +1023,7 @@ deploy_weekly_stats() {
     while ! aws lambda create-function \
       --function-name "${WEEKLY_STATS_FUNCTION_NAME}" \
       --runtime "${RUNTIME}" \
+      --architectures "${ARCHITECTURE}" \
       --handler "${STATS_HANDLER}" \
       --memory-size "${STATS_MEMORY}" \
       --timeout "${STATS_TIMEOUT}" \
@@ -1065,7 +1070,7 @@ deploy_weekly_stats() {
 
   aws events put-targets \
     --rule "${STATS_RULE}" \
-    --targets "Id=weekly-stats-lambda,Arn=${STATS_ARN},Input={\"source\":\"eventbridge-weekly-stats\"}" \
+    --targets '[{"Id":"weekly-stats-lambda","Arn":"'"${STATS_ARN}"'","Input":"{\"source\":\"eventbridge-weekly-stats\"}"}]' \
     --region "${REGION}"
 
   aws lambda add-permission \
@@ -1144,7 +1149,7 @@ main() {
       echo ""
       echo "Next steps:"
       echo "  1. Create Secrets Manager secret (if not done): ./deploy.sh create-secret"
-      echo "  2. Enable Bedrock model access in us-east-1 (AWS Console -> Bedrock -> Model access)"
+      echo "  2. Enable Bedrock model access in eu-north-1 (AWS Console -> Bedrock -> Model access)"
       echo "  3. Set up Gmail Push Notifications (Google Cloud Console -> Pub/Sub)"
       echo "  4. Test: Send an email to ${MY_EMAIL} and check CloudWatch Logs + Telegram"
       echo "  5. Deploy extras (dashboard, alarms, canary, watch renewal, weekly stats): ./deploy.sh extras"

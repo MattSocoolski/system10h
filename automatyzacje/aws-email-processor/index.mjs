@@ -26,7 +26,7 @@ import {
   gmailCreateDraft,
 } from './gmail.mjs';
 import { queryCRM, buildEmailIndex, updateNotionLead } from './notion.mjs';
-import { classifyEmail, generateDraft } from './bedrock.mjs';
+import { classifyEmail, generateDraft, init as initAI } from './bedrock.mjs';
 import { sendTelegram } from './telegram.mjs';
 import { loadS3File, checkStaleness } from './s3.mjs';
 import {
@@ -59,14 +59,35 @@ export async function handler(event) {
   const isWebhook = !!(event.body || event.requestContext);
   const isFallback = event.source === 'eventbridge-fallback';
 
-  // Webhook validation (Edge Case: API Gateway security)
+  // Webhook validation (API Gateway security)
+  // Layer 1: Pub/Sub subscription path validation (structure check)
+  // Layer 2: Pub/Sub Bearer token verification (if WEBHOOK_AUTH_TOKEN env var set)
+  // Layer 3: DynamoDB dedup + Gmail API reads (webhook only triggers, payload ignored)
   if (isWebhook && event.body) {
+    // Bearer token check — shared secret between Pub/Sub subscription and Lambda
+    const authToken = process.env.WEBHOOK_AUTH_TOKEN;
+    if (authToken) {
+      const authHeader = event.headers?.authorization || event.headers?.Authorization || '';
+      if (authHeader !== `Bearer ${authToken}`) {
+        console.warn('[Handler] REJECTED: Invalid or missing webhook auth token');
+        return { statusCode: 403, body: 'Forbidden: invalid auth' };
+      }
+    }
     try {
       const body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
+
+      // Validate subscription path (strict format)
       const subscription = body?.subscription || '';
-      if (!subscription.includes('artnapi-gmail-push')) {
-        console.warn('[Handler] REJECTED: Invalid Pub/Sub subscription', subscription);
+      const validSubscription = /^projects\/[a-z][a-z0-9-]*\/subscriptions\/artnapi-gmail-push$/.test(subscription);
+      if (!validSubscription) {
+        console.warn('[Handler] REJECTED: Invalid Pub/Sub subscription path', subscription);
         return { statusCode: 403, body: 'Forbidden' };
+      }
+
+      // Validate message envelope exists
+      if (!body.message || typeof body.message !== 'object') {
+        console.warn('[Handler] REJECTED: Missing or invalid message field in Pub/Sub envelope');
+        return { statusCode: 400, body: 'Bad Request: missing message' };
       }
     } catch {
       // Malformed body — reject
@@ -79,6 +100,7 @@ export async function handler(event) {
   try {
     // --- STEP 1: Load secrets ---
     secrets = await getSecrets();
+    initAI(secrets.ANTHROPIC_API_KEY);
   } catch (err) {
     console.error('[Handler] FATAL: Failed to load secrets:', err.message);
     // Can't send Telegram without secrets — just log and bail
@@ -103,7 +125,7 @@ export async function handler(event) {
     }
 
     // Query: inbox messages from others in last hour (webhook) or 15 min (fallback)
-    const timeWindow = isFallback ? '15m' : '1h';
+    const timeWindow = isFallback ? '20m' : '1h';
     const query = `to:${MY_EMAIL} is:inbox newer_than:${timeWindow} -from:${MY_EMAIL} -category:promotions -category:social -category:updates`;
     const messages = await gmailSearchMessages(accessToken, query, 10);
 
@@ -227,12 +249,19 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     return;
   }
 
-  // --- A. DRAFT QUALITY GUARD: Check if already replied in thread ---
-  const sentInThread = await gmailSearchMessages(accessToken,
-    `from:${MY_EMAIL} to:${senderEmail} in:sent newer_than:7d`, 5);
+  // --- A. DRAFT QUALITY GUARD: Check if already replied AFTER this email ---
+  // Fetch thread messages early (also reused for draft generation later)
+  const threadMessages = await getThreadMessages(accessToken, detail.threadId);
+  const incomingTs = Number(detail.internalDate || 0);
 
-  if (sentInThread.length > 0) {
-    safeLog('[Process] Already replied in thread, skipping', { email: senderEmail });
+  const repliedAfterIncoming = threadMessages.some(m => {
+    const msgFrom = extractEmail(m.from);
+    const msgTs = Number(m.internalDate || 0);
+    return msgFrom === MY_EMAIL.toLowerCase() && msgTs > incomingTs;
+  });
+
+  if (repliedAfterIncoming) {
+    safeLog('[Process] Already replied in thread after this email, skipping', { email: senderEmail });
     await sendTelegram(secrets,
       `Mail od ${maskEmail(senderEmail)}, ale juz odpowiedziano w watku. SKIP.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_ALREADY_REPLIED');
@@ -269,7 +298,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
 
   // --- B. CONTEXT ---
   const lead = emailToLead[senderEmail] || null;
-  const threadMessages = await getThreadMessages(accessToken, detail.threadId);
+  // threadMessages already fetched in Draft Quality Guard (step A)
 
   // --- C. CLASSIFICATION (Bedrock) ---
   let classification;

@@ -64,25 +64,23 @@ export function addBusinessDays(date, days) {
 export function validatePricesInDraft(draftBody, ofertaText) {
   if (!draftBody || !ofertaText) return { valid: true };
 
-  // If draft links to calculator, prices are dynamic — skip validation
-  if (draftBody.includes('B2B-Price-Calculator') || draftBody.includes('artnapi.pl/kalkulator')) {
-    return { valid: true };
-  }
-
-  // Extract price patterns: digits with comma/dot + currency
-  const priceRegex = /(\d+[,\.]\d{1,2})\s*(PLN|EUR|zł|zl|euro|€)/gi;
+  // Extract price patterns: integers and decimals with optional thousand separators + currency
+  const priceRegex = /(\d[\d\s]*(?:[,\.]\d{1,2})?)\s*(PLN|EUR|zł|zl|euro|€)/gi;
   const matches = [...draftBody.matchAll(priceRegex)];
 
   if (matches.length === 0) return { valid: true };
 
   const badPrices = [];
   for (const m of matches) {
-    const priceStr = m[1]; // e.g. "12,50"
+    const priceStr = m[1].replace(/\s/g, ''); // strip thousand separators e.g. "1 250,00" -> "1250,00"
     // Normalize: replace comma with dot for comparison, and vice versa
     const withDot = priceStr.replace(',', '.');
     const withComma = priceStr.replace('.', ',');
-    // Check if either form appears in oferta
-    if (!ofertaText.includes(withDot) && !ofertaText.includes(withComma) && !ofertaText.includes(priceStr)) {
+    // Also check original (with spaces) and without thousand dots
+    const noThousandDot = priceStr.replace(/\.(\d{3})/g, '$1'); // "1.250,00" -> "1250,00"
+    // Check if any form appears in oferta
+    const found = [priceStr, withDot, withComma, noThousandDot].some(v => ofertaText.includes(v));
+    if (!found) {
       badPrices.push(m[0]);
     }
   }
@@ -99,15 +97,26 @@ export function validatePricesInDraft(draftBody, ofertaText) {
 export function validateNoCommitments(draftBody) {
   if (!draftBody) return { valid: true };
   const forbidden = [
-    'gwarantujemy', 'obiecujemy', 'zobowiązujemy się', 'zobowiazujemy sie',
-    'umowa', 'kontrakt',
-    'we guarantee', 'we promise', 'we commit', 'contract', 'binding agreement'
+    // PL commitments
+    'gwarantujemy', 'gwarancja', 'obiecujemy', 'zobowiązujemy się', 'zobowiazujemy sie',
+    'umowa', 'kontrakt', 'zapewniamy', 'deklarujemy', 'podpisujemy', 'na pewno',
+    // EN commitments
+    'we guarantee', 'guaranteed', 'we promise', 'we commit', 'we assure', 'we ensure',
+    'contract', 'binding agreement', 'agreement',
+    // PL discounts (unauthorized offers)
+    'rabat', 'zniżka', 'znizka', 'specjalna cena', 'promocja', 'obniżka', 'obnizka',
+    // EN discounts
+    'discount', 'special price', 'special offer', 'reduced price',
   ];
   const lower = draftBody.toLowerCase();
   for (const word of forbidden) {
     if (lower.includes(word)) {
-      return { valid: false, detail: `Forbidden commitment word: "${word}"` };
+      return { valid: false, detail: `Forbidden word: "${word}"` };
     }
+  }
+  // Check for delivery time commitments (regex)
+  if (/(?:dostarczymy|delivery|wysylka|shipping).{0,30}(?:\d+\s*(?:dni|days|hours|godzin|h))/i.test(draftBody)) {
+    return { valid: false, detail: 'Delivery time commitment detected' };
   }
   return { valid: true };
 }

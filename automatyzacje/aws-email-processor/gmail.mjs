@@ -127,6 +127,7 @@ export async function gmailGetMessage(accessToken, messageId, format = 'metadata
   return {
     id: data.id,
     threadId: data.threadId,
+    internalDate: data.internalDate || '0',
     from: headers.from || '',
     to: headers.to || '',
     subject: headers.subject || '',
@@ -197,6 +198,7 @@ export async function getThreadMessages(accessToken, threadId) {
     }
     return {
       id: msg.id,
+      internalDate: msg.internalDate || '0',
       from: headers.from || '',
       subject: headers.subject || '',
       date: headers.date || '',

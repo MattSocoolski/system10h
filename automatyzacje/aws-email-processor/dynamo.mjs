@@ -33,16 +33,26 @@ export async function isProcessed(messageId) {
  * @param {string} action — DRAFT_CREATED | SKIPPED_ALREADY_REPLIED | SKIPPED_DECISION | SKIPPED_GUARDRAIL | SKIPPED_FREQ_CAP | SKIPPED_BUDGET_CAP | SKIPPED_OWN_EMAIL | SKIPPED_EXISTING_DRAFT
  */
 export async function markProcessed(messageId, senderEmail, action) {
-  await client.send(new PutItemCommand({
-    TableName: TABLE,
-    Item: {
-      PK: { S: `EMAIL#${messageId}` },
-      processedAt: { S: new Date().toISOString() },
-      senderEmail: { S: senderEmail || 'unknown' },
-      action: { S: action },
-      ttl: { N: String(Math.floor(Date.now() / 1000) + TTL_30_DAYS) },
-    },
-  }));
+  try {
+    await client.send(new PutItemCommand({
+      TableName: TABLE,
+      Item: {
+        PK: { S: `EMAIL#${messageId}` },
+        processedAt: { S: new Date().toISOString() },
+        senderEmail: { S: senderEmail || 'unknown' },
+        action: { S: action },
+        ttl: { N: String(Math.floor(Date.now() / 1000) + TTL_30_DAYS) },
+      },
+      ConditionExpression: 'attribute_not_exists(PK)',
+    }));
+    return { written: true };
+  } catch (err) {
+    if (err.name === 'ConditionalCheckFailedException') {
+      // Another Lambda instance already processed this email
+      return { written: false, reason: 'already_exists' };
+    }
+    throw err;
+  }
 }
 
 // --- Frequency Cap (Edge Case 3: spam loop prevention) ---

@@ -5,6 +5,7 @@
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { getSecrets } from './secrets.mjs';
 import { sendTelegram } from './telegram.mjs';
+import { maskEmail } from './utils.mjs';
 
 const TABLE = process.env.DYNAMO_TABLE || 'email-processor-state';
 const REGION = process.env.AWS_REGION || 'eu-west-1';
@@ -105,7 +106,7 @@ export async function handler() {
 
   // --- 3. Build Telegram report ---
   const sendersBlock = topSenders
-    .map(([email, count], i) => `${i + 1}. ${email} — ${count} maili`)
+    .map(([email, count], i) => `${i + 1}. ${maskEmail(email)} — ${count} maili`)
     .join('\n');
 
   const otherSkips = counters.SKIPPED_FREQ_CAP + counters.SKIPPED_BUDGET_CAP + counters.other;
