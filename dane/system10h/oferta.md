@@ -103,11 +103,11 @@ Scenariusze:
 
 ---
 
-## CENA
+## CENA — 2 TIER-Y
 
-**2 999 PLN netto** (jednorazowo)
+### Tier 1: System 10H Setup — **3 499 PLN netto** (jednorazowo)
 
-### Co dostajesz (value stacking):
+Bliźniak Biznesowy + Email Autopilot w jednym pakiecie.
 
 | Element | Wartość |
 |---------|---------|
@@ -116,36 +116,41 @@ Scenariusze:
 | Bliźniak Biznesowy v7.0 — AI z 16 workflow'ami + Radar Szans + pamięć | 2 800 PLN |
 | Protokół Wiarygodności — AI nie halucynuje, cytuje źródła, weryfikuje dane | 500 PLN |
 | Głęboki Profil Stylu — 3-warstwowa analiza stylu z kontekstami komunikacji | 600 PLN |
+| Email Autopilot install — konfiguracja AWS, Gmail Push, CRM, prompty | 1 500 PLN |
 | Nagranie szkoleniowe Loom (3 demo na żywo) | 500 PLN |
 | Biblioteka 16 scenariuszy (gotowe przykłady) | 600 PLN |
 | Quick Start + instrukcja instalacji | 200 PLN |
 | Wsparcie mailowe 30 dni | 900 PLN |
 | Inteligentny routing (AI rozpoznaje intencje) | 800 PLN |
 | Gwarancja 30 dni zwrotu bez pytań | — |
-| **Łączna wartość** | **9 000 PLN** |
-| **Twoja inwestycja** | **2 999 PLN** |
+| **Łączna wartość** | **10 500 PLN** |
+| **Twoja inwestycja** | **3 499 PLN** |
 
-- Zero abonamentu
-- Zero ukrytych kosztów
 - Płatność 100% z góry
-- Raty w rozmowie: 2× 1 499,50 PLN (tylko gdy klient chce, ale ma problem z cashflow)
+- Raty: 2× 1 749,50 PLN (tylko przy problemie z cashflow)
+- Bliźniak-only (bez EA): 2 499 PLN — dla klientów którzy nie chcą Autopilota
 
-**ROI:** Zwraca się po 1 uratowanym dealu lub 10h zaoszczędzonego czasu.
+### Tier 2: System 10H Autopilot — **499 PLN/msc** (recurring, opcjonalny)
 
-### Email Autopilot (addon — recurring)
+Email Autopilot running + monitoring + tuning + wsparcie.
 
-Twój Bliźniak już zna Twój styl i cennik. Email Autopilot sprawia że **SAM odpowiada na maile** — gotowe drafty czekają w Gmail, Ty tylko przeglądasz i wysyłasz.
+| Element | Opis |
+|---------|------|
+| Email Autopilot | AI monitoruje inbox, klasyfikuje maile, draftuje odpowiedzi w Twoim stylu |
+| Guardrails | Walidacja cen, blokada rabatów/zobowiązań, eskalacja decyzji na Telegram |
+| CRM sync | Auto-update Notion (Due, lastContact, notatki) |
+| Monitoring 24/7 | Canary health check, CloudWatch alarms, Telegram alerts |
+| 30 min call/msc | Tuning promptów, nowe scenariusze, przegląd efektywności |
+| Gwarancja | Nie oszczędza czasu → rezygnacja w dowolnym momencie |
 
-**Co robi:**
-- Monitoruje Twój inbox w real-time (Gmail Push, <10 sek)
-- Klasyfikuje maile (STANDARD → auto-draft, DECISION → alert na Telegram)
-- Generuje odpowiedź w Twoim stylu (ghost_styl.md) z poprawnymi cenami (oferta.md)
-- Guardrails: walidacja cen, blokada nieautoryzowanych rabatów/zobowiązań
-- Łączy się z Notion CRM (kontekst leada, auto-update Due/lastContact)
-- Telegram: powiadomienia o nowych mailach + gotowych draftach
+**Co robi Email Autopilot:**
+- Monitoruje inbox w real-time (Gmail Push, <10 sek)
+- Klasyfikuje: STANDARD → auto-draft | DECISION → alert na Telegram
+- Generuje odpowiedź w Twoim stylu z poprawnymi cenami
+- Łączy się z Notion CRM (kontekst leada, historia wątku)
+- NIGDY nie wysyła maili — tylko drafty do Twojego review
 
-**Cena:**
-- Setup: **999 PLN** (jednorazowo — konfiguracja AWS, Gmail, CRM, prompty)
+**ROI:** Zwraca się po 1 uratowanym dealu lub 10h zaoszczędzonego czasu. Autopilot oszczędza ~1-2h/dzień na odpowiedziach.
 - Abonament: **299 PLN/msc** (obejmuje API AI + infrastruktura + monitoring)
 - Wymaga aktywnego Bliźniaka (dane ghost_styl.md + oferta.md)
 

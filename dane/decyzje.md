@@ -37,6 +37,19 @@
 
 ## AKTYWNE DECYZJE
 
+### [SYSTEM10H] 24.03.2026 | STRATEGIA | PIVOT POZYCJONOWANIA — EMAIL AUTOPILOT JAKO SERCE PITCH-A
+
+**KONTEKST:** SD→Demo = 0% (8 leadów → 0 demo). Diagnoza: Bliźniak jest ABSTRAKCYJNY ("AI który zna Twój biznes" brzmi jak kurs). Email Autopilot jest KONKRETNY ("wyślij maila, za 10s masz draft"). EA = najlepsza demonstracja wartości Bliźniaka. Nikt w PL tego nie ma dla handlowców B2B solo.
+
+**DECYZJA:** Uproszczenie do 2 tier-ów:
+- **System 10H Setup** = 3 499 PLN (Bliźniak + EA install + szkolenie)
+- **System 10H Autopilot** = 499 PLN/msc (EA running + monitoring + 30 min call/msc + tuning)
+- LTV: 3 499 + 12 × 499 = 9 487 PLN/rok (3.2x vs obecne 2 999)
+
+**DLACZEGO:** Przestajemy sprzedawać "AI asystenta" (abstrakcyjne). Zaczynamy sprzedawać "AI który sam odpisuje na maile" (konkretne, demonstrowalne). Demo 2 min: send email → Telegram → draft w Gmail. Bliźniak = mózg. Email Autopilot = ręce.
+
+**NASTĘPNY KROK:** @cso materiały pitch + demo script (realizacja). @cmo content plan (3 posty LI + Loom demo). @cso upsell Stalton + bundle Modul Soft.
+
 ### [SYSTEM10H] 24.03.2026 | STRATEGIA | EMAIL AUTOPILOT — CONNECTED DOTS Z BLIŹNIAKIEM
 
 **KONTEKST:** Email Autopilot (zbudowany jako processor ArtNapi) przeszedł 4 fazy produktyzacji: bugfixy → security → tenant abstraction → CDK IaC. Kluczowe odkrycie: Bliźniak już tworzy WSZYSTKIE dane których EA potrzebuje (ghost_styl.md, oferta.md, CRM). Zero dodatkowej konfiguracji.

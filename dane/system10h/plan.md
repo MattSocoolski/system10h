@@ -66,21 +66,20 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ### LINIA PRODUKTOWA (aktualizacja 24.03)
 
-| # | Produkt | Cena | Recurring | Status |
-|---|---------|------|-----------|--------|
-| 0 | Self-Discovery | Free | — | LIVE |
-| 1 | Bliźniak Biznesowy v7.0 | 2 999 PLN | — | LIVE |
-| 2 | **Email Autopilot** | 999 PLN + 299/msc | TAK | **READY** (prod-tested na ArtNapi, multi-tenant, CDK) |
-| 3 | Bliźniak PRO | 499 PLN + 199/msc | TAK | SPEC (architektura gotowa) |
-| 4 | CARE | 299 PLN/msc | TAK | SPEC (W1 kwi) |
+| Tier | Produkt | Cena | Model | Status |
+|------|---------|------|-------|--------|
+| 0 | Self-Discovery | Free | Lead magnet | LIVE |
+| **1** | **System 10H Setup** (Bliźniak + EA install) | **3 499 PLN** | Jednorazowo | **READY** |
+| **2** | **System 10H Autopilot** (EA running + tuning + call) | **499 PLN/msc** | Recurring | **READY** |
+| alt | Bliźniak-only (bez EA) | 2 499 PLN | Jednorazowo | Fallback |
 
-**Email Autopilot LTV per klient:** 999 + 12 × 299 = **4 587 PLN/rok**
-**Bliźniak + Email Autopilot bundle:** 2 999 + 999 + 12 × 299 = **7 586 PLN/rok**
-**Full stack (Bliźniak + EA + CARE):** 2 999 + 999 + 12 × 598 = **11 174 PLN/rok**
-
-**Upsell targets (kwiecień):** Stalton (CARE + EA), Modul Soft (bundle), Zbigniew (maj)
-**Koszt per klient:** ~128 PLN/msc (API + AWS). Marża 57%.
-**Onboarding:** ~2-3h (dane z Bliźniaka już istnieją, zero dodatkowej konfiguracji)
+**LTV per klient:** 3 499 + 12 × 499 = **9 487 PLN/rok** (3.2x vs stare 2 999)
+**Koszt per klient:** ~128 PLN/msc (Anthropic API + AWS). **Marża na recurring: 74%** (499 - 128 = 371 PLN)
+**Break-even recurring:** 1 klient (ArtNapi pokrywa infra)
+**Onboarding:** ~2-3h (dane z Bliźniaka już istnieją)
+**Upsell targets:** Stalton (W2 kwi), Modul Soft (bundle B), Zbigniew (maj)
+**Demo:** 2 min live — send email → Telegram → draft w Gmail
+**Materiały:** `materialy/2026-03-24_email_autopilot_*.md` (demo script, pitch, content plan)
 **Kod:** `automatyzacje/aws-email-processor/` | **Infra:** `infra/` (CDK)
 
 ---
