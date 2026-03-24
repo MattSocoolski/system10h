@@ -24,82 +24,64 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 
 ---
 
-## 📆 AKTUALNY MIESIĄC: MARZEC 2026
+## 📆 MARZEC 2026 — ZAMKNIĘTY
 
-**Cel:** Min. 2 × close = 5 000+ PLN netto + sformalizować deal Kamil/Napi (22.5-30k pasywny)
-**Fokus:** Demo > outreach. Zamykać ciepłe leady, nie generować nowe.
-**Strategia 3 tyg (08.03):** W2 odblokuj demo + wznów content → W3 demo sprint → W4 domykanie + Kamil deadline.
+**Wynik:** 1 220 PLN closed (Stalton) + Kamil/CQRE umowa podpisana (~27k prowizja pending).
+**Co zrobione:** Demo Modul Soft ✅, Kamil/CQRE umowa ✅, 7 postów LI, Zbigniew demo ✅ (nurture maj), Karolina demo ✅ (nurture). 6× Deep Research → strategia "AI Handlowiec".
+**Co nie wyszło:** Glinka/Wielgosz/Krystian = 0% konwersja SD→Demo → usunięci.
+**Lekcja:** Lejek SD→Demo nie działa. Diagnoza w kwiecień W1.
 
-**Priorytetowe akcje:**
-- [x] DM do Zbigniewa — "Dzień z Bliźniakiem" wysłany ✅ 04.03 → DEMO ✅ 05.03 → NURTURE MAJ
-- [x] DM do Karoliny Durmaj ✅ 05.03 (call + demo) → NURTURE, FU ~19.03
-- [ ] Follow-up Michał Glinka — FU wysłany 04.03, proponowane demo CZ/PT. **PON 09.03: 2. nudge z konkretnym terminem.**
-- [x] ~~Follow-up Rafał Knap~~ — wykreślony 04.03
-- [ ] Demo Krystian Szczypek (AI urzędy, discovery). **ŚR 11.03: ustal termin + gate check (pipeline urzędów?).**
-- [x] Sformalizować współpracę z Kamilem Andruszem/CQRE — 30% prowizji Faza 1+2, umowa drafted ✅ 04.03. **W2: sfinalizuj docx, wyślij do review.**
-- [ ] Follow-up Michał Gawlik — WhatsApp 04.03. **PON 09.03: 2. nudge.**
-- [ ] Nudge Michał Wielgosz — link wysłany 23.02, brak SD. **WT 10.03: DM z ofertą demo.**
-- [ ] Case study Stalton — czeka na feedback Natana. **W3: ping jeśli brak odpowiedzi.**
-- [x] LinkedIn 2-3 posty/tyg — **7 opublikowanych w marcu** (5 wcześniej + "3 poziomy AI" 19.03 + "Czy Twoje AI działa?" zaplanowany SO 22.03). Deep Research Gemini → value-first posty z danymi (Gartner, Salesforce, MarketBetter). Kontynuuj 2-3/tyg W4.
-- [ ] Gosia Jary / FSI — ping "Kiedy spotkanie?" Potencjał: polecanie Bliźniaka po szkoleniach.
-- [ ] Referral ask Zbigniew — 3 intro z sieci (180k, VP Mówców). Do końca marca.
+---
 
-### PLAN TYGODNIA 2 (09-13.03) — ODBLOKUJ PIPELINE
+## 📆 AKTUALNY MIESIĄC: KWIECIEŃ 2026
 
-**@CSO — Follow-up blitz (cel: 2 demo umówione):**
+**Cel:** Min. 1 close (2 999 PLN) + uruchomić CARE recurring + case study Stalton
+**Fokus:** Domknij Modul Soft + uruchom CARE + napraw lejek. Reszta = content "AI Handlowiec".
 
-| Dzień | Lead | Akcja |
-|-------|------|-------|
-| PON 09 | Michał Glinka | FU DM: konkretna propozycja terminu demo (CZ/PT) |
-| PON 09 | Michał Gawlik | WhatsApp FU: "15 min call, mam gotowy koncept" |
-| WT 10 | Michał Wielgosz | Nudge DM z ofertą demo na żywo |
-| ŚR 11 | Krystian Szczypek | DM: termin discovery + pytanie "masz urzędy w pipeline?" |
-| CZW 12 | Nowy outreach ×2 | 2 DM LinkedIn do handlowców B2B solo |
-| PT 13 | Pipeline review | Kto odpowiedział, scoring, decyzje |
+### PLAN W1 (31.03-04.04) — FUNDAMENTY
 
-**@CMO — Wznowienie contentu (cel: 3 posty LI):**
+| # | Akcja | Czas | Kto |
+|---|-------|------|-----|
+| 1 | **Ping Natan → feedback Blok 2+3** (BLOKUJĄCY case study) | 30 min | user |
+| 2 | **Modul Soft check-in** — 4 dni po FU, Ola testowała? | 30 min | @ghost |
+| 3 | **CARE spec** — 299 PLN/mies: 30 min call + tuning + scenariusze | 1h | @ceo+@cso |
+| 4 | **Diagnoza SD→Demo 0%** — dlaczego 8 leadów → 0 demo? | 2h | @cso |
 
-| Dzień | Akcja |
-|-------|-------|
-| PON 09 | Post LI #1 z CTA do SD (z 12 gotowych) |
-| ŚR 11 | Post LI #2: "Skończyłeś kurs AI?" (DFY vs DIY, decyzja 05.03) |
-| CZW 12 | ✅ 2 posty v7.0 gotowe: "Twój AI Cię nie zna" (hook) + "Bliźniak v7.0 co nowego" (product update) → materialy/2026-03-12_linkedin_blizniakv7_posty.md |
-| PT 13 | Post LI #3 + Style Match Test spec |
+### PLAN W2 (07-11.04) — CONTENT + UPSELL
 
-**@CEO — Strategia:**
-- Umowa Kamil/CQRE → docx finalizacja
-- Metryki.md update (12 dni nieaktualne!)
-- Gosia Jary ping
+| # | Akcja | Czas | Kto |
+|---|-------|------|-----|
+| 5 | **LinkedIn carousel Stalton** (po feedbacku Natana) | 1.5h | @content+@ghost |
+| 6 | **Podcast pitch Jankowski** (Mała Wielka Firma) | 30 min | @ghost |
+| 7 | **Upsell CARE → Stalton** (po feedbacku) | 30 min | @cso+@ghost |
+| 8 | **Join FB "ChatGPT i sztuczna inteligencja"** (135k) | 15 min | user |
 
-### PLAN TYGODNIA 3 (16-20.03) — DEMO SPRINT
+### POSITIONING (nowy, z DR6 24.03)
 
-**@CSO (cel: MIN 1 live demo + spotkanie Modul Soft):**
+- Kategoria: **"AI Handlowiec"**
+- Tagline: **"Autopilot Sprzedaży dla jednoosobowej firmy B2B"**
+- Produkt: System 10h+ = narzędzie + wdrożenie (CLI-first, NIE extension)
+- CARE: 299 PLN/mies opcjonalny (produkt KOMPLETNY bez tego)
+- Pełna strategia: `dane/decyzje.md` → wpis "6× DEEP RESEARCH — SYNTEZA FINALNA"
 
-| Dzień | Akcja |
-|-------|-------|
-| PON 16 | Odpowiedzi z W2 → umów demo NATYCHMIAST |
-| **WT 18** | **SPOTKANIE MODUL SOFT (Ola) — 45 min discovery + demo. Prezentacja PL+UA gotowa.** |
-| ŚR 18 | Karolina Durmaj FU D+14: lekki check-in, zero presji |
-| ŚR-CZW | Live demo ×1-2 (Glinka / Wielgosz / Krystian) |
-| CZW 19 | Nowy outreach ×3 DM |
-| PT 20 | Scoring + pipeline review |
+### LINIA PRODUKTOWA (aktualizacja 24.03)
 
-**@CMO:** 3 posty LI (#4-6). Style Match Test build (jeśli spec OK). Komentarze LI 5-10.
-**@CEO:** Case study Stalton (ping Natana). Kamil status. Krystian gate check.
+| # | Produkt | Cena | Recurring | Status |
+|---|---------|------|-----------|--------|
+| 0 | Self-Discovery | Free | — | LIVE |
+| 1 | Bliźniak Biznesowy v7.0 | 2 999 PLN | — | LIVE |
+| 2 | **Email Autopilot** | 999 PLN + 299/msc | TAK | **READY** (prod-tested na ArtNapi, multi-tenant, CDK) |
+| 3 | Bliźniak PRO | 499 PLN + 199/msc | TAK | SPEC (architektura gotowa) |
+| 4 | CARE | 299 PLN/msc | TAK | SPEC (W1 kwi) |
 
-### PLAN TYGODNIA 4 (23-27.03) — DOMYKANIE
+**Email Autopilot LTV per klient:** 999 + 12 × 299 = **4 587 PLN/rok**
+**Bliźniak + Email Autopilot bundle:** 2 999 + 999 + 12 × 299 = **7 586 PLN/rok**
+**Full stack (Bliźniak + EA + CARE):** 2 999 + 999 + 12 × 598 = **11 174 PLN/rok**
 
-**@CSO:** Domykanie demo leads → close 2 999 PLN. Karolina jeśli W3+. Outreach ×3.
-**@CMO:** 3 posty LI (#7-9). Style Match Test LIVE (jeśli gotowy). Analiza content→lead.
-**@CEO:** **Kamil/CQRE deadline oferty ~27.03.** Scorecard marzec. Referral ask Zbigniew.
-
-### SCORECARD MARZEC — SCENARIUSZE
-
-| Scenariusz | Deale | PLN netto |
-|------------|-------|-----------|
-| MINIMUM | 1 close + Kamil F1 | 2 999 + 4 500 = 7 499 |
-| REALISTYCZNY | 1 close + Gawlik + Kamil F1 | 3 999 + 4 500 = 8 499 |
-| OPTIMUM | 2 close + Gawlik + Kamil F1+F2 | 6 998 + 27 000 = 33 998 |
+**Upsell targets (kwiecień):** Stalton (CARE + EA), Modul Soft (bundle), Zbigniew (maj)
+**Koszt per klient:** ~128 PLN/msc (API + AWS). Marża 57%.
+**Onboarding:** ~2-3h (dane z Bliźniaka już istnieją, zero dodatkowej konfiguracji)
+**Kod:** `automatyzacje/aws-email-processor/` | **Infra:** `infra/` (CDK)
 
 ---
 
@@ -108,21 +90,19 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 | Lead | Status | Wartość | Ostatni kontakt | Następny krok |
 |------|--------|---------|-----------------|---------------|
 | **Zbigniew Kowalski** (COMMI) | **NURTURE → MAJ** | **2 999 PLN** | 05.03 (live demo!) | Demo odbyło się ✅ — Zbigniew zobaczył system, potwierdził wartość ("narzędzie dla działającego handlowca"). COMMI w rebuild, szuka programisty + handlowca. Kontakt ~maj 2026. REFERRAL POTENTIAL: 180k ludzi, VP Mówców. |
-| **Michał Gawlik** | **WhatsApp WYSŁANY** | **1 000 PLN** | 04.03 (WhatsApp) | Bliźniak Raportowy (Claude Code Project). Czekamy odpowiedź → call 15 min → build 2-3h. |
+| **Michał Gawlik** | **CZEKA (nie cisnąć)** | **1 000 PLN** | 04.03 (WhatsApp) | Znajomy + relacja osobista. Sam się odezwał. Bliźniak Raportowy. NIE follow-upować — wróci jak będzie gotowy. |
 | **Karolina Durmaj** | **NURTURE** | 2 999 PLN | 05.03 (call + demo!) | NIE Javi — poznańska firma importowa (sourcing → sieci PL). Demo done, wartość potwierdzona, cena OK. Ale: 4. dzień w pracy, mąż, NDA. SD link na LI. FU ~19.03. |
-| **Michał Glinka** | **FU WYSŁANY** | 2 999 PLN | 04.03 (follow-up DM) | SD done, follow-up wysłany — proponowane demo CZ/PT. Czekamy odpowiedź. |
-| **Krystian Szczypek** | **DISCOVERY** | 2 999 PLN (Bliźniak) + urzędy | 23.02 (follow-up DM) | Projekt AI urzędy/KPO — demo przyszły tydzień. Max 5h/tyg cap. |
-| **Kamil Andrusz / CQRE / Napi** | **UMOWA PODPISANA** ✅ | **~27 000 PLN** (30% prowizji) | 12.03 (spotkanie z Piotrem/Unizo/Napi) | Umowa podpisana ✅. Spotkanie z Piotrem 12.03 — omawianie wdrożenia. **Faza 1: 15 000 PLN** (prowizja ~4 500 PLN). **Faza 2: ~75 000 PLN** (prowizja ~22 500 PLN). Mateusz aktywnie pracuje w obu fazach. |
-| **Natan / Stalton** (CNC) | **INSTALLED** ✅ | 1 220 PLN (zamknięty) | 17.02 | Feedback za 2-3 tyg → case study + pytania referencyjne (projekty/stalton/). |
-| **Michał Wielgosz** | LINK WYSŁANY (brak SD) | 2 999 PLN | 23.02 | Nudge z bezpośrednią ofertą demo. |
-| **Modul Soft** (via Lena) | **DISCOVERY** | **18 500-21 500 PLN** (Faza 1+2) | 12.03 (intel od Leny) | Ola (kuma Leny, dyr. sprzedaży, analityk). 200+ klientów, jedyny 1C Solution Partner w PL. **Spotkanie z Olą: prawdopodobnie WT 18.03.** 3 ścieżki: A (Bliźniak 2 999), B (AI Service Desk 10-15k), C (partnerstwo 18-21k). **Meeting prep:** materialy/2026-03-15_modulsoft_meeting_prep.md + materialy/2026-03-11_modul_soft_strategy.md |
+| **Krystian Szczypek** | **DISCOVERY** | 2 999 PLN (Bliźniak) + urzędy | W3 marzec (DM) | Pisałem W3, czekam na odpowiedź. Projekt AI urzędy/KPO. Max 5h/tyg cap. |
+| **Kamil Andrusz / CQRE / Napi** | **UMOWA PODPISANA** ✅ | **~27 000 PLN** (30% prowizji) | 23.03 (ping do Kamila) | Umowa podpisana ✅. Piotr się nie odzywa — nie naciskać, czekać. **Faza 1: 15 000 PLN** (prowizja ~4 500 PLN). **Faza 2: ~75 000 PLN** (prowizja ~22 500 PLN). |
+| **Natan / Stalton** (CNC) | **INSTALLED** ✅ | 1 220 PLN (zamknięty) | 17.02 | **PING 24.03 → feedback Blok 2+3.** Case study 70%. CARE upsell po feedbacku (W2 kwi). |
+| **Modul Soft** (via Lena) | **CZEKA NA DECYZJĘ** | **2 999-21 500 PLN** | 20.03 (FU) | Demo 16.03 ✅, FU 20.03, Ola testowała weekend. **Check-in 24.03** — 4 dni cisza. 3 ścieżki: A (Bliźniak 2 999), B (AI Service Desk 10-15k), C (partnerstwo 18-21k). |
 
 **WĄTKI NETWORKINGOWE:**
 - **Małgorzata "Gosia" Jary** (AI Biznes Lab) — FSI (szkolenia AI/IT dla korpo: Accenture, Capgemini, Nordea) + Integrivo (automatyzacje). Potencjał: polecanie Bliźniaka po szkoleniach, prowizja, wspólny produkt szkolenie+wdrożenie. Prompt do eksploracji współpracy przygotowany 06.03. Czekamy na spotkanie.
 
-**ZAMROŻENI (bez akcji):** Ewa Panek (ghosting), Bagrat (ghosting), Daniel/DANTAR (nie wypalił), Credipass (pauza), Tomek Szacoń (wrócić jeśli się odezwie), Julia Sienkiewicz (trigger: case study), Lena (beta, HOLD — ale aktywna jako źródło referrali: Modul Soft), Piotr/Artnapi (integrator — teraz osobny deal z Kamilem), Rafał Knap (wykreślony 04.03), Julia S-P (wykreślona 04.03), Arkadiusz Piotrowicz (usunięty 04.03).
+**ZAMROŻENI (bez akcji):** Ewa Panek (ghosting), Bagrat (ghosting), Daniel/DANTAR (nie wypalił), Credipass (pauza), Tomek Szacoń (wrócić jeśli się odezwie), Julia Sienkiewicz (trigger: case study), Lena (beta, HOLD — ale aktywna jako źródło referrali: Modul Soft), Piotr/Artnapi (integrator — teraz osobny deal z Kamilem), Michał Glinka (brak odpowiedzi 19d, usunięty 23.03), Michał Wielgosz (brak SD/odpowiedzi 28d, usunięty 23.03), Rafał Knap (wykreślony 04.03), Julia S-P (wykreślona 04.03), Arkadiusz Piotrowicz (usunięty 04.03).
 
-**Pipeline value aktywny:** ~27 497 PLN (Gawlik 1k + Glinka 2 999 + Krystian 2 999 + Wielgosz 2 999 + Modul Soft 18 500+)
+**Pipeline value aktywny:** ~22 499 PLN (Gawlik 1k + Krystian 2 999 + Modul Soft 18 500+)
 **Pipeline NURTURE (marzec-maj):** 5 998 PLN (Zbigniew 2 999 maj + Karolina 2 999 koniec marca)
 **Pipeline pasywny:** ~27 000 PLN (Kamil/CQRE/Napi — umowa podpisana ✅, F1 15k + F2 75k, prowizja 30%)
 **Zamknięte:** 1 220 PLN netto (Stalton)

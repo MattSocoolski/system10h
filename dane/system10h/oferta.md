@@ -132,9 +132,37 @@ Scenariusze:
 
 **ROI:** Zwraca się po 1 uratowanym dealu lub 10h zaoszczędzonego czasu.
 
-### Bliźniak PRO (addon)
+### Email Autopilot (addon — recurring)
+
+Twój Bliźniak już zna Twój styl i cennik. Email Autopilot sprawia że **SAM odpowiada na maile** — gotowe drafty czekają w Gmail, Ty tylko przeglądasz i wysyłasz.
+
+**Co robi:**
+- Monitoruje Twój inbox w real-time (Gmail Push, <10 sek)
+- Klasyfikuje maile (STANDARD → auto-draft, DECISION → alert na Telegram)
+- Generuje odpowiedź w Twoim stylu (ghost_styl.md) z poprawnymi cenami (oferta.md)
+- Guardrails: walidacja cen, blokada nieautoryzowanych rabatów/zobowiązań
+- Łączy się z Notion CRM (kontekst leada, auto-update Due/lastContact)
+- Telegram: powiadomienia o nowych mailach + gotowych draftach
+
+**Cena:**
+- Setup: **999 PLN** (jednorazowo — konfiguracja AWS, Gmail, CRM, prompty)
+- Abonament: **299 PLN/msc** (obejmuje API AI + infrastruktura + monitoring)
+- Wymaga aktywnego Bliźniaka (dane ghost_styl.md + oferta.md)
+
+**Dla kogo:** Handlowcy B2B z >10 maili/dzień. Oszczędność: 1-2h dziennie na odpowiedziach.
+
+**Gwarancja:** 30 dni. Nie oszczędza czasu → rezygnacja bez pytań, zwrot setup fee.
+
+**Tech stack:** AWS Lambda + Anthropic Claude Sonnet + Gmail API + Notion + Telegram. Kod: `automatyzacje/aws-email-processor/`. CDK infra: `automatyzacje/aws-email-processor/infra/`.
+
+### Bliźniak PRO (addon — recurring)
 
 Dla tych którzy chcą żeby system SAM przychodził z informacjami — automatyczne briefy i alerty na Telegram. Szczegóły: dane/system10h/blizniakpro_architektura.md
+
+### CARE (support — recurring)
+
+Miesięczna opieka nad Bliźniakiem: 30 min call + tuning scenariuszy + nowe workflow'y.
+- **299 PLN/msc** (bez zobowiązania, rezygnacja w dowolnym momencie)
 
 **Gwarancja:** 30 dni. Jeśli System nie oszczędza Ci czasu — pełny zwrot, zero pytań.
 
