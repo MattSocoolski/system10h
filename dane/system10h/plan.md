@@ -38,6 +38,19 @@ Odzyskać stabilność: generować min. 10k PLN przychodu/msc i spłacić 50% d�
 **Cel:** Min. 1 close (2 999 PLN) + uruchomić CARE recurring + case study Stalton
 **Fokus:** Domknij Modul Soft + uruchom CARE + napraw lejek. Reszta = content "AI Handlowiec".
 
+### RESZTA W4 (25-28.03) — POST-PIVOT EXECUTION
+
+| # | Akcja | Czas | Kto | Due |
+|---|-------|------|-----|-----|
+| 1 | **LinkedIn post "Wieczorna sesja"** | — | user | **ŚR 25.03 rano** (zaplanowany) |
+| 2 | **Nagraj Loom demo Email Autopilot** (script: `materialy/2026-03-24_email_autopilot_demo_script.md`) | 30 min | user | CZW 26.03 |
+| 3 | **Ping Natan → feedback Blok 2+3** (BLOKUJĄCY case study + CARE + EA upsell) | 15 min | user | ŚR 25.03 |
+| 4 | **Modul Soft check-in** — 5 dni cisza, Ola testowała? Bundle B z EA | 15 min | @ghost | ŚR 25.03 |
+| 5 | **Respond Art Adventure** — cennik AT + info 80x60 (Due 26.03 w CRM) | 30 min | @ghost | CZW 26.03 |
+| 6 | **Respond Rembrandt van Wine** — adres do samples + cennik NL all-in (Due 26.03) | 30 min | @ghost | CZW 26.03 |
+| 7 | **Review 5 cold outreach drafts** (Wine Gogh ES, Paint&Party FI, Paint'n Sip NO, Paintlybe BE, ArtMoment CZ) | 20 min | user | PT 28.03 |
+| 8 | **CARE spec finalize** — 499 PLN/msc (nowy tier Autopilot, nie osobny CARE) | 1h | @ceo+@cso | PT 28.03 |
+
 ### PLAN W1 (31.03-04.04) — FUNDAMENTY
 
 | # | Akcja | Czas | Kto |
