@@ -5,6 +5,11 @@ const NOTION_API = 'https://api.notion.com/v1';
 const NOTION_VERSION = '2025-09-03';
 const CRM_DATA_SOURCE_ID = process.env.NOTION_CRM_DATASOURCE_ID || '26f862e1-4a0c-808f-a249-000b2cee31df';
 
+// In-memory cache for queryCRM results (same pattern as secrets.mjs)
+let _crmCache = null;
+let _crmCachedAt = 0;
+const CRM_CACHE_TTL_MS = 15 * 60 * 1000; // 15 min
+
 /**
  * Low-level Notion API call.
  */
@@ -21,7 +26,7 @@ async function notionFetch(apiKey, endpoint, options = {}) {
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Notion ${res.status}: ${text}`);
+    throw new Error(`Notion ${res.status}: ${(text || '').slice(0, 200)}`);
   }
   return res.json();
 }
@@ -33,6 +38,14 @@ async function notionFetch(apiKey, endpoint, options = {}) {
  * @returns {Array} — raw Notion page objects
  */
 export async function queryCRM(notionApiKey, filter = null) {
+  // Return cached results if within TTL (only for unfiltered queries)
+  const now = Date.now();
+  const useCache = !filter || Object.keys(filter).length === 0;
+  if (useCache && _crmCache && (now - _crmCachedAt) < CRM_CACHE_TTL_MS) {
+    console.log('[Notion] queryCRM cache hit — returning cached leads');
+    return _crmCache;
+  }
+
   const body = { page_size: 100 };
   if (filter && Object.keys(filter).length) body.filter = filter;
 
@@ -47,6 +60,13 @@ export async function queryCRM(notionApiKey, filter = null) {
     results = results.concat(data.results);
     cursor = data.has_more ? data.next_cursor : undefined;
   } while (cursor);
+
+  // Cache only unfiltered (full) queries
+  if (useCache) {
+    _crmCache = results;
+    _crmCachedAt = Date.now();
+    console.log(`[Notion] queryCRM cache miss — fetched ${results.length} leads, cached for 15 min`);
+  }
 
   return results;
 }

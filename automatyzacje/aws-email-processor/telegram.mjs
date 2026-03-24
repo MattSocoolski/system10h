@@ -33,7 +33,7 @@ export async function sendTelegram(secrets, text) {
     });
     const data = await res.json();
     if (!data.ok) {
-      console.error('[Telegram] API error:', JSON.stringify(data));
+      console.error('[Telegram] API error:', JSON.stringify({ ok: data.ok, error_code: data.error_code, description: (data.description || '').slice(0, 200) }));
     }
     return data;
   } catch (err) {

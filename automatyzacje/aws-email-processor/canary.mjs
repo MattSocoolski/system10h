@@ -131,7 +131,10 @@ export async function handler(event) {
         messages: [{ role: 'user', content: 'Say OK' }],
       }),
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text().catch(() => 'unknown')}`);
+    if (!res.ok) {
+      const errText = await res.text().catch(() => 'unknown');
+      throw new Error(`HTTP ${res.status}: ${(errText || '').slice(0, 200)}`);
+    }
     const body = await res.json();
     if (!body.content?.[0]?.text) throw new Error('Empty response');
   });

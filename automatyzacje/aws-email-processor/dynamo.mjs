@@ -3,6 +3,7 @@
 // All records use TTL for automatic cleanup.
 
 import { DynamoDBClient, GetItemCommand, PutItemCommand, UpdateItemCommand } from '@aws-sdk/client-dynamodb';
+import { maskEmail } from './utils.mjs';
 
 const TABLE = process.env.DYNAMO_TABLE || 'email-processor-state';
 const REGION = process.env.AWS_REGION || 'eu-west-1';
@@ -10,6 +11,7 @@ const REGION = process.env.AWS_REGION || 'eu-west-1';
 const client = new DynamoDBClient({ region: REGION });
 
 const TTL_30_DAYS = 30 * 24 * 60 * 60;
+const TTL_90_DAYS = 90 * 24 * 60 * 60;
 const TTL_24_HOURS = 24 * 60 * 60;
 const TTL_4_HOURS = 4 * 60 * 60;
 
@@ -232,4 +234,98 @@ export async function getHeartbeat() {
     lastWebhookAt: ts,
     ageHours: Math.floor(ageMs / (1000 * 60 * 60)),
   };
+}
+
+// --- Audit Trail (structured processing results) ---
+
+/**
+ * Write a structured audit record for an email processing result.
+ *
+ * @param {object} params
+ * @param {string} params.messageId — Gmail message ID
+ * @param {string} params.senderEmail — sender email address (will be masked)
+ * @param {string} params.subject — email subject
+ * @param {object} [params.classification] — { type, reason }
+ * @param {object} [params.guardrailResults] — { priceCheck: {valid,detail}, commitCheck: {valid,detail} }
+ * @param {string} params.action — DRAFT_CREATED | SKIPPED_* | ERROR_*
+ * @param {boolean} params.draftCreated — whether a draft was actually created
+ * @param {object} [params.tokenUsage] — { classifyTokens: {input_tokens,output_tokens}, draftTokens: {input_tokens,output_tokens} }
+ */
+export async function writeAuditRecord({
+  messageId,
+  senderEmail,
+  subject,
+  classification,
+  guardrailResults,
+  action,
+  draftCreated,
+  tokenUsage,
+}) {
+  const nowSec = Math.floor(Date.now() / 1000);
+
+  const item = {
+    PK: { S: `AUDIT#${messageId}` },
+    senderEmail: { S: maskEmail(senderEmail) },
+    subject: { S: subject || '[no subject]' },
+    action: { S: action },
+    draftCreated: { BOOL: !!draftCreated },
+    processedAt: { S: new Date().toISOString() },
+    ttl: { N: String(nowSec + TTL_90_DAYS) },
+  };
+
+  if (classification) {
+    item.classificationType = { S: classification.type || 'UNKNOWN' };
+    item.classificationReason = { S: classification.reason || '' };
+  }
+
+  if (guardrailResults) {
+    const gr = {};
+    if (guardrailResults.priceCheck) {
+      gr.priceCheck = {
+        M: {
+          valid: { BOOL: !!guardrailResults.priceCheck.valid },
+          ...(guardrailResults.priceCheck.detail ? { detail: { S: guardrailResults.priceCheck.detail } } : {}),
+        },
+      };
+    }
+    if (guardrailResults.commitCheck) {
+      gr.commitCheck = {
+        M: {
+          valid: { BOOL: !!guardrailResults.commitCheck.valid },
+          ...(guardrailResults.commitCheck.detail ? { detail: { S: guardrailResults.commitCheck.detail } } : {}),
+        },
+      };
+    }
+    if (Object.keys(gr).length > 0) {
+      item.guardrailResults = { M: gr };
+    }
+  }
+
+  if (tokenUsage) {
+    const tu = {};
+    if (tokenUsage.classifyTokens) {
+      tu.classifyTokens = {
+        M: {
+          input_tokens: { N: String(tokenUsage.classifyTokens.input_tokens || 0) },
+          output_tokens: { N: String(tokenUsage.classifyTokens.output_tokens || 0) },
+        },
+      };
+    }
+    if (tokenUsage.draftTokens) {
+      tu.draftTokens = {
+        M: {
+          input_tokens: { N: String(tokenUsage.draftTokens.input_tokens || 0) },
+          output_tokens: { N: String(tokenUsage.draftTokens.output_tokens || 0) },
+        },
+      };
+    }
+    if (Object.keys(tu).length > 0) {
+      item.tokenUsage = { M: tu };
+    }
+  }
+
+  await client.send(new PutItemCommand({
+    TableName: TABLE,
+    Item: item,
+  }));
 }

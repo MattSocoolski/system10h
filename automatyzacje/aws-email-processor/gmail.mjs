@@ -32,9 +32,9 @@ export async function gmailGetAccessToken(secrets) {
       if (data.error) {
         // Distinguish auth failure (permanent) from transient errors
         if (data.error === 'invalid_grant') {
-          throw new Error(`GMAIL_AUTH_PERMANENT: Refresh token revoked or expired. Re-run gmail-auth.js on Mac. Detail: ${data.error_description || ''}`);
+          throw new Error(`GMAIL_AUTH_PERMANENT: Refresh token revoked or expired. Re-run gmail-auth.js on Mac. Detail: ${(data.error_description || '').slice(0, 200)}`);
         }
-        throw new Error(`Gmail token refresh failed: ${data.error} — ${data.error_description || ''}`);
+        throw new Error(`Gmail token refresh failed: ${data.error} — ${(data.error_description || '').slice(0, 200)}`);
       }
 
       return data.access_token;
@@ -70,7 +70,7 @@ async function gmailFetch(accessToken, endpoint, params = {}) {
   }
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Gmail API ${res.status}: ${text}`);
+    throw new Error(`Gmail API ${res.status}: ${(text || '').slice(0, 200)}`);
   }
   return res.json();
 }
@@ -109,7 +109,7 @@ export async function gmailGetMessage(accessToken, messageId, format = 'metadata
   }
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Gmail API ${res.status}: ${text}`);
+    throw new Error(`Gmail API ${res.status}: ${(text || '').slice(0, 200)}`);
   }
 
   const data = await res.json();
@@ -262,7 +262,7 @@ export async function gmailCreateDraft(accessToken, to, subject, body, threadId 
 
   if (!res.ok) {
     const text = await res.text();
-    throw new Error(`Gmail draft create ${res.status}: ${text}`);
+    throw new Error(`Gmail draft create ${res.status}: ${(text || '').slice(0, 200)}`);
   }
   return res.json();
 }

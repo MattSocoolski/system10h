@@ -37,6 +37,7 @@ import {
   checkBudgetCap,
   incrementBudgetCounter,
   updateHeartbeat,
+  writeAuditRecord,
 } from './dynamo.mjs';
 import {
   extractEmail,
@@ -119,7 +120,7 @@ export async function handler(event) {
       accessToken = await gmailGetAccessToken(secrets);
     } catch (err) {
       if (err.message.includes('GMAIL_AUTH')) {
-        await sendTelegram(secrets, `GMAIL AUTH FAILED: ${err.message}\nOdnow token: node automatyzacje/gmail-auth.js na Mac, potem update Secrets Manager.`);
+        await sendTelegram(secrets, `GMAIL AUTH FAILED: ${(err.message || '').slice(0, 200)}\nOdnow token: node automatyzacje/gmail-auth.js na Mac, potem update Secrets Manager.`);
       }
       throw err;
     }
@@ -162,7 +163,7 @@ export async function handler(event) {
     // These are loaded once per invocation, shared across all emails
     const [crmLeads, oferta, ghostStyl] = await Promise.all([
       queryCRM(secrets.NOTION_API_KEY).catch(err => {
-        console.error('[Handler] Notion CRM query failed:', err.message);
+        console.error('[Handler] Notion CRM query failed:', (err.message || '').slice(0, 200));
         return []; // Continue without CRM — draft still valuable
       }),
       loadS3File('oferta.md'),
@@ -188,7 +189,7 @@ export async function handler(event) {
       );
       existingDrafts = existingDrafts.filter(Boolean);
     } catch (err) {
-      console.warn('[Handler] Failed to fetch existing drafts:', err.message);
+      console.warn('[Handler] Failed to fetch existing drafts:', (err.message || '').slice(0, 200));
       // Non-critical — continue without race condition check
     }
 
@@ -211,8 +212,8 @@ export async function handler(event) {
         });
         processedCount++;
       } catch (err) {
-        console.error(`[Handler] Error processing message ${msg.id}:`, err.message);
-        await sendTelegram(secrets, `EMAIL PROCESSOR ERROR: ${err.message}\nMessage ID: ${msg.id}`);
+        console.error(`[Handler] Error processing message ${msg.id}:`, (err.message || '').slice(0, 200));
+        await sendTelegram(secrets, `EMAIL PROCESSOR ERROR: ${(err.message || '').slice(0, 200)}\nMessage ID: ${msg.id}`);
         // Mark as processed to avoid infinite retry loops
         await markProcessed(msg.id, 'unknown', 'ERROR').catch(() => {});
       }
@@ -227,9 +228,9 @@ export async function handler(event) {
     };
 
   } catch (err) {
-    console.error('[Handler] FATAL:', err.message);
-    await sendTelegram(secrets, `EMAIL PROCESSOR FATAL ERROR: ${err.message}`).catch(() => {});
-    return { statusCode: 500, body: `Error: ${err.message}` };
+    console.error('[Handler] FATAL:', (err.message || '').slice(0, 200));
+    await sendTelegram(secrets, `EMAIL PROCESSOR FATAL ERROR: ${(err.message || '').slice(0, 200)}`).catch(() => {});
+    return { statusCode: 500, body: 'Internal error' };
   }
 }
 
@@ -243,9 +244,18 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
 
   safeLog('[Process] Email', { id: msg.id, email: senderEmail, subject: detail.subject });
 
+  // Helper to write audit record (best-effort, never throws)
+  const audit = (params) => writeAuditRecord(params).catch(err => {
+    console.error('[Process] Audit write failed:', (err.message || '').slice(0, 200));
+  });
+
   // Skip own emails
   if (senderEmail === MY_EMAIL.toLowerCase()) {
     await markProcessed(msg.id, senderEmail, 'SKIPPED_OWN_EMAIL');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      action: 'SKIPPED_OWN_EMAIL', draftCreated: false,
+    });
     return;
   }
 
@@ -265,6 +275,10 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     await sendTelegram(secrets,
       `Mail od ${maskEmail(senderEmail)}, ale juz odpowiedziano w watku. SKIP.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_ALREADY_REPLIED');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      action: 'SKIPPED_ALREADY_REPLIED', draftCreated: false,
+    });
     return;
   }
 
@@ -274,6 +288,10 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     await sendTelegram(secrets,
       `Draft juz istnieje w watku "${detail.subject}". SKIP.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_EXISTING_DRAFT');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      action: 'SKIPPED_EXISTING_DRAFT', draftCreated: false,
+    });
     return;
   }
 
@@ -284,6 +302,10 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     await sendTelegram(secrets,
       `FREQUENCY CAP: ${maskEmail(senderEmail)} — ${freqCheck.reason}. Przejdz do Gmail lub @ceo.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_FREQ_CAP');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      action: 'SKIPPED_FREQ_CAP', draftCreated: false,
+    });
     return;
   }
 
@@ -293,6 +315,10 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     await sendTelegram(secrets,
       `BUDGET CAP osiagniety w trakcie batch (${budgetMid.callsToday}/${budgetMid.cap}). Reszta maili na jutro.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_BUDGET_CAP');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      action: 'SKIPPED_BUDGET_CAP', draftCreated: false,
+    });
     return;
   }
 
@@ -300,16 +326,25 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   const lead = emailToLead[senderEmail] || null;
   // threadMessages already fetched in Draft Quality Guard (step A)
 
+  // Track token usage across classify + draft calls
+  let classifyTokens = null;
+  let draftTokens = null;
+
   // --- C. CLASSIFICATION (Bedrock) ---
   let classification;
   try {
     classification = await classifyEmail(detail, lead, oferta);
+    classifyTokens = classification.usage || null;
     await incrementBudgetCounter(1);
   } catch (err) {
-    console.error('[Process] Bedrock classify failed:', err.message);
+    console.error('[Process] Bedrock classify failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
       `BEDROCK TIMEOUT: Nie udalo sie sklasyfikowac maila od ${maskEmail(senderEmail)}. Sprawdz recznie.`);
     await markProcessed(msg.id, senderEmail, 'ERROR_CLASSIFY');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      action: 'ERROR_CLASSIFY', draftCreated: false,
+    });
     return;
   }
 
@@ -326,15 +361,21 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     ].join('\n');
     await sendTelegram(secrets, alertMsg);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_DECISION');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      classification: { type: classification.type, reason: classification.reason },
+      action: 'SKIPPED_DECISION', draftCreated: false,
+      tokenUsage: { classifyTokens },
+    });
     return;
   }
 
   // --- D. DRAFT GENERATION (Bedrock Claude Sonnet) ---
-  let draftBody;
+  let draftResult;
   const isEn = lead ? isForeignLead(lead) : false;
 
   try {
-    draftBody = await generateDraft({
+    draftResult = await generateDraft({
       ghostStyl,
       oferta,
       email: detail,
@@ -342,14 +383,23 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
       lead,
       isForeign: isEn,
     });
+    draftTokens = draftResult.usage || null;
     await incrementBudgetCounter(1);
   } catch (err) {
-    console.error('[Process] Bedrock draft generation failed:', err.message);
+    console.error('[Process] Bedrock draft generation failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
       `BEDROCK TIMEOUT: Nie udalo sie wygenerowac draftu dla ${lead?.company || maskEmail(senderEmail)}. Sprawdz recznie.`);
     await markProcessed(msg.id, senderEmail, 'ERROR_DRAFT_GEN');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      classification: { type: classification.type, reason: classification.reason },
+      action: 'ERROR_DRAFT_GEN', draftCreated: false,
+      tokenUsage: { classifyTokens },
+    });
     return;
   }
+
+  const draftBody = draftResult.text;
 
   // --- GUARDRAIL: Price validation ---
   const priceCheck = validatePricesInDraft(draftBody, oferta);
@@ -357,6 +407,13 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     await sendTelegram(secrets,
       `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral bledna cene (${priceCheck.detail}). Draft NIE utworzony.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      classification: { type: classification.type, reason: classification.reason },
+      guardrailResults: { priceCheck },
+      action: 'SKIPPED_GUARDRAIL', draftCreated: false,
+      tokenUsage: { classifyTokens, draftTokens },
+    });
     return;
   }
 
@@ -366,6 +423,13 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     await sendTelegram(secrets,
       `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral zobowiazanie (${commitCheck.detail}). Draft NIE utworzony.`);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      classification: { type: classification.type, reason: classification.reason },
+      guardrailResults: { priceCheck, commitCheck },
+      action: 'SKIPPED_GUARDRAIL', draftCreated: false,
+      tokenUsage: { classifyTokens, draftTokens },
+    });
     return;
   }
 
@@ -383,10 +447,17 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
       { html: true }
     );
   } catch (err) {
-    console.error('[Process] Gmail draft creation failed:', err.message);
+    console.error('[Process] Gmail draft creation failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
-      `GMAIL ERROR: Nie udalo sie stworzyc draftu dla ${maskEmail(senderEmail)}: ${err.message}`);
+      `GMAIL ERROR: Nie udalo sie stworzyc draftu dla ${maskEmail(senderEmail)}: ${(err.message || '').slice(0, 200)}`);
     await markProcessed(msg.id, senderEmail, 'ERROR_DRAFT_CREATE');
+    await audit({
+      messageId: msg.id, senderEmail, subject: detail.subject,
+      classification: { type: classification.type, reason: classification.reason },
+      guardrailResults: { priceCheck, commitCheck },
+      action: 'ERROR_DRAFT_CREATE', draftCreated: false,
+      tokenUsage: { classifyTokens, draftTokens },
+    });
     return;
   }
 
@@ -402,7 +473,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
         safeLog('[Process] Notion update skipped', { reason: updateResult.reason, email: senderEmail });
       }
     } catch (err) {
-      console.error('[Process] Notion update failed:', err.message);
+      console.error('[Process] Notion update failed:', (err.message || '').slice(0, 200));
       await sendTelegram(secrets,
         `NOTION DOWN: Draft utworzony, ale CRM nie zaktualizowany. Firma: ${lead.company || 'brak'}, Due: ${addBusinessDays(now, 3).toISOString().slice(0, 10)}. Zaktualizuj recznie.`);
     }
@@ -419,5 +490,15 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     `Draft gotowy: ${lead?.company || lead?.name || maskEmail(senderEmail)} — "${detail.subject}"`);
 
   await markProcessed(msg.id, senderEmail, 'DRAFT_CREATED');
+
+  // Audit: success path
+  await audit({
+    messageId: msg.id, senderEmail, subject: detail.subject,
+    classification: { type: classification.type, reason: classification.reason },
+    guardrailResults: { priceCheck, commitCheck },
+    action: 'DRAFT_CREATED', draftCreated: true,
+    tokenUsage: { classifyTokens, draftTokens },
+  });
+
   safeLog('[Process] Draft created', { email: senderEmail, subject: detail.subject });
 }

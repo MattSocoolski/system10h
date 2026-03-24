@@ -2,6 +2,8 @@
 // Two functions: classifyEmail (DECISION vs STANDARD) and generateDraft.
 // Switched from Bedrock to Anthropic API direct on 2026-03-24 (Bedrock quota = 0 on new account).
 
+import { maskEmail } from './utils.mjs';
+
 const MODEL_ID = process.env.ANTHROPIC_MODEL_ID || 'claude-sonnet-4-6';
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
 const ANTHROPIC_VERSION = '2023-06-01';
@@ -24,7 +26,7 @@ export function init(apiKey) {
  * @param {object} [options]
  * @param {number} [options.maxTokens=1000]
  * @param {number} [options.temperature=0.3]
- * @returns {string} — model response text
+ * @returns {{ text: string, usage: { input_tokens: number, output_tokens: number } }}
  */
 async function invokeAnthropic(systemPrompt, userPrompt, { maxTokens = 1000, temperature = 0.3 } = {}) {
   if (!_apiKey) {
@@ -60,14 +62,21 @@ async function invokeAnthropic(systemPrompt, userPrompt, { maxTokens = 1000, tem
       if (!result.content || !result.content[0]) {
         throw new Error('Anthropic API returned empty response');
       }
-      return result.content[0].text;
+      const usage = result.usage || { input_tokens: 0, output_tokens: 0 };
+      return {
+        text: result.content[0].text,
+        usage: {
+          input_tokens: usage.input_tokens || 0,
+          output_tokens: usage.output_tokens || 0,
+        },
+      };
     }
 
     const errorBody = await response.text().catch(() => 'unknown');
     const isRetryable = response.status === 429 || response.status === 529 || response.status >= 500;
 
     if (!isRetryable || attempt === MAX_RETRIES - 1) {
-      throw new Error(`Anthropic API ${response.status}: ${errorBody}`);
+      throw new Error(`Anthropic API ${response.status}: ${(errorBody || '').slice(0, 200)}`);
     }
 
     console.warn(`[bedrock] Anthropic API ${response.status}, retry ${attempt + 1}/${MAX_RETRIES} in ${RETRY_DELAYS[attempt]}ms`);
@@ -99,7 +108,7 @@ function detectInjection(body, from) {
   const lower = body.toLowerCase();
   const found = INJECTION_PATTERNS.filter(p => lower.includes(p));
   if (found.length > 0) {
-    console.warn(`[bedrock] PROMPT INJECTION DETECTED from ${from}: ${found.join(', ')} — routing to DECISION`);
+    console.warn(`[bedrock] PROMPT INJECTION DETECTED from ${maskEmail(from)}: ${found.join(', ')} — routing to DECISION`);
     return true;
   }
   return false;
@@ -141,7 +150,7 @@ STANDARD = mail na ktory mozna odpowiedziec automatycznie:
  * @param {object} email — { from, subject, bodyText, snippet }
  * @param {object|null} lead — parsed CRM lead or null
  * @param {string} ofertaText — contents of oferta.md
- * @returns {{ type: 'DECISION'|'STANDARD', reason: string }}
+ * @returns {{ type: 'DECISION'|'STANDARD', reason: string, usage: { input_tokens: number, output_tokens: number } }}
  */
 export async function classifyEmail(email, lead, ofertaText) {
   const leadContext = lead
@@ -152,7 +161,7 @@ export async function classifyEmail(email, lead, ofertaText) {
 
   // Prompt injection → immediate DECISION (skip AI classification)
   if (detectInjection(body, email.from)) {
-    return { type: 'DECISION', reason: 'Prompt injection patterns detected — requires human review' };
+    return { type: 'DECISION', reason: 'Prompt injection patterns detected — requires human review', usage: { input_tokens: 0, output_tokens: 0 } };
   }
 
   const userPrompt = `Mail od: ${email.from}
@@ -170,15 +179,16 @@ Odpowiedz w formacie:
 TYPE: DECISION lub STANDARD
 REASON: 1 zdanie`;
 
-  const raw = await invokeAnthropic(CLASSIFY_SYSTEM, userPrompt, { maxTokens: 100, temperature: 0.1 });
+  const result = await invokeAnthropic(CLASSIFY_SYSTEM, userPrompt, { maxTokens: 100, temperature: 0.1 });
 
   // Parse response
-  const typeMatch = raw.match(/TYPE:\s*(DECISION|STANDARD)/i);
-  const reasonMatch = raw.match(/REASON:\s*(.+)/i);
+  const typeMatch = result.text.match(/TYPE:\s*(DECISION|STANDARD)/i);
+  const reasonMatch = result.text.match(/REASON:\s*(.+)/i);
 
   return {
     type: typeMatch ? typeMatch[1].toUpperCase() : 'DECISION', // default to DECISION (safer)
-    reason: reasonMatch ? reasonMatch[1].trim() : raw.trim(),
+    reason: reasonMatch ? reasonMatch[1].trim() : result.text.trim(),
+    usage: result.usage,
   };
 }
 
@@ -194,7 +204,7 @@ REASON: 1 zdanie`;
  * @param {Array} params.thread — thread messages [{ from, subject, date, snippet }]
  * @param {object|null} params.lead — parsed CRM lead
  * @param {boolean} params.isForeign — true if lead is non-Polish
- * @returns {string} — HTML body for the draft (without signature — added by wrapEmailHTML)
+ * @returns {{ text: string, usage: { input_tokens: number, output_tokens: number } }}
  */
 export async function generateDraft({ ghostStyl, oferta, email, thread, lead, isForeign }) {
   const lang = isForeign ? 'angielski' : 'polski';
@@ -260,6 +270,6 @@ ${oferta}
 
 Napisz odpowiedz na tego maila w HTML.`;
 
-  const draft = await invokeAnthropic(systemPrompt, userPrompt, { maxTokens: 1000, temperature: 0.3 });
-  return draft;
+  const result = await invokeAnthropic(systemPrompt, userPrompt, { maxTokens: 1000, temperature: 0.3 });
+  return { text: result.text, usage: result.usage };
 }

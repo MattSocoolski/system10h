@@ -78,7 +78,7 @@ async function main() {
   const tokenData = await tokenRes.json();
 
   if (tokenData.error) {
-    console.error(`OAuth error: ${tokenData.error} — ${tokenData.error_description}`);
+    console.error(`OAuth error: ${tokenData.error} — ${(tokenData.error_description || '').slice(0, 200)}`);
     process.exit(1);
   }
 

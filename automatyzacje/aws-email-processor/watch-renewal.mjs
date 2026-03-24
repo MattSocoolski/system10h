@@ -30,8 +30,8 @@ export async function handler(event) {
   try {
     accessToken = await gmailGetAccessToken(secrets);
   } catch (err) {
-    console.error('[WatchRenewal] OAuth token refresh failed:', err.message);
-    await sendTelegram(secrets, `⚠️ <b>Gmail Watch FAILED</b>\nOAuth token refresh error:\n<code>${err.message}</code>`);
+    console.error('[WatchRenewal] OAuth token refresh failed:', (err.message || '').slice(0, 200));
+    await sendTelegram(secrets, `⚠️ <b>Gmail Watch FAILED</b>\nOAuth token refresh error:\n<code>${(err.message || '').slice(0, 200)}</code>`);
     throw err;
   }
 
@@ -50,7 +50,7 @@ export async function handler(event) {
 
     if (!res.ok) {
       const text = await res.text();
-      throw new Error(`Gmail watch API ${res.status}: ${text}`);
+      throw new Error(`Gmail watch API ${res.status}: ${(text || '').slice(0, 200)}`);
     }
 
     const data = await res.json();
@@ -69,10 +69,10 @@ export async function handler(event) {
       body: { historyId: data.historyId, expiration: expiryDate },
     };
   } catch (err) {
-    console.error('[WatchRenewal] Watch call failed:', err.message);
+    console.error('[WatchRenewal] Watch call failed:', (err.message || '').slice(0, 200));
     await sendTelegram(
       secrets,
-      `⚠️ <b>Gmail Watch FAILED</b>\n<code>${err.message}</code>`,
+      `⚠️ <b>Gmail Watch FAILED</b>\n<code>${(err.message || '').slice(0, 200)}</code>`,
     );
     throw err;
   }
