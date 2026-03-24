@@ -3,11 +3,12 @@
 
 const NOTION_API = 'https://api.notion.com/v1';
 const NOTION_VERSION = '2025-09-03';
-const CRM_DATA_SOURCE_ID = process.env.NOTION_CRM_DATASOURCE_ID || '26f862e1-4a0c-808f-a249-000b2cee31df';
+const DEFAULT_DATA_SOURCE_ID = process.env.NOTION_CRM_DATASOURCE_ID || '26f862e1-4a0c-808f-a249-000b2cee31df';
 
 // In-memory cache for queryCRM results (same pattern as secrets.mjs)
-let _crmCache = null;
-let _crmCachedAt = 0;
+// Cache key includes datasourceId to support multi-tenant
+const _crmCache = {};
+const _crmCachedAt = {};
 const CRM_CACHE_TTL_MS = 15 * 60 * 1000; // 15 min
 
 /**
@@ -35,15 +36,19 @@ async function notionFetch(apiKey, endpoint, options = {}) {
  * Query all CRM leads (paginated).
  * @param {string} notionApiKey
  * @param {object} [filter] — optional Notion filter object
+ * @param {object} [options] — { datasourceId: string }. If omitted, uses default.
  * @returns {Array} — raw Notion page objects
  */
-export async function queryCRM(notionApiKey, filter = null) {
+export async function queryCRM(notionApiKey, filter = null, { datasourceId } = {}) {
+  const dsId = datasourceId || DEFAULT_DATA_SOURCE_ID;
+
   // Return cached results if within TTL (only for unfiltered queries)
   const now = Date.now();
   const useCache = !filter || Object.keys(filter).length === 0;
-  if (useCache && _crmCache && (now - _crmCachedAt) < CRM_CACHE_TTL_MS) {
+  const cacheKey = dsId;
+  if (useCache && _crmCache[cacheKey] && (now - (_crmCachedAt[cacheKey] || 0)) < CRM_CACHE_TTL_MS) {
     console.log('[Notion] queryCRM cache hit — returning cached leads');
-    return _crmCache;
+    return _crmCache[cacheKey];
   }
 
   const body = { page_size: 100 };
@@ -53,7 +58,7 @@ export async function queryCRM(notionApiKey, filter = null) {
   let cursor;
   do {
     if (cursor) body.start_cursor = cursor;
-    const data = await notionFetch(notionApiKey, `/data_sources/${CRM_DATA_SOURCE_ID}/query`, {
+    const data = await notionFetch(notionApiKey, `/data_sources/${dsId}/query`, {
       method: 'POST',
       body,
     });
@@ -63,8 +68,8 @@ export async function queryCRM(notionApiKey, filter = null) {
 
   // Cache only unfiltered (full) queries
   if (useCache) {
-    _crmCache = results;
-    _crmCachedAt = Date.now();
+    _crmCache[cacheKey] = results;
+    _crmCachedAt[cacheKey] = Date.now();
     console.log(`[Notion] queryCRM cache miss — fetched ${results.length} leads, cached for 15 min`);
   }
 
@@ -73,13 +78,16 @@ export async function queryCRM(notionApiKey, filter = null) {
 
 /**
  * Query CRM for a single lead by email address.
+ * @param {string} notionApiKey
+ * @param {string} email
+ * @param {object} [options] — { datasourceId: string }. If omitted, uses default.
  */
-export async function queryCRMByEmail(notionApiKey, email) {
+export async function queryCRMByEmail(notionApiKey, email, { datasourceId } = {}) {
   const filter = {
     property: 'Email',
     email: { equals: email },
   };
-  const results = await queryCRM(notionApiKey, filter);
+  const results = await queryCRM(notionApiKey, filter, { datasourceId });
   return results.length > 0 ? results[0] : null;
 }
 

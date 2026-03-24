@@ -9,6 +9,7 @@ import { loadS3File, checkStaleness } from './s3.mjs';
 import { queryCRM } from './notion.mjs';
 import { getHeartbeat } from './dynamo.mjs';
 import { sendTelegram } from './telegram.mjs';
+import { loadTenantConfig, getDefaultTenantId } from './tenant-config.mjs';
 
 const DYNAMO_TABLE = process.env.DYNAMO_TABLE || 'email-processor-state';
 const ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages';
@@ -35,6 +36,18 @@ export async function handler(event) {
   let secrets = null;
   let accessToken = null;
 
+  // Load tenant config (best-effort — canary continues even if config fails)
+  let tenantConfig = null;
+  try {
+    tenantConfig = loadTenantConfig(getDefaultTenantId());
+  } catch (err) {
+    console.warn('[Canary] Tenant config not available, using defaults:', err.message);
+  }
+  const myEmail = tenantConfig?.email || MY_EMAIL;
+  const s3Prefix = tenantConfig?.s3Prefix || '';
+  const telegramOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
+  const notionDatasourceId = tenantConfig?.notionDatasourceId || undefined;
+
   // 1. Secrets Manager
   const secretsResult = await runCheck('Secrets Manager', async () => {
     secrets = await getSecrets();
@@ -55,16 +68,16 @@ export async function handler(event) {
   // 3. Gmail API
   const gmailResult = await runCheck('Gmail API', async () => {
     if (!accessToken) throw new Error('Skipped: OAuth failed');
-    const msgs = await gmailSearchMessages(accessToken, `to:${MY_EMAIL}`, 1);
+    const msgs = await gmailSearchMessages(accessToken, `to:${myEmail}`, 1);
     return `${msgs.length} message(s)`;
   });
   results.push(gmailResult);
 
   // 4. S3 oferta.md
   const s3Result = await runCheck('S3 oferta.md', async () => {
-    const text = await loadS3File('oferta.md');
+    const text = await loadS3File(`${s3Prefix}oferta.md`);
     if (!text || text.length < 50) throw new Error(`File too small: ${text?.length || 0} chars`);
-    const staleness = await checkStaleness('oferta.md', 168); // 7 days
+    const staleness = await checkStaleness(`${s3Prefix}oferta.md`, 168); // 7 days
     const ageLabel = staleness.ageHours < 24
       ? `${staleness.ageHours}h`
       : `${Math.floor(staleness.ageHours / 24)}d`;
@@ -96,9 +109,9 @@ export async function handler(event) {
 
   // 5c. S3 ghost_styl.md staleness
   const ghostResult = await runCheck('S3 ghost_styl.md', async () => {
-    const text = await loadS3File('ghost_styl.md');
+    const text = await loadS3File(`${s3Prefix}ghost_styl.md`);
     if (!text || text.length < 50) throw new Error(`File too small: ${text?.length || 0} chars`);
-    const staleness = await checkStaleness('ghost_styl.md', 168);
+    const staleness = await checkStaleness(`${s3Prefix}ghost_styl.md`, 168);
     const ageLabel = staleness.ageHours < 24 ? `${staleness.ageHours}h` : `${Math.floor(staleness.ageHours / 24)}d`;
     if (staleness.ageHours > 168) throw new Error(`Stale: ${ageLabel} old (>7d)`);
     return `age: ${ageLabel}`;
@@ -108,7 +121,7 @@ export async function handler(event) {
   // 6. Notion CRM
   const notionResult = await runCheck('Notion CRM', async () => {
     if (!secrets) throw new Error('Skipped: Secrets Manager failed');
-    const pages = await queryCRM(secrets.NOTION_API_KEY, null);
+    const pages = await queryCRM(secrets.NOTION_API_KEY, null, { datasourceId: notionDatasourceId });
     if (!Array.isArray(pages)) throw new Error('Unexpected response format');
     return `${pages.length} leads`;
   });
@@ -172,7 +185,7 @@ export async function handler(event) {
 
   // 8. Telegram (always last — reports results)
   if (secrets) {
-    await sendTelegram(secrets, report);
+    await sendTelegram(secrets, report, telegramOpts);
   } else {
     console.error('[Canary] Cannot send Telegram: secrets unavailable');
   }

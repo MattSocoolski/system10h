@@ -49,6 +49,7 @@ import {
   safeLog,
   maskEmail,
 } from './utils.mjs';
+import { loadTenantConfig, getDefaultTenantId } from './tenant-config.mjs';
 
 const MY_EMAIL = process.env.MY_EMAIL || 'mateusz.sokolski@artnapi.pl';
 
@@ -98,10 +99,20 @@ export async function handler(event) {
   }
 
   let secrets;
+  let tenantConfig;
   try {
-    // --- STEP 1: Load secrets ---
+    // --- STEP 1: Load secrets + tenant config ---
     secrets = await getSecrets();
     initAI(secrets.ANTHROPIC_API_KEY);
+
+    // Load tenant config (backward compatible — falls back to env vars if tenant unknown)
+    try {
+      tenantConfig = loadTenantConfig(getDefaultTenantId());
+      console.log(`[Handler] Tenant config loaded: ${tenantConfig.tenantId}`);
+    } catch (err) {
+      console.warn('[Handler] Tenant config not available, using env var defaults:', err.message);
+      tenantConfig = null;
+    }
   } catch (err) {
     console.error('[Handler] FATAL: Failed to load secrets:', err.message);
     // Can't send Telegram without secrets — just log and bail
@@ -120,14 +131,16 @@ export async function handler(event) {
       accessToken = await gmailGetAccessToken(secrets);
     } catch (err) {
       if (err.message.includes('GMAIL_AUTH')) {
-        await sendTelegram(secrets, `GMAIL AUTH FAILED: ${(err.message || '').slice(0, 200)}\nOdnow token: node automatyzacje/gmail-auth.js na Mac, potem update Secrets Manager.`);
+        const tgOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
+        await sendTelegram(secrets, `GMAIL AUTH FAILED: ${(err.message || '').slice(0, 200)}\nOdnow token: node automatyzacje/gmail-auth.js na Mac, potem update Secrets Manager.`, tgOpts);
       }
       throw err;
     }
 
     // Query: inbox messages from others in last hour (webhook) or 15 min (fallback)
     const timeWindow = isFallback ? '20m' : '1h';
-    const query = `to:${MY_EMAIL} is:inbox newer_than:${timeWindow} -from:${MY_EMAIL} -category:promotions -category:social -category:updates`;
+    const myEmail = tenantConfig?.email || MY_EMAIL;
+    const query = `to:${myEmail} is:inbox newer_than:${timeWindow} -from:${myEmail} -category:promotions -category:social -category:updates`;
     const messages = await gmailSearchMessages(accessToken, query, 10);
 
     if (messages.length === 0) {
@@ -154,29 +167,34 @@ export async function handler(event) {
     // --- STEP 4: Budget cap check (before any Bedrock calls) ---
     const budget = await checkBudgetCap();
     if (!budget.allowed) {
+      const tgOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
       await sendTelegram(secrets,
-        `BUDGET CAP: Lambda przetworzyala ${budget.callsToday} maili dzis (limit: ${budget.cap}). Dalsze maile na jutro.`);
+        `BUDGET CAP: Lambda przetworzyala ${budget.callsToday} maili dzis (limit: ${budget.cap}). Dalsze maile na jutro.`, tgOpts);
       return { statusCode: 200, body: `Budget cap reached: ${budget.callsToday}/${budget.cap}` };
     }
 
     // --- STEP 5: Load context (CRM + S3 knowledge base) ---
     // These are loaded once per invocation, shared across all emails
+    const s3Prefix = tenantConfig?.s3Prefix || '';
+    const notionDatasourceId = tenantConfig?.notionDatasourceId || undefined;
     const [crmLeads, oferta, ghostStyl] = await Promise.all([
-      queryCRM(secrets.NOTION_API_KEY).catch(err => {
+      queryCRM(secrets.NOTION_API_KEY, null, { datasourceId: notionDatasourceId }).catch(err => {
         console.error('[Handler] Notion CRM query failed:', (err.message || '').slice(0, 200));
         return []; // Continue without CRM — draft still valuable
       }),
-      loadS3File('oferta.md'),
-      loadS3File('ghost_styl.md'),
+      loadS3File(`${s3Prefix}oferta.md`),
+      loadS3File(`${s3Prefix}ghost_styl.md`),
     ]);
 
     const emailToLead = buildEmailIndex(crmLeads);
 
     // Check oferta.md staleness (Edge Case 2)
-    const staleness = await checkStaleness('oferta.md', 48);
+    const staleness = await checkStaleness(`${s3Prefix}oferta.md`, 48);
     if (staleness.stale) {
+      const telegramOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
       await sendTelegram(secrets,
-        `STALE DATA: oferta.md na S3 nie byl aktualizowany od ${staleness.ageHours}h. Sprawdz czy ceny sa aktualne.\nSync: aws s3 cp dane/artnapi/oferta.md s3://artnapi-email-processor-kb/oferta.md`);
+        `STALE DATA: oferta.md na S3 nie byl aktualizowany od ${staleness.ageHours}h. Sprawdz czy ceny sa aktualne.\nSync: aws s3 cp dane/artnapi/oferta.md s3://artnapi-email-processor-kb/${s3Prefix}oferta.md`,
+        telegramOpts);
     }
 
     // Pre-fetch existing drafts for race condition check (Edge Case 1)
@@ -209,11 +227,13 @@ export async function handler(event) {
           ghostStyl,
           existingDraftThreadIds,
           now,
+          tenantConfig,
         });
         processedCount++;
       } catch (err) {
         console.error(`[Handler] Error processing message ${msg.id}:`, (err.message || '').slice(0, 200));
-        await sendTelegram(secrets, `EMAIL PROCESSOR ERROR: ${(err.message || '').slice(0, 200)}\nMessage ID: ${msg.id}`);
+        const tgOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
+        await sendTelegram(secrets, `EMAIL PROCESSOR ERROR: ${(err.message || '').slice(0, 200)}\nMessage ID: ${msg.id}`, tgOpts);
         // Mark as processed to avoid infinite retry loops
         await markProcessed(msg.id, 'unknown', 'ERROR').catch(() => {});
       }
@@ -229,7 +249,8 @@ export async function handler(event) {
 
   } catch (err) {
     console.error('[Handler] FATAL:', (err.message || '').slice(0, 200));
-    await sendTelegram(secrets, `EMAIL PROCESSOR FATAL ERROR: ${(err.message || '').slice(0, 200)}`).catch(() => {});
+    const tgOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
+    await sendTelegram(secrets, `EMAIL PROCESSOR FATAL ERROR: ${(err.message || '').slice(0, 200)}`, tgOpts).catch(() => {});
     return { statusCode: 500, body: 'Internal error' };
   }
 }
@@ -237,7 +258,9 @@ export async function handler(event) {
 /**
  * Process a single email through the full pipeline.
  */
-async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, ghostStyl, existingDraftThreadIds, now }) {
+async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, ghostStyl, existingDraftThreadIds, now, tenantConfig }) {
+  const myEmail = tenantConfig?.email || MY_EMAIL;
+  const telegramOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
   // Fetch full message details
   const detail = await gmailGetMessage(accessToken, msg.id, 'full');
   const senderEmail = extractEmail(detail.from);
@@ -250,7 +273,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   });
 
   // Skip own emails
-  if (senderEmail === MY_EMAIL.toLowerCase()) {
+  if (senderEmail === myEmail.toLowerCase()) {
     await markProcessed(msg.id, senderEmail, 'SKIPPED_OWN_EMAIL');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -267,13 +290,13 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   const repliedAfterIncoming = threadMessages.some(m => {
     const msgFrom = extractEmail(m.from);
     const msgTs = Number(m.internalDate || 0);
-    return msgFrom === MY_EMAIL.toLowerCase() && msgTs > incomingTs;
+    return msgFrom === myEmail.toLowerCase() && msgTs > incomingTs;
   });
 
   if (repliedAfterIncoming) {
     safeLog('[Process] Already replied in thread after this email, skipping', { email: senderEmail });
     await sendTelegram(secrets,
-      `Mail od ${maskEmail(senderEmail)}, ale juz odpowiedziano w watku. SKIP.`);
+      `Mail od ${maskEmail(senderEmail)}, ale juz odpowiedziano w watku. SKIP.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_ALREADY_REPLIED');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -286,7 +309,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   if (existingDraftThreadIds.has(detail.threadId)) {
     safeLog('[Process] Draft already exists in thread, skipping', { email: senderEmail, threadId: detail.threadId });
     await sendTelegram(secrets,
-      `Draft juz istnieje w watku "${detail.subject}". SKIP.`);
+      `Draft juz istnieje w watku "${detail.subject}". SKIP.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_EXISTING_DRAFT');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -300,7 +323,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   if (!freqCheck.allowed) {
     safeLog('[Process] Frequency cap hit', { email: senderEmail, reason: freqCheck.reason });
     await sendTelegram(secrets,
-      `FREQUENCY CAP: ${maskEmail(senderEmail)} — ${freqCheck.reason}. Przejdz do Gmail lub @ceo.`);
+      `FREQUENCY CAP: ${maskEmail(senderEmail)} — ${freqCheck.reason}. Przejdz do Gmail lub @ceo.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_FREQ_CAP');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -313,7 +336,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   const budgetMid = await checkBudgetCap();
   if (!budgetMid.allowed) {
     await sendTelegram(secrets,
-      `BUDGET CAP osiagniety w trakcie batch (${budgetMid.callsToday}/${budgetMid.cap}). Reszta maili na jutro.`);
+      `BUDGET CAP osiagniety w trakcie batch (${budgetMid.callsToday}/${budgetMid.cap}). Reszta maili na jutro.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_BUDGET_CAP');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -333,13 +356,13 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   // --- C. CLASSIFICATION (Bedrock) ---
   let classification;
   try {
-    classification = await classifyEmail(detail, lead, oferta);
+    classification = await classifyEmail(detail, lead, oferta, tenantConfig);
     classifyTokens = classification.usage || null;
     await incrementBudgetCounter(1);
   } catch (err) {
     console.error('[Process] Bedrock classify failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
-      `BEDROCK TIMEOUT: Nie udalo sie sklasyfikowac maila od ${maskEmail(senderEmail)}. Sprawdz recznie.`);
+      `BEDROCK TIMEOUT: Nie udalo sie sklasyfikowac maila od ${maskEmail(senderEmail)}. Sprawdz recznie.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'ERROR_CLASSIFY');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -359,7 +382,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
       '',
       'Nie tworze draftu — przejdz do Gmail lub @ceo sesja.',
     ].join('\n');
-    await sendTelegram(secrets, alertMsg);
+    await sendTelegram(secrets, alertMsg, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_DECISION');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -372,7 +395,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
 
   // --- D. DRAFT GENERATION (Bedrock Claude Sonnet) ---
   let draftResult;
-  const isEn = lead ? isForeignLead(lead) : false;
+  const isEn = lead ? isForeignLead(lead, tenantConfig?.foreignTLDs) : false;
 
   try {
     draftResult = await generateDraft({
@@ -382,13 +405,14 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
       thread: threadMessages,
       lead,
       isForeign: isEn,
+      tenantConfig,
     });
     draftTokens = draftResult.usage || null;
     await incrementBudgetCounter(1);
   } catch (err) {
     console.error('[Process] Bedrock draft generation failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
-      `BEDROCK TIMEOUT: Nie udalo sie wygenerowac draftu dla ${lead?.company || maskEmail(senderEmail)}. Sprawdz recznie.`);
+      `BEDROCK TIMEOUT: Nie udalo sie wygenerowac draftu dla ${lead?.company || maskEmail(senderEmail)}. Sprawdz recznie.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'ERROR_DRAFT_GEN');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -402,10 +426,12 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   const draftBody = draftResult.text;
 
   // --- GUARDRAIL: Price validation ---
-  const priceCheck = validatePricesInDraft(draftBody, oferta);
+  const priceCheck = (tenantConfig?.guardrails?.priceValidation !== false)
+    ? validatePricesInDraft(draftBody, oferta)
+    : { valid: true };
   if (!priceCheck.valid) {
     await sendTelegram(secrets,
-      `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral bledna cene (${priceCheck.detail}). Draft NIE utworzony.`);
+      `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral bledna cene (${priceCheck.detail}). Draft NIE utworzony.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -418,10 +444,10 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   }
 
   // --- GUARDRAIL: Commitment words check ---
-  const commitCheck = validateNoCommitments(draftBody);
+  const commitCheck = validateNoCommitments(draftBody, tenantConfig?.guardrails);
   if (!commitCheck.valid) {
     await sendTelegram(secrets,
-      `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral zobowiazanie (${commitCheck.detail}). Draft NIE utworzony.`);
+      `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral zobowiazanie (${commitCheck.detail}). Draft NIE utworzony.`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -436,7 +462,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   // --- E. DELIVERY ---
 
   // Gmail: create draft as reply in thread
-  const htmlBody = wrapEmailHTML(draftBody, isEn);
+  const htmlBody = wrapEmailHTML(draftBody, isEn, tenantConfig);
   try {
     await gmailCreateDraft(
       accessToken,
@@ -449,7 +475,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   } catch (err) {
     console.error('[Process] Gmail draft creation failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
-      `GMAIL ERROR: Nie udalo sie stworzyc draftu dla ${maskEmail(senderEmail)}: ${(err.message || '').slice(0, 200)}`);
+      `GMAIL ERROR: Nie udalo sie stworzyc draftu dla ${maskEmail(senderEmail)}: ${(err.message || '').slice(0, 200)}`, telegramOpts);
     await markProcessed(msg.id, senderEmail, 'ERROR_DRAFT_CREATE');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
@@ -475,7 +501,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     } catch (err) {
       console.error('[Process] Notion update failed:', (err.message || '').slice(0, 200));
       await sendTelegram(secrets,
-        `NOTION DOWN: Draft utworzony, ale CRM nie zaktualizowany. Firma: ${lead.company || 'brak'}, Due: ${addBusinessDays(now, 3).toISOString().slice(0, 10)}. Zaktualizuj recznie.`);
+        `NOTION DOWN: Draft utworzony, ale CRM nie zaktualizowany. Firma: ${lead.company || 'brak'}, Due: ${addBusinessDays(now, 3).toISOString().slice(0, 10)}. Zaktualizuj recznie.`, telegramOpts);
     }
   }
 
@@ -487,7 +513,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
 
   // Telegram: confirmation
   await sendTelegram(secrets,
-    `Draft gotowy: ${lead?.company || lead?.name || maskEmail(senderEmail)} — "${detail.subject}"`);
+    `Draft gotowy: ${lead?.company || lead?.name || maskEmail(senderEmail)} — "${detail.subject}"`, telegramOpts);
 
   await markProcessed(msg.id, senderEmail, 'DRAFT_CREATED');
 

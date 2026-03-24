@@ -18,21 +18,26 @@ export function extractName(headerValue) {
   return match ? match[1].trim() : headerValue.split('@')[0];
 }
 
+// Default foreign TLDs (backward compatibility when no tenant config is passed)
+const DEFAULT_FOREIGN_TLDS = [
+  'cz', 'sk', 'hu', 'lt', 'lv', 'ee', 'de', 'nl', 'fr', 'se', 'dk',
+  'at', 'ro', 'bg', 'hr', 'si', 'fi', 'no', 'be', 'pt', 'es', 'it', 'ie', 'uk', 'ch',
+];
+
 /**
  * Determine if a lead is foreign (non-Polish) based on country or email TLD.
+ * @param {object} lead — parsed CRM lead
+ * @param {string[]} [foreignTLDs] — list of foreign TLDs. If omitted, uses default list.
  */
-export function isForeignLead(lead) {
+export function isForeignLead(lead, foreignTLDs = null) {
+  const tlds = foreignTLDs || DEFAULT_FOREIGN_TLDS;
   const country = (lead.country || '').toUpperCase();
   if (country && country !== 'PL' && country !== 'POLSKA' && country !== 'POLAND') {
     return true;
   }
   if (!country && lead.email) {
     const tld = lead.email.split('.').pop().toLowerCase();
-    const foreignTLDs = [
-      'cz', 'sk', 'hu', 'lt', 'lv', 'ee', 'de', 'nl', 'fr', 'se', 'dk',
-      'at', 'ro', 'bg', 'hr', 'si', 'fi', 'no', 'be', 'pt', 'es', 'it', 'ie', 'uk', 'ch'
-    ];
-    return foreignTLDs.includes(tld);
+    return tlds.includes(tld);
   }
   return false;
 }
@@ -91,23 +96,31 @@ export function validatePricesInDraft(draftBody, ofertaText) {
   return { valid: true };
 }
 
+// Default forbidden words (backward compatibility when no tenant config is passed)
+const DEFAULT_FORBIDDEN_WORDS = [
+  // PL commitments
+  'gwarantujemy', 'gwarancja', 'obiecujemy', 'zobowiązujemy się', 'zobowiazujemy sie',
+  'umowa', 'kontrakt', 'zapewniamy', 'deklarujemy', 'podpisujemy', 'na pewno',
+  // EN commitments
+  'we guarantee', 'guaranteed', 'we promise', 'we commit', 'we assure', 'we ensure',
+  'contract', 'binding agreement', 'agreement',
+  // PL discounts (unauthorized offers)
+  'rabat', 'zniżka', 'znizka', 'specjalna cena', 'promocja', 'obniżka', 'obnizka',
+  // EN discounts
+  'discount', 'special price', 'special offer', 'reduced price',
+];
+
+const DEFAULT_DELIVERY_TIME_REGEX = '(?:dostarczymy|delivery|wysylka|shipping).{0,30}(?:\\d+\\s*(?:dni|days|hours|godzin|h))';
+
 /**
  * Validate draft does not contain commitment/legal words that require human review.
+ * @param {string} draftBody — draft email body text
+ * @param {object} [guardrails] — { forbiddenWords: string[], deliveryTimeRegex: string }. If omitted, uses defaults.
  */
-export function validateNoCommitments(draftBody) {
+export function validateNoCommitments(draftBody, guardrails = null) {
   if (!draftBody) return { valid: true };
-  const forbidden = [
-    // PL commitments
-    'gwarantujemy', 'gwarancja', 'obiecujemy', 'zobowiązujemy się', 'zobowiazujemy sie',
-    'umowa', 'kontrakt', 'zapewniamy', 'deklarujemy', 'podpisujemy', 'na pewno',
-    // EN commitments
-    'we guarantee', 'guaranteed', 'we promise', 'we commit', 'we assure', 'we ensure',
-    'contract', 'binding agreement', 'agreement',
-    // PL discounts (unauthorized offers)
-    'rabat', 'zniżka', 'znizka', 'specjalna cena', 'promocja', 'obniżka', 'obnizka',
-    // EN discounts
-    'discount', 'special price', 'special offer', 'reduced price',
-  ];
+  const forbidden = guardrails?.forbiddenWords || DEFAULT_FORBIDDEN_WORDS;
+  const deliveryRegexStr = guardrails?.deliveryTimeRegex || DEFAULT_DELIVERY_TIME_REGEX;
   const lower = draftBody.toLowerCase();
   for (const word of forbidden) {
     if (lower.includes(word)) {
@@ -115,20 +128,21 @@ export function validateNoCommitments(draftBody) {
     }
   }
   // Check for delivery time commitments (regex)
-  if (/(?:dostarczymy|delivery|wysylka|shipping).{0,30}(?:\d+\s*(?:dni|days|hours|godzin|h))/i.test(draftBody)) {
+  if (new RegExp(deliveryRegexStr, 'i').test(draftBody)) {
     return { valid: false, detail: 'Delivery time commitment detected' };
   }
   return { valid: true };
 }
 
 // --- HTML Email Signatures ---
-const HTML_SIGNATURE_PL = `<p style="margin-top: 16px; line-height: 1.6;">
+// Default signatures (backward compatibility when no tenant config is passed)
+const DEFAULT_SIGNATURE_PL = `<p style="margin-top: 16px; line-height: 1.6;">
 <strong>Sokólski Mateusz</strong><br>
 key account manager w <a href="https://artnapi.pl" style="color: #1a73e8; text-decoration: none;">artnapi.pl</a><br>
 <a href="mailto:mateusz.sokolski@artnapi.pl" style="color: #1a73e8; text-decoration: none;">mateusz.sokolski@artnapi.pl</a> | <a href="tel:+48534852707" style="color: #1a73e8; text-decoration: none;">+48 534 852 707</a>
 </p>`;
 
-const HTML_SIGNATURE_EN = `<p style="margin-top: 16px; line-height: 1.6;">
+const DEFAULT_SIGNATURE_EN = `<p style="margin-top: 16px; line-height: 1.6;">
 <strong>Mateusz Sokólski</strong><br>
 Key Account Manager at <a href="https://artnapi.pl" style="color: #1a73e8; text-decoration: none;">artnapi.pl</a><br>
 <a href="mailto:mateusz.sokolski@artnapi.pl" style="color: #1a73e8; text-decoration: none;">mateusz.sokolski@artnapi.pl</a> | <a href="tel:+48534852707" style="color: #1a73e8; text-decoration: none;">+48 534 852 707</a>
@@ -136,9 +150,17 @@ Key Account Manager at <a href="https://artnapi.pl" style="color: #1a73e8; text-
 
 /**
  * Wrap HTML email body with consistent styling and the appropriate signature.
+ * @param {string} bodyContent — HTML body content
+ * @param {boolean} [isEnglish=false] — use English signature
+ * @param {object} [tenantConfig] — tenant config with signaturePL/signatureEN. If omitted, uses defaults.
  */
-export function wrapEmailHTML(bodyContent, isEnglish = false) {
-  const signature = isEnglish ? HTML_SIGNATURE_EN : HTML_SIGNATURE_PL;
+export function wrapEmailHTML(bodyContent, isEnglish = false, tenantConfig = null) {
+  let signature;
+  if (isEnglish) {
+    signature = tenantConfig?.signatureEN || DEFAULT_SIGNATURE_EN;
+  } else {
+    signature = tenantConfig?.signaturePL || DEFAULT_SIGNATURE_PL;
+  }
   return `<div style="font-family: Arial, sans-serif; font-size: 14px; color: #333; line-height: 1.6;">
 ${bodyContent}
 ${signature}
