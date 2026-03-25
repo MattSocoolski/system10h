@@ -5,7 +5,7 @@
 import { SecretsManagerClient, GetSecretValueCommand } from '@aws-sdk/client-secrets-manager';
 
 const SECRET_NAME = process.env.SECRET_NAME || 'artnapi-email-processor/credentials';
-const REGION = process.env.AWS_REGION || 'eu-west-1';
+const REGION = process.env.AWS_REGION || 'eu-north-1';
 
 const client = new SecretsManagerClient({ region: REGION });
 

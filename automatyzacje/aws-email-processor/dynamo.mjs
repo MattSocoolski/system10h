@@ -6,7 +6,7 @@ import { DynamoDBClient, GetItemCommand, PutItemCommand, UpdateItemCommand } fro
 import { maskEmail } from './utils.mjs';
 
 const TABLE = process.env.DYNAMO_TABLE || 'email-processor-state';
-const REGION = process.env.AWS_REGION || 'eu-west-1';
+const REGION = process.env.AWS_REGION || 'eu-north-1';
 
 const client = new DynamoDBClient({ region: REGION });
 
@@ -55,6 +55,23 @@ export async function markProcessed(messageId, senderEmail, action) {
     }
     throw err;
   }
+}
+
+/**
+ * Update a previously claimed (PROCESSING) record with final action.
+ */
+export async function updateProcessed(messageId, senderEmail, action) {
+  await client.send(new UpdateItemCommand({
+    TableName: TABLE,
+    Key: { PK: { S: `EMAIL#${messageId}` } },
+    UpdateExpression: 'SET senderEmail = :email, #act = :action, processedAt = :ts',
+    ExpressionAttributeNames: { '#act': 'action' },
+    ExpressionAttributeValues: {
+      ':email': { S: senderEmail || 'unknown' },
+      ':action': { S: action },
+      ':ts': { S: new Date().toISOString() },
+    },
+  }));
 }
 
 // --- Frequency Cap (Edge Case 3: spam loop prevention) ---

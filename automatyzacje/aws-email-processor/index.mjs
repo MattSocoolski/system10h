@@ -38,6 +38,7 @@ import {
   incrementBudgetCounter,
   updateHeartbeat,
   writeAuditRecord,
+  updateProcessed,
 } from './dynamo.mjs';
 import {
   extractEmail,
@@ -150,11 +151,19 @@ export async function handler(event) {
 
     safeLog('[Handler] Found messages', { count: messages.length });
 
-    // --- STEP 3: DynamoDB dedup ---
+    // --- STEP 3: DynamoDB dedup + claim (prevents race between webhook and fallback) ---
     const newMessages = [];
     for (const msg of messages) {
       const already = await isProcessed(msg.id);
-      if (!already) newMessages.push(msg);
+      if (!already) {
+        // Claim this message atomically — only one Lambda instance wins
+        const claimed = await markProcessed(msg.id, 'pending', 'PROCESSING');
+        if (claimed.written) {
+          newMessages.push(msg);
+        } else {
+          safeLog('[Handler] Message already claimed by another instance', { id: msg.id });
+        }
+      }
     }
 
     if (newMessages.length === 0) {
@@ -165,7 +174,12 @@ export async function handler(event) {
     safeLog('[Handler] New messages to process', { count: newMessages.length });
 
     // --- STEP 4: Budget cap check (before any Bedrock calls) ---
-    const budget = await checkBudgetCap();
+    let budget = { allowed: true, callsToday: 0, cap: 50 };
+    try {
+      budget = await checkBudgetCap();
+    } catch (err) {
+      console.warn('[Handler] DynamoDB budget check failed, proceeding without cap:', (err.message || '').slice(0, 100));
+    }
     if (!budget.allowed) {
       const tgOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
       await sendTelegram(secrets,
@@ -235,7 +249,7 @@ export async function handler(event) {
         const tgOpts = tenantConfig?.telegramChatId ? { chatId: tenantConfig.telegramChatId } : {};
         await sendTelegram(secrets, `EMAIL PROCESSOR ERROR: ${(err.message || '').slice(0, 200)}\nMessage ID: ${msg.id}`, tgOpts);
         // Mark as processed to avoid infinite retry loops
-        await markProcessed(msg.id, 'unknown', 'ERROR').catch(() => {});
+        await updateProcessed(msg.id, 'unknown', 'ERROR').catch(() => {});
       }
     }
 
@@ -274,7 +288,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
 
   // Skip own emails
   if (senderEmail === myEmail.toLowerCase()) {
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_OWN_EMAIL');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_OWN_EMAIL');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       action: 'SKIPPED_OWN_EMAIL', draftCreated: false,
@@ -297,7 +311,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     safeLog('[Process] Already replied in thread after this email, skipping', { email: senderEmail });
     await sendTelegram(secrets,
       `Mail od ${maskEmail(senderEmail)}, ale juz odpowiedziano w watku. SKIP.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_ALREADY_REPLIED');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_ALREADY_REPLIED');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       action: 'SKIPPED_ALREADY_REPLIED', draftCreated: false,
@@ -310,7 +324,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     safeLog('[Process] Draft already exists in thread, skipping', { email: senderEmail, threadId: detail.threadId });
     await sendTelegram(secrets,
       `Draft juz istnieje w watku "${detail.subject}". SKIP.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_EXISTING_DRAFT');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_EXISTING_DRAFT');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       action: 'SKIPPED_EXISTING_DRAFT', draftCreated: false,
@@ -319,12 +333,17 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   }
 
   // --- FREQUENCY CAP (Edge Case 3): Spam loop prevention ---
-  const freqCheck = await checkFrequencyCap(senderEmail);
+  let freqCheck = { allowed: true, count: 0 };
+  try {
+    freqCheck = await checkFrequencyCap(senderEmail);
+  } catch (err) {
+    console.warn('[Process] DynamoDB frequency check failed, proceeding:', (err.message || '').slice(0, 100));
+  }
   if (!freqCheck.allowed) {
     safeLog('[Process] Frequency cap hit', { email: senderEmail, reason: freqCheck.reason });
     await sendTelegram(secrets,
       `FREQUENCY CAP: ${maskEmail(senderEmail)} — ${freqCheck.reason}. Przejdz do Gmail lub @ceo.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_FREQ_CAP');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_FREQ_CAP');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       action: 'SKIPPED_FREQ_CAP', draftCreated: false,
@@ -333,11 +352,16 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   }
 
   // --- BUDGET CHECK (per-email, in case batch approaches limit) ---
-  const budgetMid = await checkBudgetCap();
+  let budgetMid = { allowed: true, callsToday: 0, cap: 50 };
+  try {
+    budgetMid = await checkBudgetCap();
+  } catch (err) {
+    console.warn('[Process] DynamoDB budget check failed, proceeding:', (err.message || '').slice(0, 100));
+  }
   if (!budgetMid.allowed) {
     await sendTelegram(secrets,
       `BUDGET CAP osiagniety w trakcie batch (${budgetMid.callsToday}/${budgetMid.cap}). Reszta maili na jutro.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_BUDGET_CAP');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_BUDGET_CAP');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       action: 'SKIPPED_BUDGET_CAP', draftCreated: false,
@@ -363,7 +387,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     console.error('[Process] Bedrock classify failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
       `BEDROCK TIMEOUT: Nie udalo sie sklasyfikowac maila od ${maskEmail(senderEmail)}. Sprawdz recznie.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'ERROR_CLASSIFY');
+    await updateProcessed(msg.id, senderEmail, 'ERROR_CLASSIFY');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       action: 'ERROR_CLASSIFY', draftCreated: false,
@@ -383,7 +407,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
       'Nie tworze draftu — przejdz do Gmail lub @ceo sesja.',
     ].join('\n');
     await sendTelegram(secrets, alertMsg, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_DECISION');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_DECISION');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       classification: { type: classification.type, reason: classification.reason },
@@ -413,7 +437,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     console.error('[Process] Bedrock draft generation failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
       `BEDROCK TIMEOUT: Nie udalo sie wygenerowac draftu dla ${lead?.company || maskEmail(senderEmail)}. Sprawdz recznie.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'ERROR_DRAFT_GEN');
+    await updateProcessed(msg.id, senderEmail, 'ERROR_DRAFT_GEN');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       classification: { type: classification.type, reason: classification.reason },
@@ -432,7 +456,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   if (!priceCheck.valid) {
     await sendTelegram(secrets,
       `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral bledna cene (${priceCheck.detail}). Draft NIE utworzony.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       classification: { type: classification.type, reason: classification.reason },
@@ -448,7 +472,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   if (!commitCheck.valid) {
     await sendTelegram(secrets,
       `GUARDRAIL: Draft dla ${maskEmail(senderEmail)} zawieral zobowiazanie (${commitCheck.detail}). Draft NIE utworzony.`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
+    await updateProcessed(msg.id, senderEmail, 'SKIPPED_GUARDRAIL');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       classification: { type: classification.type, reason: classification.reason },
@@ -476,7 +500,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
     console.error('[Process] Gmail draft creation failed:', (err.message || '').slice(0, 200));
     await sendTelegram(secrets,
       `GMAIL ERROR: Nie udalo sie stworzyc draftu dla ${maskEmail(senderEmail)}: ${(err.message || '').slice(0, 200)}`, telegramOpts);
-    await markProcessed(msg.id, senderEmail, 'ERROR_DRAFT_CREATE');
+    await updateProcessed(msg.id, senderEmail, 'ERROR_DRAFT_CREATE');
     await audit({
       messageId: msg.id, senderEmail, subject: detail.subject,
       classification: { type: classification.type, reason: classification.reason },
@@ -515,7 +539,7 @@ async function processEmail({ msg, accessToken, secrets, emailToLead, oferta, gh
   await sendTelegram(secrets,
     `Draft gotowy: ${lead?.company || lead?.name || maskEmail(senderEmail)} — "${detail.subject}"`, telegramOpts);
 
-  await markProcessed(msg.id, senderEmail, 'DRAFT_CREATED');
+  await updateProcessed(msg.id, senderEmail, 'DRAFT_CREATED');
 
   // Audit: success path
   await audit({

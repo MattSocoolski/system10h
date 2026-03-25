@@ -76,7 +76,7 @@ async function invokeAnthropic(systemPrompt, userPrompt, { maxTokens = 1000, tem
     const isRetryable = response.status === 429 || response.status === 529 || response.status >= 500;
 
     if (!isRetryable || attempt === MAX_RETRIES - 1) {
-      throw new Error(`Anthropic API ${response.status}: ${(errorBody || '').slice(0, 200)}`);
+      throw new Error(`Anthropic API ${response.status}: ${(errorBody || '').replace(/x-api-key[^"]*|sk-[a-zA-Z0-9_-]+/gi, '[REDACTED]').slice(0, 100)}`);
     }
 
     console.warn(`[bedrock] Anthropic API ${response.status}, retry ${attempt + 1}/${MAX_RETRIES} in ${RETRY_DELAYS[attempt]}ms`);

@@ -5,7 +5,7 @@
 import { S3Client, GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 
 const BUCKET = process.env.S3_BUCKET || 'artnapi-email-processor-kb';
-const REGION = process.env.AWS_REGION || 'eu-west-1';
+const REGION = process.env.AWS_REGION || 'eu-north-1';
 
 const client = new S3Client({ region: REGION });
 
