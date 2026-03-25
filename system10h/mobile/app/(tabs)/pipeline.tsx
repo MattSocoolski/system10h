@@ -4,7 +4,6 @@ import {
   ScrollView,
   RefreshControl,
   Pressable,
-  ActivityIndicator,
   Linking,
   Alert,
   Platform,
@@ -23,6 +22,7 @@ import {
 
 import { colors, typography, spacing, radius, iconSize } from '@/constants/tokens';
 import { PressableScale } from '@/components/ui/PressableScale';
+import { PipelineSkeleton } from '@/components/ui/SkeletonScreen';
 import { useLeads } from '@/lib/hooks';
 import { useUIStore } from '@/lib/stores';
 import * as api from '@/lib/api';
@@ -374,8 +374,7 @@ export default function PipelineScreen() {
   if (isLoading && leads.length === 0) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={colors.accent.default} />
-        <Text style={styles.loadingText}>Ladowanie pipeline...</Text>
+        <PipelineSkeleton />
       </View>
     );
   }

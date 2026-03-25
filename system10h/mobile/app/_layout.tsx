@@ -1,5 +1,7 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { QueryClient, QueryClientProvider, focusManager } from '@tanstack/react-query';
+import { QueryClient, QueryClientProvider, focusManager, onlineManager } from '@tanstack/react-query';
+import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
+import NetInfo from '@react-native-community/netinfo';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
@@ -11,6 +13,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { colors } from '@/constants/tokens';
+import { persister } from '@/lib/mmkv';
 import {
   configureNotificationHandler,
   setupNotificationCategories,
@@ -45,6 +48,8 @@ function onAppStateChange(status: AppStateStatus) {
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      gcTime: 1000 * 60 * 60 * 24, // 24h — must be >= persister maxAge
+      staleTime: 1000 * 60 * 5,     // 5 min default
       networkMode: 'offlineFirst',
       refetchOnWindowFocus: false,
       refetchOnReconnect: 'always',
@@ -152,36 +157,60 @@ export default function RootLayout() {
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
+  // Wire NetInfo to TanStack Query onlineManager for offline-aware queries
+  useEffect(() => {
+    return NetInfo.addEventListener((state) => {
+      onlineManager.setOnline(!!state.isConnected);
+    });
+  }, []);
+
+  const stackContent = (
+    <ThemeProvider value={colorScheme === 'dark' ? System10HDarkTheme : DefaultTheme}>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="lead/[id]"
+          options={{
+            headerShown: true,
+            title: 'Lead',
+            presentation: 'card',
+            headerStyle: { backgroundColor: colors.bg.base },
+            headerTintColor: colors.text.primary,
+          }}
+        />
+        <Stack.Screen
+          name="draft/[id]"
+          options={{
+            headerShown: true,
+            title: 'Draft',
+            presentation: 'card',
+            headerStyle: { backgroundColor: colors.bg.base },
+            headerTintColor: colors.text.primary,
+          }}
+        />
+        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      </Stack>
+    </ThemeProvider>
+  );
+
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider value={colorScheme === 'dark' ? System10HDarkTheme : DefaultTheme}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen
-              name="lead/[id]"
-              options={{
-                headerShown: true,
-                title: 'Lead',
-                presentation: 'card',
-                headerStyle: { backgroundColor: colors.bg.base },
-                headerTintColor: colors.text.primary,
-              }}
-            />
-            <Stack.Screen
-              name="draft/[id]"
-              options={{
-                headerShown: true,
-                title: 'Draft',
-                presentation: 'card',
-                headerStyle: { backgroundColor: colors.bg.base },
-                headerTintColor: colors.text.primary,
-              }}
-            />
-            <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-          </Stack>
-        </ThemeProvider>
-      </QueryClientProvider>
+      {persister ? (
+        <PersistQueryClientProvider
+          client={queryClient}
+          persistOptions={{ persister, maxAge: 1000 * 60 * 60 * 24 }}
+          onSuccess={() =>
+            queryClient.resumePausedMutations()
+              .then(() => queryClient.invalidateQueries())
+          }
+        >
+          {stackContent}
+        </PersistQueryClientProvider>
+      ) : (
+        <QueryClientProvider client={queryClient}>
+          {stackContent}
+        </QueryClientProvider>
+      )}
     </GestureHandlerRootView>
   );
 }

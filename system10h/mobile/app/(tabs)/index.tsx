@@ -4,7 +4,6 @@ import {
   ScrollView,
   RefreshControl,
   Pressable,
-  ActivityIndicator,
   Linking,
   Alert,
   Platform,
@@ -28,6 +27,7 @@ import {
 
 import { colors, typography, spacing, radius, iconSize } from '@/constants/tokens';
 import { PressableScale } from '@/components/ui/PressableScale';
+import { DashboardSkeleton } from '@/components/ui/SkeletonScreen';
 import { useDashboard, useActivity } from '@/lib/hooks';
 import * as api from '@/lib/api';
 
@@ -235,8 +235,7 @@ export default function DashboardScreen() {
   if (isLoading && !dashboard) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color={colors.accent.default} />
-        <RNText style={styles.loadingText}>Ladowanie...</RNText>
+        <DashboardSkeleton />
       </View>
     );
   }

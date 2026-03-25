@@ -1,7 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   StyleSheet,
-  ScrollView,
   RefreshControl,
   Pressable,
   Alert,
@@ -9,6 +8,7 @@ import {
   View,
   Text,
 } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import Animated, {
   useAnimatedStyle,
@@ -27,6 +27,7 @@ import { Check, X, Sparkle, Eye } from 'phosphor-react-native';
 
 import { colors, typography, spacing, radius, iconSize } from '@/constants/tokens';
 import { PressableScale } from '@/components/ui/PressableScale';
+import { DraftsSkeleton } from '@/components/ui/SkeletonScreen';
 import { haptic } from '@/lib/haptics';
 import { useDrafts, useApproveDraft, useRejectDraft } from '@/lib/hooks';
 import type { Draft } from '@/types';
@@ -249,7 +250,7 @@ function SwipeableDraftCard({
   // Web: skip Swipeable (doesn't work), use tap buttons only
   if (Platform.OS === 'web') {
     return (
-      <View style={{ marginBottom: spacing.md }}>
+      <View>
         {cardContent}
       </View>
     );
@@ -366,16 +367,85 @@ export default function DraftsScreen() {
     setUndoAction(null);
   }, [approveMutation, rejectMutation]);
 
+  // Skeleton loading state
+  if (isLoading && drafts.length === 0) {
+    return (
+      <View style={styles.root}>
+        <DraftsSkeleton />
+      </View>
+    );
+  }
+
   // Filter out drafts with pending undo action (visually removed but not yet mutated)
   const visibleDrafts = drafts.filter(
     (d) => !(undoAction && undoAction.draftId === d.id),
   );
 
+  const renderItem = useCallback(({ item }: { item: Draft }) => (
+    <SwipeableDraftCard
+      draft={item}
+      onApprove={handleApprove}
+      onReject={handleReject}
+      onOpen={handleOpenDraft}
+      isApproving={
+        approveMutation.isPending &&
+        approveMutation.variables === item.id
+      }
+      isRejecting={
+        rejectMutation.isPending &&
+        rejectMutation.variables === item.id
+      }
+    />
+  ), [handleApprove, handleReject, handleOpenDraft, approveMutation.isPending, approveMutation.variables, rejectMutation.isPending, rejectMutation.variables]);
+
+  const keyExtractor = useCallback((item: Draft) => item.id, []);
+
+  const ListHeaderComponent = useMemo(() => (
+    <View>
+      <Text style={styles.header}>
+        {visibleDrafts.length}{' '}
+        {visibleDrafts.length === 1 ? 'draft' : 'draftow'} do zatwierdzenia
+      </Text>
+
+      <Text style={styles.hint}>
+        Swipe w prawo = zatwierdz | Swipe w lewo = odrzuc
+      </Text>
+
+      {isError && (
+        <ErrorBanner
+          message={error?.message || 'Nie udalo sie zaladowac draftow'}
+          onRetry={refetch}
+        />
+      )}
+    </View>
+  ), [visibleDrafts.length, isError, error, refetch]);
+
+  const ListEmptyComponent = useMemo(() => {
+    if (isLoading) return null;
+    return (
+      <View style={styles.empty}>
+        <EnvelopeSimpleEmpty />
+        <Text style={styles.emptyText}>Brak draftow do zatwierdzenia</Text>
+        <Text style={styles.emptySubtext}>
+          Email Autopilot + @ghost tworza drafty automatycznie
+        </Text>
+      </View>
+    );
+  }, [isLoading]);
+
   return (
     <View style={styles.root}>
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
+      <FlashList
+        data={visibleDrafts}
+        renderItem={renderItem}
+        keyExtractor={keyExtractor}
+        estimatedItemSize={220}
+        drawDistance={250}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.flashListContent}
+        ListHeaderComponent={ListHeaderComponent}
+        ListEmptyComponent={ListEmptyComponent}
+        ItemSeparatorComponent={() => <View style={{ height: spacing.md }} />}
         refreshControl={
           <RefreshControl
             refreshing={isLoading || isRefetching}
@@ -383,53 +453,7 @@ export default function DraftsScreen() {
             tintColor={colors.accent.default}
           />
         }
-      >
-        <View style={styles.container}>
-          <Text style={styles.header}>
-            {visibleDrafts.length}{' '}
-            {visibleDrafts.length === 1 ? 'draft' : 'draftow'} do zatwierdzenia
-          </Text>
-
-          <Text style={styles.hint}>
-            Swipe w prawo = zatwierdz | Swipe w lewo = odrzuc
-          </Text>
-
-          {isError && (
-            <ErrorBanner
-              message={error?.message || 'Nie udalo sie zaladowac draftow'}
-              onRetry={refetch}
-            />
-          )}
-
-          {visibleDrafts.map((draft) => (
-            <SwipeableDraftCard
-              key={draft.id}
-              draft={draft}
-              onApprove={handleApprove}
-              onReject={handleReject}
-              onOpen={handleOpenDraft}
-              isApproving={
-                approveMutation.isPending &&
-                approveMutation.variables === draft.id
-              }
-              isRejecting={
-                rejectMutation.isPending &&
-                rejectMutation.variables === draft.id
-              }
-            />
-          ))}
-
-          {visibleDrafts.length === 0 && !isLoading && (
-            <View style={styles.empty}>
-              <EnvelopeSimpleEmpty />
-              <Text style={styles.emptyText}>Brak draftow do zatwierdzenia</Text>
-              <Text style={styles.emptySubtext}>
-                Email Autopilot + @ghost tworza drafty automatycznie
-              </Text>
-            </View>
-          )}
-        </View>
-      </ScrollView>
+      />
 
       {/* Undo Snackbar — fixed at bottom */}
       {undoAction && (
@@ -452,9 +476,7 @@ function EnvelopeSimpleEmpty() {
 // --- Styles ---
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.bg.base },
-  scroll: { flex: 1, backgroundColor: colors.bg.base },
-  scrollContent: { paddingBottom: 100 },
-  container: { flex: 1, padding: spacing.lg },
+  flashListContent: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, paddingBottom: 100 },
   header: { fontSize: typography.size.footnote, fontWeight: typography.weight.medium, color: colors.text.tertiary, marginBottom: spacing.xs, fontVariant: ['tabular-nums'] },
   hint: { fontSize: typography.size.caption1, color: colors.text.muted, marginBottom: spacing.base, fontWeight: typography.weight.medium },
 
@@ -463,7 +485,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.bg.surface,
     borderRadius: radius.xl,
     padding: spacing.base,
-    marginBottom: spacing.md,
     borderWidth: 1,
     borderColor: colors.border.subtle,
   },
@@ -529,7 +550,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 100,
     borderRadius: radius.xl,
-    marginBottom: spacing.md,
     gap: spacing.xs,
   },
   approveAction: {
