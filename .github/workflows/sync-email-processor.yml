@@ -7,16 +7,15 @@ on:
       - 'dane/artnapi/oferta.md'
       - 'dane/ghost_styl.md'
       - 'automatyzacje/aws-email-processor/**'
+  schedule:
+    # Daily sync at 06:00 UTC — prevents stale data alerts (48h threshold)
+    - cron: '0 6 * * *'
+  workflow_dispatch: {}
 
 jobs:
   sync-kb:
     name: Sync knowledge base to S3
     runs-on: ubuntu-latest
-    if: >-
-      contains(github.event.head_commit.modified, 'dane/artnapi/oferta.md') ||
-      contains(github.event.head_commit.modified, 'dane/ghost_styl.md') ||
-      contains(github.event.head_commit.added, 'dane/artnapi/oferta.md') ||
-      contains(github.event.head_commit.added, 'dane/ghost_styl.md')
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4

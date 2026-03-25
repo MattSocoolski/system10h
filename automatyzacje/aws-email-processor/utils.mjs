@@ -56,15 +56,20 @@ export function addBusinessDays(date, days) {
   return result;
 }
 
+// Max unit price thresholds — all unit prices in oferta.md are below these values.
+// Prices above = likely totals (qty × unit price) or delivery costs → skip validation.
+const MAX_UNIT_PRICE_PLN = 50;
+const MAX_UNIT_PRICE_EUR = 5;
+
 /**
- * Validate that any prices mentioned in draft text exist in oferta.md content.
+ * Validate that any UNIT prices mentioned in draft text exist in oferta.md content.
  *
  * Returns { valid: true } or { valid: false, detail: string }
  *
  * Logic:
- * - If draft references the B2B calculator URL, skip price check (calculator handles it).
  * - Extract all price-like patterns from draft (e.g. "12,50 PLN", "3.20 EUR").
- * - Each extracted price must appear somewhere in oferta text.
+ * - Skip prices above MAX_UNIT_PRICE threshold (these are totals or delivery costs).
+ * - Each remaining (unit) price must appear somewhere in oferta text.
  */
 export function validatePricesInDraft(draftBody, ofertaText) {
   if (!draftBody || !ofertaText) return { valid: true };
@@ -78,10 +83,22 @@ export function validatePricesInDraft(draftBody, ofertaText) {
   const badPrices = [];
   for (const m of matches) {
     const priceStr = m[1].replace(/\s/g, ''); // strip thousand separators e.g. "1 250,00" -> "1250,00"
+    const currency = m[2].toUpperCase();
+
+    // Parse numeric value for threshold check
+    const numericStr = priceStr.replace(',', '.');
+    const numericVal = parseFloat(numericStr);
+    if (isNaN(numericVal)) continue;
+
+    // Skip totals and delivery costs — only validate unit prices
+    const isEur = currency === 'EUR' || currency === 'EURO' || currency === '€';
+    const threshold = isEur ? MAX_UNIT_PRICE_EUR : MAX_UNIT_PRICE_PLN;
+    if (numericVal > threshold) continue;
+
     // Normalize: replace comma with dot for comparison, and vice versa
     const withDot = priceStr.replace(',', '.');
     const withComma = priceStr.replace('.', ',');
-    // Also check original (with spaces) and without thousand dots
+    // Also check without thousand dots
     const noThousandDot = priceStr.replace(/\.(\d{3})/g, '$1'); // "1.250,00" -> "1250,00"
     // Check if any form appears in oferta
     const found = [priceStr, withDot, withComma, noThousandDot].some(v => ofertaText.includes(v));
