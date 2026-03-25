@@ -25,13 +25,13 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          aws-region: eu-north-1
 
       - name: Sync oferta.md to S3
-        run: aws s3 cp dane/artnapi/oferta.md s3://artnapi-email-processor-kb/oferta.md
+        run: aws s3 cp dane/artnapi/oferta.md s3://artnapi-email-processor-kb/oferta.md --region eu-north-1
 
       - name: Sync ghost_styl.md to S3
-        run: aws s3 cp dane/ghost_styl.md s3://artnapi-email-processor-kb/ghost_styl.md
+        run: aws s3 cp dane/ghost_styl.md s3://artnapi-email-processor-kb/ghost_styl.md --region eu-north-1
 
   deploy-code:
     name: Deploy Lambda code
@@ -59,7 +59,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-1
+          aws-region: eu-north-1
 
       - name: Deploy Lambda via deploy.sh
         if: steps.check.outputs.has_changes == 'true'
