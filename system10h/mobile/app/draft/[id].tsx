@@ -15,6 +15,7 @@ import { PencilSimple, PaperPlaneTilt, TrashSimple, FloppyDisk, XCircle } from '
 
 import { colors, typography, spacing, radius, iconSize } from '@/constants/tokens';
 import { PressableScale } from '@/components/ui/PressableScale';
+import { ConfidenceBadge } from '@/components/ui/ConfidenceBadge';
 import { useDraft, useApproveDraft, useRejectDraft, queryKeys } from '@/lib/hooks';
 import { updateDraftContent } from '@/lib/api';
 
@@ -191,6 +192,10 @@ export default function DraftPreviewScreen() {
                 day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit',
               })}
             </Text>
+          </View>
+          <View style={styles.headerRow}>
+            <Text style={styles.headerLabel}>AI:</Text>
+            <ConfidenceBadge source={draft.source || 'autopilot'} />
           </View>
         </View>
 

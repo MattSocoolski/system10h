@@ -4,6 +4,7 @@
 // While BFF is not ready, the API functions fall back to mock data.
 // When BFF ships, only api.ts changes — these hooks stay the same.
 
+import { useEffect } from 'react';
 import {
   useQuery,
   useMutation,
@@ -14,6 +15,7 @@ import * as api from '@/lib/api';
 import type { DashboardData, Lead, Draft, DraftDetail } from '@/types';
 import type { ActivityEvent } from '@/lib/api';
 import { MOCK_DASHBOARD, MOCK_LEADS, MOCK_DRAFTS } from '@/lib/stores';
+import { useDraftStore } from '@/stores/draftStore';
 
 // ─── Stale times (per Deep Research recommendations) ─────────────────────────
 
@@ -117,11 +119,20 @@ export function useLeads(status?: string) {
  * Short staleTime (30s) — user expects fresh data on this screen.
  */
 export function useDrafts() {
-  return useQuery({
+  const query = useQuery({
     queryKey: queryKeys.drafts,
     queryFn: fetchDrafts,
     staleTime: STALE_TIMES.drafts,
   });
+
+  const setDraftCount = useDraftStore.getState().setDraftCount;
+  useEffect(() => {
+    if (query.data) {
+      setDraftCount(Array.isArray(query.data) ? query.data.length : 0);
+    }
+  }, [query.data]);
+
+  return query;
 }
 
 export function useDraft(id: string) {

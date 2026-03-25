@@ -23,17 +23,19 @@ import type { SharedValue } from 'react-native-reanimated';
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import type { SwipeableMethods } from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { Platform } from 'react-native';
-import { Check, X, Sparkle, Eye } from 'phosphor-react-native';
+import { Check, X, Sparkle, Eye, PaperPlaneTilt, PencilSimple } from 'phosphor-react-native';
 
 import { colors, typography, spacing, radius, iconSize } from '@/constants/tokens';
 import { PressableScale } from '@/components/ui/PressableScale';
 import { DraftsSkeleton } from '@/components/ui/SkeletonScreen';
+import { ConfidenceBadge } from '@/components/ui/ConfidenceBadge';
 import { haptic } from '@/lib/haptics';
 import { useDrafts, useApproveDraft, useRejectDraft } from '@/lib/hooks';
 import type { Draft } from '@/types';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.35;
+const LONG_SWIPE_THRESHOLD = SCREEN_WIDTH * 0.55;
 const UNDO_TIMEOUT_MS = 5000;
 
 // --- Source badge configuration (confidence colors per DR) ---
@@ -47,7 +49,7 @@ const SOURCE_CONFIG: Record<string, { label: string; color: string; bg: string; 
 interface UndoAction {
   id: string;
   draftId: string;
-  type: 'approve' | 'reject';
+  type: 'approve' | 'reject' | 'send';
   subject: string;
 }
 
@@ -66,8 +68,8 @@ function UndoSnackbar({
     return () => clearTimeout(timer);
   }, [action.id, onExpire]);
 
-  const label = action.type === 'approve' ? 'Zatwierdzono' : 'Odrzucono';
-  const bgColor = action.type === 'approve' ? colors.swipe.approve : colors.swipe.reject;
+  const label = action.type === 'send' ? 'Wysylam' : action.type === 'approve' ? 'Zatwierdzono' : 'Odrzucono';
+  const bgColor = action.type === 'reject' ? colors.swipe.reject : colors.swipe.approve;
 
   return (
     <Animated.View
@@ -85,10 +87,11 @@ function UndoSnackbar({
   );
 }
 
-// --- Swipe left action panel (Approve - green) ---
+// --- Swipe left action panel (Approve / Send - green) ---
+// Short swipe right = Approve, Long swipe right = Approve + Send
 function LeftActions(
   progress: SharedValue<number>,
-  _translation: SharedValue<number>,
+  translation: SharedValue<number>,
 ) {
   const animStyle = useAnimatedStyle(() => {
     const opacity = interpolate(progress.value, [0, 0.5, 1], [0, 0.5, 1]);
@@ -96,18 +99,39 @@ function LeftActions(
     return { opacity, transform: [{ scale }] };
   });
 
+  // Show send icon when translation exceeds long threshold
+  const sendIconStyle = useAnimatedStyle(() => ({
+    opacity: translation.value > LONG_SWIPE_THRESHOLD ? 1 : 0,
+  }));
+  const checkIconStyle = useAnimatedStyle(() => ({
+    opacity: translation.value > LONG_SWIPE_THRESHOLD ? 0 : 1,
+  }));
+  const labelStyle = useAnimatedStyle(() => ({
+    opacity: 1,
+  }));
+
   return (
     <Animated.View style={[styles.swipeAction, styles.approveAction, animStyle]}>
-      <Check size={iconSize.tabBar} color="#fff" weight="bold" />
-      <Text style={styles.swipeActionText}>Zatwierdz</Text>
+      <View style={styles.swipeIconStack}>
+        <Animated.View style={[styles.swipeIconAbsolute, checkIconStyle]}>
+          <Check size={iconSize.tabBar} color="#fff" weight="bold" />
+        </Animated.View>
+        <Animated.View style={[styles.swipeIconAbsolute, sendIconStyle]}>
+          <PaperPlaneTilt size={iconSize.tabBar} color="#fff" weight="bold" />
+        </Animated.View>
+      </View>
+      <Animated.Text style={[styles.swipeActionText, labelStyle]}>
+        Zatwierdz
+      </Animated.Text>
     </Animated.View>
   );
 }
 
-// --- Swipe right action panel (Reject - red) ---
+// --- Swipe right action panel (Reject / Edit - red/blue) ---
+// Short swipe left = Reject, Long swipe left = Edit
 function RightActions(
   progress: SharedValue<number>,
-  _translation: SharedValue<number>,
+  translation: SharedValue<number>,
 ) {
   const animStyle = useAnimatedStyle(() => {
     const opacity = interpolate(progress.value, [0, 0.5, 1], [0, 0.5, 1]);
@@ -115,10 +139,34 @@ function RightActions(
     return { opacity, transform: [{ scale }] };
   });
 
+  // translation is negative for left swipe
+  const isLongSwipe = useAnimatedStyle(() => ({
+    opacity: Math.abs(translation.value) > LONG_SWIPE_THRESHOLD ? 1 : 0,
+  }));
+  const isShortSwipe = useAnimatedStyle(() => ({
+    opacity: Math.abs(translation.value) > LONG_SWIPE_THRESHOLD ? 0 : 1,
+  }));
+
+  // Change background color based on swipe distance
+  const bgStyle = useAnimatedStyle(() => ({
+    backgroundColor: Math.abs(translation.value) > LONG_SWIPE_THRESHOLD
+      ? colors.info
+      : colors.swipe.reject,
+  }));
+
   return (
-    <Animated.View style={[styles.swipeAction, styles.rejectAction, animStyle]}>
-      <X size={iconSize.tabBar} color="#fff" weight="bold" />
-      <Text style={styles.swipeActionText}>Odrzuc</Text>
+    <Animated.View style={[styles.swipeAction, animStyle, bgStyle]}>
+      <View style={styles.swipeIconStack}>
+        <Animated.View style={[styles.swipeIconAbsolute, isShortSwipe]}>
+          <X size={iconSize.tabBar} color="#fff" weight="bold" />
+        </Animated.View>
+        <Animated.View style={[styles.swipeIconAbsolute, isLongSwipe]}>
+          <PencilSimple size={iconSize.tabBar} color="#fff" weight="bold" />
+        </Animated.View>
+      </View>
+      <Animated.Text style={styles.swipeActionText}>
+        Odrzuc
+      </Animated.Text>
     </Animated.View>
   );
 }
@@ -129,6 +177,7 @@ function SwipeableDraftCard({
   onApprove,
   onReject,
   onOpen,
+  onApproveAndSend,
   isApproving,
   isRejecting,
 }: {
@@ -136,26 +185,47 @@ function SwipeableDraftCard({
   onApprove: (id: string) => void;
   onReject: (id: string) => void;
   onOpen: (id: string) => void;
+  onApproveAndSend: (id: string) => void;
   isApproving: boolean;
   isRejecting: boolean;
 }) {
   const swipeableRef = useRef<SwipeableMethods>(null);
+  const translationRef = useRef<SharedValue<number> | null>(null);
   const source = SOURCE_CONFIG[draft.source] || SOURCE_CONFIG.manual;
 
   const handleSwipeOpen = useCallback(
     (direction: 'left' | 'right') => {
-      // Swipe right = opens left panel = Approve
+      // Read the current translation value from the SharedValue ref
+      const absTranslation = translationRef.current ? Math.abs(translationRef.current.value) : 0;
+      const isLongSwipe = absTranslation > LONG_SWIPE_THRESHOLD;
+
       if (direction === 'right') {
-        haptic.success();
-        onApprove(draft.id);
+        // Swipe right = opens left panel
+        if (isLongSwipe) {
+          // Long right: Approve + Send immediately
+          haptic.success();
+          onApproveAndSend(draft.id);
+        } else {
+          // Short right: Approve (keep in drafts)
+          haptic.success();
+          onApprove(draft.id);
+        }
       }
-      // Swipe left = opens right panel = Reject
       if (direction === 'left') {
-        haptic.warning();
-        onReject(draft.id);
+        // Swipe left = opens right panel
+        if (isLongSwipe) {
+          // Long left: Edit (navigate to draft detail)
+          haptic.selection();
+          onOpen(draft.id);
+          swipeableRef.current?.close();
+        } else {
+          // Short left: Reject
+          haptic.warning();
+          onReject(draft.id);
+        }
       }
     },
-    [draft.id, onApprove, onReject],
+    [draft.id, onApprove, onReject, onOpen, onApproveAndSend],
   );
 
   const handleSwipeWillOpen = useCallback(() => {
@@ -176,11 +246,14 @@ function SwipeableDraftCard({
     <PressableScale onPress={() => onOpen(draft.id)} scaleValue={0.98}>
       <View style={styles.card}>
         <View style={styles.cardHeader}>
-          <View style={[styles.sourceBadge, { backgroundColor: source.bg }]}>
-            {source.hasIcon && <Sparkle size={12} color={source.color} weight="fill" style={{ marginRight: 4 }} />}
-            <Text style={[styles.sourceText, { color: source.color }]}>
-              {source.label}
-            </Text>
+          <View style={styles.cardBadges}>
+            <View style={[styles.sourceBadge, { backgroundColor: source.bg }]}>
+              {source.hasIcon && <Sparkle size={12} color={source.color} weight="fill" style={{ marginRight: 4 }} />}
+              <Text style={[styles.sourceText, { color: source.color }]}>
+                {source.label}
+              </Text>
+            </View>
+            <ConfidenceBadge source={draft.source || 'autopilot'} />
           </View>
           <Text style={styles.time}>
             {new Date(draft.createdAt).toLocaleTimeString('pl-PL', {
@@ -265,8 +338,14 @@ function SwipeableDraftCard({
     >
       <ReanimatedSwipeable
         ref={swipeableRef}
-        renderLeftActions={LeftActions}
-        renderRightActions={RightActions}
+        renderLeftActions={(progress, translation) => {
+          translationRef.current = translation;
+          return LeftActions(progress, translation);
+        }}
+        renderRightActions={(progress, translation) => {
+          translationRef.current = translation;
+          return RightActions(progress, translation);
+        }}
         leftThreshold={SWIPE_THRESHOLD}
         rightThreshold={SWIPE_THRESHOLD}
         overshootLeft={false}
@@ -302,7 +381,7 @@ export default function DraftsScreen() {
 
   // Undo snackbar state
   const [undoAction, setUndoAction] = useState<UndoAction | null>(null);
-  const pendingMutationRef = useRef<{ type: 'approve' | 'reject'; draftId: string } | null>(null);
+  const pendingMutationRef = useRef<{ type: 'approve' | 'reject' | 'send'; draftId: string } | null>(null);
 
   // Handle approve with 5s undo delay (Gmail pattern)
   const handleApprove = useCallback(
@@ -313,6 +392,19 @@ export default function DraftsScreen() {
       const actionId = `approve-${draftId}-${Date.now()}`;
       pendingMutationRef.current = { type: 'approve', draftId };
       setUndoAction({ id: actionId, draftId, type: 'approve', subject: draft.subject });
+    },
+    [drafts],
+  );
+
+  // Handle approve + send (long right swipe)
+  const handleApproveAndSend = useCallback(
+    (draftId: string) => {
+      const draft = drafts.find((d) => d.id === draftId);
+      if (!draft) return;
+
+      const actionId = `send-${draftId}-${Date.now()}`;
+      pendingMutationRef.current = { type: 'send', draftId };
+      setUndoAction({ id: actionId, draftId, type: 'send', subject: draft.subject });
     },
     [drafts],
   );
@@ -349,7 +441,7 @@ export default function DraftsScreen() {
       return;
     }
 
-    if (pending.type === 'approve') {
+    if (pending.type === 'approve' || pending.type === 'send') {
       approveMutation.mutate(pending.draftId, {
         onError: () => {
           Alert.alert('Blad', 'Nie udalo sie zatwierdzic draftu. Sprobuj ponownie.');
@@ -387,6 +479,7 @@ export default function DraftsScreen() {
       onApprove={handleApprove}
       onReject={handleReject}
       onOpen={handleOpenDraft}
+      onApproveAndSend={handleApproveAndSend}
       isApproving={
         approveMutation.isPending &&
         approveMutation.variables === item.id
@@ -396,7 +489,7 @@ export default function DraftsScreen() {
         rejectMutation.variables === item.id
       }
     />
-  ), [handleApprove, handleReject, handleOpenDraft, approveMutation.isPending, approveMutation.variables, rejectMutation.isPending, rejectMutation.variables]);
+  ), [handleApprove, handleReject, handleOpenDraft, handleApproveAndSend, approveMutation.isPending, approveMutation.variables, rejectMutation.isPending, rejectMutation.variables]);
 
   const keyExtractor = useCallback((item: Draft) => item.id, []);
 
@@ -408,7 +501,7 @@ export default function DraftsScreen() {
       </Text>
 
       <Text style={styles.hint}>
-        Swipe w prawo = zatwierdz | Swipe w lewo = odrzuc
+        Swipe prawo = zatwierdz | Dalej = wyslij | Lewo = odrzuc | Dalej = edytuj
       </Text>
 
       {isError && (
@@ -494,6 +587,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: spacing.sm,
   },
+  cardBadges: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+    flexShrink: 1,
+  },
   sourceBadge: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -562,6 +661,16 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: typography.weight.bold,
     fontSize: typography.size.footnote,
+  },
+  swipeIconStack: {
+    width: iconSize.tabBar,
+    height: iconSize.tabBar,
+    position: 'relative',
+  },
+  swipeIconAbsolute: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
   },
 
   // Undo snackbar

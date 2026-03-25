@@ -11,6 +11,8 @@ import type { AppStateStatus } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-reanimated';
 
+import * as Notifications from 'expo-notifications';
+
 import { useColorScheme } from '@/components/useColorScheme';
 import { colors } from '@/constants/tokens';
 import { persister } from '@/lib/mmkv';
@@ -23,6 +25,7 @@ import {
 } from '@/lib/notifications';
 import * as api from '@/lib/api';
 import LoginScreen from '@/components/LoginScreen';
+import { useDraftStore } from '@/stores/draftStore';
 
 export {
   ErrorBoundary,
@@ -162,6 +165,24 @@ function RootLayoutNav() {
     return NetInfo.addEventListener((state) => {
       onlineManager.setOnline(!!state.isConnected);
     });
+  }, []);
+
+  // Push notification listener — update draft count and invalidate queries
+  useEffect(() => {
+    if (Platform.OS === 'web') return;
+    const sub = Notifications.addNotificationReceivedListener((notification) => {
+      const data = notification.request.content.data as any;
+      if (data?.type === 'draft_created' || data?.type === 'draft_updated') {
+        queryClient.invalidateQueries({ queryKey: ['drafts'] });
+        if (data?.badgeCount !== undefined) {
+          useDraftStore.getState().setDraftCount(data.badgeCount);
+        }
+      }
+      if (data?.type === 'activity_update') {
+        queryClient.invalidateQueries({ queryKey: ['activity'] });
+      }
+    });
+    return () => sub.remove();
   }, []);
 
   const stackContent = (

@@ -23,6 +23,8 @@ import {
 import { colors, typography, spacing, radius, iconSize } from '@/constants/tokens';
 import { PressableScale } from '@/components/ui/PressableScale';
 import { PipelineSkeleton } from '@/components/ui/SkeletonScreen';
+import { AnimatedSearchBar } from '@/components/ui/AnimatedSearchBar';
+import { usePipelineSearch } from '@/hooks/usePipelineSearch';
 import { useLeads } from '@/lib/hooks';
 import { useUIStore } from '@/lib/stores';
 import * as api from '@/lib/api';
@@ -257,6 +259,9 @@ export default function PipelineScreen() {
   const setActiveFilter = useUIStore((s) => s.setActiveTab);
   const { data: leads = [], isLoading, isRefetching, isError, error, refetch } = useLeads(activeFilter);
 
+  // Fuzzy search on top of server-filtered leads
+  const { query, setQuery, results: filteredLeads } = usePipelineSearch(leads);
+
   // Bottom sheet state (native only)
   const bottomSheetRef = useRef<any>(null);
   const [selectedLead, setSelectedLead] = useState<any>(null);
@@ -331,6 +336,9 @@ export default function PipelineScreen() {
 
   const ListHeaderComponent = useMemo(() => (
     <View>
+      {/* Search bar */}
+      <AnimatedSearchBar value={query} onChangeText={setQuery} placeholder="Szukaj leadow..." />
+
       {/* Filters */}
       <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.filterRow}>
         {STATUS_FILTERS.map((f) => (
@@ -357,10 +365,10 @@ export default function PipelineScreen() {
 
       {/* Summary */}
       <Text style={styles.summary}>
-        {leads.length} leadow {'\u00B7'} {leads.reduce((s: number, l: any) => s + l.value, 0).toLocaleString('pl-PL')} PLN
+        {filteredLeads.length}{query ? ` / ${leads.length}` : ''} leadow {'\u00B7'} {filteredLeads.reduce((s: number, l: any) => s + l.value, 0).toLocaleString('pl-PL')} PLN
       </Text>
     </View>
-  ), [activeFilter, setActiveFilter, isError, error, refetch, leads]);
+  ), [activeFilter, setActiveFilter, isError, error, refetch, leads, filteredLeads, query, setQuery]);
 
   const ListEmptyComponent = useMemo(() => {
     if (isLoading) return null;
@@ -382,7 +390,7 @@ export default function PipelineScreen() {
   return (
     <View style={styles.screenContainer}>
       <FlashList
-        data={leads}
+        data={filteredLeads}
         renderItem={renderItem}
         keyExtractor={keyExtractor}
         contentContainerStyle={styles.flashListContent}

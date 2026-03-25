@@ -5,10 +5,13 @@ import { ChartBar, Funnel, EnvelopeSimple } from 'phosphor-react-native';
 
 import { colors, typography, spacing, iconSize } from '@/constants/tokens';
 import { useDashboard } from '@/lib/hooks';
+import { useDraftStore } from '@/stores/draftStore';
 
 export default function TabLayout() {
   const { data: dashboard } = useDashboard();
-  const draftsCount = dashboard?.recentDrafts || 0;
+  const draftCount = useDraftStore((s) => s.draftCount);
+  // Prefer store count (updated by API + push), fall back to dashboard count
+  const draftsCount = draftCount > 0 ? draftCount : (dashboard?.recentDrafts || 0);
 
   return (
     <Tabs
@@ -59,7 +62,7 @@ export default function TabLayout() {
             <EnvelopeSimple weight={focused ? 'fill' : 'regular'} size={iconSize.tabBar} color={color} />
           ),
           tabBarBadge: draftsCount > 0 ? draftsCount : undefined,
-          tabBarBadgeStyle: { backgroundColor: colors.accent.decorative, fontSize: typography.size.caption2 },
+          tabBarBadgeStyle: { backgroundColor: '#dc2626', color: '#fff', fontSize: 11, minWidth: 18, height: 18, lineHeight: 18, borderRadius: 9 },
         }}
       />
     </Tabs>
