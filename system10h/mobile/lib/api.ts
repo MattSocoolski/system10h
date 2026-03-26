@@ -28,12 +28,9 @@ async function secureDelete(key: string): Promise<void> {
   return SecureStore.deleteItemAsync(key);
 }
 
-// API_BASE uses Expo's __DEV__ flag for environment switching.
-// For multi-environment setups, consider using expo-constants or app.config.js
-// to inject the URL from build-time environment variables.
-const API_BASE = __DEV__
-  ? 'http://localhost:8787/api/mobile'
-  : 'https://live-preview-api.hajlajf-art.workers.dev/api/mobile';
+// Always use production Worker — works from anywhere (home, mobile, office).
+// For local Worker dev, temporarily switch to http://192.168.x.x:8787/api/mobile
+const API_BASE = 'https://live-preview-api.hajlajf-art.workers.dev/api/mobile';
 
 async function getToken(): Promise<string | null> {
   try {
